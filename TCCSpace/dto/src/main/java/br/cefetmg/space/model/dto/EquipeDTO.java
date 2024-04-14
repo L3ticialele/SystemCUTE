@@ -2,7 +2,9 @@
 package br.cefetmg.space.model.dto;
 
 import java.util.ArrayList;
+import javax.persistence.Entity;
 
+@Entity
 public class EquipeDTO extends UsuarioDTO{
 
     private ArrayList<PessoaDTO> integrantes;

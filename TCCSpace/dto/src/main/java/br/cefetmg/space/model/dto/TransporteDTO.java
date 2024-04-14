@@ -6,6 +6,7 @@ public class TransporteDTO {
     private String entrada;
     private String saida;
 
+    
     public void setEntrada(String entrada){
         this.entrada = entrada;
     }

@@ -1,6 +1,13 @@
 package br.cefetmg.space.model.dto;
 
-public class DadosDTO {
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
+public class DadosDTO implements Serializable {
 
     private String umidade;
     private double pressao;
@@ -11,6 +18,16 @@ public class DadosDTO {
     private CubeSatDTO cube;
     private LocalizacaoDTO localizacao;
     private int id;
+    
+    @Id 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public int getId(){
+        return id;
+    }
+    
+    public void setId(int id){
+        this.id = id;
+    }
 
     public CubeSatDTO getCube() {
         return cube;
@@ -33,14 +50,6 @@ public class DadosDTO {
         temperatura = 430;
         velocidadeVento = -1;
         id = -1;
-    }
-    
-    public void setId(int id){
-        this.id = id;
-    }
-    
-    public int getId(){
-        return id;
     }
     
     public void setCubSat(CubeSatDTO cube){

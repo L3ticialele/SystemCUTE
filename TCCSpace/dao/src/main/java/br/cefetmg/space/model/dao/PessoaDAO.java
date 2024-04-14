@@ -92,7 +92,7 @@ public class PessoaDAO implements IPessoaDAO{
                 pessoaPersistida.setId(pessoa.getId());
                 pessoaPersistida.setNome(pessoa.getNome());
                 pessoaPersistida.setSenha(pessoa.getSenha());
-                pessoaPersistida.setUser(pessoa.getUser());
+                pessoaPersistida.setUserName(pessoa.getUserName());
                 pessoaPersistida.setAdministrador(pessoa.isAdministrador());
                 pessoaPersistida.setCpf(pessoa.getCpf());
                 pessoaPersistida.setTelefone(pessoa.getTelefone());

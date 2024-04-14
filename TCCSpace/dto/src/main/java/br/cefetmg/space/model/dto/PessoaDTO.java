@@ -2,7 +2,9 @@
 package br.cefetmg.space.model.dto;
 
 import java.util.ArrayList;
+import javax.persistence.Entity;
 
+@Entity
 public class PessoaDTO extends UsuarioDTO{
     private String cpf;
     private boolean administrador;

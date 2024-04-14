@@ -1,12 +1,33 @@
 
 package br.cefetmg.space.model.dto;
 
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.Table;
 
-public class UsuarioDTO {
+@Entity
+@Table(name = "usuario")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public class UsuarioDTO implements Serializable{
     private String senha;
-    private String user;
+    private String username;
     private String email;
     private int id;
+    
+    @Id 
+    @GeneratedValue(strategy = GenerationType.TABLE)
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
     
     public void setEmail(String email){
         this.email = email;
@@ -24,21 +45,11 @@ public class UsuarioDTO {
         this.senha = senha;
     }
 
-    public String getUser() {
-        return user;
+    public String getUserName() {
+        return username;
     }
 
-    public void setUser(String usuario) {
-        user = usuario;
+    public void setUserName(String usuario) {
+        username = usuario;
     }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-    
-    
 }

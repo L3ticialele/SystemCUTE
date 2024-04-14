@@ -1,8 +1,14 @@
 package br.cefetmg.space.model.dto;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-public class CubeSatDTO {
+@Entity
+public class CubeSatDTO implements Serializable {
 
     private int id;
     private String dataFabricacao;
@@ -10,6 +16,16 @@ public class CubeSatDTO {
     private String nome;
     private String competicao;
     final private ArrayList<DadosDTO> dados;
+    
+    @Id 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
    
     public CubeSatDTO(){
         dados = null;
@@ -23,14 +39,6 @@ public class CubeSatDTO {
     
     public ArrayList<DadosDTO> getDados(){
         return dados;
-    }
-    
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getDataFabricacao() {

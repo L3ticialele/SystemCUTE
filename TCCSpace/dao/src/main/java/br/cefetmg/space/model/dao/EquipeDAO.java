@@ -95,7 +95,7 @@ public class EquipeDAO implements IEquipeDAO{
                 equipePersistida.setId(equipe.getId());
                 equipePersistida.setNome(equipe.getNome());
                 equipePersistida.setSenha(equipe.getSenha());
-                equipePersistida.setUser(equipe.getUser());
+                equipePersistida.setUserName(equipe.getUserName());
                 return true;
             }else{
                 System.out.println("Não foi possível encontrar a equipe com o id: " + equipe.getId());

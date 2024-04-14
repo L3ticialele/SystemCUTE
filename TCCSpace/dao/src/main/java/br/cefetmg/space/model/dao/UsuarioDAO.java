@@ -40,7 +40,7 @@ public class UsuarioDAO implements IUsuarioDAO{
         List<UsuarioDTO> usuarios = entityManager.createQuery(criteria).getResultList();
         
         for(UsuarioDTO usuario : usuarios){
-            System.out.println("Id usuário: " + usuario.getId() + " Usuário: " + usuario.getUser() + " Email: " + usuario.getEmail());
+            System.out.println("Id usuário: " + usuario.getId() + " Usuário: " + usuario.getUserName() + " Email: " + usuario.getEmail());
         }
         entityManager.close();
         return usuarios;
@@ -84,7 +84,7 @@ public class UsuarioDAO implements IUsuarioDAO{
             if(usuarioPersistido != null){
                 usuarioPersistido.setEmail(usuario.getEmail());
                 usuarioPersistido.setId(usuario.getId());
-                usuarioPersistido.setUser(usuario.getUser());
+                usuarioPersistido.setUserName(usuario.getUserName());
                 usuarioPersistido.setSenha(usuario.getSenha());
                 return true;
             }else{
