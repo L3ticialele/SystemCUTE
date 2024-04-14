@@ -1,26 +1,30 @@
+
 package br.cefetmg.space.model.dao;
 
-import br.cefetmg.space.model.dto.LocalizacaoDTO;
-import br.cefetmg.space.model.idao.ILocalizacaoDAO;
+import br.cefetmg.space.model.dto.CubeSatDTO;
+import br.cefetmg.space.model.idao.ICubeSatDAO;
 import br.cefetmg.space.model.idao.exception.PersistenciaException;
+
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaQuery;
 
-public class LocalizacaoDAO implements ILocalizacaoDAO{
+
+public class CubeSatDAO implements ICubeSatDAO{
     
     @Override
-    public void inserir(LocalizacaoDTO localizacao) throws PersistenciaException{
+    public void inserir(CubeSatDTO cube) throws PersistenciaException{
         EntityManagerFactory entityManagerFactory = 
         Persistence.createEntityManagerFactory("persistence");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         
         try{
             entityManager.getTransaction().begin();
-            entityManager.persist(localizacao);
+            entityManager.persist(cube);
             entityManager.getTransaction().commit();
+            
         }catch(Exception ex){
             entityManager.getTransaction().rollback();
             throw ex;
@@ -30,38 +34,38 @@ public class LocalizacaoDAO implements ILocalizacaoDAO{
     }
     
     @Override
-    public List<LocalizacaoDTO> listarTodos() throws PersistenciaException{
+    public List<CubeSatDTO> listarTodos() throws PersistenciaException{
         EntityManagerFactory entityManagerFactory = 
         Persistence.createEntityManagerFactory("persistence");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-        CriteriaQuery<LocalizacaoDTO> criteria = 
-        entityManager.getCriteriaBuilder().createQuery(LocalizacaoDTO.class);
-        criteria.select(criteria.from(LocalizacaoDTO.class));
-        List<LocalizacaoDTO> localizacoes = entityManager.createQuery(criteria).getResultList();
+        CriteriaQuery<CubeSatDTO> criteria = 
+        entityManager.getCriteriaBuilder().createQuery(CubeSatDTO.class);
+        criteria.select(criteria.from(CubeSatDTO.class));
+        List<CubeSatDTO> cubes = entityManager.createQuery(criteria).getResultList();
         
-        for(LocalizacaoDTO localizacao : localizacoes){
-            System.out.println("Id: " + localizacao.getId() + " Altitude: " + localizacao.getAltitude()+ " Longitude: " + localizacao.getLongitude());
+        for(CubeSatDTO cube : cubes){
+            System.out.println("Id: " + cube.getId() + " Nome: " + cube.getNome()+ " Fabricação: " + cube.getDataFabricacao() + " Tamanho: " + cube.getTamanho() + " Competição: " + cube.getCompeticao());
         }
         
         entityManager.close();
-        return localizacoes;
+        return cubes;
     }
        
     @Override
-    public boolean delete(int idLocalizacao) throws PersistenciaException{
+    public boolean delete(int idCube) throws PersistenciaException{
         EntityManagerFactory entityManagerFactory = 
         Persistence.createEntityManagerFactory("persistence");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         
         try{
             entityManager.getTransaction().begin();
-            LocalizacaoDTO localizacao = entityManager.find(LocalizacaoDTO.class, idLocalizacao);
+            CubeSatDTO cube = entityManager.find(CubeSatDTO.class, idCube);
             
-            if(localizacao != null){
-                entityManager.remove(localizacao);
+            if(cube != null){
+                entityManager.remove(cube);
                 return true;
             }else{
-                System.out.println("Não foi possíbel encontrar a localização com o id: " + idLocalizacao);
+                System.out.println("Não foi possível encontrar o CubeSat com o id: " + idCube);
                 return false;
             }
         }catch(Exception ex){
@@ -73,22 +77,24 @@ public class LocalizacaoDAO implements ILocalizacaoDAO{
     }
     
     @Override
-    public boolean atualizar(LocalizacaoDTO localizacao) throws PersistenciaException{
+    public boolean atualizar(CubeSatDTO cube) throws PersistenciaException{
         EntityManagerFactory entityManagerFactory = 
         Persistence.createEntityManagerFactory("persistence");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         
         try{
             entityManager.getTransaction().begin();
-            LocalizacaoDTO localizacaoPersistida = entityManager.find(LocalizacaoDTO.class, localizacao.getId());
+            CubeSatDTO cubePersistido = entityManager.find(CubeSatDTO.class, cube.getId());
             
-            if(localizacaoPersistida != null){
-                localizacaoPersistida.setId(localizacao.getId());
-                localizacaoPersistida.setAltitude(localizacao.getAltitude());
-                localizacaoPersistida.setLongitude(localizacao.getLongitude());
+            if(cubePersistido != null){
+                cubePersistido.setId(cube.getId());
+                cubePersistido.setNome(cube.getNome());
+                cubePersistido.setCompeticao(cube.getCompeticao());
+                cubePersistido.setDataFabricacao(cube.getDataFabricacao());
+                cubePersistido.setTamanho(cube.getTamanho());
                 return true;
             }else{
-                System.out.println("Não foi possível encontrar a localização com o id: " + localizacao.getId());
+                System.out.println("Não foi possível encontrar o CubSat com o id: " + cube.getId());
                 return false;
             }
         }catch(Exception ex){

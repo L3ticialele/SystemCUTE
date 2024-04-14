@@ -3,20 +3,41 @@ package br.cefetmg.space.model.dto;
 public class DadosDTO {
 
     private String umidade;
-    private double pressao, temperatura;
+    private double pressao;
+    private double temperatura;
     private double velocidadeVento;
     private String radiacao;
     private String massasAr;
-
-    public DadosDTO(String umidade, double pressao, double temperatura, double velocidadeVento, String radiacao, String massasAr) {
-        this.umidade = umidade;
-        this.pressao = pressao;
-        this.temperatura = temperatura;
-        this.velocidadeVento = velocidadeVento;
-        this.radiacao = radiacao;
-        this.massasAr = massasAr;
+    private CubeSatDTO cube;
+    private int id;
+    
+    public DadosDTO(){
+        pressao = -1;
+        temperatura = 430;
+        velocidadeVento = -1;
+        id = -1;
     }
-
+    
+    public void setId(int id){
+        this.id = id;
+    }
+    
+    public int getId(){
+        return id;
+    }
+    
+    public void setCubSat(CubeSatDTO cube){
+        this.cube = cube;
+    }
+    
+    public CubeSatDTO getCubSat(){
+        return cube;
+    }
+    
+    public int getIdCubSat(){
+        return cube.getId();
+    }
+    
     public String getUmidade() {
         return umidade;
     }
