@@ -4,10 +4,15 @@ public class LocalizacaoDTO {
 
     private String altitude;
     private String longitude;
+    private int id;
 
-    public LocalizacaoDTO(String altitude, String longitude) {
-        this.altitude = altitude;
-        this.longitude = longitude;
+    
+    public void setId(int id){
+        this.id = id;
+    }
+    
+    public int getId(){
+        return id;
     }
 
     public String getAltitude() {
