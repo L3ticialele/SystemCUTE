@@ -1,58 +1,21 @@
 
 package br.cefetmg.space.model.dto;
 
-import java.util.ArrayList;
 
 public class UsuarioDTO {
     private String senha;
-    private String usuario;
+    private String user;
+    private String email;
     private int id;
-    private String cpf;
-
-    public String getCpf() {
-        return cpf;
+    
+    public void setEmail(String email){
+        this.email = email;
     }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
+    
+    public String getEmail(){
+        return email;
     }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public ArrayList<EquipeDTO> getEquipes() {
-        return equipes;
-    }
-
-    public void setEquipes(ArrayList<EquipeDTO> equipes) {
-        this.equipes = equipes;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
-    public ArrayList<CubeSatDTO> getCubeSat() {
-        return cubeSat;
-    }
-
-    public void setCubeSat(ArrayList<CubeSatDTO> cubeSat) {
-        this.cubeSat = cubeSat;
-    }
-    private String nome;
-    private ArrayList<EquipeDTO> equipes;
-    private String telefone;
-    private ArrayList<CubeSatDTO> cubeSat;
-
+    
     public String getSenha() {
         return senha;
     }
@@ -61,12 +24,12 @@ public class UsuarioDTO {
         this.senha = senha;
     }
 
-    public String getUsuario() {
-        return usuario;
+    public String getUser() {
+        return user;
     }
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
+    public void setUser(String usuario) {
+        user = usuario;
     }
 
     public int getId() {

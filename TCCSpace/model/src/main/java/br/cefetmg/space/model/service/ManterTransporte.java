@@ -16,28 +16,11 @@ public class ManterTransporte implements IManterTransporte{
     
     @Override
     public void cadastrar(TransporteDTO transporte) throws PersistenciaException {
-        /*
-        if((transporte.getIP() == -1))
-            throw new NegocioException("Obrigatório informar o IP.");
-        if((transporte.getSaida() == null) || (transporte.getSaida().isEmpty()))
-            throw new NegocioException("Obrigatório informar a saída.");
-        if((transporte.getEntrada() == null) || (transporte.getEntrada().isEmpty()))
-            throw new NegocioException("Obrigatório informar a entrada.");
-        */
         transporteDAO.inserir(transporte);
     }
     
     @Override
     public boolean alterar(TransporteDTO transporte) throws PersistenciaException {
-       /*
-        if((transporte.getIP() == -1))
-            throw new NegocioException("Obrigatório informar o IP.");
-        if((transporte.getSaida() == null) || (transporte.getSaida().isEmpty()))
-            throw new NegocioException("Obrigatório informar a saída.");
-        if((transporte.getEntrada() == null) || (transporte.getEntrada().isEmpty()))
-            throw new NegocioException("Obrigatório informar a entrada.");
-        */
-    
         boolean result = transporteDAO.atualizar(transporte);
         return result;
     }

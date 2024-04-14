@@ -16,28 +16,11 @@ public class ManterLocalizacao implements IManterLocalizacao{
     
     @Override
     public void cadastrar(LocalizacaoDTO localizacao) throws PersistenciaException {
-       /*
-        if((localizacao.getId() == -1))
-            throw new NegocioException("Obrigatório informar o id da localizacao.");
-        if((localizacao.getAltitude() == null) || (localizacao.getAltitude().isEmpty()))
-            throw new NegocioException("Obrigatório informar a altitude.");
-        if((localizacao.getLongitude() == null) || (localizacao.getLongitude().isEmpty()))
-            throw new NegocioException("Obrigatório informar a longitude.");
-        */
        localizacaoDAO.inserir(localizacao);
     }
     
     @Override
     public boolean alterar(LocalizacaoDTO localizacao) throws PersistenciaException {
-      /*
-        if((localizacao.getId() == -1))
-            throw new NegocioException("Obrigatório informar o id da localizacao.");
-        if((localizacao.getAltitude() == null) || (localizacao.getAltitude().isEmpty()))
-            throw new NegocioException("Obrigatório informar a altitude.");
-        if((localizacao.getLongitude() == null) || (localizacao.getLongitude().isEmpty()))
-            throw new NegocioException("Obrigatório informar a longitude.");
-    */
-    
         boolean result = localizacaoDAO.atualizar(localizacao);
         return result;
     }
