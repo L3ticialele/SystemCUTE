@@ -9,7 +9,24 @@ public class DadosDTO {
     private String radiacao;
     private String massasAr;
     private CubeSatDTO cube;
+    private LocalizacaoDTO localizacao;
     private int id;
+
+    public CubeSatDTO getCube() {
+        return cube;
+    }
+
+    public void setCube(CubeSatDTO cube) {
+        this.cube = cube;
+    }
+
+    public LocalizacaoDTO getLocalizacao() {
+        return localizacao;
+    }
+
+    public void setLocalizacao(LocalizacaoDTO localizacao) {
+        this.localizacao = localizacao;
+    }
     
     public DadosDTO(){
         pressao = -1;
