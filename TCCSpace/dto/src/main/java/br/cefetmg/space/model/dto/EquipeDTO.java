@@ -18,7 +18,7 @@ import javax.persistence.Table;
 public class EquipeDTO implements Serializable{
 
     @ManyToMany(mappedBy="equipes")
-    private ArrayList<PessoaDTO> integrantes;
+    private ArrayList<UsuarioDTO> integrantes;
     private String nome;
     @OneToMany(fetch = FetchType.EAGER, cascade = 
             CascadeType.PERSIST, mappedBy = "equipes")
@@ -111,19 +111,19 @@ public class EquipeDTO implements Serializable{
         return cubeSat;
     }
     
-    public PessoaDTO getIntegrante(int posicao){
+    public UsuarioDTO getIntegrante(int posicao){
         return integrantes.get(posicao);
     }
 
-    public ArrayList<PessoaDTO> getIntegrantes() {
+    public ArrayList<UsuarioDTO> getIntegrantes() {
         return integrantes;
     }
 
-    public void setIntegrante(PessoaDTO integrante) {
+    public void setIntegrante(UsuarioDTO integrante) {
         integrantes.add(integrante);
     }
     
-    public void setIntegrante(ArrayList<PessoaDTO> integrante) {
+    public void setIntegrante(ArrayList<UsuarioDTO> integrante) {
         if(integrantes.isEmpty())
             integrantes = integrante;
         else

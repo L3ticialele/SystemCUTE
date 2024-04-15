@@ -8,9 +8,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 
 @Entity
+@Table(name = "localizacao")
 public class LocalizacaoDTO implements Serializable {
 
     private String altitude;
@@ -22,12 +24,16 @@ public class LocalizacaoDTO implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    public CubeSatDTO getCubeSat() {
+    public void setCubeSat(CubeSatDTO cube){
+        cubeSat = cube;
+    }
+    
+    public CubeSatDTO getCubeSat(){
         return cubeSat;
     }
-
-    public void setCubeSat(CubeSatDTO cubeSat) {
-        this.cubeSat = cubeSat;
+    
+    public int getIdCubeSat(){
+        return cubeSat.getId();
     }
 
     public int getId(){

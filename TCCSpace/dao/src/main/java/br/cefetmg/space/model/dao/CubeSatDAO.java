@@ -43,9 +43,9 @@ public class CubeSatDAO implements ICubeSatDAO{
         List<CubeSatDTO> cubes = entityManager.createQuery(criteria).getResultList();
         
         for(CubeSatDTO cube : cubes){
-            System.out.print("Id: " + cube.getId() + " Nome: " + cube.getNome()+ " Fabricação: " + cube.getDataFabricacao() + " Tamanho: " + cube.getTamanho() + " Competição: " + cube.getCompeticao());
+            System.out.print("Id: " + cube.getId() + " Nome: " + cube.getNome()+ " Fabricação: " + cube.getDataFabricacao() + " Tamanho: " + cube.getTamanho() + " Status: " + cube.getStatus());
             if(cube.getEquipe() == null)
-                System.out.println(" Criador: " + cube.getPessoa().getUserName());
+                System.out.println(" Criador: " + cube.getUsuario().getUserName());
             else
                 System.out.println(" Equipe criadora: " + cube.getEquipe());
         }
@@ -92,14 +92,13 @@ public class CubeSatDAO implements ICubeSatDAO{
             if(cubePersistido != null){
                 cubePersistido.setId(cube.getId());
                 cubePersistido.setNome(cube.getNome());
-                cubePersistido.setCompeticao(cube.getCompeticao());
                 cubePersistido.setDataFabricacao(cube.getDataFabricacao());
                 cubePersistido.setTamanho(cube.getTamanho());
                 cubePersistido.setTodosDados(cube.getDados());
-                cubePersistido.setPessoa(cube.getPessoa());
+                cubePersistido.setPessoa(cube.getUsuario());
                 cubePersistido.setEquipe(cube.getEquipe());
                 cubePersistido.setLocalizacao(cube.getLocalizacao());
-                cubePersistido.setTransporte(cube.getTransporte());
+                cubePersistido.setStatus(cube.getStatus());
                 
                 return true;
             }else{

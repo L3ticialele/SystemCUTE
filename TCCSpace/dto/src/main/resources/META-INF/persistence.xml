@@ -9,12 +9,11 @@
     <class>br.cefetmg.space.model.dto.EquipeDTO</class>
     <class>br.cefetmg.space.model.dto.PessoaDTO</class>
     <class>br.cefetmg.space.model.dto.AdministradorDTO</class>
-    <class>br.cefetmg.space.model.dto.TransporteDTO</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/TCC-AEROSPACE"/>
       <property name="javax.persistence.jdbc.user" value="postgres"/>
       <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-      <property name="javax.persistence.jdbc.password" value=""/>
+      <property name="javax.persistence.jdbc.password" value="admin"/>
     </properties>
   </persistence-unit>
 </persistence>

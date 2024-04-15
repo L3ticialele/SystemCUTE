@@ -40,7 +40,11 @@ public class UsuarioDAO implements IUsuarioDAO{
         List<UsuarioDTO> usuarios = entityManager.createQuery(criteria).getResultList();
         
         for(UsuarioDTO usuario : usuarios){
-            System.out.println("Id usuário: " + usuario.getId() + " Usuário: " + usuario.getUserName() + " Email: " + usuario.getEmail());
+            System.out.print("Id equipe: " + usuario.getId() + " Nome: " + usuario.getNome() + " CubeSats feitos/em andamento: " + usuario.quantCubeSat() + " Telefone: " + usuario.getTelefone() + " Participa de quantas equipes: " + usuario.quantEquipes());
+            if(usuario.isAdministrador())
+                System.out.println("Administrador: sim");
+            else
+                System.out.println("Administrador: não");
         }
         entityManager.close();
         return usuarios;
@@ -85,7 +89,13 @@ public class UsuarioDAO implements IUsuarioDAO{
                 usuarioPersistido.setEmail(usuario.getEmail());
                 usuarioPersistido.setId(usuario.getId());
                 usuarioPersistido.setUserName(usuario.getUserName());
+                usuarioPersistido.setNome(usuario.getNome());
                 usuarioPersistido.setSenha(usuario.getSenha());
+                usuarioPersistido.setAdministrador(usuario.isAdministrador());
+                usuarioPersistido.setCpf(usuario.getCpf());
+                usuarioPersistido.setTelefone(usuario.getTelefone());
+                usuarioPersistido.setEquipes(usuario.getEquipes());
+                usuarioPersistido.setCubeSat(usuario.getCubeSat());
                 return true;
             }else{
                 System.out.println("Não foi possível encontrar o usuário com o id: " + usuario.getId());

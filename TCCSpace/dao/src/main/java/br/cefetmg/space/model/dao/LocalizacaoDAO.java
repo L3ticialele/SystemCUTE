@@ -40,7 +40,7 @@ public class LocalizacaoDAO implements ILocalizacaoDAO{
         List<LocalizacaoDTO> localizacoes = entityManager.createQuery(criteria).getResultList();
         
         for(LocalizacaoDTO localizacao : localizacoes){
-            System.out.println("Id: " + localizacao.getId() + " Altitude: " + localizacao.getAltitude()+ " Longitude: " + localizacao.getLongitude() + " Id do CubSat: " + localizacao.getCubeSat().getId());
+            System.out.println("Id: " + localizacao.getId() + " Altitude: " + localizacao.getAltitude()+ " Longitude: " + localizacao.getLongitude() + " Id do CubSat: " + localizacao.getIdCubeSat());
         }
         
         entityManager.close();

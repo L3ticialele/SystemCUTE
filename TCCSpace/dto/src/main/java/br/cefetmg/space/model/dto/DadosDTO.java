@@ -8,8 +8,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "dados")
 public class DadosDTO implements Serializable {
 
     private String umidade;
@@ -18,12 +20,21 @@ public class DadosDTO implements Serializable {
     private double velocidadeVento;
     private String radiacao;
     private String massasAr;
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "idCubSat", nullable = false)
-    private CubeSatDTO cube;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idCubeSat", nullable = false)
+    private CubeSatDTO cubeSat;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    private String dataObtencao;
+
+    public String getDataObtencao() {
+        return dataObtencao;
+    }
+
+    public void setDataObtencao(String dataObtencao) {
+        this.dataObtencao = dataObtencao;
+    }
     
     public int getId(){
         return id;
@@ -31,14 +42,6 @@ public class DadosDTO implements Serializable {
     
     public void setId(int id){
         this.id = id;
-    }
-
-    public CubeSatDTO getCube() {
-        return cube;
-    }
-
-    public void setCube(CubeSatDTO cube) {
-        this.cube = cube;
     }
     
     public DadosDTO(){
@@ -48,16 +51,16 @@ public class DadosDTO implements Serializable {
         id = -1;
     }
     
-    public void setCubSat(CubeSatDTO cube){
-        this.cube = cube;
+    public void setCubeSat(CubeSatDTO cube){
+        cubeSat = cube;
     }
     
-    public CubeSatDTO getCubSat(){
-        return cube;
+    public CubeSatDTO getCubeSat(){
+        return cubeSat;
     }
     
-    public int getIdCubSat(){
-        return cube.getId();
+    public int getIdCubeSat(){
+        return cubeSat.getId();
     }
     
     public String getUmidade() {

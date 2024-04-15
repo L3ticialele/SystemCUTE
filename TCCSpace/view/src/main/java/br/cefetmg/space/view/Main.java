@@ -1,17 +1,17 @@
 
 package br.cefetmg.space.view;
-import br.cefetmg.space.model.dto.PessoaDTO;
+import br.cefetmg.space.model.dao.UsuarioDAO;
+import br.cefetmg.space.model.dto.UsuarioDTO;
+import br.cefetmg.space.model.idao.IUsuarioDAO;
 import br.cefetmg.space.model.idao.exception.PersistenciaException;
-import br.cefetmg.space.model.service.IManterPessoa;
-import br.cefetmg.space.model.service.ManterPessoa;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) throws PersistenciaException {
-        PessoaDTO pessoa = new PessoaDTO();
+        UsuarioDTO usuario = new UsuarioDTO();
         String nome, cpf, telefone, user, senha1, senha2, email;
-        IManterPessoa manterPessoa = new ManterPessoa();
+        IUsuarioDAO usuarioDAO = new UsuarioDAO();
         try (Scanner input = new Scanner(System.in)) {
             System.out.println("-----CADASTRANDO USUÁRIO-----");
             System.out.println("Digite seu nome: ");
@@ -33,15 +33,14 @@ public class Main {
                     System.out.println("Senha incorreta!");
             }while(!senha1.equals(senha2));
             
-            pessoa.setCpf(cpf);
-            pessoa.setEmail(email);
-            pessoa.setNome(nome);
-            pessoa.setSenha(senha1);
-            pessoa.setTelefone(telefone);
-            pessoa.setUserName(user);
+            usuario.setEmail(email);
+            usuario.setNome(nome);
+            usuario.setSenha(senha1);
+            usuario.setUserName(user);
+            usuario.setCpf(cpf);
+            usuario.setTelefone(telefone);
             
-            manterPessoa.cadastrar(pessoa);
-            manterPessoa.pesquisarTodos();
+            usuarioDAO.inserir(usuario);
             
             System.out.println("FIM");
         }
