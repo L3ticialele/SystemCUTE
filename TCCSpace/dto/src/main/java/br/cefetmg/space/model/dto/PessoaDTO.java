@@ -2,15 +2,29 @@
 package br.cefetmg.space.model.dto;
 
 import java.util.ArrayList;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "pessoas")
 public class PessoaDTO extends UsuarioDTO{
     private String cpf;
     private boolean administrador;
     private String nome;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "Pessoa_Equipe",
+            joinColumns = {@JoinColumn(name="idPessoa")},
+            inverseJoinColumns={@JoinColumn(name="idEquipe")})
     private ArrayList<EquipeDTO> equipes;
     private String telefone;
+    @OneToMany(fetch = FetchType.EAGER, cascade = 
+            CascadeType.PERSIST, mappedBy = "pessoas")
     private ArrayList<CubeSatDTO> cubeSat;
     
     public int quantEquipes(){

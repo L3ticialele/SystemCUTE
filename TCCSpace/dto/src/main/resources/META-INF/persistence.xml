@@ -8,6 +8,8 @@
     <class>br.cefetmg.space.model.dto.UsuarioDTO</class>
     <class>br.cefetmg.space.model.dto.EquipeDTO</class>
     <class>br.cefetmg.space.model.dto.PessoaDTO</class>
+    <class>br.cefetmg.space.model.dto.AdministradorDTO</class>
+    <class>br.cefetmg.space.model.dto.TransporteDTO</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/TCC-AEROSPACE"/>
       <property name="javax.persistence.jdbc.user" value="postgres"/>

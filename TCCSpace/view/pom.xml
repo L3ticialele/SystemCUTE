@@ -19,6 +19,6 @@
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <exec.mainClass>com.mycompany.view.Main</exec.mainClass>
+        <exec.mainClass>br.cefetmg.space.view.Main</exec.mainClass>
     </properties>
 </project>

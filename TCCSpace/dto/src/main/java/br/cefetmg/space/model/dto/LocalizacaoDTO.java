@@ -2,9 +2,12 @@ package br.cefetmg.space.model.dto;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 
 @Entity
@@ -12,10 +15,21 @@ public class LocalizacaoDTO implements Serializable {
 
     private String altitude;
     private String longitude;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "idCubeSat", nullable = false)
+    private CubeSatDTO cubeSat;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Id 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)  
+    public CubeSatDTO getCubeSat() {
+        return cubeSat;
+    }
+
+    public void setCubeSat(CubeSatDTO cubeSat) {
+        this.cubeSat = cubeSat;
+    }
+
     public int getId(){
         return id;
     }

@@ -1,30 +1,90 @@
 
 package br.cefetmg.space.model.dto;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
-public class EquipeDTO extends UsuarioDTO{
+@Table(name = "equipes")
+public class EquipeDTO implements Serializable{
 
+    @ManyToMany(mappedBy="equipes")
     private ArrayList<PessoaDTO> integrantes;
     private String nome;
+    @OneToMany(fetch = FetchType.EAGER, cascade = 
+            CascadeType.PERSIST, mappedBy = "equipes")
     private ArrayList<CubeSatDTO> cubeSat;
-    private ArrayList<PessoaDTO> administrador;
+    @ManyToMany(mappedBy="equipes")
+    private ArrayList<AdministradorDTO> administrador;
+    private String senha;
+    private String username;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    private String email;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    public ArrayList<AdministradorDTO> getAdministrador() {
+        return administrador;
+    }
+
+    public void setAdministrador(ArrayList<AdministradorDTO> administrador) {
+        this.administrador = administrador;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public String getUserName() {
+        return username;
+    }
+
+    public void setUserName(String username) {
+        this.username = username;
+    }
     
     public int quantAdministradores(){
         return administrador.size();
     }
     
-    public PessoaDTO getAdministrador(int posicao){
+    public AdministradorDTO getAdministrador(int posicao){
         return administrador.get(posicao);
     }
     
-    public ArrayList<PessoaDTO> getAdministradores(){
+    public ArrayList<AdministradorDTO> getAdministradores(){
         return administrador;
     }
     
-    public void setAdministrador(PessoaDTO adm){
+    public void setAdministrador(AdministradorDTO adm){
         if(adm.isAdministrador())
           administrador.add(adm);
         else

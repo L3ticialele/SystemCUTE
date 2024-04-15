@@ -8,19 +8,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.Table;
 
 @Entity
-@Table(name = "usuario")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class UsuarioDTO implements Serializable{
     private String senha;
     private String username;
     private String email;
-    private int id;
-    
     @Id 
     @GeneratedValue(strategy = GenerationType.TABLE)
+    private int id;
+   
     public int getId() {
         return id;
     }
