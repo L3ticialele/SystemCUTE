@@ -11,21 +11,11 @@ import javax.persistence.Table;
 public class TransporteDTO implements Serializable {
 
     @Id
-    private int id;
     private int IP;
     private String entrada;
     private String saida;
     @OneToOne(mappedBy = "transporte")
     private CubeSatDTO cubeSat;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     
     public CubeSatDTO getCubeSat() {
         return cubeSat;

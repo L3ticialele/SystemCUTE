@@ -40,7 +40,11 @@ public class PessoaDAO implements IPessoaDAO{
         List<PessoaDTO> pessoas = entityManager.createQuery(criteria).getResultList();
         
         for(PessoaDTO pessoa : pessoas){
-            System.out.println("Id equipe: " + pessoa.getId() + " Nome: " + pessoa.getNome() + " CubeSats feitos/em andamento: " + pessoa.quantCubeSat() + " Telefone: " + pessoa.getTelefone() + " Participa de quantas equipes: " + pessoa.quantEquipes());
+            System.out.print("Id equipe: " + pessoa.getId() + " Nome: " + pessoa.getNome() + " CubeSats feitos/em andamento: " + pessoa.quantCubeSat() + " Telefone: " + pessoa.getTelefone() + " Participa de quantas equipes: " + pessoa.quantEquipes());
+            if(pessoa.isAdministrador())
+                System.out.println("Administrador: sim");
+            else
+                System.out.println("Administrador: não");
         }
         entityManager.close();
         return pessoas;
@@ -82,12 +86,6 @@ public class PessoaDAO implements IPessoaDAO{
             PessoaDTO pessoaPersistida = entityManager.find(PessoaDTO.class, pessoa.getId());
             
             if(pessoaPersistida != null){
-                for(int i = 0; i<pessoaPersistida.quantCubeSat(); i++){
-                    pessoaPersistida.setCubeSat(pessoa.getCubeSat(i));
-                }
-                for(int i = 0; i<pessoaPersistida.quantEquipes(); i++){
-                    pessoaPersistida.setEquipe(pessoa.getEquipe(i));
-                }
                 pessoaPersistida.setEmail(pessoa.getEmail());
                 pessoaPersistida.setId(pessoa.getId());
                 pessoaPersistida.setNome(pessoa.getNome());
@@ -96,6 +94,8 @@ public class PessoaDAO implements IPessoaDAO{
                 pessoaPersistida.setAdministrador(pessoa.isAdministrador());
                 pessoaPersistida.setCpf(pessoa.getCpf());
                 pessoaPersistida.setTelefone(pessoa.getTelefone());
+                pessoaPersistida.setEquipes(pessoa.getEquipes());
+                pessoaPersistida.setCubeSat(pessoa.getCubeSat());
                 return true;
             }else{
                 System.out.println("Não foi possível encontrar o usuário com o id: " + pessoa.getId());

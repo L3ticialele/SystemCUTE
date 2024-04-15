@@ -1,7 +1,8 @@
+
 package br.cefetmg.space.model.dao;
 
-import br.cefetmg.space.model.dto.TransporteDTO;
-import br.cefetmg.space.model.idao.ITransporteDAO;
+import br.cefetmg.space.model.dto.AdministradorDTO;
+import br.cefetmg.space.model.idao.IAdministradorDAO;
 import br.cefetmg.space.model.idao.exception.PersistenciaException;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -9,17 +10,16 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaQuery;
 
-public class TransporteDAO implements ITransporteDAO{
-    
+public class AdministradorDAO implements IAdministradorDAO {
     @Override
-    public void inserir(TransporteDTO transporte) throws PersistenciaException{
+    public void inserir(AdministradorDTO adm) throws PersistenciaException{
         EntityManagerFactory entityManagerFactory = 
         Persistence.createEntityManagerFactory("persistence");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         
         try{
             entityManager.getTransaction().begin();
-            entityManager.persist(transporte);
+            entityManager.persist(adm);
             entityManager.getTransaction().commit();
         }catch(Exception ex){
             entityManager.getTransaction().rollback();
@@ -30,37 +30,37 @@ public class TransporteDAO implements ITransporteDAO{
     }
     
     @Override
-    public List<TransporteDTO> listarTodos() throws PersistenciaException{
+    public List<AdministradorDTO> listarTodos() throws PersistenciaException{
         EntityManagerFactory entityManagerFactory = 
         Persistence.createEntityManagerFactory("persistence");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-        CriteriaQuery<TransporteDTO> criteria = 
-        entityManager.getCriteriaBuilder().createQuery(TransporteDTO.class);
-        criteria.select(criteria.from(TransporteDTO.class));
-        List<TransporteDTO> transportes = entityManager.createQuery(criteria).getResultList();
+        CriteriaQuery<AdministradorDTO> criteria = 
+        entityManager.getCriteriaBuilder().createQuery(AdministradorDTO.class);
+        criteria.select(criteria.from(AdministradorDTO.class));
+        List<AdministradorDTO> adms = entityManager.createQuery(criteria).getResultList();
         
-        for(TransporteDTO transporte : transportes){
-            System.out.println("IP: " + transporte.getIP() + " Saída: " + transporte.getSaida() + " Entrada: " + transporte.getEntrada() + "Id do CubeSat: " + transporte.getCubeSat().getId());
+        for(AdministradorDTO adm : adms){
+            System.out.print("Id equipe: " + adm.getId() + " Nome: " + adm.getNome() + " CubeSats feitos/em andamento: " + adm.quantCubeSat() + " Telefone: " + adm.getTelefone() + " Participa de quantas equipes: " + adm.quantEquipes() + " Administra " + adm.quantEquipesAdministradas() + " equipes");
         }
         entityManager.close();
-        return transportes;
+        return adms;
     }
        
     @Override
-    public boolean delete(int Ip) throws PersistenciaException{
+    public boolean delete(int idAdm) throws PersistenciaException{
         EntityManagerFactory entityManagerFactory = 
         Persistence.createEntityManagerFactory("persistence");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         
         try{
             entityManager.getTransaction().begin();
-            TransporteDTO transporte = entityManager.find(TransporteDTO.class, Ip);
+            AdministradorDTO adm = entityManager.find(AdministradorDTO.class, idAdm);
             
-            if(transporte != null){
-                entityManager.remove(transporte);
+            if(adm != null){
+                entityManager.remove(adm);
                 return true;
             }else{
-                System.out.println("Não foi possível encontrar o transporte com o IP: " + Ip);
+                System.out.println("Não foi possível encontrar o usuário com o id: " + idAdm);
                 return false;
             }
         }catch(Exception ex){
@@ -72,23 +72,29 @@ public class TransporteDAO implements ITransporteDAO{
     }
     
     @Override
-    public boolean atualizar(TransporteDTO transporte) throws PersistenciaException{
+    public boolean atualizar(AdministradorDTO adm) throws PersistenciaException{
         EntityManagerFactory entityManagerFactory = 
         Persistence.createEntityManagerFactory("persistence");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         
         try{
             entityManager.getTransaction().begin();
-            TransporteDTO transportePersistido = entityManager.find(TransporteDTO.class, transporte.getIP());
+            AdministradorDTO admPersistido = entityManager.find(AdministradorDTO.class, adm.getId());
             
-            if(transportePersistido != null){
-                transportePersistido.setIP(transporte.getIP());
-                transportePersistido.setEntrada(transporte.getEntrada());
-                transportePersistido.setSaida(transporte.getSaida());
-                transportePersistido.setCubeSat(transporte.getCubeSat());
+            if(admPersistido != null){
+                admPersistido.setEmail(adm.getEmail());
+                admPersistido.setId(adm.getId());
+                admPersistido.setNome(adm.getNome());
+                admPersistido.setSenha(adm.getSenha());
+                admPersistido.setUserName(adm.getUserName());
+                admPersistido.setAdministrador(adm.isAdministrador());
+                admPersistido.setCpf(adm.getCpf());
+                admPersistido.setTelefone(adm.getTelefone());
+                admPersistido.setEquipes(adm.getEquipes());
+                admPersistido.setCubeSat(adm.getCubeSat());
                 return true;
             }else{
-                System.out.println("Não foi possível encontrar o tranporte com o IP: " + transporte.getIP());
+                System.out.println("Não foi possível encontrar o usuário com o id: " + adm.getId());
                 return false;
             }
         }catch(Exception ex){

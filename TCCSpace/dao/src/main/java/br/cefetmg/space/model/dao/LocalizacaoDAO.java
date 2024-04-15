@@ -40,7 +40,7 @@ public class LocalizacaoDAO implements ILocalizacaoDAO{
         List<LocalizacaoDTO> localizacoes = entityManager.createQuery(criteria).getResultList();
         
         for(LocalizacaoDTO localizacao : localizacoes){
-            System.out.println("Id: " + localizacao.getId() + " Altitude: " + localizacao.getAltitude()+ " Longitude: " + localizacao.getLongitude());
+            System.out.println("Id: " + localizacao.getId() + " Altitude: " + localizacao.getAltitude()+ " Longitude: " + localizacao.getLongitude() + " Id do CubSat: " + localizacao.getCubeSat().getId());
         }
         
         entityManager.close();
@@ -61,7 +61,7 @@ public class LocalizacaoDAO implements ILocalizacaoDAO{
                 entityManager.remove(localizacao);
                 return true;
             }else{
-                System.out.println("Não foi possíbel encontrar a localização com o id: " + idLocalizacao);
+                System.out.println("Não foi possível encontrar a localização com o id: " + idLocalizacao);
                 return false;
             }
         }catch(Exception ex){
@@ -86,6 +86,7 @@ public class LocalizacaoDAO implements ILocalizacaoDAO{
                 localizacaoPersistida.setId(localizacao.getId());
                 localizacaoPersistida.setAltitude(localizacao.getAltitude());
                 localizacaoPersistida.setLongitude(localizacao.getLongitude());
+                localizacaoPersistida.setCubeSat(localizacao.getCubeSat());
                 return true;
             }else{
                 System.out.println("Não foi possível encontrar a localização com o id: " + localizacao.getId());

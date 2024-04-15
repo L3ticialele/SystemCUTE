@@ -74,6 +74,14 @@ public class PessoaDTO extends UsuarioDTO{
     public void setEquipe(EquipeDTO equipes) {
         this.equipes.add(equipes);
     }
+    
+    public void setEquipes(ArrayList<EquipeDTO> equipes) {
+        if(this.equipes.isEmpty())
+            this.equipes = equipes;
+        else 
+            for(int i=0; i<equipes.size(); i++)
+                setEquipe(equipes.get(i));
+    }
 
     public String getTelefone() {
         return telefone;
@@ -89,6 +97,14 @@ public class PessoaDTO extends UsuarioDTO{
 
     public void setCubeSat(CubeSatDTO cubeSat) {
         this.cubeSat.add(cubeSat);
+    }
+    
+    public void setCubeSat(ArrayList<CubeSatDTO> cubeSat) {
+        if(cubeSat.isEmpty())
+            this.cubeSat = cubeSat;
+        else
+            for(int i=0; i<cubeSat.size(); i++)
+                setCubeSat(cubeSat.get(i));
     }
     
 }

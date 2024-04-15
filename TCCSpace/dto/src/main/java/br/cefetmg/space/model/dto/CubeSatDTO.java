@@ -25,7 +25,7 @@ public class CubeSatDTO implements Serializable {
     private String competicao;
     @OneToMany(fetch = FetchType.EAGER, cascade = 
             CascadeType.PERSIST, mappedBy = "cubesat")
-    final private ArrayList<DadosDTO> dados;
+    private ArrayList<DadosDTO> dados;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idUsuario", nullable = true)
     private PessoaDTO pessoa;
@@ -60,9 +60,18 @@ public class CubeSatDTO implements Serializable {
     public ArrayList<LocalizacaoDTO> getLocalizacao() {
         return localizacao;
     }
+    
+    public void setLocalizacao(LocalizacaoDTO localizacao) {
+        this.localizacao.add(localizacao);
+    }
 
     public void setLocalizacao(ArrayList<LocalizacaoDTO> localizacao) {
-        this.localizacao = localizacao;
+        if(localizacao.isEmpty())
+             this.localizacao = localizacao;
+        else{
+            for(int i=0; i<localizacao.size(); i++)
+               setLocalizacao(localizacao.get(i));
+        }
     }
 
     public PessoaDTO getPessoa() {
@@ -89,6 +98,15 @@ public class CubeSatDTO implements Serializable {
     
     public void setDados(DadosDTO dado){
         dados.add(dado);
+    }
+    
+    public void setTodosDados(ArrayList<DadosDTO> dado){
+        if(dados.isEmpty())
+            dados = dado;
+        else{
+            for(int i=0; i<dado.size(); i++)
+                setDados(dado.get(i));
+        }
     }
     
     public ArrayList<DadosDTO> getDados(){

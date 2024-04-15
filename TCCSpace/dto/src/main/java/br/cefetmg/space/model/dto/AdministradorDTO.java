@@ -20,6 +20,10 @@ public class AdministradorDTO extends PessoaDTO{
     public ArrayList<EquipeDTO> getEquipesA() {
         return equipesAdministradas;
     }
+    
+    public int quantEquipesAdministradas(){
+        return equipesAdministradas.size();
+    }
 
     public EquipeDTO getEquipeAdministradas(int posicao){
         return equipesAdministradas.get(posicao);

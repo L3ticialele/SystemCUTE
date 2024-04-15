@@ -82,15 +82,9 @@ public class EquipeDAO implements IEquipeDAO{
             EquipeDTO equipePersistida = entityManager.find(EquipeDTO.class, equipe.getId());
             
             if(equipePersistida != null){
-                for(int i = 0; i<equipePersistida.quantAdministradores(); i++){
-                    equipePersistida.setAdministrador(equipe.getAdministrador(i));
-                }
-                for(int i = 0; i<equipePersistida.quantCubeSat(); i++){
-                    equipePersistida.setCubeSat(equipe.getCubeSat(i));
-                }
-                for(int i = 0; i<equipePersistida.quantIntegrantes(); i++){
-                    equipePersistida.setIntegrante(equipe.getIntegrante(i));
-                }
+                equipePersistida.setAdministrador(equipe.getAdministrador());
+                equipePersistida.setCubeSat(equipe.getCubeSat());
+                equipePersistida.setIntegrante(equipePersistida.getIntegrantes());
                 equipePersistida.setEmail(equipe.getEmail());
                 equipePersistida.setId(equipe.getId());
                 equipePersistida.setNome(equipe.getNome());

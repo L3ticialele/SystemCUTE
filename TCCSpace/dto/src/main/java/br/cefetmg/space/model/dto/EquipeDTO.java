@@ -43,6 +43,18 @@ public class EquipeDTO implements Serializable{
     public int getId() {
         return id;
     }
+    
+    public int quantCubeSat(){
+        return cubeSat.size();
+    }
+    
+    public int quantIntegrantes(){
+        return integrantes.size();
+    }
+    
+    public int quantAdministradores(){
+        return administrador.size();
+    }
 
     public void setId(int id) {
         this.id = id;
@@ -53,7 +65,11 @@ public class EquipeDTO implements Serializable{
     }
 
     public void setAdministrador(ArrayList<AdministradorDTO> administrador) {
-        this.administrador = administrador;
+        if(this.administrador.isEmpty())
+            this.administrador = administrador;
+        else
+            for(int i=0; i<administrador.size(); i++)
+                setAdministrador(administrador.get(i));
     }
 
     public String getSenha() {
@@ -72,10 +88,6 @@ public class EquipeDTO implements Serializable{
         this.username = username;
     }
     
-    public int quantAdministradores(){
-        return administrador.size();
-    }
-    
     public AdministradorDTO getAdministrador(int posicao){
         return administrador.get(posicao);
     }
@@ -89,14 +101,6 @@ public class EquipeDTO implements Serializable{
           administrador.add(adm);
         else
            System.out.println("Este usuário não é um administrador.");
-    }
-    
-    public int quantIntegrantes(){
-        return integrantes.size();
-    }
-    
-    public int quantCubeSat(){
-        return cubeSat.size();
     }
     
     public CubeSatDTO getCubeSat(int posicao){
@@ -118,6 +122,14 @@ public class EquipeDTO implements Serializable{
     public void setIntegrante(PessoaDTO integrante) {
         integrantes.add(integrante);
     }
+    
+    public void setIntegrante(ArrayList<PessoaDTO> integrante) {
+        if(integrantes.isEmpty())
+            integrantes = integrante;
+        else
+            for(int i=0; i<integrante.size(); i++)
+                setIntegrante(integrante.get(i));
+    }
 
     public String getNome() {
         return nome;
@@ -129,5 +141,13 @@ public class EquipeDTO implements Serializable{
 
     public void setCubeSat(CubeSatDTO cubeSat) {
         this.cubeSat.add(cubeSat);
+    }
+    
+    public void setCubeSat(ArrayList<CubeSatDTO> cubeSat) {
+        if(this.cubeSat.isEmpty())
+            this.cubeSat = cubeSat;
+        else
+            for(int i=0; i<cubeSat.size(); i++)
+                setCubeSat(cubeSat.get(i));
     }
 }
