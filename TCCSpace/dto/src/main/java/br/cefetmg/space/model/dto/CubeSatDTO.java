@@ -23,7 +23,8 @@ public class CubeSatDTO implements Serializable {
     private String dataFabricacao;
     private double tamanho;
     private String nome;
-    @OneToMany(mappedBy = "cubesat", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.EAGER, cascade = 
+            CascadeType.PERSIST, mappedBy = "cubesat")
     private ArrayList<DadosDTO> dados;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idUsuario", nullable = true)
@@ -31,7 +32,8 @@ public class CubeSatDTO implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idEquipe", nullable = true)
     private EquipeDTO equipe;
-   @OneToMany(mappedBy = "cubesat", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.EAGER, cascade = 
+            CascadeType.PERSIST, mappedBy = "cubesat")
     private ArrayList<LocalizacaoDTO> localizacoes;
     private String status;
 

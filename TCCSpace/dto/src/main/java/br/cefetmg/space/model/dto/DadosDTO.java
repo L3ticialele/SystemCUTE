@@ -20,8 +20,8 @@ public class DadosDTO implements Serializable {
     private double velocidadeVento;
     private String radiacao;
     private String massasAr;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idCubeSat", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "cubesat", nullable = false)
     private CubeSatDTO cubeSat;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

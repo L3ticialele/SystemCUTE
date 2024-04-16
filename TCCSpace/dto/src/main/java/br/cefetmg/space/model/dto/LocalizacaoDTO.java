@@ -18,7 +18,7 @@ public class LocalizacaoDTO implements Serializable {
     private String altitude;
     private String longitude;
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "idCubeSat", nullable = false)
+    @JoinColumn(name = "cubesat", nullable = false)
     private CubeSatDTO cubeSat;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
