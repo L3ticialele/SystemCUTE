@@ -1,12 +1,11 @@
 package br.cefetmg.space.model.dto;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -18,25 +17,35 @@ import javax.persistence.Table;
 public class CubeSatDTO implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private int id;
     private String dataFabricacao;
     private double tamanho;
     private String nome;
     @OneToMany(fetch = FetchType.EAGER, cascade = 
-            CascadeType.PERSIST, mappedBy = "cubesat")
-    private ArrayList<DadosDTO> dados;
+            CascadeType.ALL, mappedBy = "cubeSat")
+    private List<DadosDTO> dados;
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "idUsuario", nullable = true)
+    @JoinColumn(name = "idusuario", nullable = true)
     private UsuarioDTO usuario;
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "idEquipe", nullable = true)
+    @JoinColumn(name = "idequipe", nullable = true)
     private EquipeDTO equipe;
     @OneToMany(fetch = FetchType.EAGER, cascade = 
-            CascadeType.PERSIST, mappedBy = "cubesat")
-    private ArrayList<LocalizacaoDTO> localizacoes;
+            CascadeType.ALL, mappedBy = "cubeSat")
+    private List<LocalizacaoDTO> localizacoes;
     private String status;
 
+    public CubeSatDTO(){
+        dataFabricacao = null;
+        tamanho = -1;
+        nome = null;
+        dados = null;
+        equipe = null;
+        localizacoes = null;
+        status = null;
+    }
+    
     public String getStatus() {
         return status;
     }
@@ -53,7 +62,7 @@ public class CubeSatDTO implements Serializable {
         this.equipe = equipe;
     }
 
-    public ArrayList<LocalizacaoDTO> getLocalizacao() {
+    public List<LocalizacaoDTO> getLocalizacao() {
         return localizacoes;
     }
     
@@ -61,7 +70,7 @@ public class CubeSatDTO implements Serializable {
         localizacoes.add(localizacao);
     }
 
-    public void setLocalizacao(ArrayList<LocalizacaoDTO> localizacao) {
+    public void setLocalizacao(List<LocalizacaoDTO> localizacao) {
         if(localizacao.isEmpty())
              localizacoes = localizacao;
         else{
@@ -85,18 +94,12 @@ public class CubeSatDTO implements Serializable {
     public void setId(int id) {
         this.id = id;
     }
-   
-    public CubeSatDTO(){
-        dados = null;
-        tamanho = 0;
-        id = -1;
-    }
     
     public void setDados(DadosDTO dado){
         dados.add(dado);
     }
     
-    public void setTodosDados(ArrayList<DadosDTO> dado){
+    public void setTodosDados(List<DadosDTO> dado){
         if(dados.isEmpty())
             dados = dado;
         else{
@@ -105,7 +108,7 @@ public class CubeSatDTO implements Serializable {
         }
     }
     
-    public ArrayList<DadosDTO> getDados(){
+    public List<DadosDTO> getDados(){
         return dados;
     }
 

@@ -20,15 +20,14 @@ public class ManterUsuario implements IManterUsuario{
     }
     
     @Override
-    public boolean alterar(UsuarioDTO usuario) throws PersistenciaException{
-        boolean result = usuarioDAO.atualizar(usuario);
+    public boolean alterar(int idUsuario, UsuarioDTO usuario) throws PersistenciaException{
+        boolean result = usuarioDAO.atualizar(idUsuario, usuario);
         return result;
     }
 
     @Override
-    public boolean excluir(int idUsuario) throws PersistenciaException{
-       boolean result = usuarioDAO.delete(idUsuario);
-       return result;
+    public void excluir(int idUsuario) throws PersistenciaException{
+        usuarioDAO.delete(idUsuario);
     }
 
     @Override

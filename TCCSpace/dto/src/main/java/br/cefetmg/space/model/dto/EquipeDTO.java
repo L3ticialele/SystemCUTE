@@ -2,12 +2,11 @@
 package br.cefetmg.space.model.dto;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
@@ -18,19 +17,29 @@ import javax.persistence.Table;
 public class EquipeDTO implements Serializable{
 
     @ManyToMany(mappedBy="equipes")
-    private ArrayList<UsuarioDTO> integrantes;
+    private List<UsuarioDTO> integrantes;
     private String nome;
     @OneToMany(fetch = FetchType.EAGER, cascade = 
-            CascadeType.PERSIST, mappedBy = "equipes")
-    private ArrayList<CubeSatDTO> cubeSat;
-    @ManyToMany(mappedBy="equipes")
-    private ArrayList<AdministradorDTO> administrador;
+            CascadeType.ALL, mappedBy = "equipe")
+    private List<CubeSatDTO> cubeSat;
+    @ManyToMany(mappedBy="equipesAdministradas")
+    private List<AdministradorDTO> administrador;
     private String senha;
     private String username;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private int id;
     private String email;
+    
+    public EquipeDTO(){
+        nome = null;
+        integrantes = null;
+        cubeSat = null;
+        administrador = null;
+        senha = null;
+        username = null;
+        email = null;
+    }
 
     public String getEmail() {
         return email;
@@ -60,11 +69,11 @@ public class EquipeDTO implements Serializable{
         this.id = id;
     }
     
-    public ArrayList<AdministradorDTO> getAdministrador() {
+    public List<AdministradorDTO> getAdministrador() {
         return administrador;
     }
 
-    public void setAdministrador(ArrayList<AdministradorDTO> administrador) {
+    public void setAdministrador(List<AdministradorDTO> administrador) {
         if(this.administrador.isEmpty())
             this.administrador = administrador;
         else
@@ -92,7 +101,7 @@ public class EquipeDTO implements Serializable{
         return administrador.get(posicao);
     }
     
-    public ArrayList<AdministradorDTO> getAdministradores(){
+    public List<AdministradorDTO> getAdministradores(){
         return administrador;
     }
     
@@ -107,7 +116,7 @@ public class EquipeDTO implements Serializable{
         return cubeSat.get(posicao);
     }
     
-    public ArrayList<CubeSatDTO> getCubeSat() {
+    public List<CubeSatDTO> getCubeSat() {
         return cubeSat;
     }
     
@@ -115,7 +124,7 @@ public class EquipeDTO implements Serializable{
         return integrantes.get(posicao);
     }
 
-    public ArrayList<UsuarioDTO> getIntegrantes() {
+    public List<UsuarioDTO> getIntegrantes() {
         return integrantes;
     }
 
@@ -123,7 +132,7 @@ public class EquipeDTO implements Serializable{
         integrantes.add(integrante);
     }
     
-    public void setIntegrante(ArrayList<UsuarioDTO> integrante) {
+    public void setIntegrante(List<UsuarioDTO> integrante) {
         if(integrantes.isEmpty())
             integrantes = integrante;
         else
@@ -143,7 +152,7 @@ public class EquipeDTO implements Serializable{
         this.cubeSat.add(cubeSat);
     }
     
-    public void setCubeSat(ArrayList<CubeSatDTO> cubeSat) {
+    public void setCubeSat(List<CubeSatDTO> cubeSat) {
         if(this.cubeSat.isEmpty())
             this.cubeSat = cubeSat;
         else

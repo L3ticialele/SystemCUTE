@@ -19,6 +19,6 @@
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <exec.mainClass>com.mycompany.idao.Idao</exec.mainClass>
+        <exec.mainClass>br.cefetmg.space.idao.Idao</exec.mainClass>
     </properties>
 </project>

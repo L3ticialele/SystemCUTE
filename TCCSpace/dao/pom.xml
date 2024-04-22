@@ -65,6 +65,6 @@
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <exec.mainClass>com.mycompany.dao.Dao</exec.mainClass>
+        <exec.mainClass>br.cefetmg.space.dao.Dao</exec.mainClass>
     </properties>
 </project>

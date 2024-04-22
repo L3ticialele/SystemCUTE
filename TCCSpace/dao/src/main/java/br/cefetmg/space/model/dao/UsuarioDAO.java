@@ -38,20 +38,23 @@ public class UsuarioDAO implements IUsuarioDAO{
         entityManager.getCriteriaBuilder().createQuery(UsuarioDTO.class);
         criteria.select(criteria.from(UsuarioDTO.class));
         List<UsuarioDTO> usuarios = entityManager.createQuery(criteria).getResultList();
-        
-        for(UsuarioDTO usuario : usuarios){
-            System.out.print("Id equipe: " + usuario.getId() + " Nome: " + usuario.getNome() + " CubeSats feitos/em andamento: " + usuario.quantCubeSat() + " Telefone: " + usuario.getTelefone() + " Participa de quantas equipes: " + usuario.quantEquipes());
-            if(usuario.isAdministrador())
-                System.out.println("Administrador: sim");
-            else
-                System.out.println("Administrador: não");
+        if(!usuarios.isEmpty()){
+            for(UsuarioDTO usuario : usuarios){
+                System.out.print("Id usuario: " + usuario.getId() + " Nome: " + usuario.getNome() + " CubeSats feitos/em andamento: " + usuario.quantCubeSat() + " Telefone: " + usuario.getTelefone() + " Participa de quantas equipes: " + usuario.quantEquipes());
+                if(usuario.isAdministrador())
+                    System.out.println(" Administrador: sim");
+                else
+                    System.out.println(" Administrador: não");
+            }
+        }else{
+            System.out.println(" Não há usuários cadastrados no sistema.");
         }
         entityManager.close();
         return usuarios;
     }
        
     @Override
-    public boolean delete(int idUsuario) throws PersistenciaException{
+    public void delete(int idUsuario) throws PersistenciaException{
         EntityManagerFactory entityManagerFactory = 
         Persistence.createEntityManagerFactory("persistence");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -59,13 +62,11 @@ public class UsuarioDAO implements IUsuarioDAO{
         try{
             entityManager.getTransaction().begin();
             UsuarioDTO usuario = entityManager.find(UsuarioDTO.class, idUsuario);
-            
             if(usuario != null){
                 entityManager.remove(usuario);
-                return true;
+                entityManager.getTransaction().commit();
             }else{
                 System.out.println("Não foi possível encontrar o usuário com o id: " + idUsuario);
-                return false;
             }
         }catch(Exception ex){
             entityManager.getTransaction().rollback();
@@ -76,18 +77,16 @@ public class UsuarioDAO implements IUsuarioDAO{
     }
     
     @Override
-    public boolean atualizar(UsuarioDTO usuario) throws PersistenciaException{
+    public boolean atualizar(int idUsuario, UsuarioDTO usuario) throws PersistenciaException{
         EntityManagerFactory entityManagerFactory = 
         Persistence.createEntityManagerFactory("persistence");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         
         try{
             entityManager.getTransaction().begin();
-            UsuarioDTO usuarioPersistido = entityManager.find(UsuarioDTO.class, usuario.getId());
-            
+            UsuarioDTO usuarioPersistido = entityManager.find(UsuarioDTO.class, idUsuario);
             if(usuarioPersistido != null){
                 usuarioPersistido.setEmail(usuario.getEmail());
-                usuarioPersistido.setId(usuario.getId());
                 usuarioPersistido.setUserName(usuario.getUserName());
                 usuarioPersistido.setNome(usuario.getNome());
                 usuarioPersistido.setSenha(usuario.getSenha());
@@ -96,9 +95,10 @@ public class UsuarioDAO implements IUsuarioDAO{
                 usuarioPersistido.setTelefone(usuario.getTelefone());
                 usuarioPersistido.setEquipes(usuario.getEquipes());
                 usuarioPersistido.setCubeSat(usuario.getCubeSat());
+                entityManager.getTransaction().commit();
                 return true;
             }else{
-                System.out.println("Não foi possível encontrar o usuário com o id: " + usuario.getId());
+                System.out.println("Não foi possível encontrar o usuário com o id: " + idUsuario);
                 return false;
             }
         }catch(Exception ex){

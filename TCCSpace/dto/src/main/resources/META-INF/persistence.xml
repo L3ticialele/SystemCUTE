@@ -3,17 +3,17 @@
   <persistence-unit name="persistence" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>br.cefetmg.space.model.dto.CubeSatDTO</class>
-    <class>br.cefetmg.space.model.dto.DadosDTO</class>
-    <class>br.cefetmg.space.model.dto.LocalizacaoDTO</class>
     <class>br.cefetmg.space.model.dto.UsuarioDTO</class>
     <class>br.cefetmg.space.model.dto.EquipeDTO</class>
     <class>br.cefetmg.space.model.dto.PessoaDTO</class>
     <class>br.cefetmg.space.model.dto.AdministradorDTO</class>
+    <class>br.cefetmg.space.model.dto.LocalizacaoDTO</class>
+    <class>br.cefetmg.space.model.dto.DadosDTO</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/TCC-AEROSPACE"/>
       <property name="javax.persistence.jdbc.user" value="postgres"/>
       <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-      <property name="javax.persistence.jdbc.password" value="admin"/>
+      <property name="javax.persistence.jdbc.password" value=""/>
     </properties>
   </persistence-unit>
 </persistence>

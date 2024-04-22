@@ -61,6 +61,6 @@
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <exec.mainClass>com.mycompany.dto.Dto</exec.mainClass>
+        <exec.mainClass>br.cefetmg.space.dto.Dto</exec.mainClass>
     </properties>
 </project>

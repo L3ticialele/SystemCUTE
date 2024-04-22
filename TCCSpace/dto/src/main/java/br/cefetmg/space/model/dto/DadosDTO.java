@@ -2,11 +2,9 @@ package br.cefetmg.space.model.dto;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -14,20 +12,29 @@ import javax.persistence.Table;
 @Table(name = "dados")
 public class DadosDTO implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private String umidade;
     private double pressao;
     private double temperatura;
     private double velocidadeVento;
     private String radiacao;
     private String massasAr;
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "cubesat", nullable = false)
+    @ManyToOne
     private CubeSatDTO cubeSat;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
     private String dataObtencao;
 
+    public DadosDTO(){
+        umidade = null;
+        pressao = -1;
+        temperatura = -1;
+        velocidadeVento = -1;
+        radiacao = null;
+        massasAr = null;
+        dataObtencao = null;
+    }
+    
     public String getDataObtencao() {
         return dataObtencao;
     }
@@ -44,13 +51,6 @@ public class DadosDTO implements Serializable {
         this.id = id;
     }
     
-    public DadosDTO(){
-        pressao = -1;
-        temperatura = 430;
-        velocidadeVento = -1;
-        id = -1;
-    }
-    
     public void setCubeSat(CubeSatDTO cube){
         cubeSat = cube;
     }
@@ -59,7 +59,7 @@ public class DadosDTO implements Serializable {
         return cubeSat;
     }
     
-    public int getIdCubeSat(){
+    public long getIdCubeSat(){
         return cubeSat.getId();
     }
     

@@ -2,13 +2,15 @@
 package br.cefetmg.space.model.dto;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -17,30 +19,35 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "usuarios")
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 public class UsuarioDTO implements Serializable{
     private String senha;
     private String username;
     private String email;
     @Id 
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
     private String cpf;
     private boolean administrador;
     private String nome;
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "Usuario_Equipe",
-            joinColumns = {@JoinColumn(name="idUsuario")},
-            inverseJoinColumns={@JoinColumn(name="idEquipe")})
-    private ArrayList<EquipeDTO> equipes;
+    @JoinTable(name = "usuario_equipe",
+            joinColumns = {@JoinColumn(name="idusuario")},
+            inverseJoinColumns={@JoinColumn(name="idequipe")})
+    private List<EquipeDTO> equipes;
     private String telefone;
     @OneToMany(fetch = FetchType.EAGER, cascade = 
-            CascadeType.PERSIST, mappedBy = "usuarios")
-    private ArrayList<CubeSatDTO> cubeSat;
+            CascadeType.ALL, mappedBy = "usuario")
+    private List<CubeSatDTO> cubeSat;
     
     public UsuarioDTO(){
+        senha = null;
+        username = null;
+        email = null;
+        telefone = null;
         administrador = false;
-        equipes = new ArrayList<>();
-        cubeSat = new ArrayList<>();
+        equipes = null;
+        cubeSat = null;
     }
     
     public int quantEquipes(){
@@ -79,7 +86,7 @@ public class UsuarioDTO implements Serializable{
         this.nome = nome;
     }
 
-    public ArrayList<EquipeDTO> getEquipes() {
+    public List<EquipeDTO> getEquipes() {
         return equipes;
     }
     
@@ -91,7 +98,7 @@ public class UsuarioDTO implements Serializable{
         this.equipes.add(equipes);
     }
     
-    public void setEquipes(ArrayList<EquipeDTO> equipes) {
+    public void setEquipes(List<EquipeDTO> equipes) {
         if(this.equipes.isEmpty())
             this.equipes = equipes;
         else 
@@ -107,7 +114,7 @@ public class UsuarioDTO implements Serializable{
         this.telefone = telefone;
     }
 
-    public ArrayList<CubeSatDTO> getCubeSat() {
+    public List<CubeSatDTO> getCubeSat() {
         return cubeSat;
     }
 
@@ -115,8 +122,8 @@ public class UsuarioDTO implements Serializable{
         this.cubeSat.add(cubeSat);
     }
     
-    public void setCubeSat(ArrayList<CubeSatDTO> cubeSat) {
-        if(cubeSat.isEmpty())
+    public void setCubeSat(List<CubeSatDTO> cubeSat) {
+        if(this.cubeSat.isEmpty())
             this.cubeSat = cubeSat;
         else
             for(int i=0; i<cubeSat.size(); i++)

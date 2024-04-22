@@ -1,7 +1,7 @@
 
 package br.cefetmg.space.model.dto;
 
-import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -10,16 +10,20 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="administrador")
+@Table(name="administradores")
 public class AdministradorDTO extends UsuarioDTO{
     
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "Administrador_Equipe",
-            joinColumns={@JoinColumn(name="idAdministrador")},
-            inverseJoinColumns={@JoinColumn(name="idEquipe")})
-    private ArrayList<EquipeDTO> equipesAdministradas;
+    @JoinTable(name = "administrador_equipe",
+            joinColumns={@JoinColumn(name="idadministrador")},
+            inverseJoinColumns={@JoinColumn(name="idequipe")})
+    private List<EquipeDTO> equipesAdministradas;
+    
+    public AdministradorDTO(){
+        equipesAdministradas = null;
+    }
 
-    public ArrayList<EquipeDTO> getEquipesA() {
+    public List<EquipeDTO> getEquipesA() {
         return equipesAdministradas;
     }
     
@@ -31,7 +35,7 @@ public class AdministradorDTO extends UsuarioDTO{
         return equipesAdministradas.get(posicao);
     }
     
-    public void setEquipesAdministradas(ArrayList<EquipeDTO> equipes) {
+    public void setEquipesAdministradas(List<EquipeDTO> equipes) {
         equipesAdministradas = equipes;
     }
     
