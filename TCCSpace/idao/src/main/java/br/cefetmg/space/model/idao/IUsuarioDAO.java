@@ -13,4 +13,10 @@ public interface IUsuarioDAO {
     void delete(int idUsuario) throws PersistenciaException;
 
     List<UsuarioDTO> listarTodos() throws PersistenciaException;
+    
+    UsuarioDTO procurarPorCPF(String cpf) throws PersistenciaException;
+    
+    UsuarioDTO procurarPorUserName(String user) throws PersistenciaException;
+    
+    UsuarioDTO procurarPorEmail(String email) throws PersistenciaException;
 }

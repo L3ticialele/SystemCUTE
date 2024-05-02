@@ -8,6 +8,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
 
 public class UsuarioDAO implements IUsuarioDAO{
@@ -21,6 +22,7 @@ public class UsuarioDAO implements IUsuarioDAO{
             entityManager.getTransaction().begin();
             entityManager.persist(usuario);
             entityManager.getTransaction().commit();
+             System.out.println("Usuário cadastrado!");
         }catch(Exception ex){
             entityManager.getTransaction().rollback();
             throw ex;
@@ -67,6 +69,78 @@ public class UsuarioDAO implements IUsuarioDAO{
                 entityManager.getTransaction().commit();
             }else{
                 System.out.println("Não foi possível encontrar o usuário com o id: " + idUsuario);
+            }
+        }catch(Exception ex){
+            entityManager.getTransaction().rollback();
+            throw ex;
+        }finally{
+            entityManager.close();
+        }
+    }
+    
+    @Override
+    public UsuarioDTO procurarPorCPF(String cpf) throws PersistenciaException{
+        EntityManagerFactory entityManagerFactory = 
+        Persistence.createEntityManagerFactory("persistence");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        
+        try{
+             entityManager.getTransaction().begin();
+             Query query = entityManager.createQuery("FROM UsuarioDTO AS u WHERE u.cpf =:cpf ");
+             query.setParameter("cpf", cpf);
+             List<UsuarioDTO> usuarioPersistido = query.getResultList();
+            if(!usuarioPersistido.isEmpty()){
+                return usuarioPersistido.get(0);
+            }else{
+                return null;
+            }
+        }catch(Exception ex){
+            entityManager.getTransaction().rollback();
+            throw ex;
+        }finally{
+            entityManager.close();
+        }
+    }
+    
+    @Override
+    public UsuarioDTO procurarPorUserName(String user) throws PersistenciaException{
+        EntityManagerFactory entityManagerFactory = 
+        Persistence.createEntityManagerFactory("persistence");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        
+        try{
+             entityManager.getTransaction().begin();
+             Query query = entityManager.createQuery("FROM UsuarioDTO AS u WHERE u.username =:user ");
+             query.setParameter("user", user);
+             List<UsuarioDTO> usuarioPersistido = query.getResultList();
+            if(!usuarioPersistido.isEmpty()){
+                return usuarioPersistido.get(0);
+            }else{
+                return null;
+            }
+        }catch(Exception ex){
+            entityManager.getTransaction().rollback();
+            throw ex;
+        }finally{
+            entityManager.close();
+        }
+    }
+    
+    @Override
+    public UsuarioDTO procurarPorEmail(String email) throws PersistenciaException{
+        EntityManagerFactory entityManagerFactory = 
+        Persistence.createEntityManagerFactory("persistence");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        
+        try{
+             entityManager.getTransaction().begin();
+             Query query = entityManager.createQuery("FROM UsuarioDTO AS u WHERE u.email =:email ");
+             query.setParameter("email", email);
+             List<UsuarioDTO> usuarioPersistido = query.getResultList();
+            if(!usuarioPersistido.isEmpty()){
+                return usuarioPersistido.get(0);
+            }else{
+                return null;
             }
         }catch(Exception ex){
             entityManager.getTransaction().rollback();
