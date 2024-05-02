@@ -1,7 +1,8 @@
+
 package br.cefetmg.space.model.dao;
 
-import br.cefetmg.space.model.dto.LocalizacaoDTO;
-import br.cefetmg.space.model.idao.ILocalizacaoDAO;
+import br.cefetmg.space.model.dto.AdministradorDTO;
+import br.cefetmg.space.model.idao.IAdministradorDAO;
 import br.cefetmg.space.model.idao.exception.PersistenciaException;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -9,17 +10,16 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaQuery;
 
-public class LocalizacaoDAO implements ILocalizacaoDAO{
-    
+public class AdministradorDAO implements IAdministradorDAO {
     @Override
-    public void inserir(LocalizacaoDTO localizacao) throws PersistenciaException{
+    public void inserir(AdministradorDTO adm) throws PersistenciaException{
         EntityManagerFactory entityManagerFactory = 
         Persistence.createEntityManagerFactory("persistence");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         
         try{
             entityManager.getTransaction().begin();
-            entityManager.persist(localizacao);
+            entityManager.persist(adm);
             entityManager.getTransaction().commit();
         }catch(Exception ex){
             entityManager.getTransaction().rollback();
@@ -30,38 +30,37 @@ public class LocalizacaoDAO implements ILocalizacaoDAO{
     }
     
     @Override
-    public List<LocalizacaoDTO> listarTodos() throws PersistenciaException{
+    public List<AdministradorDTO> listarTodos() throws PersistenciaException{
         EntityManagerFactory entityManagerFactory = 
         Persistence.createEntityManagerFactory("persistence");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-        CriteriaQuery<LocalizacaoDTO> criteria = 
-        entityManager.getCriteriaBuilder().createQuery(LocalizacaoDTO.class);
-        criteria.select(criteria.from(LocalizacaoDTO.class));
-        List<LocalizacaoDTO> localizacoes = entityManager.createQuery(criteria).getResultList();
+        CriteriaQuery<AdministradorDTO> criteria = 
+        entityManager.getCriteriaBuilder().createQuery(AdministradorDTO.class);
+        criteria.select(criteria.from(AdministradorDTO.class));
+        List<AdministradorDTO> adms = entityManager.createQuery(criteria).getResultList();
         
-        for(LocalizacaoDTO localizacao : localizacoes){
-            System.out.println("Id: " + localizacao.getId() + " Altitude: " + localizacao.getAltitude()+ " Longitude: " + localizacao.getLongitude() + " Id do CubSat: " + localizacao.getIdCubeSat());
+        for(AdministradorDTO adm : adms){
+            System.out.print("Id equipe: " + adm.getId() + " Nome: " + adm.getNome() + " CubeSats feitos/em andamento: " + adm.quantCubeSat() + " Telefone: " + adm.getTelefone() + " Participa de quantas equipes: " + adm.quantEquipes() + " Administra " + adm.quantEquipesAdministradas() + " equipes");
         }
-        
         entityManager.close();
-        return localizacoes;
+        return adms;
     }
        
     @Override
-    public boolean delete(int idLocalizacao) throws PersistenciaException{
+    public boolean delete(int idAdm) throws PersistenciaException{
         EntityManagerFactory entityManagerFactory = 
         Persistence.createEntityManagerFactory("persistence");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         
         try{
             entityManager.getTransaction().begin();
-            LocalizacaoDTO localizacao = entityManager.find(LocalizacaoDTO.class, idLocalizacao);
+            AdministradorDTO adm = entityManager.find(AdministradorDTO.class, idAdm);
             
-            if(localizacao != null){
-                entityManager.remove(localizacao);
+            if(adm != null){
+                entityManager.remove(adm);
                 return true;
             }else{
-                System.out.println("Não foi possível encontrar a localização com o id: " + idLocalizacao);
+                System.out.println("Não foi possível encontrar o usuário com o id: " + idAdm);
                 return false;
             }
         }catch(Exception ex){
@@ -73,23 +72,29 @@ public class LocalizacaoDAO implements ILocalizacaoDAO{
     }
     
     @Override
-    public boolean atualizar(LocalizacaoDTO localizacao) throws PersistenciaException{
+    public boolean atualizar(AdministradorDTO adm) throws PersistenciaException{
         EntityManagerFactory entityManagerFactory = 
         Persistence.createEntityManagerFactory("persistence");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         
         try{
             entityManager.getTransaction().begin();
-            LocalizacaoDTO localizacaoPersistida = entityManager.find(LocalizacaoDTO.class, localizacao.getId());
+            AdministradorDTO admPersistido = entityManager.find(AdministradorDTO.class, adm.getId());
             
-            if(localizacaoPersistida != null){
-                localizacaoPersistida.setId(localizacao.getId());
-                localizacaoPersistida.setAltitude(localizacao.getAltitude());
-                localizacaoPersistida.setLongitude(localizacao.getLongitude());
-                localizacaoPersistida.setCubeSat(localizacao.getCubeSat());
+            if(admPersistido != null){
+                admPersistido.setEmail(adm.getEmail());
+                admPersistido.setId(adm.getId());
+                admPersistido.setNome(adm.getNome());
+                admPersistido.setSenha(adm.getSenha());
+                admPersistido.setUserName(adm.getUserName());
+                admPersistido.setAdministrador(adm.isAdministrador());
+                admPersistido.setCpf(adm.getCpf());
+                admPersistido.setTelefone(adm.getTelefone());
+                admPersistido.setEquipes(adm.getEquipes());
+                admPersistido.setCubeSat(adm.getCubeSat());
                 return true;
             }else{
-                System.out.println("Não foi possível encontrar a localização com o id: " + localizacao.getId());
+                System.out.println("Não foi possível encontrar o usuário com o id: " + adm.getId());
                 return false;
             }
         }catch(Exception ex){

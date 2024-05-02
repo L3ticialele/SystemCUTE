@@ -1,7 +1,8 @@
+
 package br.cefetmg.space.model.dao;
 
-import br.cefetmg.space.model.dto.TransporteDTO;
-import br.cefetmg.space.model.idao.ITransporteDAO;
+import br.cefetmg.space.model.dto.EquipeDTO;
+import br.cefetmg.space.model.idao.IEquipeDAO;
 import br.cefetmg.space.model.idao.exception.PersistenciaException;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -9,17 +10,16 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaQuery;
 
-public class TransporteDAO implements ITransporteDAO{
-    
+public class EquipeDAO implements IEquipeDAO{
     @Override
-    public void inserir(TransporteDTO transporte) throws PersistenciaException{
+    public void inserir(EquipeDTO equipe) throws PersistenciaException{
         EntityManagerFactory entityManagerFactory = 
         Persistence.createEntityManagerFactory("persistence");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         
         try{
             entityManager.getTransaction().begin();
-            entityManager.persist(transporte);
+            entityManager.persist(equipe);
             entityManager.getTransaction().commit();
         }catch(Exception ex){
             entityManager.getTransaction().rollback();
@@ -30,37 +30,37 @@ public class TransporteDAO implements ITransporteDAO{
     }
     
     @Override
-    public List<TransporteDTO> listarTodos() throws PersistenciaException{
+    public List<EquipeDTO> listarTodos() throws PersistenciaException{
         EntityManagerFactory entityManagerFactory = 
         Persistence.createEntityManagerFactory("persistence");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-        CriteriaQuery<TransporteDTO> criteria = 
-        entityManager.getCriteriaBuilder().createQuery(TransporteDTO.class);
-        criteria.select(criteria.from(TransporteDTO.class));
-        List<TransporteDTO> transportes = entityManager.createQuery(criteria).getResultList();
+        CriteriaQuery<EquipeDTO> criteria = 
+        entityManager.getCriteriaBuilder().createQuery(EquipeDTO.class);
+        criteria.select(criteria.from(EquipeDTO.class));
+        List<EquipeDTO> equipes = entityManager.createQuery(criteria).getResultList();
         
-        for(TransporteDTO transporte : transportes){
-            System.out.println("IP: " + transporte.getIP() + " Saída: " + transporte.getSaida() + " Entrada: " + transporte.getEntrada());
+        for(EquipeDTO equipe : equipes){
+            System.out.println("Id equipe: " + equipe.getId() + " Nome: " + equipe.getNome() + " CubeSats feitos/em andamento: " + equipe.quantCubeSat() + " Quantidade de Integrantes: " + equipe.quantIntegrantes() + " Quantidade de administradores: " + equipe.quantAdministradores());
         }
         entityManager.close();
-        return transportes;
+        return equipes;
     }
        
     @Override
-    public boolean delete(int Ip) throws PersistenciaException{
+    public boolean delete(int idEquipe) throws PersistenciaException{
         EntityManagerFactory entityManagerFactory = 
         Persistence.createEntityManagerFactory("persistence");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         
         try{
             entityManager.getTransaction().begin();
-            TransporteDTO transporte = entityManager.find(TransporteDTO.class, Ip);
+            EquipeDTO equipe = entityManager.find(EquipeDTO.class, idEquipe);
             
-            if(transporte != null){
-                entityManager.remove(transporte);
+            if(equipe != null){
+                entityManager.remove(equipe);
                 return true;
             }else{
-                System.out.println("Não foi possíbel encontrar o transporte com o IP: " + Ip);
+                System.out.println("Não foi possível encontrar a equipe com o id: " + idEquipe);
                 return false;
             }
         }catch(Exception ex){
@@ -72,22 +72,27 @@ public class TransporteDAO implements ITransporteDAO{
     }
     
     @Override
-    public boolean atualizar(TransporteDTO transporte) throws PersistenciaException{
+    public boolean atualizar(EquipeDTO equipe) throws PersistenciaException{
         EntityManagerFactory entityManagerFactory = 
         Persistence.createEntityManagerFactory("persistence");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         
         try{
             entityManager.getTransaction().begin();
-            TransporteDTO transportePersistido = entityManager.find(TransporteDTO.class, transporte.getIP());
+            EquipeDTO equipePersistida = entityManager.find(EquipeDTO.class, equipe.getId());
             
-            if(transportePersistido != null){
-                transportePersistido.setIP(transporte.getIP());
-                transportePersistido.setEntrada(transporte.getEntrada());
-                transportePersistido.setSaida(transporte.getSaida());
+            if(equipePersistida != null){
+                equipePersistida.setAdministrador(equipe.getAdministrador());
+                equipePersistida.setCubeSat(equipe.getCubeSat());
+                equipePersistida.setIntegrante(equipePersistida.getIntegrantes());
+                equipePersistida.setEmail(equipe.getEmail());
+                equipePersistida.setId(equipe.getId());
+                equipePersistida.setNome(equipe.getNome());
+                equipePersistida.setSenha(equipe.getSenha());
+                equipePersistida.setUserName(equipe.getUserName());
                 return true;
             }else{
-                System.out.println("Não foi possível encontrar o tranporte com o IP: " + transporte.getIP());
+                System.out.println("Não foi possível encontrar a equipe com o id: " + equipe.getId());
                 return false;
             }
         }catch(Exception ex){

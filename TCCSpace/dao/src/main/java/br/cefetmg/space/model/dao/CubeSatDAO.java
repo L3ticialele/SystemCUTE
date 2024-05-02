@@ -4,7 +4,6 @@ package br.cefetmg.space.model.dao;
 import br.cefetmg.space.model.dto.CubeSatDTO;
 import br.cefetmg.space.model.idao.ICubeSatDAO;
 import br.cefetmg.space.model.idao.exception.PersistenciaException;
-
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -44,7 +43,11 @@ public class CubeSatDAO implements ICubeSatDAO{
         List<CubeSatDTO> cubes = entityManager.createQuery(criteria).getResultList();
         
         for(CubeSatDTO cube : cubes){
-            System.out.println("Id: " + cube.getId() + " Nome: " + cube.getNome()+ " Fabricação: " + cube.getDataFabricacao() + " Tamanho: " + cube.getTamanho() + " Competição: " + cube.getCompeticao());
+            System.out.print("Id: " + cube.getId() + " Nome: " + cube.getNome()+ " Fabricação: " + cube.getDataFabricacao() + " Tamanho: " + cube.getTamanho() + " Status: " + cube.getStatus());
+            if(cube.getEquipe() == null)
+                System.out.println(" Criador: " + cube.getUsuario().getUserName());
+            else
+                System.out.println(" Equipe criadora: " + cube.getEquipe());
         }
         
         entityManager.close();
@@ -89,9 +92,14 @@ public class CubeSatDAO implements ICubeSatDAO{
             if(cubePersistido != null){
                 cubePersistido.setId(cube.getId());
                 cubePersistido.setNome(cube.getNome());
-                cubePersistido.setCompeticao(cube.getCompeticao());
                 cubePersistido.setDataFabricacao(cube.getDataFabricacao());
                 cubePersistido.setTamanho(cube.getTamanho());
+                cubePersistido.setTodosDados(cube.getDados());
+                cubePersistido.setPessoa(cube.getUsuario());
+                cubePersistido.setEquipe(cube.getEquipe());
+                cubePersistido.setLocalizacao(cube.getLocalizacao());
+                cubePersistido.setStatus(cube.getStatus());
+                
                 return true;
             }else{
                 System.out.println("Não foi possível encontrar o CubSat com o id: " + cube.getId());

@@ -41,7 +41,7 @@ public class DadosDAO implements IDadosDAO{
         List<DadosDTO> dados = entityManager.createQuery(criteria).getResultList();
         
         for(DadosDTO dado : dados){
-            System.out.println("Id dados: " + dado.getId() + " Velocidade do vento: " + dado.getVelocidadeVento() + " Umidade: " + dado.getUmidade() + " Massa do ar: " + dado.getMassasAr() + " Radiação: " + dado.getRadiacao() + " Pressão: " + dado.getPressao() + " Temperatura: " + dado.getTemperatura() + " Id CubSat: " + dado.getCubSat().getId());
+            System.out.println("Id dados: " + dado.getId() + " Velocidade do vento: " + dado.getVelocidadeVento() + " Umidade: " + dado.getUmidade() + " Massa do ar: " + dado.getMassasAr() + " Radiação: " + dado.getRadiacao() + " Pressão: " + dado.getPressao() + " Temperatura: " + dado.getTemperatura() + " Id CubSat: " + dado.getCubeSat().getId() + " Data de Obtenção: " + dado.getDataObtencao());
         }
         entityManager.close();
         return dados;
@@ -84,13 +84,14 @@ public class DadosDAO implements IDadosDAO{
             
             if(dadosPersistidos != null){
                 dadosPersistidos.setId(dados.getId());
-                dadosPersistidos.setCubSat(dados.getCubSat());
+                dadosPersistidos.setCubeSat(dados.getCubeSat());
                 dadosPersistidos.setMassasAr(dados.getMassasAr());
                 dadosPersistidos.setPressao(dados.getPressao());
                 dadosPersistidos.setRadiacao(dados.getRadiacao());
                 dadosPersistidos.setTemperatura(dados.getTemperatura());
                 dadosPersistidos.setVelocidadeVento(dados.getVelocidadeVento());
                 dadosPersistidos.setUmidade(dados.getUmidade());
+                dadosPersistidos.setDataObtencao(dados.getDataObtencao());
                 return true;
             }else{
                 System.out.println("Não foi possível encontrar os dados com o id: " + dados.getId());

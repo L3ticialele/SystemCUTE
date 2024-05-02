@@ -10,6 +10,7 @@
         <module>dao</module>
         <module>dto</module>
         <module>model</module>
+        <module>view</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

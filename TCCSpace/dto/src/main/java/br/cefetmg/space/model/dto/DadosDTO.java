@@ -1,41 +1,66 @@
 package br.cefetmg.space.model.dto;
 
-public class DadosDTO {
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "dados")
+public class DadosDTO implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private String umidade;
     private double pressao;
     private double temperatura;
     private double velocidadeVento;
     private String radiacao;
     private String massasAr;
-    private CubeSatDTO cube;
-    private int id;
-    
+    @ManyToOne
+    private CubeSatDTO cubeSat;
+    private String dataObtencao;
+
     public DadosDTO(){
+        umidade = null;
         pressao = -1;
-        temperatura = 430;
+        temperatura = -1;
         velocidadeVento = -1;
-        id = -1;
+        radiacao = null;
+        massasAr = null;
+        dataObtencao = null;
     }
     
-    public void setId(int id){
-        this.id = id;
+    public String getDataObtencao() {
+        return dataObtencao;
+    }
+
+    public void setDataObtencao(String dataObtencao) {
+        this.dataObtencao = dataObtencao;
     }
     
     public int getId(){
         return id;
     }
     
-    public void setCubSat(CubeSatDTO cube){
-        this.cube = cube;
+    public void setId(int id){
+        this.id = id;
     }
     
-    public CubeSatDTO getCubSat(){
-        return cube;
+    public void setCubeSat(CubeSatDTO cube){
+        cubeSat = cube;
     }
     
-    public int getIdCubSat(){
-        return cube.getId();
+    public CubeSatDTO getCubeSat(){
+        return cubeSat;
+    }
+    
+    public long getIdCubeSat(){
+        return cubeSat.getId();
     }
     
     public String getUmidade() {

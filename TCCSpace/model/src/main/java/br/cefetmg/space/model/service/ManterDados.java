@@ -16,48 +16,11 @@ public class ManterDados implements IManterDados{
     
     @Override
     public void cadastrar(DadosDTO dados) throws PersistenciaException {
-        /*
-        if((dados.getId() == -1))
-            throw new NegocioException("Obrigatório informar o id dos dados.");
-        if((dados.getCubSat() == null))
-            throw new NegocioException("Obrigatório informar o CubeSat.");
-        if((dados.getMassasAr() == null) || (dados.getMassasAr().isEmpty()))
-            throw new NegocioException("Obrigatório informar a massa de ar.");
-        if((dados.getRadiacao() == null) || (dados.getRadiacao().isEmpty()))
-            throw new NegocioException("Obrigatório informar a radiacao.");
-        if((dados.getVelocidadeVento() == -1))
-            throw new NegocioException("Obrigatório informar a velocidade do vento.");
-        if((dados.getTemperatura() == 430))
-            throw new NegocioException("Obrigatório informar a temperatura.");
-        if((dados.getPressao() == -1))
-            throw new NegocioException("Obrigatório informar a pressão.");
-        if((dados.getUmidade() == null) || (dados.getUmidade().isEmpty()))
-            throw new NegocioException("Obrigatório informar a umidade."); 
-    */
         dadosDAO.inserir(dados);
     }
     
     @Override
-    public boolean alterar(DadosDTO dados) throws PersistenciaException {
-       /*
-        if((dados.getId() == -1))
-            throw new NegocioException("Obrigatório informar o id dos dados.");
-        if((dados.getCubSat() == null))
-            throw new NegocioException("Obrigatório informar o CubeSat.");
-        if((dados.getMassasAr() == null) || (dados.getMassasAr().isEmpty()))
-            throw new NegocioException("Obrigatório informar a massa de ar.");
-        if((dados.getRadiacao() == null) || (dados.getRadiacao().isEmpty()))
-            throw new NegocioException("Obrigatório informar a radiacao.");
-        if((dados.getVelocidadeVento() == -1))
-            throw new NegocioException("Obrigatório informar a velocidade do vento.");
-        if((dados.getTemperatura() == 430))
-            throw new NegocioException("Obrigatório informar a temperatura.");
-        if((dados.getPressao() == -1))
-            throw new NegocioException("Obrigatório informar a pressão.");
-        if((dados.getUmidade() == null) || (dados.getUmidade().isEmpty()))
-            throw new NegocioException("Obrigatório informar a umidade.");
-     */    
-
+    public boolean alterar(DadosDTO dados) throws PersistenciaException {  
         boolean result = dadosDAO.atualizar(dados);
         return result;
     }
