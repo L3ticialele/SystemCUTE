@@ -18,10 +18,11 @@ import javax.swing.JOptionPane;
 public class Login extends javax.swing.JFrame {
 
     /**
-     * Creates new form Login
+     * Creates new form teste
      */
     public Login() {
         initComponents();
+        setExtendedState(MAXIMIZED_BOTH);
     }
 
     /**
@@ -33,96 +34,116 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
-        campoSenha = new javax.swing.JPasswordField();
+        jDesktopPane1 = new javax.swing.JDesktopPane();
         campoUser = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        campoSenha = new javax.swing.JPasswordField();
         botaoLogin = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
-        linkCadastrar = new javax.swing.JLabel();
+        linkCadastrar = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(null);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Inserir_um_título-removebg-preview.png"))); // NOI18N
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(120, 10, 80, 80);
+        jDesktopPane1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        campoUser.setBackground(new java.awt.Color(89, 132, 241));
+        campoUser.setFont(new java.awt.Font("Calibri Light", 0, 24)); // NOI18N
+        campoUser.setForeground(new java.awt.Color(255, 255, 255));
+        campoUser.setToolTipText("");
+        campoUser.setBorder(null);
+        campoUser.setCaretColor(new java.awt.Color(255, 255, 255));
+        campoUser.setDisabledTextColor(new java.awt.Color(89, 132, 241));
+        campoUser.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        campoUser.setSelectedTextColor(new java.awt.Color(89, 132, 241));
+        campoUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoUserActionPerformed(evt);
+            }
+        });
+        jDesktopPane1.add(campoUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 280, 250, 30));
+
+        campoSenha.setBackground(new java.awt.Color(89, 132, 241));
+        campoSenha.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
+        campoSenha.setForeground(new java.awt.Color(255, 255, 255));
+        campoSenha.setBorder(null);
+        campoSenha.setCaretColor(new java.awt.Color(255, 255, 255));
         campoSenha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 campoSenhaActionPerformed(evt);
             }
         });
-        getContentPane().add(campoSenha);
-        campoSenha.setBounds(70, 170, 160, 20);
-        getContentPane().add(campoUser);
-        campoUser.setBounds(70, 120, 160, 22);
+        jDesktopPane1.add(campoSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 400, 220, 30));
 
-        jLabel1.setForeground(new java.awt.Color(0, 0, 102));
-        jLabel1.setText("Usuário/E-mail:");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(70, 100, 90, 16);
-
-        jLabel4.setForeground(new java.awt.Color(0, 0, 102));
-        jLabel4.setText("Senha:");
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(70, 150, 50, 16);
-
-        botaoLogin.setBackground(new java.awt.Color(0, 0, 153));
-        botaoLogin.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        botaoLogin.setBackground(new java.awt.Color(0, 102, 204));
+        botaoLogin.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
         botaoLogin.setForeground(new java.awt.Color(255, 255, 255));
         botaoLogin.setText("LOGIN");
         botaoLogin.setActionCommand("login");
+        botaoLogin.setBorder(null);
+        botaoLogin.setContentAreaFilled(false);
+        botaoLogin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                botaoLoginMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                botaoLoginMouseExited(evt);
+            }
+        });
         botaoLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoLoginActionPerformed(evt);
             }
         });
-        getContentPane().add(botaoLogin);
-        botaoLogin.setBounds(80, 210, 140, 50);
+        jDesktopPane1.add(botaoLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 490, 330, 90));
 
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText(" Não possui uma conta?");
-        getContentPane().add(jLabel5);
-        jLabel5.setBounds(60, 270, 130, 20);
-
-        linkCadastrar.setForeground(new java.awt.Color(0, 0, 204));
-        linkCadastrar.setText("Cadastre-se");
-        linkCadastrar.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                linkCadastrarMouseMoved(evt);
-            }
-        });
+        linkCadastrar.setFont(new java.awt.Font("Segoe UI", 1, 19)); // NOI18N
+        linkCadastrar.setForeground(new java.awt.Color(0, 43, 102));
+        linkCadastrar.setText("Cadastrar-se");
+        linkCadastrar.setContentAreaFilled(false);
         linkCadastrar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                linkCadastrarMouseClicked(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 linkCadastrarMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 linkCadastrarMouseExited(evt);
             }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                linkCadastrarMouseReleased(evt);
+        });
+        linkCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                linkCadastrarActionPerformed(evt);
             }
         });
-        getContentPane().add(linkCadastrar);
-        linkCadastrar.setBounds(190, 270, 80, 20);
+        jDesktopPane1.add(linkCadastrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 600, 150, 30));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/novo.png"))); // NOI18N
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(0, 0, 310, 336);
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Não possui conta?");
+        jDesktopPane1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 600, 180, -1));
 
-        setSize(new java.awt.Dimension(321, 339));
-        setLocationRelativeTo(null);
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/login.png"))); // NOI18N
+        jLabel3.setToolTipText("");
+        jDesktopPane1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 30, -1, -1));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fundo.png"))); // NOI18N
+        jLabel1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jLabel1.setAutoscrolls(true);
+        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jDesktopPane1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jDesktopPane1)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jDesktopPane1)
+        );
+
+        pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void campoSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoSenhaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_campoSenhaActionPerformed
 
     private void botaoLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoLoginActionPerformed
         // TODO add your handling code here:
@@ -130,11 +151,15 @@ public class Login extends javax.swing.JFrame {
         String user = campoUser.getText();
         String senha = new String(campoSenha.getPassword());
         try {
-            if(usuarioDAO.procurarPorUserName(user) == null && usuarioDAO.procurarPorEmail(user) == null){
-                 JOptionPane.showMessageDialog(null, "Usuário não encontrado.");
+            if(senha.isEmpty() || user.isEmpty())
+                JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos de texto.");
+            else if(usuarioDAO.procurarPorUserName(user) == null && usuarioDAO.procurarPorEmail(user) == null){
+                JOptionPane.showMessageDialog(null, "Usuário não encontrado.");
             }else{
                 if(usuarioDAO.procurarPorEmail(user) != null && usuarioDAO.procurarPorEmail(user).getSenha().equals(senha)|| usuarioDAO.procurarPorUserName(user) != null && usuarioDAO.procurarPorUserName(user).getSenha().equals(senha) ){
-                    JOptionPane.showMessageDialog(null, "Logado!");
+                    Menu telaMenu = new Menu();
+                    this.dispose();
+                    telaMenu.setVisible(true);
             }else{
                 JOptionPane.showMessageDialog(null,"Usuário ou senha incorretos.");
                  }
@@ -144,27 +169,38 @@ public class Login extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_botaoLoginActionPerformed
 
-    private void linkCadastrarMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_linkCadastrarMouseMoved
+    private void campoUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoUserActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_linkCadastrarMouseMoved
+    }//GEN-LAST:event_campoUserActionPerformed
 
-    private void linkCadastrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_linkCadastrarMouseClicked
+    private void campoSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoSenhaActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null,"Olá.");
-    }//GEN-LAST:event_linkCadastrarMouseClicked
+    }//GEN-LAST:event_campoSenhaActionPerformed
+
+    private void botaoLoginMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoLoginMouseEntered
+        // TODO add your handling code here:
+        botaoLogin.setForeground(new Color(89,132,241)); 
+    }//GEN-LAST:event_botaoLoginMouseEntered
+
+    private void botaoLoginMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoLoginMouseExited
+        // TODO add your handling code here:
+        botaoLogin.setForeground(new Color(242, 242, 242));
+    }//GEN-LAST:event_botaoLoginMouseExited
+
+    private void linkCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_linkCadastrarActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_linkCadastrarActionPerformed
 
     private void linkCadastrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_linkCadastrarMouseEntered
-        // TODO add your handling code here
-            linkCadastrar.setForeground(new Color(242, 242, 242)); 
+        // TODO add your handling code here:
+        linkCadastrar.setForeground(new Color(243,243,243));
     }//GEN-LAST:event_linkCadastrarMouseEntered
 
     private void linkCadastrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_linkCadastrarMouseExited
         // TODO add your handling code here:
+        linkCadastrar.setForeground(new Color(0, 0, 204));
     }//GEN-LAST:event_linkCadastrarMouseExited
-
-    private void linkCadastrarMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_linkCadastrarMouseReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_linkCadastrarMouseReleased
 
     /**
      * @param args the command line arguments
@@ -192,12 +228,11 @@ public class Login extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Login().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Login().setVisible(true);
         });
     }
 
@@ -205,11 +240,10 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JButton botaoLogin;
     private javax.swing.JPasswordField campoSenha;
     private javax.swing.JTextField campoUser;
+    private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel linkCadastrar;
+    private javax.swing.JButton linkCadastrar;
     // End of variables declaration//GEN-END:variables
 }
