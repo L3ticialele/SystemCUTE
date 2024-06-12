@@ -27,7 +27,6 @@ public class UsuarioDTO implements Serializable{
     @Id 
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
-    private String cpf;
     private boolean administrador;
     private String nome;
     @ManyToMany(fetch = FetchType.EAGER)
@@ -60,14 +59,6 @@ public class UsuarioDTO implements Serializable{
     
     public int quantCubeSat(){
         return cubeSat.size();
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
     }
 
     public boolean isAdministrador() {

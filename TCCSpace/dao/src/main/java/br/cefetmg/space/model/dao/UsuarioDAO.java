@@ -22,7 +22,7 @@ public class UsuarioDAO implements IUsuarioDAO{
             entityManager.getTransaction().begin();
             entityManager.persist(usuario);
             entityManager.getTransaction().commit();
-             System.out.println("Usuário cadastrado!");
+            System.out.println("Usuário cadastrado!");
         }catch(Exception ex){
             entityManager.getTransaction().rollback();
             throw ex;
@@ -40,9 +40,16 @@ public class UsuarioDAO implements IUsuarioDAO{
         entityManager.getCriteriaBuilder().createQuery(UsuarioDTO.class);
         criteria.select(criteria.from(UsuarioDTO.class));
         List<UsuarioDTO> usuarios = entityManager.createQuery(criteria).getResultList();
+        
         if(!usuarios.isEmpty()){
             for(UsuarioDTO usuario : usuarios){
-                System.out.print("Id usuario: " + usuario.getId() + " Nome: " + usuario.getNome() + " CubeSats feitos/em andamento: " + usuario.quantCubeSat() + " Telefone: " + usuario.getTelefone() + " Participa de quantas equipes: " + usuario.quantEquipes());
+                System.out.print(
+                          "Id usuario: " + usuario.getId() 
+                        + " Nome: " + usuario.getNome() 
+                        + " CubeSats feitos/em andamento: " + usuario.quantCubeSat() 
+                        + " Telefone: " + usuario.getTelefone() 
+                        + " Participa de quantas equipes: " + usuario.quantEquipes()
+                );
                 if(usuario.isAdministrador())
                     System.out.println(" Administrador: sim");
                 else
@@ -64,35 +71,12 @@ public class UsuarioDAO implements IUsuarioDAO{
         try{
             entityManager.getTransaction().begin();
             UsuarioDTO usuario = entityManager.find(UsuarioDTO.class, idUsuario);
+            
             if(usuario != null){
                 entityManager.remove(usuario);
                 entityManager.getTransaction().commit();
             }else{
                 System.out.println("Não foi possível encontrar o usuário com o id: " + idUsuario);
-            }
-        }catch(Exception ex){
-            entityManager.getTransaction().rollback();
-            throw ex;
-        }finally{
-            entityManager.close();
-        }
-    }
-    
-    @Override
-    public UsuarioDTO procurarPorCPF(String cpf) throws PersistenciaException{
-        EntityManagerFactory entityManagerFactory = 
-        Persistence.createEntityManagerFactory("persistence");
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        
-        try{
-             entityManager.getTransaction().begin();
-             Query query = entityManager.createQuery("FROM UsuarioDTO AS u WHERE u.cpf =:cpf ");
-             query.setParameter("cpf", cpf);
-             List<UsuarioDTO> usuarioPersistido = query.getResultList();
-            if(!usuarioPersistido.isEmpty()){
-                return usuarioPersistido.get(0);
-            }else{
-                return null;
             }
         }catch(Exception ex){
             entityManager.getTransaction().rollback();
@@ -159,13 +143,13 @@ public class UsuarioDAO implements IUsuarioDAO{
         try{
             entityManager.getTransaction().begin();
             UsuarioDTO usuarioPersistido = entityManager.find(UsuarioDTO.class, idUsuario);
+            
             if(usuarioPersistido != null){
                 usuarioPersistido.setEmail(usuario.getEmail());
                 usuarioPersistido.setUserName(usuario.getUserName());
                 usuarioPersistido.setNome(usuario.getNome());
                 usuarioPersistido.setSenha(usuario.getSenha());
                 usuarioPersistido.setAdministrador(usuario.isAdministrador());
-                usuarioPersistido.setCpf(usuario.getCpf());
                 usuarioPersistido.setTelefone(usuario.getTelefone());
                 usuarioPersistido.setEquipes(usuario.getEquipes());
                 usuarioPersistido.setCubeSat(usuario.getCubeSat());

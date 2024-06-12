@@ -34,18 +34,18 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDesktopPane1 = new javax.swing.JDesktopPane();
+        panelLogin = new javax.swing.JDesktopPane();
         campoUser = new javax.swing.JTextField();
         campoSenha = new javax.swing.JPasswordField();
         botaoLogin = new javax.swing.JButton();
         linkCadastrar = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        possuiContaLogin = new javax.swing.JLabel();
+        caixaLogin = new javax.swing.JLabel();
+        fundoLogin = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jDesktopPane1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panelLogin.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         campoUser.setBackground(new java.awt.Color(89, 132, 241));
         campoUser.setFont(new java.awt.Font("Calibri Light", 0, 24)); // NOI18N
@@ -61,7 +61,7 @@ public class Login extends javax.swing.JFrame {
                 campoUserActionPerformed(evt);
             }
         });
-        jDesktopPane1.add(campoUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 280, 250, 30));
+        panelLogin.add(campoUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 280, 250, 30));
 
         campoSenha.setBackground(new java.awt.Color(89, 132, 241));
         campoSenha.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
@@ -73,7 +73,7 @@ public class Login extends javax.swing.JFrame {
                 campoSenhaActionPerformed(evt);
             }
         });
-        jDesktopPane1.add(campoSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 400, 220, 30));
+        panelLogin.add(campoSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 400, 220, 30));
 
         botaoLogin.setBackground(new java.awt.Color(0, 102, 204));
         botaoLogin.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
@@ -95,7 +95,7 @@ public class Login extends javax.swing.JFrame {
                 botaoLoginActionPerformed(evt);
             }
         });
-        jDesktopPane1.add(botaoLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 490, 330, 90));
+        panelLogin.add(botaoLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 490, 330, 90));
 
         linkCadastrar.setFont(new java.awt.Font("Segoe UI", 1, 19)); // NOI18N
         linkCadastrar.setForeground(new java.awt.Color(0, 43, 102));
@@ -114,32 +114,32 @@ public class Login extends javax.swing.JFrame {
                 linkCadastrarActionPerformed(evt);
             }
         });
-        jDesktopPane1.add(linkCadastrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 600, 150, 30));
+        panelLogin.add(linkCadastrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 600, 150, 30));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Não possui conta?");
-        jDesktopPane1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 600, 180, -1));
+        possuiContaLogin.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        possuiContaLogin.setForeground(new java.awt.Color(255, 255, 255));
+        possuiContaLogin.setText("Não possui conta?");
+        panelLogin.add(possuiContaLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 600, 180, -1));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/login.png"))); // NOI18N
-        jLabel3.setToolTipText("");
-        jDesktopPane1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 30, -1, -1));
+        caixaLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/login.png"))); // NOI18N
+        caixaLogin.setToolTipText("");
+        panelLogin.add(caixaLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 30, -1, -1));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fundo.png"))); // NOI18N
-        jLabel1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        jLabel1.setAutoscrolls(true);
-        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jDesktopPane1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        fundoLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fundo.png"))); // NOI18N
+        fundoLogin.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        fundoLogin.setAutoscrolls(true);
+        fundoLogin.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        panelLogin.add(fundoLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1)
+            .addComponent(panelLogin)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1)
+            .addComponent(panelLogin)
         );
 
         pack();
@@ -152,14 +152,15 @@ public class Login extends javax.swing.JFrame {
         String senha = new String(campoSenha.getPassword());
         try {
             if(senha.isEmpty() || user.isEmpty())
-                JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos de texto.");
-            else if(usuarioDAO.procurarPorUserName(user) == null && usuarioDAO.procurarPorEmail(user) == null){
-                JOptionPane.showMessageDialog(null, "Usuário não encontrado.");
-            }else{
-                if(usuarioDAO.procurarPorEmail(user) != null && usuarioDAO.procurarPorEmail(user).getSenha().equals(senha)|| usuarioDAO.procurarPorUserName(user) != null && usuarioDAO.procurarPorUserName(user).getSenha().equals(senha) ){
-                    Menu telaMenu = new Menu();
+                JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos.");   
+            else{
+                if(usuarioDAO.procurarPorEmail(user) != null)
+                    user = usuarioDAO.procurarPorEmail(user).getUserName();
+                if(usuarioDAO.procurarPorUserName(user) != null && usuarioDAO.procurarPorUserName(user).getSenha().equals(senha)){
+                    Cubesat telaCubeSat = new Cubesat();
                     this.dispose();
-                    telaMenu.setVisible(true);
+                    telaCubeSat.user.setText(user);
+                    telaCubeSat.setVisible(true);
             }else{
                 JOptionPane.showMessageDialog(null,"Usuário ou senha incorretos.");
                  }
@@ -189,7 +190,9 @@ public class Login extends javax.swing.JFrame {
 
     private void linkCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_linkCadastrarActionPerformed
         // TODO add your handling code here:
-        
+        CadastroUsuario telaCadastroUsuario = new CadastroUsuario();
+        this.dispose();
+        telaCadastroUsuario.setVisible(true);
     }//GEN-LAST:event_linkCadastrarActionPerformed
 
     private void linkCadastrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_linkCadastrarMouseEntered
@@ -238,12 +241,12 @@ public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoLogin;
+    private javax.swing.JLabel caixaLogin;
     private javax.swing.JPasswordField campoSenha;
     private javax.swing.JTextField campoUser;
-    private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel fundoLogin;
     private javax.swing.JButton linkCadastrar;
+    private javax.swing.JDesktopPane panelLogin;
+    private javax.swing.JLabel possuiContaLogin;
     // End of variables declaration//GEN-END:variables
 }

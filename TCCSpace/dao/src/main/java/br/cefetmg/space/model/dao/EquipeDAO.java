@@ -21,6 +21,7 @@ public class EquipeDAO implements IEquipeDAO{
             entityManager.getTransaction().begin();
             entityManager.persist(equipe);
             entityManager.getTransaction().commit();
+            System.out.println("Equipe cadastrada!");
         }catch(Exception ex){
             entityManager.getTransaction().rollback();
             throw ex;
@@ -39,8 +40,14 @@ public class EquipeDAO implements IEquipeDAO{
         criteria.select(criteria.from(EquipeDTO.class));
         List<EquipeDTO> equipes = entityManager.createQuery(criteria).getResultList();
         
-        for(EquipeDTO equipe : equipes){
-            System.out.println("Id equipe: " + equipe.getId() + " Nome: " + equipe.getNome() + " CubeSats feitos/em andamento: " + equipe.quantCubeSat() + " Quantidade de Integrantes: " + equipe.quantIntegrantes() + " Quantidade de administradores: " + equipe.quantAdministradores());
+        if(!equipes.isEmpty()){
+            for(EquipeDTO equipe : equipes){
+                System.out.println("Id equipe: " + equipe.getId() 
+                        + " Nome: " + equipe.getNome() 
+                        + " CubeSats feitos/em andamento: " + equipe.quantCubeSat() 
+                        + " Quantidade de Integrantes: " + equipe.quantIntegrantes() 
+                        + " Quantidade de administradores: " + equipe.quantAdministradores());
+        }
         }
         entityManager.close();
         return equipes;
@@ -58,6 +65,7 @@ public class EquipeDAO implements IEquipeDAO{
             
             if(equipe != null){
                 entityManager.remove(equipe);
+                entityManager.getTransaction().commit();
                 return true;
             }else{
                 System.out.println("Não foi possível encontrar a equipe com o id: " + idEquipe);
@@ -90,6 +98,7 @@ public class EquipeDAO implements IEquipeDAO{
                 equipePersistida.setNome(equipe.getNome());
                 equipePersistida.setSenha(equipe.getSenha());
                 equipePersistida.setUserName(equipe.getUserName());
+                entityManager.getTransaction().commit();
                 return true;
             }else{
                 System.out.println("Não foi possível encontrar a equipe com o id: " + equipe.getId());
