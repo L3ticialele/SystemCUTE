@@ -40,8 +40,39 @@ public class DadosDAO implements IDadosDAO{
         criteria.select(criteria.from(DadosDTO.class));
         List<DadosDTO> dados = entityManager.createQuery(criteria).getResultList();
         
-        for(DadosDTO dado : dados){
-            System.out.println("Id dados: " + dado.getId() + " Velocidade do vento: " + dado.getVelocidadeVento() + " Umidade: " + dado.getUmidade() + " Massa do ar: " + dado.getMassasAr() + " Radiação: " + dado.getRadiacao() + " Pressão: " + dado.getPressao() + " Temperatura: " + dado.getTemperatura() + " Id CubSat: " + dado.getCubeSat().getId() + " Data de Obtenção: " + dado.getDataObtencao());
+        if(!dados.isEmpty()){
+            for(DadosDTO dado : dados){
+                System.out.println("Id dados: " + dado.getId() 
+                        + " Acelerômetro X: " + dado.getAcelerometroX() 
+                        + " Acelerômetro Y: " + dado.getAcelerometroY()
+                        + " Acelerômetro Z: " + dado.getAcelerometroZ()
+                        + " Ângulo X: " + dado.getAnguloX()
+                        + " Ângulo Y: " + dado.getAnguloY()
+                        + " Ângulo Z: " + dado.getAnguloZ()
+                        + " Altitude: " + dado.getAltitude()
+                        + " Bateria: " + dado.getBateria() + "%"
+                        + " Corrente Bateria: " + dado.getCorrenteBateria()
+                        + " Corrente da Placa Solar: " + dado.getCorrentePlacaSolar()
+                        + " Gás 1: " + dado.getGas1()
+                        + " Gás 2: " + dado.getGas2() 
+                        + " Luz 1: " + dado.getLuz1()
+                        + " Luz 2: " + dado.getLuz2()
+                        + " Ponto do Orvalho: " + dado.getPontoOrvalho()
+                        + " Pressão: " + dado.getPressao()
+                        + " Sensor UV: " + dado.getSensorUV()
+                        + " Temperatura Interna: " + dado.getTemperaturaInterna()
+                        + " Temperatura Externa: " + dado.getTemperaturaExterna()
+                        + " Tensão da Bateria: " + dado.getTensaoBateria()
+                        + " Tensão da Placa Solar: " + dado.getTensaoPlacaSolar()
+                        + " Umidade: " + dado.getUmidade()
+                        + " Velocidade: " + dado.getVelocidade()
+                        + " Velocidade Angular X: " + dado.getVelocidadeAngularX()
+                        + " Velocidade Angular Y: " + dado.getVelocidadeAngularY()
+                        + " Velocidade Angular Z: " + dado.getVelocidadeAngularZ()
+                        + " Cubesat: " + dado.getCubeSat().getNome() 
+                        + " Data: " + dado.getDataObtencao()
+                );
+            }
         }
         entityManager.close();
         return dados;
@@ -59,6 +90,7 @@ public class DadosDAO implements IDadosDAO{
             
             if(dado != null){
                 entityManager.remove(dado);
+                entityManager.getTransaction().commit();
                 return true;
             }else{
                 System.out.println("Não foi possível encontrar os dados com o id: " + idDado);
@@ -85,13 +117,32 @@ public class DadosDAO implements IDadosDAO{
             if(dadosPersistidos != null){
                 dadosPersistidos.setId(dados.getId());
                 dadosPersistidos.setCubeSat(dados.getCubeSat());
-                dadosPersistidos.setMassasAr(dados.getMassasAr());
+                dadosPersistidos.setAcelerometroX(dados.getAcelerometroX());
+                dadosPersistidos.setAcelerometroY(dados.getAcelerometroY());
+                dadosPersistidos.setAcelerometroZ(dados.getAcelerometroZ());
+                dadosPersistidos.setAnguloX(dados.getAnguloX());
+                dadosPersistidos.setAnguloY(dados.getAnguloY());
+                dadosPersistidos.setAnguloZ(dados.getAnguloZ());
+                dadosPersistidos.setAltitude(dados.getAltitude());
+                dadosPersistidos.setBateria(dados.getBateria());
+                dadosPersistidos.setCorrenteBateria(dados.getCorrenteBateria());
+                dadosPersistidos.setGas1(dados.getGas1());
+                dadosPersistidos.setGas2(dados.getGas2());
+                dadosPersistidos.setLuz1(dados.getLuz1());
+                dadosPersistidos.setLuz2(dados.getLuz2());
+                dadosPersistidos.setPontoOrvalho(dados.getPontoOrvalho());
                 dadosPersistidos.setPressao(dados.getPressao());
-                dadosPersistidos.setRadiacao(dados.getRadiacao());
-                dadosPersistidos.setTemperatura(dados.getTemperatura());
-                dadosPersistidos.setVelocidadeVento(dados.getVelocidadeVento());
+                dadosPersistidos.setSensorUV(dados.getSensorUV());
+                dadosPersistidos.setTemperaturaExterna(dados.getTemperaturaExterna());
+                dadosPersistidos.setTemperaturaInterna(dados.getTemperaturaInterna());
+                dadosPersistidos.setTensaoBateria(dados.getTensaoBateria());
+                dadosPersistidos.setTensaoPlacaSolar(dados.getTensaoPlacaSolar());
                 dadosPersistidos.setUmidade(dados.getUmidade());
-                dadosPersistidos.setDataObtencao(dados.getDataObtencao());
+                dadosPersistidos.setVelocidade(dados.getVelocidade());
+                dadosPersistidos.setVelocidadeAngularX(dados.getVelocidadeAngularX());
+                dadosPersistidos.setVelocidadeAngularY(dados.getVelocidadeAngularY());
+                dadosPersistidos.setVelocidadeAngularZ(dados.getVelocidadeAngularZ());
+                entityManager.getTransaction().commit();
                 return true;
             }else{
                 System.out.println("Não foi possível encontrar os dados com o id: " + dados.getId());

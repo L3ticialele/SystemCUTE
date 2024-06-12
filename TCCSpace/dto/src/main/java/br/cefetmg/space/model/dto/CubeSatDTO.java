@@ -31,9 +31,6 @@ public class CubeSatDTO implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idequipe", nullable = true)
     private EquipeDTO equipe;
-    @OneToMany(fetch = FetchType.EAGER, cascade = 
-            CascadeType.ALL, mappedBy = "cubeSat")
-    private List<LocalizacaoDTO> localizacoes;
     private String status;
 
     public CubeSatDTO(){
@@ -42,7 +39,6 @@ public class CubeSatDTO implements Serializable {
         nome = null;
         dados = null;
         equipe = null;
-        localizacoes = null;
         status = null;
     }
     
@@ -60,23 +56,6 @@ public class CubeSatDTO implements Serializable {
 
     public void setEquipe(EquipeDTO equipe) {
         this.equipe = equipe;
-    }
-
-    public List<LocalizacaoDTO> getLocalizacao() {
-        return localizacoes;
-    }
-    
-    public void setLocalizacao(LocalizacaoDTO localizacao) {
-        localizacoes.add(localizacao);
-    }
-
-    public void setLocalizacao(List<LocalizacaoDTO> localizacao) {
-        if(localizacao.isEmpty())
-             localizacoes = localizacao;
-        else{
-            for(int i=0; i<localizacao.size(); i++)
-               setLocalizacao(localizacao.get(i));
-        }
     }
 
     public UsuarioDTO getUsuario() {

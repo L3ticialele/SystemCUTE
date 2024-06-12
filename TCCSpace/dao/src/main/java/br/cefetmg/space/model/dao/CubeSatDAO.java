@@ -23,7 +23,7 @@ public class CubeSatDAO implements ICubeSatDAO{
             entityManager.getTransaction().begin();
             entityManager.persist(cube);
             entityManager.getTransaction().commit();
-            
+            System.out.println("Cubesat cadastrado!");
         }catch(Exception ex){
             entityManager.getTransaction().rollback();
             throw ex;
@@ -42,14 +42,21 @@ public class CubeSatDAO implements ICubeSatDAO{
         criteria.select(criteria.from(CubeSatDTO.class));
         List<CubeSatDTO> cubes = entityManager.createQuery(criteria).getResultList();
         
+        if(!cubes.isEmpty()){
         for(CubeSatDTO cube : cubes){
-            System.out.print("Id: " + cube.getId() + " Nome: " + cube.getNome()+ " Fabricação: " + cube.getDataFabricacao() + " Tamanho: " + cube.getTamanho() + " Status: " + cube.getStatus());
-            if(cube.getEquipe() == null)
-                System.out.println(" Criador: " + cube.getUsuario().getUserName());
-            else
-                System.out.println(" Equipe criadora: " + cube.getEquipe());
+                System.out.print(
+                          "Id: " + cube.getId() 
+                        + " Nome: " + cube.getNome()
+                        + " Fabricação: " + cube.getDataFabricacao() 
+                        + " Tamanho: " + cube.getTamanho() 
+                        + " Status: " + cube.getStatus()
+                );
+                if(cube.getEquipe() == null)
+                    System.out.println(" Criador: " + cube.getUsuario().getUserName());
+                else
+                    System.out.println(" Equipe: " + cube.getEquipe());
+                }
         }
-        
         entityManager.close();
         return cubes;
     }
@@ -66,6 +73,7 @@ public class CubeSatDAO implements ICubeSatDAO{
             
             if(cube != null){
                 entityManager.remove(cube);
+                entityManager.getTransaction().commit();
                 return true;
             }else{
                 System.out.println("Não foi possível encontrar o CubeSat com o id: " + idCube);
@@ -97,9 +105,8 @@ public class CubeSatDAO implements ICubeSatDAO{
                 cubePersistido.setTodosDados(cube.getDados());
                 cubePersistido.setPessoa(cube.getUsuario());
                 cubePersistido.setEquipe(cube.getEquipe());
-                cubePersistido.setLocalizacao(cube.getLocalizacao());
                 cubePersistido.setStatus(cube.getStatus());
-                
+                entityManager.getTransaction().commit();
                 return true;
             }else{
                 System.out.println("Não foi possível encontrar o CubSat com o id: " + cube.getId());
