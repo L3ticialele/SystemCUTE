@@ -3,7 +3,6 @@ CREATE TABLE usuarios(
 	senha varchar(255) NOT NULL,
 	username varchar(255) NOT NULL,
 	email varchar(255) NOT NULL,
-	cpf varchar(15) NOT NULL,
 	administrador boolean NOT NULL,
 	nome varchar(255) NOT NULL,
 	telefone varchar(255) NOT NULL,
