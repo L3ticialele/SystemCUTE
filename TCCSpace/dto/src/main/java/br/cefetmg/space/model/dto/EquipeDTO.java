@@ -4,6 +4,7 @@ package br.cefetmg.space.model.dto;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -18,23 +19,27 @@ public class EquipeDTO implements Serializable{
 
     @ManyToMany(mappedBy="equipes")
     private List<UsuarioDTO> integrantes;
+    @Column(name = "nome")
     private String nome;
     @OneToMany(fetch = FetchType.EAGER, cascade = 
             CascadeType.ALL, mappedBy = "equipe")
-    private List<CubeSatDTO> cubeSat;
+    private List<CubeSatDTO> cubesat;
     @ManyToMany(mappedBy="equipesAdministradas")
     private List<AdministradorDTO> administrador;
+    @Column(name = "senha")
     private String senha;
+    @Column(name = "username")
     private String username;
     @Id
     @GeneratedValue
     private int id;
+    @Column(name = "email")
     private String email;
     
     public EquipeDTO(){
         nome = null;
         integrantes = null;
-        cubeSat = null;
+        cubesat = null;
         administrador = null;
         senha = null;
         username = null;
@@ -54,7 +59,7 @@ public class EquipeDTO implements Serializable{
     }
     
     public int quantCubeSat(){
-        return cubeSat.size();
+        return cubesat.size();
     }
     
     public int quantIntegrantes(){
@@ -113,11 +118,11 @@ public class EquipeDTO implements Serializable{
     }
     
     public CubeSatDTO getCubeSat(int posicao){
-        return cubeSat.get(posicao);
+        return cubesat.get(posicao);
     }
     
     public List<CubeSatDTO> getCubeSat() {
-        return cubeSat;
+        return cubesat;
     }
     
     public UsuarioDTO getIntegrante(int posicao){
@@ -149,12 +154,12 @@ public class EquipeDTO implements Serializable{
     }
 
     public void setCubeSat(CubeSatDTO cubeSat) {
-        this.cubeSat.add(cubeSat);
+        this.cubesat.add(cubeSat);
     }
     
     public void setCubeSat(List<CubeSatDTO> cubeSat) {
-        if(this.cubeSat.isEmpty())
-            this.cubeSat = cubeSat;
+        if(this.cubesat.isEmpty())
+            this.cubesat = cubeSat;
         else
             for(int i=0; i<cubeSat.size(); i++)
                 setCubeSat(cubeSat.get(i));

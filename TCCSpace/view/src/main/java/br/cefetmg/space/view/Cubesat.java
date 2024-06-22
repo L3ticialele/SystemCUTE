@@ -35,106 +35,10 @@ public class Cubesat extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        cute = new javax.swing.JLabel();
-        botaoExplorar = new javax.swing.JButton();
-        botaoCubesat = new javax.swing.JButton();
-        botaoEquipes = new javax.swing.JButton();
-        user = new javax.swing.JLabel();
-        naoHaCubesatsCadastrados = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        fundoMenu = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        cute.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
-        cute.setForeground(new java.awt.Color(255, 255, 255));
-        cute.setText("Cubesat Telemetry ");
-        jPanel1.add(cute, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 40, 190, -1));
-
-        botaoExplorar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        botaoExplorar.setForeground(new java.awt.Color(255, 255, 255));
-        botaoExplorar.setText("     EXPLORAR");
-        botaoExplorar.setContentAreaFilled(false);
-        botaoExplorar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        botaoExplorar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                botaoExplorarMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                botaoExplorarMouseExited(evt);
-            }
-        });
-        botaoExplorar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoExplorarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(botaoExplorar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 40, 180, 50));
-
-        botaoCubesat.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        botaoCubesat.setForeground(new java.awt.Color(255, 255, 255));
-        botaoCubesat.setText("      CUBESATS");
-        botaoCubesat.setContentAreaFilled(false);
-        botaoCubesat.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        botaoCubesat.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                botaoCubesatMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                botaoCubesatMouseExited(evt);
-            }
-        });
-        botaoCubesat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoCubesatActionPerformed(evt);
-            }
-        });
-        jPanel1.add(botaoCubesat, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 40, 200, 50));
-
-        botaoEquipes.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        botaoEquipes.setForeground(new java.awt.Color(255, 255, 255));
-        botaoEquipes.setText("     EQUIPES");
-        botaoEquipes.setContentAreaFilled(false);
-        botaoEquipes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        botaoEquipes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                botaoEquipesMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                botaoEquipesMouseExited(evt);
-            }
-        });
-        jPanel1.add(botaoEquipes, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 40, 200, 50));
-
-        user.setForeground(new java.awt.Color(255, 255, 255));
-        user.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        user.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                userMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                userMouseExited(evt);
-            }
-        });
-        jPanel1.add(user, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 100, 130, -1));
-
-        naoHaCubesatsCadastrados.setFont(new java.awt.Font("Segoe UI", 0, 84)); // NOI18N
-        naoHaCubesatsCadastrados.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel1.add(naoHaCubesatsCadastrados, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 270, -1, -1));
-
-        jButton1.setContentAreaFilled(false);
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 80, 70));
-
-        fundoMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/a.png"))); // NOI18N
-        jPanel1.add(fundoMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -140, 1300, 1010));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -150,68 +54,6 @@ public class Cubesat extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void botaoExplorarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoExplorarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_botaoExplorarActionPerformed
-
-    private void botaoCubesatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCubesatActionPerformed
-        // TODO add your handling code here:Login telaLogin = new Login();
-        UsuarioDAO usuarioDAO = new UsuarioDAO();
-        try {
-            if(usuarioDAO.procurarPorUserName(cute.getText()).getCubeSat().isEmpty()){
-                naoHaCubesatsCadastrados.setText("Não há cubesats cadastrados.");
-            }else
-                naoHaCubesatsCadastrados.setText("ok");
-        } catch (PersistenciaException ex) {
-            Logger.getLogger(Cubesat.class.getName()).log(Level.SEVERE, null, ex);
-        }
-            
-    }//GEN-LAST:event_botaoCubesatActionPerformed
-
-    private void botaoCubesatMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoCubesatMouseEntered
-        // TODO add your handling code here:
-        botaoCubesat.setForeground(new Color(0, 0,203));
-    }//GEN-LAST:event_botaoCubesatMouseEntered
-
-    private void botaoCubesatMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoCubesatMouseExited
-        // TODO add your handling code here:
-        botaoCubesat.setForeground(new Color(242, 242, 242));
-    }//GEN-LAST:event_botaoCubesatMouseExited
-
-    private void botaoEquipesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoEquipesMouseEntered
-        // TODO add your handling code here:
-        botaoEquipes.setForeground(new Color(0, 0,203));
-    }//GEN-LAST:event_botaoEquipesMouseEntered
-
-    private void botaoEquipesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoEquipesMouseExited
-        // TODO add your handling code here:
-        botaoEquipes.setForeground(new Color(242, 242, 242));
-    }//GEN-LAST:event_botaoEquipesMouseExited
-
-    private void botaoExplorarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoExplorarMouseEntered
-        // TODO add your handling code here:
-        botaoExplorar.setForeground(new Color(0, 0,203));
-    }//GEN-LAST:event_botaoExplorarMouseEntered
-
-    private void botaoExplorarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoExplorarMouseExited
-        // TODO add your handling code here:
-        botaoExplorar.setForeground(new Color(242, 242, 242));
-    }//GEN-LAST:event_botaoExplorarMouseExited
-
-    private void userMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userMouseEntered
-        // TODO add your handling code here:
-        user.setForeground(new Color(0, 0,203));
-    }//GEN-LAST:event_userMouseEntered
-
-    private void userMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userMouseExited
-        // TODO add your handling code here:
-        user.setForeground(new Color(242, 242, 242));
-    }//GEN-LAST:event_userMouseExited
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -252,14 +94,6 @@ public class Cubesat extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botaoCubesat;
-    private javax.swing.JButton botaoEquipes;
-    private javax.swing.JButton botaoExplorar;
-    public javax.swing.JLabel cute;
-    private javax.swing.JLabel fundoMenu;
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel naoHaCubesatsCadastrados;
-    protected javax.swing.JLabel user;
     // End of variables declaration//GEN-END:variables
 }

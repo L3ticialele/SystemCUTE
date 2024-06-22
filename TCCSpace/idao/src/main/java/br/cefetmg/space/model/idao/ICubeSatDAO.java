@@ -13,4 +13,6 @@ public interface ICubeSatDAO{
     boolean delete(int cube) throws PersistenciaException;
 
     List<CubeSatDTO> listarTodos() throws PersistenciaException;
+    
+    CubeSatDTO procurarPorId(int id) throws PersistenciaException;
 }

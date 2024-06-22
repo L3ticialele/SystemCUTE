@@ -8,6 +8,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
 
 public class DadosDAO implements IDadosDAO{
@@ -147,6 +148,30 @@ public class DadosDAO implements IDadosDAO{
             }else{
                 System.out.println("Não foi possível encontrar os dados com o id: " + dados.getId());
                 return false;
+            }
+        }catch(Exception ex){
+            entityManager.getTransaction().rollback();
+            throw ex;
+        }finally{
+            entityManager.close();
+        }
+    }
+    
+    @Override
+    public DadosDTO procurarPorId(int id) throws PersistenciaException{
+        EntityManagerFactory entityManagerFactory = 
+        Persistence.createEntityManagerFactory("persistence");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        
+        try{
+             entityManager.getTransaction().begin();
+             Query query = entityManager.createQuery("FROM DadosDTO AS d WHERE d.id =:id ");
+             query.setParameter("id", id);
+             List<DadosDTO> dadosPersistidos = query.getResultList();
+            if(!dadosPersistidos.isEmpty()){
+                return dadosPersistidos.get(0);
+            }else{
+                return null;
             }
         }catch(Exception ex){
             entityManager.getTransaction().rollback();

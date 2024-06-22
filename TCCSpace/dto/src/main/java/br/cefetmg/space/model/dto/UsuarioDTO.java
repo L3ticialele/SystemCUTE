@@ -2,8 +2,10 @@
 package br.cefetmg.space.model.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -21,20 +23,26 @@ import javax.persistence.Table;
 @Table(name = "usuarios")
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 public class UsuarioDTO implements Serializable{
-    private String senha;
-    private String username;
-    private String email;
     @Id 
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
+    @Column(name = "senha")
+    private String senha;
+    @Column(name = "username")
+    private String username;
+    @Column(name = "email")
+    private String email;
+    @Column(name = "administrador")
     private boolean administrador;
+    @Column(name = "nome")
     private String nome;
+    @Column(name = "telefone")
+    private String telefone;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "usuario_equipe",
             joinColumns = {@JoinColumn(name="idusuario")},
             inverseJoinColumns={@JoinColumn(name="idequipe")})
     private List<EquipeDTO> equipes;
-    private String telefone;
     @OneToMany(fetch = FetchType.EAGER, cascade = 
             CascadeType.ALL, mappedBy = "usuario")
     private List<CubeSatDTO> cubeSat;
@@ -46,7 +54,7 @@ public class UsuarioDTO implements Serializable{
         telefone = null;
         administrador = false;
         equipes = null;
-        cubeSat = null;
+        cubeSat = new ArrayList<>();
     }
     
     public int quantEquipes(){

@@ -8,6 +8,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
 
 
@@ -23,7 +24,7 @@ public class CubeSatDAO implements ICubeSatDAO{
             entityManager.getTransaction().begin();
             entityManager.persist(cube);
             entityManager.getTransaction().commit();
-            System.out.println("Cubesat cadastrado!");
+            System.out.println("CubeSat cadastrado!");
         }catch(Exception ex){
             entityManager.getTransaction().rollback();
             throw ex;
@@ -119,4 +120,29 @@ public class CubeSatDAO implements ICubeSatDAO{
             entityManager.close();
         }
     }
+    
+     @Override
+    public CubeSatDTO procurarPorId(int id) throws PersistenciaException{
+        EntityManagerFactory entityManagerFactory = 
+        Persistence.createEntityManagerFactory("persistence");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        
+        try{
+             entityManager.getTransaction().begin();
+             Query query = entityManager.createQuery("FROM CubeSatDTO AS u WHERE u.id =:id ");
+             query.setParameter("id", id);
+             List<CubeSatDTO> cubesatPersistido = query.getResultList();
+            if(!cubesatPersistido.isEmpty()){
+                return cubesatPersistido.get(0);
+            }else{
+                return null;
+            }
+        }catch(Exception ex){
+            entityManager.getTransaction().rollback();
+            throw ex;
+        }finally{
+            entityManager.close();
+        }
+    }
+    
 }
