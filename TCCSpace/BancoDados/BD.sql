@@ -61,7 +61,7 @@ CREATE TABLE Administrador_Equipe(
 );
 
 CREATE TABLE dados(
-	idCubeSat int NOT NULL,
+	cubesat int NOT NULL,
 	acelerometroX float,
 	acelerometroY float,
 	acelerometroZ float,
