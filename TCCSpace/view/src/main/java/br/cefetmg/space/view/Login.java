@@ -159,7 +159,6 @@ public class Login extends javax.swing.JFrame {
                 if(usuarioDAO.procurarPorUserName(user) != null && usuarioDAO.procurarPorUserName(user).getSenha().equals(senha)){
                     Cubesat telaCubeSat = new Cubesat();
                     this.dispose();
-                    telaCubeSat.user.setText(user);
                     telaCubeSat.setVisible(true);
             }else{
                 JOptionPane.showMessageDialog(null,"Usuário ou senha incorretos.");
@@ -190,9 +189,6 @@ public class Login extends javax.swing.JFrame {
 
     private void linkCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_linkCadastrarActionPerformed
         // TODO add your handling code here:
-        CadastroUsuario telaCadastroUsuario = new CadastroUsuario();
-        this.dispose();
-        telaCadastroUsuario.setVisible(true);
     }//GEN-LAST:event_linkCadastrarActionPerformed
 
     private void linkCadastrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_linkCadastrarMouseEntered

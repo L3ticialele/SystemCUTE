@@ -1,10 +1,13 @@
 package br.cefetmg.space.model.dto;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -15,31 +18,64 @@ public class DadosDTO implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private float acelerometroX, acelerometroY, acelerometroZ;
-    private float anguloX, anguloY, anguloZ;
+    @Column(name = "acelerometroX")
+    private float acelerometroX;
+    @Column(name = "acelerometroY")
+    private float acelerometroY;
+    @Column(name = "acelerometroZ")
+    private float acelerometroZ;
+    @Column(name = "anguloX")
+    private float anguloX;
+    @Column(name = "anguloY")
+    private float anguloY;
+    @Column(name = "anguloZ")
+    private float anguloZ;
+    @Column(name = "altitude")
     private float altitude;
+    @Column(name = "bateria")
     private float bateria;
+    @Column(name = "correnteBateria")
     private float correnteBateria;
+    @Column(name = "correntePlacaSolar")
     private float correntePlacaSolar;
+    @Column(name = "gas1")
     private float gas1;
+    @Column(name = "gas2")
     private float gas2;
+    @Column(name = "luz1")
     private float luz1;
+    @Column(name = "luz2")
     private float luz2;
+    @Column(name = "pontoOrvalho")
     private float pontoOrvalho;
+    @Column(name = "pressao")
     private float pressao;
+    @Column(name = "sensorUV")
     private float sensorUV;
+    @Column(name = "temperaturaExterna")
     private float temperaturaExterna;
+    @Column(name = "temperaturaInterna")
     private float temperaturaInterna;
+    @Column(name = "tensaoBateria")
     private float tensaoBateria;
+    @Column(name = "tensaoPlacaSolar")
     private float tensaoPlacaSolar;
+    @Column(name = "umidade")
     private float umidade;
+    @Column(name = "velocidade")
     private float velocidade;
-    private float velocidadeAngularX, velocidadeAngularY, velocidadeAngularZ;
-    @ManyToOne
-    private CubeSatDTO cubeSat;
+    @Column(name = "velocidadeAngularX")
+    private float velocidadeAngularX;
+    @Column(name = "velocidadeAngularY")
+    private float velocidadeAngularY;
+    @Column(name = "velocidadeAngularZ")
+    private float velocidadeAngularZ;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "cubesat", nullable = false)
+    private CubeSatDTO cubesat;
+    @Column(name = "dataObtencao")
     private String dataObtencao;
-
-
+    
     public float getLuz1() {
         return luz1;
     }
@@ -270,15 +306,11 @@ public class DadosDTO implements Serializable {
     }
     
     public void setCubeSat(CubeSatDTO cube){
-        cubeSat = cube;
+        cubesat = cube;
     }
     
     public CubeSatDTO getCubeSat(){
-        return cubeSat;
-    }
-    
-    public long getIdCubeSat(){
-        return cubeSat.getId();
+        return cubesat;
     }
     
 }

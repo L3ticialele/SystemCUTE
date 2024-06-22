@@ -14,9 +14,9 @@ import javax.persistence.Table;
 public class AdministradorDTO extends UsuarioDTO{
     
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "administrador_equipe",
-            joinColumns={@JoinColumn(name="idadministrador")},
-            inverseJoinColumns={@JoinColumn(name="idequipe")})
+    @JoinTable(name = "Administrador_Equipe",
+            joinColumns={@JoinColumn(name="idAdministrador")},
+            inverseJoinColumns={@JoinColumn(name="idEquipe")})
     private List<EquipeDTO> equipesAdministradas;
     
     public AdministradorDTO(){

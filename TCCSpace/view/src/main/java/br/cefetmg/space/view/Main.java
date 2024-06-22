@@ -1,125 +1,93 @@
-
 package br.cefetmg.space.view;
+import br.cefetmg.space.model.dao.CubeSatDAO;
+import br.cefetmg.space.model.dao.DadosDAO;
+import br.cefetmg.space.model.dto.CubeSatDTO;
+import br.cefetmg.space.model.dto.DadosDTO;
 import br.cefetmg.space.model.dao.UsuarioDAO;
-import br.cefetmg.space.model.dto.EmailValidator;
 import br.cefetmg.space.model.dto.UsuarioDTO;
-import br.cefetmg.space.model.dto.ValidaTelefone;
-import br.cefetmg.space.model.dto.ValidarSenha;
+import br.cefetmg.space.model.idao.ICubeSatDAO;
+import br.cefetmg.space.model.idao.IDadosDAO;
 import br.cefetmg.space.model.idao.IUsuarioDAO;
 import br.cefetmg.space.model.idao.exception.PersistenciaException;
-import java.util.Scanner;
 
-public class Main {
-
-    public static void main(String[] args) throws PersistenciaException { 
-        UsuarioDTO usuario = new UsuarioDTO();
-        ValidarSenha validaS = new ValidarSenha();
-        String nome, telefone, user, senha1, senha2, email;
-        ValidaTelefone validaT = new ValidaTelefone();
-        IUsuarioDAO usuarioDAO = new UsuarioDAO();
-        int resposta; int id;
+public class Main 
+{
+    public static void main(String[] args) throws PersistenciaException {
+         
+        IDadosDAO enviar = new DadosDAO();
+        //Trecho de código necessário para a primeira parte (criar usuário, cubesat e os primeiros dados do Banco)
+        DadosDTO objetoDados = new DadosDTO();
         
-        try (Scanner input = new Scanner(System.in)) {
-            do{
-                    System.out.println("Que operação deseja realizar? ");
-                    System.out.println("(1)Adicionar um novo usuário");
-                    System.out.println("(2)Excluir usuário");
-                    System.out.println("(3)Listar usuários");
-                    System.out.println("(4)Atualizar usuário");
-                    System.out.println("(5)Sair");
-                    resposta = input.nextInt();
-                    input.nextLine();
-                switch(resposta){
-                    case 1 -> {
-                        System.out.println("-----CADASTRANDO ADM-----");
-                        System.out.println("Digite seu nome completo: ");
-                        nome = input.nextLine();
-                        do{
-                            System.out.println("Digite seu telefone: ");
-                            telefone = input.nextLine();
-                            if(!validaT.validarTelefone(telefone))
-                                System.out.println("Telefone inválido!");
-                        }while(!validaT.validarTelefone(telefone));
-                        do{
-                            System.out.println("Digite seu e-mail: ");
-                            email = input.nextLine();
-                            if(!EmailValidator.isValidEmail(email))
-                                System.out.println("E-mail inválido!");
-                            if(usuarioDAO.procurarPorEmail(email) != null)
-                                System.out.println("Já existe um usuário cadastrado com esse e-mail.");
-                        }while(!EmailValidator.isValidEmail(email) && usuarioDAO.procurarPorEmail(email) != null);
-                        do{
-                            System.out.println("Digite um nome de usuário: ");
-                            user = input.nextLine();
-                            if(usuarioDAO.procurarPorUserName(user) != null)
-                                System.out.println("Já existe um usuário com esse nome.");
-                        }while(usuarioDAO.procurarPorUserName(user) != null);
-                        do{
-                            System.out.println("Digite sua senha: ");
-                            senha1 = input.nextLine();
-                            if(!validaS.senhaForte(senha1))
-                               System.out.println("Senha fraca.");
-                        }while(!validaS.senhaForte(senha1));
-                        do{
-                            System.out.println("Confirme sua senha: ");
-                            senha2 = input.nextLine();
-                            if(!senha1.equals(senha2))
-                                System.out.println("Senha incorreta!");
-                        }while(!senha1.equals(senha2));
-                        usuario.setEmail(email);
-                        usuario.setNome(nome);
-                        usuario.setSenha(senha1);
-                        usuario.setUserName(user);
-                        usuario.setTelefone(telefone);
-                        usuarioDAO.inserir(usuario);
-                    }
-                    case 2 -> {
-                        System.out.println("-----EXCLUINDO USUÁRIO-----");
-                        System.out.println("Digite o id do usuário que deseja excluir:");
-                        id = input.nextInt();
-                        input.nextLine();
-                        usuarioDAO.delete(id);
-                    }
-                    case 3 -> {
-                        System.out.println("-----LISTANDO USUÁRIOS-----");
-                        usuarioDAO.listarTodos();
-                    }
-                    case 4 -> {
-                        System.out.println("-----ATUALIZAR USUÁRIO-----");
-                        System.out.println("Digite o e-mail do usuário que deseja atualizar:");
-                        email = input.nextLine();
-                        if(usuarioDAO.procurarPorEmail(email) == null)
-                            System.out.println("Este usuário não existe.");
-                        else{
-                            System.out.println("Digite o novo nome: ");
-                            nome = input.nextLine();
-                            System.out.println("Digite o novo telefone: ");
-                            telefone = input.nextLine();
-                            System.out.println("Digite o novo email: ");
-                            email = input.nextLine();
-                            System.out.println("Digite o novo nome de usuário: ");
-                            user = input.nextLine();
-                            System.out.println("Digite a  senha: ");
-                            senha1 = input.nextLine();
-                            do{
-                                System.out.println("Confirme sua senha: ");
-                                senha2 = input.nextLine();
-                                if(!senha1.equals(senha2))
-                                    System.out.println("Senha incorreta!");
-                            }while(!senha1.equals(senha2));
-                            usuario.setEmail(email);
-                            usuario.setNome(nome);
-                            usuario.setSenha(senha1);
-                            usuario.setUserName(user);
-                            usuario.setTelefone(telefone);
-                            id = usuarioDAO.procurarPorEmail(email).getId();
-                            usuarioDAO.atualizar(id, usuario);
-                        }
-                    }
-                 }
-            }while(resposta != 5);
-            
-            System.out.println("FIM");
-        }
+        /*
+        //Trecho de código necessário para a segunda parte (apenas envio de dados) 
+        DadosDTO objetoDados = enviar.procurarPorId(6);
+        */
+        
+        // Define os valores para os atributos da classe DadosDTO
+        objetoDados.setId(2);
+        objetoDados.setAcelerometroX(1.5f);
+        objetoDados.setAcelerometroY(2.0f);
+        objetoDados.setAcelerometroZ(0.8f);
+        objetoDados.setAnguloX(30.0f);
+        objetoDados.setAnguloY(45.0f);
+        objetoDados.setAnguloZ(60.0f);
+        objetoDados.setAltitude(100.0f);
+        objetoDados.setBateria(95.0f);
+        objetoDados.setCorrenteBateria(5.0f);
+        objetoDados.setCorrentePlacaSolar(3.0f);
+        objetoDados.setGas1(0.2f);
+        objetoDados.setGas2(0.5f);
+        objetoDados.setLuz1(1500.0f);
+        objetoDados.setLuz2(1800.0f);
+        objetoDados.setPontoOrvalho(15.0f);
+        objetoDados.setPressao(1013.25f);
+        objetoDados.setSensorUV(8.5f);
+        objetoDados.setTemperaturaExterna(25.0f);
+        objetoDados.setTemperaturaInterna(28.0f);
+        objetoDados.setTensaoBateria(12.0f);
+        objetoDados.setTensaoPlacaSolar(24.0f);
+        objetoDados.setUmidade(70.0f);
+        objetoDados.setVelocidade(50.0f);
+        objetoDados.setVelocidadeAngularX(10.0f);
+        objetoDados.setVelocidadeAngularY(15.0f);
+        objetoDados.setVelocidadeAngularZ(20.0f);
+        objetoDados.setDataObtencao("2024-06-21");
+       
+        /*
+        
+        //Criação de um usuário e de um CubeSat para o primeiro armazenamento dos dados
+        CubeSatDTO cubeSat = new CubeSatDTO();
+        UsuarioDTO usuario = new UsuarioDTO();
+        IUsuarioDAO user = new UsuarioDAO();
+       
+        cubeSat.setDataFabricacao("21/06/2006");
+        cubeSat.setNome("cube");
+        cubeSat.setDados(objetoDados);
+        cubeSat.setTamanho(10);
+        
+        objetoDados.setCubeSat(cubeSat);
+        
+        usuario.setAdministrador(false);
+        usuario.setCubeSat(cubeSat);
+        usuario.setEmail("123@gmail.com");
+        usuario.setId(2);
+        usuario.setNome("L3ticialele");
+        usuario.setSenha("123");
+        usuario.setTelefone("123456789");
+        usuario.setUserName("usu");
+        
+        cubeSat.setId(3);
+        
+        cubeSat.setPessoa(usuario);
+        cubeSat.setDados(objetoDados);
+        
+        user.inserir(usuario);
+        */
+        
+        /*
+        //Apenas o envio de novos dados relacionados ao CubeSat criado anteriormente
+        //Para que o código funcione, é necessário que os dados acima estejam comentados
+        enviar.inserir(objetoDados);
+        */
     }
 }

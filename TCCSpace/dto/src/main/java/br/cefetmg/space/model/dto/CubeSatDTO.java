@@ -1,11 +1,12 @@
 package br.cefetmg.space.model.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -17,29 +18,32 @@ import javax.persistence.Table;
 public class CubeSatDTO implements Serializable {
 
     @Id
-    @GeneratedValue
     private int id;
+    @Column(name = "dataFabricacao")
     private String dataFabricacao;
+    @Column(name = "tamanho")
     private double tamanho;
+    @Column(name = "nome")
     private String nome;
-    @OneToMany(fetch = FetchType.EAGER, cascade = 
-            CascadeType.ALL, mappedBy = "cubeSat")
-    private List<DadosDTO> dados;
+    @OneToMany(fetch = FetchType.EAGER, cascade =
+            CascadeType.PERSIST, mappedBy = "cubesat")
+    private List<DadosDTO> dado;
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "idusuario", nullable = true)
+    @JoinColumn(name = "idUsuario", nullable = true)
     private UsuarioDTO usuario;
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "idequipe", nullable = true)
+    @JoinColumn(name = "idEquipe", nullable = true)
     private EquipeDTO equipe;
+    @Column(name = "status")
     private String status;
 
     public CubeSatDTO(){
+        dado = new ArrayList<>();
         dataFabricacao = null;
         tamanho = -1;
         nome = null;
-        dados = null;
         equipe = null;
-        status = null;
+        status = "inativo";
     }
     
     public String getStatus() {
@@ -75,12 +79,12 @@ public class CubeSatDTO implements Serializable {
     }
     
     public void setDados(DadosDTO dado){
-        dados.add(dado);
+        this.dado.add(dado);
     }
     
     public void setTodosDados(List<DadosDTO> dado){
-        if(dados.isEmpty())
-            dados = dado;
+        if(dado.isEmpty())
+            this.dado = dado;
         else{
             for(int i=0; i<dado.size(); i++)
                 setDados(dado.get(i));
@@ -88,7 +92,7 @@ public class CubeSatDTO implements Serializable {
     }
     
     public List<DadosDTO> getDados(){
-        return dados;
+        return dado;
     }
 
     public String getDataFabricacao() {
