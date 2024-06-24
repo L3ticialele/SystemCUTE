@@ -15,6 +15,7 @@ public class Main
     public static void main(String[] args) throws PersistenciaException {
          
         IDadosDAO enviar = new DadosDAO();
+        
         //Trecho de código necessário para a primeira parte (criar usuário, cubesat e os primeiros dados do Banco)
         DadosDTO objetoDados = new DadosDTO();
         

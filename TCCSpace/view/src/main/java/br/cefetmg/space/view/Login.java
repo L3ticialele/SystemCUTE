@@ -40,7 +40,6 @@ public class Login extends javax.swing.JFrame {
         botaoLogin = new javax.swing.JButton();
         linkCadastrar = new javax.swing.JButton();
         possuiContaLogin = new javax.swing.JLabel();
-        caixaLogin = new javax.swing.JLabel();
         fundoLogin = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -121,10 +120,6 @@ public class Login extends javax.swing.JFrame {
         possuiContaLogin.setText("Não possui conta?");
         panelLogin.add(possuiContaLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 600, 180, -1));
 
-        caixaLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/login.png"))); // NOI18N
-        caixaLogin.setToolTipText("");
-        panelLogin.add(caixaLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 30, -1, -1));
-
         fundoLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fundo.png"))); // NOI18N
         fundoLogin.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         fundoLogin.setAutoscrolls(true);
@@ -157,9 +152,7 @@ public class Login extends javax.swing.JFrame {
                 if(usuarioDAO.procurarPorEmail(user) != null)
                     user = usuarioDAO.procurarPorEmail(user).getUserName();
                 if(usuarioDAO.procurarPorUserName(user) != null && usuarioDAO.procurarPorUserName(user).getSenha().equals(senha)){
-                    Cubesat telaCubeSat = new Cubesat();
-                    this.dispose();
-                    telaCubeSat.setVisible(true);
+                    JOptionPane.showMessageDialog(null,"Seja bem vindo " + user);
             }else{
                 JOptionPane.showMessageDialog(null,"Usuário ou senha incorretos.");
                  }
@@ -237,7 +230,6 @@ public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoLogin;
-    private javax.swing.JLabel caixaLogin;
     private javax.swing.JPasswordField campoSenha;
     private javax.swing.JTextField campoUser;
     private javax.swing.JLabel fundoLogin;
