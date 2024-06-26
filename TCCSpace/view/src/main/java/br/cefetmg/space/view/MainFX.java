@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMain.java to edit this template
- */
 package br.cefetmg.space.view;
 
 import java.io.IOException;
@@ -13,11 +9,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
-/**
- *
- * @author letic
- */
+
 public class MainFX extends Application {
     
     private static Stage stage;
@@ -26,6 +20,8 @@ public class MainFX extends Application {
     private static Scene telaExplorar;
     private static Scene telaEquipes;
     private static Scene telaInicial;
+    private static Scene telaLogin;
+    private static Scene telaCadastro;
     
     @Override
     public void start(Stage primaryStage) throws IOException {
@@ -44,9 +40,16 @@ public class MainFX extends Application {
             telaEquipes = new Scene(loaderTelaEquipes, 640, 400);
              
             Parent loaderTelaInicial = FXMLLoader.load(getClass().getResource("/fxml/TelaInicial.fxml"));
-            telaInicial = new Scene(loaderTelaInicial, 640, 400);
+            telaInicial = new Scene(loaderTelaInicial, 800, 600);
             
-            primaryStage.setScene(telaInicial);
+            Parent loaderTelaLogin = FXMLLoader.load(getClass().getResource("/fxml/TelaLogin.fxml"));
+            telaLogin = new Scene(loaderTelaLogin, 1920, 1080);
+            
+            Parent loaderTelaCadastro = FXMLLoader.load(getClass().getResource("/fxml/TelaCadastro.fxml"));
+            telaCadastro = new Scene(loaderTelaCadastro, 800, 600);
+            
+            //primaryStage.initStyle(StageStyle.UNDECORATED);
+            primaryStage.setScene(telaLogin);
             primaryStage.show();
         }catch(Exception e){
             e.printStackTrace();
@@ -66,6 +69,12 @@ public class MainFX extends Application {
                 break;
             case "Tela Inicial":
                 stage.setScene(telaInicial);
+                break;
+            case "Cadastro":
+                stage.setScene(telaCadastro);
+                break;
+            case "Login":
+                stage.setScene(telaLogin);
                 break;
         }
     }

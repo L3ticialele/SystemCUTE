@@ -57,6 +57,7 @@ public class UsuarioDTO implements Serializable{
         cubeSat = new ArrayList<>();
     }
     
+    
     public int quantEquipes(){
         return equipes.size();
     }
