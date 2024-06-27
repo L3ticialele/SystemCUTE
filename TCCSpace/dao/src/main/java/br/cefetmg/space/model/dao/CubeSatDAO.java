@@ -2,6 +2,7 @@
 package br.cefetmg.space.model.dao;
 
 import br.cefetmg.space.model.dto.CubeSatDTO;
+import br.cefetmg.space.model.dto.UsuarioDTO;
 import br.cefetmg.space.model.idao.ICubeSatDAO;
 import br.cefetmg.space.model.idao.exception.PersistenciaException;
 import java.util.List;
@@ -10,6 +11,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.swing.JOptionPane;
 
 
 public class CubeSatDAO implements ICubeSatDAO{
@@ -25,7 +27,9 @@ public class CubeSatDAO implements ICubeSatDAO{
             entityManager.persist(cube);
             entityManager.getTransaction().commit();
             System.out.println("CubeSat cadastrado!");
+            JOptionPane.showMessageDialog(null, "CubeSat cadastrado!");
         }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "ERROR");
             entityManager.getTransaction().rollback();
             throw ex;
         }finally{
@@ -48,8 +52,8 @@ public class CubeSatDAO implements ICubeSatDAO{
                 System.out.print(
                           "Id: " + cube.getId() 
                         + " Nome: " + cube.getNome()
-                        + " Fabricação: " + cube.getDataFabricacao() 
-                        + " Tamanho: " + cube.getTamanho() 
+                        + " Cadastro: " + cube.getDataCadastro() 
+                        + " Descrição: " + cube.getDescricao() 
                         + " Status: " + cube.getStatus()
                 );
                 if(cube.getEquipe() == null)
@@ -101,8 +105,8 @@ public class CubeSatDAO implements ICubeSatDAO{
             if(cubePersistido != null){
                 cubePersistido.setId(cube.getId());
                 cubePersistido.setNome(cube.getNome());
-                cubePersistido.setDataFabricacao(cube.getDataFabricacao());
-                cubePersistido.setTamanho(cube.getTamanho());
+                cubePersistido.setDataCadastro(cube.getDataCadastro());
+                cubePersistido.setDescricao(cube.getDescricao());
                 cubePersistido.setTodosDados(cube.getDados());
                 cubePersistido.setPessoa(cube.getUsuario());
                 cubePersistido.setEquipe(cube.getEquipe());
@@ -110,7 +114,7 @@ public class CubeSatDAO implements ICubeSatDAO{
                 entityManager.getTransaction().commit();
                 return true;
             }else{
-                System.out.println("Não foi possível encontrar o CubSat com o id: " + cube.getId());
+                System.out.println("Não foi possível encontrar o CubeSat com o id: " + cube.getId());
                 return false;
             }
         }catch(Exception ex){
@@ -131,6 +135,30 @@ public class CubeSatDAO implements ICubeSatDAO{
              entityManager.getTransaction().begin();
              Query query = entityManager.createQuery("FROM CubeSatDTO AS u WHERE u.id =:id ");
              query.setParameter("id", id);
+             List<CubeSatDTO> cubesatPersistido = query.getResultList();
+            if(!cubesatPersistido.isEmpty()){
+                return cubesatPersistido.get(0);
+            }else{
+                return null;
+            }
+        }catch(Exception ex){
+            entityManager.getTransaction().rollback();
+            throw ex;
+        }finally{
+            entityManager.close();
+        }
+    }
+    
+    @Override
+    public CubeSatDTO procurarPorNome(String nomeC) throws PersistenciaException{
+        EntityManagerFactory entityManagerFactory = 
+        Persistence.createEntityManagerFactory("persistence");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        
+        try{
+             entityManager.getTransaction().begin();
+             Query query = entityManager.createQuery("FROM CubeSatDTO AS c WHERE c.nome =:nomeC");
+             query.setParameter("nomeC", nomeC);
              List<CubeSatDTO> cubesatPersistido = query.getResultList();
             if(!cubesatPersistido.isEmpty()){
                 return cubesatPersistido.get(0);

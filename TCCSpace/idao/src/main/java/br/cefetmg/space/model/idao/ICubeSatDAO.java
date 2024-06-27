@@ -15,4 +15,6 @@ public interface ICubeSatDAO{
     List<CubeSatDTO> listarTodos() throws PersistenciaException;
     
     CubeSatDTO procurarPorId(int id) throws PersistenciaException;
+    
+    CubeSatDTO procurarPorNome(String nomeC) throws PersistenciaException;
 }
