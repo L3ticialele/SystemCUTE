@@ -13,6 +13,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 
 /**
  * FXML Controller class
@@ -34,6 +37,49 @@ public class TelaCubesatController implements Initializable {
     
     @FXML
     private Button botaoHome;
+    
+    @FXML
+    private Button botaoCadastrarCubesat;
+    
+    @FXML
+    private ImageView iconeExplorar;
+    
+    @FXML
+    private ImageView iconeEquipes;
+    
+    @FXML
+    void explorarToPourple(MouseEvent event){
+        botaoExplorar.setStyle("-fx-text-fill: #8C52FF;"
+                + "-fx-background-color: 0;");
+        iconeExplorar.setImage(new Image("file:src/main/resources/images/iconeExplorarLilas.png"));
+    }
+    
+    @FXML
+    void explorarToWhite(MouseEvent event){
+        botaoExplorar.setStyle("-fx-text-fill: white;"
+                + "-fx-background-color: 0;");
+        iconeExplorar.setImage(new Image("file:src/main/resources/images/iconeExplorar.png"));
+    }
+    
+    @FXML
+    void equipesToPourple(MouseEvent event){
+        botaoEquipe.setStyle("-fx-text-fill: #8C52FF;"
+                + "-fx-background-color: 0;");
+        iconeEquipes.setImage(new Image("file:src/main/resources/images/iconeEquipesLilas.png"));
+    }
+    
+    @FXML
+    void equipesToWhite(MouseEvent event){
+        botaoEquipe.setStyle("-fx-text-fill: white;"
+                + "-fx-background-color: 0;");
+        iconeEquipes.setImage(new Image("file:src/main/resources/images/iconeEquipes.png"));
+    }
+    
+    @FXML
+    void telaCadastrarCubesat(ActionEvent event){
+        MainFX.changedScreen("Cadastrar Cubesat");
+    }
+    
 
     @FXML
     void apresentaTelaCubesat(ActionEvent event) {

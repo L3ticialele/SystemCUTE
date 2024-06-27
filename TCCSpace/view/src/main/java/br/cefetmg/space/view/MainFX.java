@@ -6,12 +6,9 @@ package br.cefetmg.space.view;
 
 import java.io.IOException;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
@@ -26,26 +23,39 @@ public class MainFX extends Application {
     private static Scene telaExplorar;
     private static Scene telaEquipes;
     private static Scene telaInicial;
+    private static Scene telaCadastrarCubesat;
+    private static Scene telaCadastro;
+    private static Scene telaLogin;
     
     @Override
     public void start(Stage primaryStage) throws IOException {
         try{
             stage = primaryStage;
                     
-            primaryStage.setTitle("Tela Inicial");
+            primaryStage.setTitle("CUTE");
             
             Parent  loaderTelaCubesat = FXMLLoader.load(getClass().getResource("/fxml/TelaCubesat.fxml"));
-            telaCubesat = new Scene(loaderTelaCubesat, 640, 400);
+            telaCubesat = new Scene(loaderTelaCubesat, 600, 400);
             
             Parent loaderTelaExplorar = FXMLLoader.load(getClass().getResource("/fxml/TelaExplorar.fxml"));
-            telaExplorar = new Scene(loaderTelaExplorar, 640, 400);
+            telaExplorar = new Scene(loaderTelaExplorar, 600, 400);
             
             Parent loaderTelaEquipes = FXMLLoader.load(getClass().getResource("/fxml/TelaEquipes.fxml"));
-            telaEquipes = new Scene(loaderTelaEquipes, 640, 400);
+            telaEquipes = new Scene(loaderTelaEquipes, 600, 400);
              
             Parent loaderTelaInicial = FXMLLoader.load(getClass().getResource("/fxml/TelaInicial.fxml"));
-            telaInicial = new Scene(loaderTelaInicial, 640, 400);
+            telaInicial = new Scene(loaderTelaInicial, 600, 400);
             
+            Parent loaderTelaCadastrarCubesat = FXMLLoader.load(getClass().getResource("/fxml/TelaCadastrarCubesat.fxml"));
+            telaCadastrarCubesat = new Scene(loaderTelaCadastrarCubesat, 600, 400);
+            
+            Parent loaderTelaCadastro = FXMLLoader.load(getClass().getResource("/fxml/TelaCadastro.fxml"));
+            telaCadastro = new Scene(loaderTelaCadastro, 1920, 1080);
+            
+            Parent loaderTelaLogin = FXMLLoader.load(getClass().getResource("/fxml/TelaLogin.fxml"));
+            telaLogin = new Scene(loaderTelaLogin, 1920, 1080);
+            
+            //primaryStage.initStyle(StageStyle.UNDECORATED);
             primaryStage.setScene(telaInicial);
             primaryStage.show();
         }catch(Exception e){
@@ -67,6 +77,14 @@ public class MainFX extends Application {
             case "Tela Inicial":
                 stage.setScene(telaInicial);
                 break;
+            case "Cadastrar Cubesat":
+                stage.setScene(telaCadastrarCubesat);
+                break;
+            case "Login":
+                stage.setScene(telaLogin);
+                break;
+            case "Cadastro": 
+                stage.setScene(telaCadastro);
         }
     }
 

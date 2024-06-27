@@ -1,0 +1,21 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass {
+
+}
+
+
+#textNomeCubesat{
+   -fx-text-fill: white;
+}
+
+
+#choiceBoxAcesso>.label{
+    -fx-text-fill: white;
+}
+
+#botaoHome>.image{
+    -fx-border-radius: 50%;
+}

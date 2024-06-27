@@ -36,38 +36,38 @@
                   <Font size="8.0" />
                </font>
                <graphic>
-                  <ImageView fitHeight="19.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/iconeHome.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="botaoEquipe" mnemonicParsing="false" onAction="#apresentaTelaEquipe" prefHeight="33.0" prefWidth="105.0" style="-fx-background-color: 0;" text="Equipes" textFill="WHITE">
+            <Button fx:id="botaoExplorar" mnemonicParsing="false" onAction="#apresentaTelaExplorar" onMouseEntered="#explorarToPourple" onMouseExited="#explorarToWhite" style="-fx-background-color: 0;" text="EXPLORAR" textFill="WHITE">
                <graphic>
-                  <ImageView fitHeight="28.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/iconeEquipes.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-          <Button fx:id="botaoCubesat" mnemonicParsing="false" onAction="#apresentaTelaCubesat" style="-fx-background-color: 0;" text="CubeSat" textFill="WHITE">
-               <graphic>
-                  <ImageView fitHeight="19.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/iconeCubeSat.png" />
-                     </image>
-                  </ImageView>
-               </graphic></Button>
-            <Button fx:id="botaoExplorar" mnemonicParsing="false" onAction="#apresentaTelaExplorar" style="-fx-background-color: 0;" text="Explorar" textFill="WHITE">
-               <graphic>
-                  <ImageView fitHeight="20.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="20.0" fx:id="iconeExplorar" fitWidth="21.0"  pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/iconeExplorar.png" />
                      </image>
                   </ImageView>
                </graphic></Button>
+          <Button fx:id="botaoCubesat" mnemonicParsing="false" onAction="#apresentaTelaCubesat" onMouseEntered="#cubesatToPourple" onMouseExited="#cubesatToWhite" style="-fx-background-color: 0;" text="CUBESATS" textFill="WHITE">
+               <graphic>
+                  <ImageView fx:id="iconeCubesat" fitHeight="19.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/iconeCubeSat.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Button fx:id="botaoEquipe" mnemonicParsing="false" onAction="#apresentaTelaEquipe" prefHeight="33.0" prefWidth="105.0" style="-fx-background-color: 0;" text="EQUIPES" textFill="#8c52ff">
+               <graphic>
+                  <ImageView fitHeight="28.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/iconeEquipesLilas.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
         </buttons>
       </ButtonBar>
       <Label fx:id="label" layoutX="174.0" layoutY="130.0" prefHeight="53.0" prefWidth="175.0" text="EQUIPES" textFill="WHITE">

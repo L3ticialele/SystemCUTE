@@ -86,6 +86,56 @@ public class UsuarioDAO implements IUsuarioDAO{
         }
     }
     
+   @Override
+    public UsuarioDTO procurarPorId(int id) throws PersistenciaException{
+        EntityManagerFactory entityManagerFactory = 
+        Persistence.createEntityManagerFactory("persistence");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        
+        try{
+             entityManager.getTransaction().begin();
+             Query query = entityManager.createQuery("FROM UsuarioDTO AS u WHERE u.id =:id ");
+             query.setParameter("id", id);
+             List<UsuarioDTO> usuarioPersistido = query.getResultList();
+            if(!usuarioPersistido.isEmpty()){
+                return usuarioPersistido.get(0);
+            }else{
+                return null;
+            }
+        }catch(Exception ex){
+            entityManager.getTransaction().rollback();
+            throw ex;
+        }finally{
+            entityManager.close();
+        }
+    }
+    
+    @Override
+    public UsuarioDTO validarlogin(String email, String senha) throws PersistenciaException{
+        EntityManagerFactory entityManagerFactory = 
+        Persistence.createEntityManagerFactory("persistence");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        
+        try{
+             entityManager.getTransaction().begin();
+             Query query = entityManager.createQuery("SELECT u.email, u.senha FROM UsuarioDTO AS u WHERE u.email = :email AND u.senha = :senha");
+             query.setParameter("email", email);
+             query.setParameter("senha", senha);
+             List<UsuarioDTO> usuarioPersistido = query.getResultList();
+            if(!usuarioPersistido.isEmpty()){
+                return usuarioPersistido.get(0);
+            }else{
+                return null;
+            }
+        }catch(Exception ex){
+            entityManager.getTransaction().rollback();
+            throw ex;
+        }finally{
+            entityManager.close();
+        }
+    }
+    
+    
     @Override
     public UsuarioDTO procurarPorUserName(String user) throws PersistenciaException{
         EntityManagerFactory entityManagerFactory = 
