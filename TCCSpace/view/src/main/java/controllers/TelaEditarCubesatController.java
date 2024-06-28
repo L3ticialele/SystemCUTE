@@ -4,12 +4,7 @@
  */
 package controllers;
 
-import br.cefetmg.space.model.dao.CubeSatDAO;
-import br.cefetmg.space.model.dao.UsuarioDAO;
-import br.cefetmg.space.model.dto.CubeSatDTO;
 import br.cefetmg.space.model.dto.UsuarioDTO;
-import br.cefetmg.space.model.idao.ICubeSatDAO;
-import br.cefetmg.space.model.idao.IUsuarioDAO;
 import br.cefetmg.space.model.idao.exception.PersistenciaException;
 import br.cefetmg.space.view.MainFX;
 import java.awt.Desktop;
@@ -18,12 +13,10 @@ import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -39,7 +32,9 @@ import javafx.stage.Stage;
  */
 public class TelaEditarCubesatController implements Initializable {
     
- private BufferedImage imagem;
+   private BufferedImage imagem;
+ 
+   private UsuarioDTO usuario;
     
    @FXML
    private Button botaoCubesat;
@@ -175,23 +170,23 @@ public class TelaEditarCubesatController implements Initializable {
     
     @FXML
     void apresentaTelaCubesat(ActionEvent event) {
-        MainFX.changedScreen("Cubesat");
+        MainFX.changedScreen("Cubesat", usuario);
     }
 
     @FXML
     void apresentaTelaEquipe(ActionEvent event) {
-        MainFX.changedScreen("Equipes");
+        MainFX.changedScreen("Equipes", usuario);
     }
 
     @FXML
     void apresentaTelaExplorar(ActionEvent event) {
-        MainFX.changedScreen("Explorar");
+        MainFX.changedScreen("Explorar", usuario);
     }
     
     
     @FXML
     void apresentarTelaInicial(ActionEvent event) {
-        MainFX.changedScreen("Tela Inicial");
+        MainFX.changedScreen("Tela Inicial", usuario);
     }
     
     /**
@@ -203,6 +198,14 @@ public class TelaEditarCubesatController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
        choiceBoxAcesso.getItems().addAll(acesso);
        
+       MainFX.addOnChangeScreenListener(new MainFX.OnChangeScreen(){
+           @Override
+           public void onScreenChanged(String newString, Object viewData){
+               usuario = (UsuarioDTO)viewData;
+           }
+       });
+       
     }
+    
     
 }

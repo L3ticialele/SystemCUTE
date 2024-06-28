@@ -2,7 +2,6 @@
 package br.cefetmg.space.model.dao;
 
 import br.cefetmg.space.model.dto.CubeSatDTO;
-import br.cefetmg.space.model.dto.UsuarioDTO;
 import br.cefetmg.space.model.idao.ICubeSatDAO;
 import br.cefetmg.space.model.idao.exception.PersistenciaException;
 import java.util.List;
@@ -11,7 +10,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.swing.JOptionPane;
 
 
 public class CubeSatDAO implements ICubeSatDAO{
@@ -56,7 +54,7 @@ public class CubeSatDAO implements ICubeSatDAO{
                         + " Status: " + cube.getStatus()
                 );
                 if(cube.getEquipe() == null)
-                    System.out.println(" Criador: " + cube.getUsuario().getUserName());
+                    System.out.println(" Criador: " + cube.getUsuario().getNome());
                 else
                     System.out.println(" Equipe: " + cube.getEquipe());
                 }

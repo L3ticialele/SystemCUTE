@@ -4,6 +4,7 @@
  */
 package controllers;
 
+import br.cefetmg.space.model.dto.UsuarioDTO;
 import br.cefetmg.space.view.MainFX;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -37,6 +38,8 @@ public class TelaInicialController implements Initializable {
 
     @FXML
     private Label label;
+    
+    private UsuarioDTO usuario;
     
     @FXML
     private ImageView iconeEquipes;
@@ -91,23 +94,23 @@ public class TelaInicialController implements Initializable {
 
     @FXML
     void apresentaTelaCubesat(ActionEvent event) {
-        MainFX.changedScreen("Cubesat");
+        MainFX.changedScreen("Cubesat", usuario);
     }
 
     @FXML
     void apresentaTelaEquipe(ActionEvent event) {
-        MainFX.changedScreen("Equipes");
+        MainFX.changedScreen("Equipes", usuario);
     }
 
     @FXML
     void apresentaTelaExplorar(ActionEvent event) {
-        MainFX.changedScreen("Explorar");
+        MainFX.changedScreen("Explorar", usuario);
     }
     
     
     @FXML
     void apresentarTelaInicial(ActionEvent event) {
-        MainFX.changedScreen("Tela Inicial");
+        MainFX.changedScreen("Tela Inicial", usuario);
     }
     
     /**
@@ -118,6 +121,12 @@ public class TelaInicialController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        MainFX.addOnChangeScreenListener(new MainFX.OnChangeScreen(){
+           @Override
+           public void onScreenChanged(String newString, Object viewData){
+               usuario = (UsuarioDTO)viewData;
+           }
+       });
     }       
     
 }

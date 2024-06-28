@@ -5,6 +5,7 @@ package controllers;
  * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
  */
 
+import br.cefetmg.space.model.dto.UsuarioDTO;
 import br.cefetmg.space.view.MainFX;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -26,6 +27,8 @@ public class TelaEquipesController implements Initializable {
 
    @FXML
     private Button botaoCubesat;
+   
+   private UsuarioDTO usuario;
 
     @FXML
     private Button botaoEquipe;
@@ -75,23 +78,23 @@ public class TelaEquipesController implements Initializable {
 
     @FXML
     void apresentaTelaCubesat(ActionEvent event) {
-        MainFX.changedScreen("Cubesat");
+        MainFX.changedScreen("Cubesat", usuario);
     }
 
     @FXML
     void apresentaTelaEquipe(ActionEvent event) {
-        MainFX.changedScreen("Equipes");
+        MainFX.changedScreen("Equipes", usuario);
     }
 
     @FXML
     void apresentaTelaExplorar(ActionEvent event) {
-        MainFX.changedScreen("Explorar");
+        MainFX.changedScreen("Explorar", usuario);
     }
     
     
     @FXML
     void apresentarTelaInicial(ActionEvent event) {
-        MainFX.changedScreen("Tela Inicial");
+        MainFX.changedScreen("Tela Inicial", usuario);
     }
     
     /**
@@ -102,6 +105,12 @@ public class TelaEquipesController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        MainFX.addOnChangeScreenListener(new MainFX.OnChangeScreen(){
+           @Override
+           public void onScreenChanged(String newString, Object viewData){
+               usuario = (UsuarioDTO)viewData;
+           }
+       });
     }
     
 }

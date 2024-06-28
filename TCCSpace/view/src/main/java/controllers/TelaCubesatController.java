@@ -58,6 +58,8 @@ public class TelaCubesatController implements Initializable {
     @FXML
     private Label label;
     
+    private UsuarioDTO usuario;
+    
     @FXML 
     private VBox vBoxListarCubesats;
     
@@ -104,29 +106,29 @@ public class TelaCubesatController implements Initializable {
     
     @FXML
     void telaCadastrarCubesat(ActionEvent event){
-        MainFX.changedScreen("Cadastrar Cubesat");
+        MainFX.changedScreen("Cadastrar Cubesat", usuario);
     }
     
 
     @FXML
     void apresentaTelaCubesat(ActionEvent event) {
-        MainFX.changedScreen("Cubesat");
+        MainFX.changedScreen("Cubesat", usuario);
     }
 
     @FXML
     void apresentaTelaEquipe(ActionEvent event) {
-        MainFX.changedScreen("Equipes");
+        MainFX.changedScreen("Equipes", usuario);
     }
 
     @FXML
     void apresentaTelaExplorar(ActionEvent event) {
-        MainFX.changedScreen("Explorar");
+        MainFX.changedScreen("Explorar", usuario);
     }
     
     
     @FXML
     void apresentarTelaInicial(ActionEvent event) {
-        MainFX.changedScreen("Tela Inicial");
+        MainFX.changedScreen("Tela Inicial", usuario);
     }
     
     /**
@@ -136,52 +138,52 @@ public class TelaCubesatController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
         // TODO
-        try {
-            vBoxListarCubesats = new VBox();
-            vBoxListarCubesats.setLayoutX(5);
-            vBoxListarCubesats.setLayoutY(5);
-            vBoxListarCubesats.setPrefWidth(157);
-            vBoxListarCubesats.setPrefHeight(199);
-            vBoxListarCubesats.setSpacing(10);
-            panelListaCubesat.getChildren().add(vBoxListarCubesats);
-            
-            IUsuarioDAO usuarioDAO = new UsuarioDAO();
-            UsuarioDTO usuario = usuarioDAO.procurarPorId(1);
+        vBoxListarCubesats = new VBox();
+        vBoxListarCubesats.setLayoutX(5);
+        vBoxListarCubesats.setLayoutY(5);
+        vBoxListarCubesats.setPrefWidth(157);
+        vBoxListarCubesats.setPrefHeight(199);
+        vBoxListarCubesats.setSpacing(10);
+        panelListaCubesat.getChildren().add(vBoxListarCubesats);
+        if(usuario != null){
             List<CubeSatDTO> cubes = usuario.getCubeSat();
-            int cont=0;
             if(!cubes.isEmpty()){
-                
+
                 for(int i = 0, j=0; i<cubes.size(); i++, j+=49){
-                    
-                        Button botao = new Button();
-                        botao.setId(cubes.get(i).getNome());
-                        botao.setAlignment(Pos.CENTER);
-                        botao.setLayoutX(38);
-                        if(i==0)
-                            botao.setLayoutX(6);
-                        botao.setLayoutY(j);
-                        botao.setMnemonicParsing(false);
-                        botao.setPrefHeight(40);
-                        botao.setPrefWidth(147);
-                        botao.setStyle("-fx-background-color: 0; -fx-border-color: #8c52ff; -fx-border-radius: 2px;");
-                        botao.setText(cubes.get(i).getNome());
-                        botao.setTextFill(Color.WHITE);
-                        vBoxListarCubesats.getChildren().add(botao);
-                        cont = j;
+
+                    Button botao = new Button();
+                    botao.setId(cubes.get(i).getNome());
+                    botao.setAlignment(Pos.CENTER);
+                    botao.setLayoutX(38);
+                    if(i==0)
+                        botao.setLayoutX(6);
+                    botao.setLayoutY(j);
+                    botao.setMnemonicParsing(false);
+                    botao.setPrefHeight(40);
+                    botao.setPrefWidth(147);
+                    botao.setStyle("-fx-background-color: 0; -fx-border-color: #8c52ff; -fx-border-radius: 2px;");
+                    botao.setText(cubes.get(i).getNome());
+                    botao.setTextFill(Color.WHITE);
+                    vBoxListarCubesats.getChildren().add(botao);
                 }
             }
-            
-            scroll.valueProperty().addListener(new ChangeListener<Number>(){
-                @Override
-                public void changed(ObservableValue<? extends Number> ov, 
-                        Number old_val, Number new_val){
-                            vBoxListarCubesats.setLayoutY(-new_val.doubleValue());
-                }
-            });
-        } catch (PersistenciaException ex) {
-            Logger.getLogger(TelaCubesatController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        scroll.valueProperty().addListener(new ChangeListener<Number>(){
+            @Override
+            public void changed(ObservableValue<? extends Number> ov,
+                    Number old_val, Number new_val){
+                vBoxListarCubesats.setLayoutY(-new_val.doubleValue());
+            }
+        });
+        
+        MainFX.addOnChangeScreenListener(new MainFX.OnChangeScreen(){
+           @Override
+           public void onScreenChanged(String newString, Object viewData){
+               usuario = (UsuarioDTO)viewData;
+           }
+       });
                     
     }
     

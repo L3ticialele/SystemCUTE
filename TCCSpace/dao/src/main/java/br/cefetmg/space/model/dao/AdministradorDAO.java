@@ -101,7 +101,6 @@ public class AdministradorDAO implements IAdministradorDAO {
             
             if(admPersistido != null){
                 admPersistido.setEmail(adm.getEmail());
-                admPersistido.setUserName(adm.getUserName());
                 admPersistido.setNome(adm.getNome());
                 admPersistido.setSenha(adm.getSenha());
                 admPersistido.setTelefone(adm.getTelefone());
