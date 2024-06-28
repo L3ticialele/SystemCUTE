@@ -6,7 +6,7 @@ import java.util.List;
 
 
 public interface ICubeSatDAO{
-    void inserir(CubeSatDTO cube) throws PersistenciaException;
+    boolean inserir(CubeSatDTO cube) throws PersistenciaException;
 
     boolean atualizar(CubeSatDTO cube) throws PersistenciaException;
 

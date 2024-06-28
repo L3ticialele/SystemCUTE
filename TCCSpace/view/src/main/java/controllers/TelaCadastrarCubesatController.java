@@ -18,11 +18,11 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.net.URL;
 import java.time.LocalDateTime;
-import java.util.GregorianCalendar;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -99,6 +99,12 @@ public class TelaCadastrarCubesatController implements Initializable {
                 + "-fx-background-color: 0;");
     }
     
+    void setToNull(){
+        textNomeCubesat.setText(null);
+        textDescricao.setText(null);
+        choiceBoxAcesso.setValue("Público");
+    }
+    
     @FXML
     void cadastrarToWhite(MouseEvent event){
         botaoCadastrarCubesat.setStyle("-fx-text-fill: white;"
@@ -171,22 +177,47 @@ public class TelaCadastrarCubesatController implements Initializable {
     @FXML
     void cadastrarCubesat(ActionEvent event) throws PersistenciaException{
         try{
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            Alert confirmacao = new Alert(Alert.AlertType.CONFIRMATION);
+            Alert erro = new Alert(Alert.AlertType.ERROR);
             CubeSatDTO cube = new CubeSatDTO();
             ICubeSatDAO cubeDAO = new CubeSatDAO();
             LocalDateTime dataCadastro = LocalDateTime.now(); 
             IUsuarioDAO usuario = new UsuarioDAO();
             UsuarioDTO user = usuario.procurarPorId(1);
             
-
-            cube.setDataCadastro(dataCadastro.toString());
-            cube.setNome(textNomeCubesat.getText());
-            cube.setAcesso(choiceBoxAcesso.getValue());
-            cube.setPessoa(user);
-            cube.setDescricao(textDescricao.getText());
-           
+            if(textNomeCubesat.getText() == null || textNomeCubesat.getText().isEmpty()){
+                alert.setHeaderText("Por favor, informe o nome do CubeSat.");
+                alert.show();
+            }
             
+            else if(cubeDAO.procurarPorNome(textNomeCubesat.getText()) != null){
+                alert.setHeaderText("Já existe um CubeSat com esse nome.");
+                alert.show();
+            }
+            
+            else{
+                cube.setDataCadastro(dataCadastro.toString());
+                cube.setNome(textNomeCubesat.getText());
+                cube.setAcesso(choiceBoxAcesso.getValue());
+                cube.setPessoa(user);
+                cube.setDescricao(textDescricao.getText());
 
-            cubeDAO.inserir(cube);
+                if(cubeDAO.inserir(cube)){
+                    confirmacao.setHeaderText("Cubesat cadastrado com sucesso!");
+                    confirmacao.show();
+                }else{
+                    erro.setHeaderText("Houve um erro ao inserir o cubesat.");
+                    erro.show();
+                }
+                
+                textNomeCubesat.setText(null);
+                textDescricao.setText(null);
+                choiceBoxAcesso.setValue("Público");
+                
+                MainFX.changedScreen("Cubesat");
+            }
+            
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -195,22 +226,26 @@ public class TelaCadastrarCubesatController implements Initializable {
     
     @FXML
     void apresentaTelaCubesat(ActionEvent event) {
+        setToNull();
         MainFX.changedScreen("Cubesat");
     }
 
     @FXML
     void apresentaTelaEquipe(ActionEvent event) {
+        setToNull();
         MainFX.changedScreen("Equipes");
     }
 
     @FXML
     void apresentaTelaExplorar(ActionEvent event) {
+        setToNull();
         MainFX.changedScreen("Explorar");
     }
     
     
     @FXML
     void apresentarTelaInicial(ActionEvent event) {
+        setToNull();
         MainFX.changedScreen("Tela Inicial");
     }
     
@@ -228,8 +263,9 @@ public class TelaCadastrarCubesatController implements Initializable {
      * @param rb
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb){
        choiceBoxAcesso.getItems().addAll(acesso);
+       choiceBoxAcesso.setValue("Público");
     }
     
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
@@ -12,161 +12,191 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/22" fx:controller="controllers.TelaEditarCubesatController">
-    <stylesheets>
-        <URL value="@/styles/telaeditarcubesat.css" />
-    </stylesheets>
-<children>
-      <ImageView fitHeight="314.0" fitWidth="683.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/fundo.png" />
-         </image>
-      </ImageView>
-      <ButtonBar layoutY="7.0" prefHeight="40.0" prefWidth="542.0">
-        <buttons>
-            <Button defaultButton="true" maxHeight="20.0" maxWidth="27.0" minHeight="20.0" minWidth="24.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="24.0" style="-fx-background-color: 0;">
-               <graphic>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/menu.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button id="botaoHome" fx:id="botaoHome" mnemonicParsing="false" onAction="#apresentarTelaInicial" prefHeight="29.0" prefWidth="125.0" style="-fx-background-color: 0;" stylesheets="@../styles/telacadastrarcubesat.css" text="Cubesat Telemetry&#10;Environment" textFill="WHITE">
-               <font>
-                  <Font size="8.0" />
-               </font>
-               <graphic>
-                  <ImageView id="iconeCute" fx:id="iconeCute" fitHeight="20.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true" styleClass="image">
-                     <image>
-                        <Image url="@../images/iconeHome.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button fx:id="botaoExplorar" mnemonicParsing="false" onAction="#apresentaTelaExplorar" onMouseEntered="#explorarToPourple" onMouseExited="#explorarToWhite" style="-fx-background-color: 0;" text="EXPLORAR" textFill="WHITE">
-               <graphic>
-                  <ImageView fx:id="iconeExplorar" fitHeight="20.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/iconeExplorar.png" />
-                     </image>
-                  </ImageView>
-               </graphic></Button>
-          <Button fx:id="botaoCubesat" mnemonicParsing="false" onAction="#apresentaTelaCubesat" style="-fx-background-color: 0;" text="CUBESATS" textFill="#8c52ff">
-               <graphic>
-                  <ImageView fitHeight="19.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/iconeCubesatLilas.png" />
-                     </image>
-                  </ImageView>
-               </graphic></Button>
-            <Button fx:id="botaoEquipe" mnemonicParsing="false" onAction="#apresentaTelaEquipe" onMouseEntered="#equipesToPourple" onMouseExited="#equipesToWhite" prefHeight="33.0" prefWidth="105.0" style="-fx-background-color: 0;" text="EQUIPES" textFill="WHITE">
-               <graphic>
-                  <ImageView fx:id="iconeEquipes" fitHeight="28.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/iconeEquipes.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-        </buttons>
-      </ButtonBar>
-      <Line endX="371.0" layoutX="166.0" layoutY="47.0" startX="-145.5" stroke="WHITE" />
-      <AnchorPane layoutX="100.0" layoutY="60.0" opacity="0.79" prefHeight="240.0" prefWidth="357.0" style="-fx-background-color: #000000; -fx-background-radius: 10PX;">
+<HBox id="fundoTelaEditarCubesat" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../styles/telaeditarcubesat.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TelaEditarCubesatController">
+   <children>
+      <VBox prefHeight="720.0" prefWidth="1280.0">
          <children>
-            <Label layoutX="61.0" layoutY="3.0" text="CUBESAT" textFill="WHITE">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Label>
-            <Line endX="18.3333740234375" endY="158.0" layoutX="160.0" layoutY="70.0" startX="18.333343505859375" startY="-55.333343505859375" stroke="WHITE" />
-            <Button fx:id="botaoSair" layoutX="322.0" layoutY="-3.0" mnemonicParsing="false" onAction="#apresentaTelaCubesat" onMouseEntered="#sairToPourple" onMouseExited="#sairToWhite" prefHeight="22.0" prefWidth="36.0" style="-fx-background-color: 0;">
-               <graphic>
-                  <ImageView fx:id="iconeSair" fitHeight="25.0" fitWidth="27.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/iconeSair.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button fx:id="botaoImagemCubesat" layoutX="61.0" layoutY="43.0" mnemonicParsing="false" onAction="#adicionarImagem" prefHeight="59.0" prefWidth="61.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 50%;">
-               <graphic>
-                  <ImageView fx:id="perfilCubesat" fitHeight="31.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                     <effect>
-                        <ColorAdjust brightness="-0.06" contrast="1.0" hue="-0.05" saturation="-0.03" />
-                     </effect>
-                     <image>
-                        <Image url="@../images/iconeHome.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Label fx:id="labelIdCubesat" layoutX="17.0" layoutY="21.0" prefHeight="17.0" prefWidth="150.0" style="-fx-alignment: center;" text="id: " textAlignment="CENTER" textFill="WHITE">
-               <font>
-                  <Font size="10.0" />
-               </font></Label>
-            <Button fx:id="botaoEscolherFoto" layoutX="51.0" layoutY="111.0" mnemonicParsing="false" onAction="#adicionarImagem" prefHeight="17.0" prefWidth="82.0" style="-fx-background-color: #73668B; -fx-background-radius: 20PX;" text="ESCOLHER FOTO" textFill="WHITE">
-               <font>
-                  <Font size="8.0" />
-               </font>
-            </Button>
-            <Label layoutX="14.0" layoutY="149.0" text="DESCRIÇÃO" textFill="WHITE">
-               <font>
-                  <Font size="10.0" />
-               </font>
-            </Label>
-            <TextArea fx:id="textDescricao" layoutX="20.0" layoutY="166.0" prefHeight="59.0" prefWidth="141.0" style="-fx-background-color: #2C254F;">
-               <font>
-                  <Font size="10.0" />
-               </font></TextArea>
-            <Label layoutX="195.0" layoutY="15.0" prefHeight="17.0" prefWidth="36.0" text="NOME" textFill="WHITE">
-               <font>
-                  <Font size="10.0" />
-               </font></Label>
-            <TextField id="textNomeCubesat" fx:id="textNomeCubesat" layoutX="193.0" layoutY="32.0" prefHeight="22.0" prefWidth="141.0" style="-fx-background-color: #2C254F; -fx-border-radius: 50px;" stylesheets="@../styles/telacadastrarcubesat.css">
-               <font>
-                  <Font size="10.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="TEXT" />
-               </cursor>
-            </TextField>
-            <Label layoutX="193.0" layoutY="116.0" text="EQUIPE" textFill="WHITE" />
-            <Button layoutX="241.0" layoutY="115.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="11.0" style="-fx-background-radius: 50%;">
-               <font>
-                  <Font size="10.0" />
-               </font>
-               <graphic>
-                  <ImageView fitHeight="13.0" fitWidth="9.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/iconeAdicionar.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Label layoutX="195.0" layoutY="65.0" text="ACESSO" textFill="WHITE">
-               <font>
-                  <Font size="10.0" />
-               </font></Label>
-            <ChoiceBox id="choiceBoxAcesso" fx:id="choiceBoxAcesso" layoutX="193.0" layoutY="80.0" minHeight="-Infinity" prefHeight="22.0" prefWidth="141.0" style="-fx-background-color: #2C254F;" stylesheets="@../styles/telacadastrarcubesat.css" />
-            <Label layoutX="196.0" layoutY="148.0" text="DATA DE CADASTRO" textFill="WHITE" />
-            <Label layoutX="193.0" layoutY="166.0" prefHeight="17.0" prefWidth="141.0" style="-fx-background-color: #2C254F; -fx-alignment: center; -fx-background-radius: 2px;" textFill="WHITE" />
-            <Button fx:id="botaoExcluirCubesat" layoutX="307.0" layoutY="207.0" mnemonicParsing="false" onAction="#excluirCubesat" onMouseEntered="#excluirToPourple" onMouseExited="#excluirToWhite" prefHeight="17.0" prefWidth="53.0" style="-fx-background-color: #73668B; -fx-background-radius: 10px;" text="Excluir" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="10.0" />
-               </font>
-            </Button>
-            <Button fx:id="botaoSalvarCubesat" layoutX="241.0" layoutY="207.0" mnemonicParsing="false" onAction="#salvarCubesat" onMouseEntered="#salvarToPourple" onMouseExited="#salvarToWhite" prefWidth="53.0" style="-fx-background-color: #73668B; -fx-background-radius: 10px;" text="Salvar" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="10.0" />
-               </font>
-            </Button>
+            <ButtonBar prefHeight="168.0" prefWidth="924.0">
+               <buttons>
+                  <Button defaultButton="true" maxHeight="137.0" maxWidth="282.0" minHeight="20.0" minWidth="24.0" mnemonicParsing="false" prefHeight="89.0" prefWidth="290.0" style="-fx-background-color: 0;">
+                     <graphic>
+                        <ImageView fitHeight="49.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/menu.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="botaoHome" mnemonicParsing="false" onAction="#apresentarTelaInicial" prefHeight="99.0" prefWidth="125.0" style="-fx-background-color: 0;" text="Cubesat Telemetry&#10;Environment" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="73.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/iconeHome.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="botaoExplorar" mnemonicParsing="false" onAction="#apresentaTelaExplorar" onMouseEntered="#explorarToPourple" onMouseExited="#explorarToWhite" prefHeight="105.0" style="-fx-background-color: 0;" text="EXPLORAR" textFill="WHITE">
+                     <graphic>
+                        <ImageView fx:id="iconeExplorar" fitHeight="36.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/iconeExplorar.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="botaoCubesat" mnemonicParsing="false" onAction="#apresentaTelaCubesat" style="-fx-background-color: 0;" text="CUBESATS" textFill="#8c52ff">
+                     <graphic>
+                        <ImageView fitHeight="43.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/iconeCubesatLilas.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="botaoEquipe" mnemonicParsing="false" onAction="#apresentaTelaEquipe" onMouseEntered="#equipesToPourple" onMouseExited="#equipesToWhite" prefHeight="33.0" prefWidth="105.0" style="-fx-background-color: 0;" text="EQUIPES" textFill="WHITE">
+                     <graphic>
+                        <ImageView fx:id="iconeEquipes" fitHeight="49.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/iconeEquipes.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Button>
+               </buttons>
+            </ButtonBar>
+            <Line endX="1423.893310546875" endY="-12.041077613830566" startX="181.93380737304688" startY="-4.9701948165893555" stroke="WHITE">
+               <VBox.margin>
+                  <Insets left="20.0" />
+               </VBox.margin>
+            </Line>
+            <AnchorPane opacity="0.79" prefHeight="501.0" prefWidth="983.0" style="-fx-background-color: #000000; -fx-background-radius: 10PX;">
+               <children>
+                  <Label alignment="CENTER" layoutX="87.0" layoutY="31.0" prefHeight="45.0" prefWidth="248.0" text="CUBESAT" textFill="WHITE">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
+                  <Line endX="256.6666259765625" endY="376.0" layoutX="183.0" layoutY="60.0" startX="256.6666259765625" startY="-33.33335876464844" stroke="WHITE" />
+                  <Button fx:id="botaoSair" layoutX="808.0" layoutY="9.0" mnemonicParsing="false" onAction="#apresentaTelaCubesat" onMouseEntered="#sairToPourple" onMouseExited="#sairToWhite" prefHeight="75.0" prefWidth="75.0" style="-fx-background-color: 0;">
+                     <graphic>
+                        <ImageView fx:id="iconeSair" fitHeight="50.0" fitWidth="50.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/iconeSair.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="botaoImagemCubesat" layoutX="145.0" layoutY="100.0" mnemonicParsing="false" onAction="#adicionarImagem" prefHeight="126.0" prefWidth="131.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 50%;">
+                     <graphic>
+                        <ImageView fx:id="perfilCubesat" fitHeight="88.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
+                           <effect>
+                              <ColorAdjust brightness="-0.06" contrast="1.0" hue="-0.05" saturation="-0.03" />
+                           </effect>
+                           <image>
+                              <Image url="@../images/iconeHome.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Label fx:id="labelIdCubesat" layoutX="136.0" layoutY="69.0" prefHeight="17.0" prefWidth="150.0" style="-fx-alignment: center;" text="ID:" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="botaoEscolherFoto" layoutX="113.0" layoutY="263.0" mnemonicParsing="false" onAction="#adicionarImagem" prefHeight="30.0" prefWidth="197.0" style="-fx-background-color: #73668B; -fx-background-radius: 20PX;" text="ESCOLHER FOTO" textFill="WHITE">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Button>
+                  <Label layoutX="60.0" layoutY="305.0" prefHeight="51.0" prefWidth="137.0" text="DESCRIÇÃO" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <TextArea fx:id="textDescricao" layoutX="53.0" layoutY="347.0" prefHeight="107.0" prefWidth="333.0" style="-fx-background-color: #2C254F;">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </TextArea>
+                  <Label layoutX="478.0" layoutY="57.0" prefHeight="41.0" prefWidth="85.0" text="NOME" textFill="WHITE">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+                  <TextField id="textNomeCubesat" fx:id="textNomeCubesat" layoutX="478.0" layoutY="92.0" prefHeight="43.0" prefWidth="339.0" style="-fx-background-color: #2C254F; -fx-border-radius: 50px;" stylesheets="@../styles/telacadastrarcubesat.css">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor>
+                  </TextField>
+                  <Label layoutX="475.0" layoutY="149.0" text="ACESSO" textFill="WHITE">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="578.0" layoutY="340.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="45.0" style="-fx-background-radius: 50%;">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="27.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/iconeAdicionar.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Label layoutX="486.0" layoutY="340.0" text="EQUIPE" textFill="WHITE">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+                  <ChoiceBox id="choiceBoxAcesso" fx:id="choiceBoxAcesso" layoutX="478.0" layoutY="185.0" minHeight="-Infinity" prefHeight="41.0" prefWidth="335.0" style="-fx-background-color: #2C254F;" stylesheets="@../styles/telacadastrarcubesat.css" />
+                  <Label layoutX="485.0" layoutY="244.0" text="DATA DE CADASTRO" textFill="WHITE">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="481.0" layoutY="279.0" prefHeight="38.0" prefWidth="333.0" style="-fx-background-color: #2C254F; -fx-alignment: center; -fx-background-radius: 2px;" textFill="WHITE" />
+                  <Button fx:id="botaoExcluirCubesat" layoutX="771.0" layoutY="415.0" mnemonicParsing="false" onMouseEntered="#excluirToPourple" onMouseExited="#excluirToWhite" prefHeight="33.0" prefWidth="91.0" style="-fx-background-color: #73668B; -fx-background-radius: 10px;" text="Excluir" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="botaoSalvarCubesat" layoutX="641.0" layoutY="416.0" mnemonicParsing="false" onMouseEntered="#salvarToPourple" onMouseExited="#salvarToWhite" prefHeight="33.0" prefWidth="108.0" style="-fx-background-color: #73668B; -fx-background-radius: 10px;" text="Salvar" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="50.0" left="200.0" right="200.0" top="50.0" />
+               </VBox.margin>
+            </AnchorPane>
          </children>
-      </AnchorPane>
-      <Label text="Label" />
+      </VBox>
    </children>
-</AnchorPane>
+</HBox>
