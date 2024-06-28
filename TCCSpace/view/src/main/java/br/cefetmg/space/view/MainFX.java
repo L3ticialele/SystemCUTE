@@ -4,7 +4,9 @@
  */
 package br.cefetmg.space.view;
 
+import br.cefetmg.space.model.dto.UsuarioDTO;
 import java.io.IOException;
+import java.util.ArrayList;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -55,36 +57,63 @@ public class MainFX extends Application {
             Parent loaderTelaLogin = FXMLLoader.load(getClass().getResource("/fxml/TelaLogin.fxml"));
             telaLogin = new Scene(loaderTelaLogin, 1280, 720);
             
-            //primaryStage.initStyle(StageStyle.UNDECORATED);
-            primaryStage.setScene(telaInicial);
+            primaryStage.setScene(telaLogin);
             primaryStage.show();
         }catch(Exception e){
             e.printStackTrace();
         }
     }
     
-    public static void changedScreen(String tela){
+    public static void changedScreen(String tela, Object userData){
         switch(tela){
             case "Cubesat":
                 stage.setScene(telaCubesat);
+                notifyAllListeners("Cubesat", userData);
                 break;
             case "Explorar":
                 stage.setScene(telaExplorar);
+                notifyAllListeners("Explorar", userData);
                 break;
             case "Equipes":
                 stage.setScene(telaEquipes);
+                notifyAllListeners("Equipes", userData);
                 break;
             case "Tela Inicial":
                 stage.setScene(telaInicial);
+                notifyAllListeners("Tela Inicial", userData);
                 break;
             case "Cadastrar Cubesat":
                 stage.setScene(telaCadastrarCubesat);
-                break;
-            case "Login":
-                stage.setScene(telaLogin);
+                notifyAllListeners("Cadastrar Cubesat", userData);
                 break;
             case "Cadastro": 
                 stage.setScene(telaCadastro);
+                notifyAllListeners("Cadastro", userData);
+                break;
+            case "Login":
+                stage.setScene(telaLogin);
+                notifyAllListeners("Login", null);
+                break;
+        }
+        
+    }
+    public static void changedScreen(String tela){
+        notifyAllListeners(tela, null);
+    }
+    
+    private static ArrayList<OnChangeScreen> listeners = new ArrayList<>();
+    
+    public static interface OnChangeScreen{
+        void onScreenChanged(String newScreen, Object userData);
+    }
+    
+    public static void addOnChangeScreenListener(OnChangeScreen newListener){
+        listeners.add(newListener);
+    }
+    
+    private static void notifyAllListeners(String newScreen, Object userData){
+        for(OnChangeScreen l : listeners){
+            l.onScreenChanged(newScreen, userData);
         }
     }
 

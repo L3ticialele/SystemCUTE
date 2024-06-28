@@ -19,6 +19,8 @@ public class TelaCadastroController implements Initializable {
 
     @FXML
     private Button BotaoCadastrar;
+    
+    private UsuarioDTO usuario;
 
     @FXML
     private Button BotaoVoltar;
@@ -39,7 +41,7 @@ public class TelaCadastroController implements Initializable {
     private Label msg;
 
     public void voltar(ActionEvent e){
-        MainFX.changedScreen("Login");
+        MainFX.changedScreen("Login", null);
     }
     
     public void cadastrarBotao(ActionEvent e){
@@ -53,12 +55,12 @@ public class TelaCadastroController implements Initializable {
             String senha = CampoSenha.getText();
             String telefone = CampoTelefone.getText();
             inserir(email, nome, senha, telefone);
-            MainFX.changedScreen("Login");
+            MainFX.changedScreen("Tela Inicial", usuario);
         }
     }
     
         public void inserir(String email, String nome,String senha, String telefone){
-            UsuarioDTO usuario = new UsuarioDTO();
+            usuario = new UsuarioDTO();
             usuario.setEmail(email);
             usuario.setNome(nome);
             usuario.setSenha(senha);

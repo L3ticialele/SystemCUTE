@@ -45,6 +45,8 @@ public class TelaCadastrarCubesatController implements Initializable {
     
    @FXML 
    private Button botaoCadastrarCubesat;
+   
+   private UsuarioDTO user;
     
    @FXML
    private Button botaoCubesat;
@@ -182,9 +184,6 @@ public class TelaCadastrarCubesatController implements Initializable {
             Alert erro = new Alert(Alert.AlertType.ERROR);
             CubeSatDTO cube = new CubeSatDTO();
             ICubeSatDAO cubeDAO = new CubeSatDAO();
-            LocalDateTime dataCadastro = LocalDateTime.now(); 
-            IUsuarioDAO usuario = new UsuarioDAO();
-            UsuarioDTO user = usuario.procurarPorId(1);
             
             if(textNomeCubesat.getText() == null || textNomeCubesat.getText().isEmpty()){
                 alert.setHeaderText("Por favor, informe o nome do CubeSat.");
@@ -197,6 +196,7 @@ public class TelaCadastrarCubesatController implements Initializable {
             }
             
             else{
+                LocalDateTime dataCadastro = LocalDateTime.now(); 
                 cube.setDataCadastro(dataCadastro.toString());
                 cube.setNome(textNomeCubesat.getText());
                 cube.setAcesso(choiceBoxAcesso.getValue());
@@ -215,7 +215,7 @@ public class TelaCadastrarCubesatController implements Initializable {
                 textDescricao.setText(null);
                 choiceBoxAcesso.setValue("Público");
                 
-                MainFX.changedScreen("Cubesat");
+                MainFX.changedScreen("Cubesat", user);
             }
             
         }catch(Exception e){
@@ -227,26 +227,26 @@ public class TelaCadastrarCubesatController implements Initializable {
     @FXML
     void apresentaTelaCubesat(ActionEvent event) {
         setToNull();
-        MainFX.changedScreen("Cubesat");
+        MainFX.changedScreen("Cubesat", user);
     }
 
     @FXML
     void apresentaTelaEquipe(ActionEvent event) {
         setToNull();
-        MainFX.changedScreen("Equipes");
+        MainFX.changedScreen("Equipes", user);
     }
 
     @FXML
     void apresentaTelaExplorar(ActionEvent event) {
         setToNull();
-        MainFX.changedScreen("Explorar");
+        MainFX.changedScreen("Explorar", user);
     }
     
     
     @FXML
     void apresentarTelaInicial(ActionEvent event) {
         setToNull();
-        MainFX.changedScreen("Tela Inicial");
+        MainFX.changedScreen("Tela Inicial", user);
     }
     
     @FXML
@@ -264,6 +264,14 @@ public class TelaCadastrarCubesatController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb){
+       
+       MainFX.addOnChangeScreenListener(new MainFX.OnChangeScreen(){
+           @Override
+           public void onScreenChanged(String newString, Object viewData){
+               user = (UsuarioDTO)viewData;
+           }
+       });
+        
        choiceBoxAcesso.getItems().addAll(acesso);
        choiceBoxAcesso.setValue("Público");
     }
