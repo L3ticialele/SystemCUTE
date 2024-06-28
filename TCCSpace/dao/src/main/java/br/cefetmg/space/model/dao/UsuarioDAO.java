@@ -135,7 +135,7 @@ public class UsuarioDAO implements IUsuarioDAO{
     }
     
      @Override
-    public UsuarioDTO validarlogin(String email, String senha) throws PersistenciaException{
+    public boolean validarlogin(UsuarioDTO usuario) throws PersistenciaException{
         EntityManagerFactory entityManagerFactory = 
         Persistence.createEntityManagerFactory("persistence");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -143,13 +143,13 @@ public class UsuarioDAO implements IUsuarioDAO{
         try{
              entityManager.getTransaction().begin();
              Query query = entityManager.createQuery("SELECT u.email, u.senha FROM UsuarioDTO AS u WHERE u.email = :email AND u.senha = :senha");
-             query.setParameter("email", email);
-             query.setParameter("senha", senha);
+             query.setParameter("email", usuario.getEmail());
+             query.setParameter("senha", usuario.getSenha());
              List<UsuarioDTO> usuarioPersistido = query.getResultList();
             if(!usuarioPersistido.isEmpty()){
-                return usuarioPersistido.get(0);
+                return true;
             }else{
-                return null;
+                return false;
             }
         }catch(Exception ex){
             entityManager.getTransaction().rollback();
@@ -190,4 +190,5 @@ public class UsuarioDAO implements IUsuarioDAO{
             entityManager.close();
         }
     }
+
 }
