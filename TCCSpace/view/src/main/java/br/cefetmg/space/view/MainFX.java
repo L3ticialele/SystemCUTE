@@ -35,25 +35,25 @@ public class MainFX extends Application {
             primaryStage.setTitle("CUTE");
             
             Parent  loaderTelaCubesat = FXMLLoader.load(getClass().getResource("/fxml/TelaCubesat.fxml"));
-            telaCubesat = new Scene(loaderTelaCubesat, 600, 400);
+            telaCubesat = new Scene(loaderTelaCubesat, 1280, 720);
             
             Parent loaderTelaExplorar = FXMLLoader.load(getClass().getResource("/fxml/TelaExplorar.fxml"));
-            telaExplorar = new Scene(loaderTelaExplorar, 600, 400);
+            telaExplorar = new Scene(loaderTelaExplorar, 1280, 720);
             
             Parent loaderTelaEquipes = FXMLLoader.load(getClass().getResource("/fxml/TelaEquipes.fxml"));
-            telaEquipes = new Scene(loaderTelaEquipes, 600, 400);
+            telaEquipes = new Scene(loaderTelaEquipes, 1280, 720);
              
             Parent loaderTelaInicial = FXMLLoader.load(getClass().getResource("/fxml/TelaInicial.fxml"));
-            telaInicial = new Scene(loaderTelaInicial, 600, 400);
+            telaInicial = new Scene(loaderTelaInicial, 1280, 720);
             
             Parent loaderTelaCadastrarCubesat = FXMLLoader.load(getClass().getResource("/fxml/TelaCadastrarCubesat.fxml"));
-            telaCadastrarCubesat = new Scene(loaderTelaCadastrarCubesat, 600, 400);
+            telaCadastrarCubesat = new Scene(loaderTelaCadastrarCubesat, 1280, 720);
             
             Parent loaderTelaCadastro = FXMLLoader.load(getClass().getResource("/fxml/TelaCadastro.fxml"));
-            telaCadastro = new Scene(loaderTelaCadastro, 1920, 1080);
+            telaCadastro = new Scene(loaderTelaCadastro, 1280, 720);
             
             Parent loaderTelaLogin = FXMLLoader.load(getClass().getResource("/fxml/TelaLogin.fxml"));
-            telaLogin = new Scene(loaderTelaLogin, 1920, 1080);
+            telaLogin = new Scene(loaderTelaLogin, 1280, 720);
             
             //primaryStage.initStyle(StageStyle.UNDECORATED);
             primaryStage.setScene(telaInicial);

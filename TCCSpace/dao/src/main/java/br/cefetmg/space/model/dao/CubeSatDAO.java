@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 public class CubeSatDAO implements ICubeSatDAO{
     
     @Override
-    public void inserir(CubeSatDTO cube) throws PersistenciaException{
+    public boolean inserir(CubeSatDTO cube) throws PersistenciaException{
         EntityManagerFactory entityManagerFactory = 
         Persistence.createEntityManagerFactory("persistence");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -27,9 +27,8 @@ public class CubeSatDAO implements ICubeSatDAO{
             entityManager.persist(cube);
             entityManager.getTransaction().commit();
             System.out.println("CubeSat cadastrado!");
-            JOptionPane.showMessageDialog(null, "CubeSat cadastrado!");
+            return true;
         }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "ERROR");
             entityManager.getTransaction().rollback();
             throw ex;
         }finally{
