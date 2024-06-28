@@ -53,7 +53,7 @@ public class TelaCadastroController implements Initializable {
             String senha = CampoSenha.getText();
             String telefone = CampoTelefone.getText();
             inserir(email, nome, senha, telefone);
-            MainFX.changedScreen("Login");
+            MainFX.changedScreen("Tela Inicial");
         }
     }
     

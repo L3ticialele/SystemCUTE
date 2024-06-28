@@ -28,8 +28,6 @@ public class UsuarioDTO implements Serializable{
     private int id;
     @Column(name = "senha")
     private String senha;
-    @Column(name = "username")
-    private String username;
     @Column(name = "email")
     private String email;
     @Column(name = "administrador")
@@ -49,7 +47,6 @@ public class UsuarioDTO implements Serializable{
     
     public UsuarioDTO(){
         senha = null;
-        username = null;
         email = null;
         telefone = null;
         administrador = false;
@@ -130,13 +127,6 @@ public class UsuarioDTO implements Serializable{
                 setCubeSat(cubeSat.get(i));
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
    
     public int getId() {
         return id;
@@ -162,11 +152,4 @@ public class UsuarioDTO implements Serializable{
         this.senha = senha;
     }
 
-    public String getUserName() {
-        return username;
-    }
-
-    public void setUserName(String usuario) {
-        username = usuario;
-    }
 }

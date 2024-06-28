@@ -42,8 +42,8 @@ public class TelaLoginController implements Initializable {
         if(CampoEmail.getText().isBlank() == true || CampoSenha.getText().isBlank() == true)
             msgErro.setText("Preencha os campos vazios");
         
-      //  else if(test(email, senha)) 
-          //  MainFX.changedScreen("Tela Inicial");
+        else if(test(email, senha)) 
+            MainFX.changedScreen("Tela Inicial");
         
         else
              msgErro.setText("E-mail ou senha incorreto!");
@@ -53,10 +53,10 @@ public class TelaLoginController implements Initializable {
         MainFX.changedScreen("Cadastro");
     }
     
-  //  public boolean test(String email, String senha) throws PersistenciaException{
-      //  UsuarioDAO user = new UsuarioDAO();
-      //  return user.validarlogin(email, senha) != null;
-  //  }
+    public boolean test(String email, String senha) throws PersistenciaException{
+       UsuarioDAO user = new UsuarioDAO();
+        return user.validarlogin(email, senha) != null;
+    }
     
     
     @Override

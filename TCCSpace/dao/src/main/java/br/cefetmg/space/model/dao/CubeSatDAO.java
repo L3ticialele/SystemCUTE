@@ -53,7 +53,7 @@ public class CubeSatDAO implements ICubeSatDAO{
                         + " Status: " + cube.getStatus()
                 );
                 if(cube.getEquipe() == null)
-                    System.out.println(" Criador: " + cube.getUsuario().getUserName());
+                    System.out.println(" Criador: " + cube.getUsuario().getNome());
                 else
                     System.out.println(" Equipe: " + cube.getEquipe());
                 }

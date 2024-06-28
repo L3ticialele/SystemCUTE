@@ -171,7 +171,6 @@ public class UsuarioDAO implements IUsuarioDAO{
             
             if(usuarioPersistido != null){
                 usuarioPersistido.setEmail(usuario.getEmail());
-                usuarioPersistido.setUserName(usuario.getUserName());
                 usuarioPersistido.setNome(usuario.getNome());
                 usuarioPersistido.setSenha(usuario.getSenha());
                 usuarioPersistido.setAdministrador(usuario.isAdministrador());
