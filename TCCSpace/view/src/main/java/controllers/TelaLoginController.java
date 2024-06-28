@@ -1,4 +1,5 @@
 package controllers;
+
 import br.cefetmg.space.model.dto.UsuarioDTO;
 import br.cefetmg.space.model.idao.IUsuarioDAO;
 import br.cefetmg.space.model.dto.UsuarioDTO;
@@ -34,31 +35,35 @@ public class TelaLoginController implements Initializable {
 
     @FXML
     private Label msgErro;
-    
-   
+
     public void loginButaoErro(ActionEvent e) throws PersistenciaException {
         String email = CampoEmail.getText();
         String senha = CampoSenha.getText();
-        if(CampoEmail.getText().isBlank() == true || CampoSenha.getText().isBlank() == true)
+        if (CampoEmail.getText().isBlank() == true || CampoSenha.getText().isBlank() == true) {
             msgErro.setText("Preencha os campos vazios");
-        
-        else if(test(email, senha)) 
+        } else if (test(email, senha)) {
             MainFX.changedScreen("Tela Inicial");
-        
-        else
-             msgErro.setText("E-mail ou senha incorreto!");
+        } else {
+            msgErro.setText("E-mail ou senha incorreto!");
         }
+    }
 
-    public void cadastroButao(ActionEvent e){
+    public void cadastroButao(ActionEvent e) {
         MainFX.changedScreen("Cadastro");
     }
-    
-    public boolean test(String email, String senha) throws PersistenciaException{
-       UsuarioDAO user = new UsuarioDAO();
-        return user.validarlogin(email, senha) != null;
+
+    public boolean test(String email, String senha) throws PersistenciaException {
+        UsuarioDTO usuario = new UsuarioDTO();
+        usuario.setEmail(email);
+        usuario.setSenha(senha);
+        usuario.setNome(senha);
+        usuario.setTelefone(senha);
+
+        UsuarioDAO user = new UsuarioDAO();
+
+        return user.validarlogin(usuario);
     }
-    
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
