@@ -1,0 +1,17 @@
+
+
+.mainFxmlClass {
+
+}
+
+#fundoCadastro{
+    -fx-background-image: url("../images/fundoCadastro.png");
+    -fx-background-position: center;
+    -fx-background-size: cover;
+}
+
+#BotaoVoltar{
+    -fx-background-image: url("../images/iconeVoltar.png");
+    -fx-background-position: center;
+    -fx-background-size: cover;
+}
