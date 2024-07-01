@@ -89,7 +89,10 @@
                </VBox.margin></Line>
             <AnchorPane minWidth="-Infinity" opacity="0.79" prefHeight="472.0" prefWidth="1080.0" style="-fx-background-color: #000000; -fx-background-radius: 10px;">
                <children>
-                  <AnchorPane layoutX="432.0" layoutY="50.0" prefHeight="426.0" prefWidth="640.0" style="-fx-background-color: fffffff;" />
+                  <AnchorPane layoutX="426.0" layoutY="34.0" prefHeight="426.0" prefWidth="640.0" style="-fx-background-color: fffffff;">
+                     <children>
+                        <Button fx:id="botaoEditarCubesat" layoutX="14.0" layoutY="2.0" mnemonicParsing="false" onAction="#apresentaTelaEditarCubesat" text="Edit" />
+                     </children></AnchorPane>
                   <AnchorPane fx:id="panelListaCubesat" layoutX="21.0" layoutY="125.0" prefHeight="377.0" prefWidth="351.0" AnchorPane.bottomAnchor="26.333333333333314" AnchorPane.topAnchor="125.0">
                      <children>
                         <ScrollBar fx:id="scroll" layoutX="346.0" layoutY="6.0" orientation="VERTICAL" prefHeight="369.0" prefWidth="26.0" style="-fx-background-color: 0;" />

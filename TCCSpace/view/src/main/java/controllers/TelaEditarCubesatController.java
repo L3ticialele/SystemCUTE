@@ -4,17 +4,22 @@
  */
 package controllers;
 
+import br.cefetmg.space.model.dao.CubeSatDAO;
+import br.cefetmg.space.model.dto.CubeSatDTO;
 import br.cefetmg.space.model.dto.UsuarioDTO;
+import br.cefetmg.space.model.idao.ICubeSatDAO;
 import br.cefetmg.space.model.idao.exception.PersistenciaException;
 import br.cefetmg.space.view.MainFX;
 import java.awt.Desktop;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
@@ -34,7 +39,7 @@ public class TelaEditarCubesatController implements Initializable {
     
    private BufferedImage imagem;
  
-   private UsuarioDTO usuario;
+   private CubeSatDTO cubesat;
     
    @FXML
    private Button botaoCubesat;
@@ -87,23 +92,70 @@ public class TelaEditarCubesatController implements Initializable {
     private Button botaoExcluirCubesat;
     
     @FXML
+    void excluirCubesat(ActionEvent event) throws PersistenciaException{
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setHeaderText("Tem certeza que deseja excluir o cubesat ?"); //+ cubesat.getNome() + "?");
+        alert.show();
+    }
+    
+    @FXML
+    void salvarAlteracoesCubesat(ActionEvent event) throws PersistenciaException{
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            Alert confirmacao = new Alert(Alert.AlertType.CONFIRMATION);
+            Alert erro = new Alert(Alert.AlertType.ERROR);
+            CubeSatDTO cube = new CubeSatDTO();
+            ICubeSatDAO cubeDAO = new CubeSatDAO();
+        
+        if(textNomeCubesat.getText() == null || textNomeCubesat.getText().isEmpty()){
+                alert.setHeaderText("Por favor, informe o nome do CubeSat.");
+                alert.show();
+            }
+        else{
+                LocalDateTime dataCadastro = LocalDateTime.now(); 
+                cube.setDataCadastro(dataCadastro.toString());
+                cube.setNome(textNomeCubesat.getText());
+                cube.setAcesso(choiceBoxAcesso.getValue());
+                cube.setPessoa(cubesat.getUsuario());
+                cube.setDescricao(textDescricao.getText());
+                
+                if(cubeDAO.atualizar(cube)){
+                    confirmacao.setHeaderText("Cubesat atualizado!");
+                    confirmacao.show();
+                }else{
+                    erro.setHeaderText("Houve um erro ao atualizar o cubesat.");
+                    erro.show();
+                }
+                
+                choiceBoxAcesso.setValue(cubesat.getAcesso());
+                textDescricao.setText(cubesat.getDescricao());
+                textNomeCubesat.setText(cubesat.getNome());
+                
+                MainFX.changedScreen("Cubesat", cubesat.getUsuario());
+        }
+    }
+    
+    @FXML
     void salvarToPourple(MouseEvent event){
-        botaoExplorar.setStyle("-fx-text-fill: #8C52FF;");
+        botaoSalvarCubesat.setStyle("-fx-text-fill: white;"
+                                     + "-fx-background-color:  #8C52FF;");
     }
     
     @FXML
     void salvarToWhite(MouseEvent event){
-        botaoExplorar.setStyle("-fx-text-fill: white;");
+        botaoSalvarCubesat.setStyle("-fx-text-fill: white;"
+                                     + "-fx-background-color:  #73668B;");
     }
     
     @FXML
     void excluirToPourple(MouseEvent event){
-        botaoExcluirCubesat.setStyle("-fx-text-fill: #8C52FF;");
+        botaoExcluirCubesat.setStyle("-fx-text-fill: white;"
+                                    + "-fx-background-color:  #8C52FF;");
     }
     
     @FXML
     void excluirToWhite(MouseEvent event){
-        botaoExcluirCubesat.setStyle("-fx-text-fill: white;");
+        botaoExcluirCubesat.setStyle("-fx-text-fill: white;"
+                                     + "-fx-background-color:  #73668B;");
     }
     
     @FXML
@@ -170,23 +222,23 @@ public class TelaEditarCubesatController implements Initializable {
     
     @FXML
     void apresentaTelaCubesat(ActionEvent event) {
-        MainFX.changedScreen("Cubesat", usuario);
+        MainFX.changedScreen("Cubesat", cubesat.getUsuario());
     }
 
     @FXML
     void apresentaTelaEquipe(ActionEvent event) {
-        MainFX.changedScreen("Equipes", usuario);
+        MainFX.changedScreen("Equipes", cubesat.getUsuario());
     }
 
     @FXML
     void apresentaTelaExplorar(ActionEvent event) {
-        MainFX.changedScreen("Explorar", usuario);
+        MainFX.changedScreen("Explorar", cubesat.getUsuario());
     }
     
     
     @FXML
     void apresentarTelaInicial(ActionEvent event) {
-        MainFX.changedScreen("Tela Inicial", usuario);
+        MainFX.changedScreen("Tela Inicial", cubesat.getUsuario());
     }
     
     /**
@@ -196,12 +248,11 @@ public class TelaEditarCubesatController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       choiceBoxAcesso.getItems().addAll(acesso);
+       
        
        MainFX.addOnChangeScreenListener(new MainFX.OnChangeScreen(){
            @Override
            public void onScreenChanged(String newString, Object viewData){
-               usuario = (UsuarioDTO)viewData;
            }
        });
        

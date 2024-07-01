@@ -11,33 +11,33 @@
 
 <AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1820.0" styleClass="mainFxmlClass" stylesheets="@../styles/telalogin.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TelaLoginController">
    <children>
-      <ImageView fitHeight="720.0" fitWidth="1820.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="720.0" fitWidth="1920.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/fundoLogin.png" />
          </image>
       </ImageView>
-      <Label layoutX="459.0" layoutY="504.0" prefWidth="214.0" text="Não possui conta?" textFill="#e1d6d6">
+      <Label layoutX="477.0" layoutY="500.0" prefWidth="214.0" text="Não possui conta?" textFill="#e1d6d6">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Button fx:id="BotaoSenha" layoutX="490.0" layoutY="569.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="341.0" style="-fx-background-color: 0;" textFill="#5984f1">
+      <Button fx:id="BotaoSenha" layoutX="666.0" layoutY="546.0" mnemonicParsing="false" style="-fx-background-color: 0;" textFill="#5984f1">
          <font>
             <Font size="19.0" />
          </font>
       </Button>
-      <Button fx:id="BotaoCadastro" layoutX="624.0" layoutY="496.0" mnemonicParsing="false" onAction="#cadastroButao" prefHeight="45.0" prefWidth="133.0" style="-fx-background-color: 0;" text="Cadastrar-se" textFill="#5984f1">
+      <Button fx:id="BotaoCadastro" layoutX="640.0" layoutY="492.0" mnemonicParsing="false" onAction="#cadastroButao" prefHeight="45.0" prefWidth="133.0" style="-fx-background-color: 0;" text="Cadastrar-se" textFill="#5984f1">
          <font>
             <Font size="19.0" />
          </font>
       </Button>
-      <Button fx:id="BotaoLogin" layoutX="397.0" layoutY="416.0" mnemonicParsing="false" onAction="#loginButaoErro" opacity="0.0" prefHeight="88.0" prefWidth="527.0" />
-      <TextField fx:id="CampoEmail" layoutX="509.0" layoutY="227.0" prefHeight="16.0" prefWidth="261.0" promptText="E-MAIL" style="-fx-background-color: #DFDCE1; -fx-border-color: 0;">
+      <Button fx:id="BotaoLogin" layoutX="425.0" layoutY="436.0" mnemonicParsing="false" onAction="#loginButaoErro" opacity="0.0" prefHeight="63.0" prefWidth="423.0" />
+      <TextField fx:id="CampoEmail" layoutX="501.0" layoutY="227.0" prefHeight="30.0" prefWidth="331.0" promptText="E-MAIL" style="-fx-background-color: #DFDCE1; -fx-border-color: 0;">
          <font>
             <Font size="20.0" />
          </font>
       </TextField>
-      <PasswordField fx:id="CampoSenha" layoutX="444.0" layoutY="316.0" prefHeight="17.0" prefWidth="341.0" promptText="SENHA" style="-fx-background-color: #DFDCE1; -fx-border-color: 0;">
+      <PasswordField fx:id="CampoSenha" layoutX="445.0" layoutY="316.0" prefHeight="19.0" prefWidth="331.0" promptText="SENHA" style="-fx-background-color: #DFDCE1; -fx-border-color: 0;">
          <font>
             <Font size="20.0" />
          </font>

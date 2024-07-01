@@ -55,11 +55,8 @@ public class TelaLoginController implements Initializable {
     }
 
     public boolean test(String email, String senha) throws PersistenciaException {
-        usuario = new UsuarioDTO();
-        usuario.setEmail(email);
-        usuario.setSenha(senha);
-        usuario.setNome(senha);
-        usuario.setTelefone(senha);
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        usuario = usuarioDAO.procurarPorEmail(email);
 
         UsuarioDAO user = new UsuarioDAO();
 

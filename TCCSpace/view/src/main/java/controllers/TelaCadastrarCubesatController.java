@@ -185,6 +185,8 @@ public class TelaCadastrarCubesatController implements Initializable {
             CubeSatDTO cube = new CubeSatDTO();
             ICubeSatDAO cubeDAO = new CubeSatDAO();
             
+            System.out.println(user.getNome());
+            
             if(textNomeCubesat.getText() == null || textNomeCubesat.getText().isEmpty()){
                 alert.setHeaderText("Por favor, informe o nome do CubeSat.");
                 alert.show();

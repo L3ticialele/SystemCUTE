@@ -75,6 +75,17 @@ public class TelaCubesatController implements Initializable {
     @FXML
     private ImageView iconeEquipes;
     
+    @FXML 
+    private Button botaoEditarCubesat;
+    
+    
+    
+    
+    @FXML
+    void apresentaTelaEditarCubesat(ActionEvent event){
+        MainFX.changedScreen("Editar Cubesat", usuario);
+    }
+    
     @FXML
     void explorarToPourple(MouseEvent event){
         botaoExplorar.setStyle("-fx-text-fill: #8C52FF;"
@@ -150,7 +161,6 @@ public class TelaCubesatController implements Initializable {
         if(usuario != null){
             List<CubeSatDTO> cubes = usuario.getCubeSat();
             if(!cubes.isEmpty()){
-
                 for(int i = 0, j=0; i<cubes.size(); i++, j+=49){
 
                     Button botao = new Button();
