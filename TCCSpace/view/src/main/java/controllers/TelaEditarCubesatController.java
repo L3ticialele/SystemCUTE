@@ -36,6 +36,8 @@ import javafx.stage.Stage;
  * @author letic
  */
 public class TelaEditarCubesatController implements Initializable {
+   
+   private UsuarioDTO usuario;
     
    private BufferedImage imagem;
  
@@ -222,23 +224,23 @@ public class TelaEditarCubesatController implements Initializable {
     
     @FXML
     void apresentaTelaCubesat(ActionEvent event) {
-        MainFX.changedScreen("Cubesat", cubesat.getUsuario());
+        MainFX.changedScreen("Cubesat", usuario);
     }
 
     @FXML
     void apresentaTelaEquipe(ActionEvent event) {
-        MainFX.changedScreen("Equipes", cubesat.getUsuario());
+        MainFX.changedScreen("Equipes", usuario);
     }
 
     @FXML
     void apresentaTelaExplorar(ActionEvent event) {
-        MainFX.changedScreen("Explorar", cubesat.getUsuario());
+        MainFX.changedScreen("Explorar", usuario);
     }
     
     
     @FXML
     void apresentarTelaInicial(ActionEvent event) {
-        MainFX.changedScreen("Tela Inicial", cubesat.getUsuario());
+        MainFX.changedScreen("Tela Inicial", usuario);
     }
     
     /**
@@ -253,6 +255,7 @@ public class TelaEditarCubesatController implements Initializable {
        MainFX.addOnChangeScreenListener(new MainFX.OnChangeScreen(){
            @Override
            public void onScreenChanged(String newString, Object viewData){
+               usuario = (UsuarioDTO)viewData;
            }
        });
        
