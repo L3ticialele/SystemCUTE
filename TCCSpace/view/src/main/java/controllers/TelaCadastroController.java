@@ -1,4 +1,5 @@
 package controllers;
+
 import br.cefetmg.space.model.idao.IUsuarioDAO;
 import br.cefetmg.space.model.dto.UsuarioDTO;
 import br.cefetmg.space.model.dao.UsuarioDAO;
@@ -19,8 +20,6 @@ public class TelaCadastroController implements Initializable {
 
     @FXML
     private Button BotaoCadastrar;
-    
-    private UsuarioDTO usuario;
 
     @FXML
     private Button BotaoVoltar;
@@ -36,20 +35,22 @@ public class TelaCadastroController implements Initializable {
 
     @FXML
     private TextField CampoTelefone;
-    
+
     @FXML
     private Label msg;
-
-    public void voltar(ActionEvent e){
-        MainFX.changedScreen("Login", null);
-    }
     
-    public void cadastrarBotao(ActionEvent e){
-        if(CampoEmail.getText().isBlank() == true || CampoSenha.getText().isBlank() == true || CampoNome.getText().isBlank() == true || CampoTelefone.getText().isBlank() == true)
+    @FXML
+    private UsuarioDTO usuario;
+    
+
+    public void voltarPaginaLogin(ActionEvent e) {
+        MainFX.changedScreen("Login");
+    }
+
+    public void BotaoCadastrar(ActionEvent e) {
+        if (CampoEmail.getText().isBlank() == true || CampoSenha.getText().isBlank() == true || CampoNome.getText().isBlank() == true || CampoTelefone.getText().isBlank() == true) {
             msg.setText("Preencha os campos vazios");
-        
-        else
-        {
+        } else {
             String email = CampoEmail.getText();
             String nome = CampoNome.getText();
             String senha = CampoSenha.getText();
@@ -58,26 +59,25 @@ public class TelaCadastroController implements Initializable {
             MainFX.changedScreen("Tela Inicial", usuario);
         }
     }
-    
-        public void inserir(String email, String nome,String senha, String telefone){
-            usuario = new UsuarioDTO();
-            usuario.setEmail(email);
-            usuario.setNome(nome);
-            usuario.setSenha(senha);
-            usuario.setTelefone(telefone);
-            
-            UsuarioDAO user = new UsuarioDAO();
+
+    public void inserir(String email, String nome, String senha, String telefone) {
+        usuario = new UsuarioDTO();
+        usuario.setEmail(email);
+        usuario.setNome(nome);
+        usuario.setSenha(senha);
+        usuario.setTelefone(telefone);
+
+        UsuarioDAO user = new UsuarioDAO();
         try {
             user.inserir(usuario);
         } catch (PersistenciaException ex) {
             Logger.getLogger(TelaCadastroController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        }
-        
-        
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-    
+
+    }
+
 }

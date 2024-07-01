@@ -28,6 +28,7 @@ public class MainFX extends Application {
     private static Scene telaCadastrarCubesat;
     private static Scene telaCadastro;
     private static Scene telaLogin;
+    private static Scene telaEditarCubesat;
     
     @Override
     public void start(Stage primaryStage) throws IOException {
@@ -35,6 +36,9 @@ public class MainFX extends Application {
             stage = primaryStage;
                     
             primaryStage.setTitle("CUTE");
+            
+            Parent loaderTelaEditarCubesat = FXMLLoader.load(getClass().getResource("/fxml/TelaEditarCubesat.fxml"));
+            telaEditarCubesat = new Scene(loaderTelaEditarCubesat, 1280, 720);
             
             Parent  loaderTelaCubesat = FXMLLoader.load(getClass().getResource("/fxml/TelaCubesat.fxml"));
             telaCubesat = new Scene(loaderTelaCubesat, 1280, 720);
@@ -92,8 +96,11 @@ public class MainFX extends Application {
                 break;
             case "Login":
                 stage.setScene(telaLogin);
-                notifyAllListeners("Login", null);
+                notifyAllListeners("Login", userData);
                 break;
+            case "Editar Cubesat":
+                stage.setScene(telaEditarCubesat);
+                notifyAllListeners("Editar Cubesat", userData);
         }
         
     }
