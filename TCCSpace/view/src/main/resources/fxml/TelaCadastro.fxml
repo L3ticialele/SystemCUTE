@@ -27,14 +27,6 @@
                         <Font size="30.0" />
                      </font>
                   </Button>
-                  <Button fx:id="BotaoVoltar" layoutX="870.0" layoutY="188.0" mnemonicParsing="false" onAction="#voltarPaginaLogin" style="-fx-background-color: 0;" AnchorPane.leftAnchor="870.0" AnchorPane.rightAnchor="363.0">
-                     <graphic>
-                        <ImageView fitHeight="48.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/iconeSair.png" />
-                           </image>
-                        </ImageView>
-                     </graphic></Button>
                   <TextField fx:id="CampoEmail" layoutX="422.0" layoutY="303.0" prefHeight="50.0" prefWidth="425.0" promptText="E-MAIL" style="-fx-background-color: #DFDCE1; -fx-background-radius: 50px;">
                      <font>
                         <Font size="17.0" />
@@ -79,6 +71,15 @@
                         <Image url="@../images/IconeEmail.png" />
                      </image>
                   </ImageView>
+                  <Button fx:id="BotaoVoltar" layoutX="871.0" layoutY="197.0" mnemonicParsing="false" onAction="#voltarPaginaLogin" style="-fx-background-color: 0;">
+                     <graphic>
+                        <ImageView fitHeight="43.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/iconeSair.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
                </children>
             </AnchorPane>
          </children>
