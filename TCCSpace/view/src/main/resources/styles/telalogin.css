@@ -1,0 +1,9 @@
+.mainFxmlClass {
+   
+}
+#BotaoCadastro:hover{
+    -fx-underline: true;
+}
+#BotaoSenha:hover{
+    -fx-underline: true;
+}
