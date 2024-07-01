@@ -180,7 +180,7 @@
                         <Font size="25.0" />
                      </font>
                   </Label>
-                  <Label layoutX="481.0" layoutY="279.0" prefHeight="38.0" prefWidth="333.0" style="-fx-background-color: #2C254F; -fx-alignment: center; -fx-background-radius: 2px;" textFill="WHITE" />
+                  <Label fx:id="labelDataCadastro" layoutX="481.0" layoutY="279.0" prefHeight="38.0" prefWidth="333.0" style="-fx-background-color: #2C254F; -fx-alignment: center; -fx-background-radius: 2px;" textFill="WHITE" />
                   <Button fx:id="botaoExcluirCubesat" layoutX="771.0" layoutY="415.0" mnemonicParsing="false" onAction="#excluirCubesat" onMouseEntered="#excluirToPourple" onMouseExited="#excluirToWhite" prefHeight="33.0" prefWidth="91.0" style="-fx-background-color: #73668B; -fx-background-radius: 10px;" text="Excluir" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="20.0" />

@@ -22,6 +22,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -36,8 +37,6 @@ import javafx.stage.Stage;
  * @author letic
  */
 public class TelaEditarCubesatController implements Initializable {
-   
-   private UsuarioDTO usuario;
     
    private BufferedImage imagem;
  
@@ -62,6 +61,9 @@ public class TelaEditarCubesatController implements Initializable {
     private ChoiceBox<String> choiceBoxAcesso;
     
     @FXML
+    private Label labelDataCadastro;
+    
+    @FXML
     private TextField textNomeCubesat;
     
     private String[] acesso = {"Público", "Privado"};
@@ -79,6 +81,9 @@ public class TelaEditarCubesatController implements Initializable {
     private Button botaoImagemCubesat;
     
     @FXML
+    private Label labelIdCubesat;
+    
+    @FXML
     private ImageView perfilCubesat;
     
     private final FileChooser fileChooser = new FileChooser();
@@ -92,6 +97,26 @@ public class TelaEditarCubesatController implements Initializable {
     
     @FXML 
     private Button botaoExcluirCubesat;
+    
+    private Stage dialogStage;
+    private boolean okClicked = false;
+    
+    public void setDialogStage(Stage dialogStage){
+        this.dialogStage = dialogStage;
+    }
+    
+    public void textsFields(){
+        textNomeCubesat.setText(cubesat.getNome());
+        textDescricao.setText(cubesat.getDescricao());
+        choiceBoxAcesso.setValue(cubesat.getAcesso());
+        labelDataCadastro.setText(cubesat.getDataCadastro());
+        labelIdCubesat.setText("ID: " + cubesat.getId());
+    }
+    
+    public boolean isOkClicked(){
+        return this.okClicked;
+    }
+    
     
     @FXML
     void excluirCubesat(ActionEvent event) throws PersistenciaException{
@@ -224,23 +249,23 @@ public class TelaEditarCubesatController implements Initializable {
     
     @FXML
     void apresentaTelaCubesat(ActionEvent event) {
-        MainFX.changedScreen("Cubesat", usuario);
+        MainFX.changedScreen("Cubesat", cubesat.getUsuario());
     }
 
     @FXML
     void apresentaTelaEquipe(ActionEvent event) {
-        MainFX.changedScreen("Equipes", usuario);
+        MainFX.changedScreen("Equipes", cubesat.getUsuario());
     }
 
     @FXML
     void apresentaTelaExplorar(ActionEvent event) {
-        MainFX.changedScreen("Explorar", usuario);
+        MainFX.changedScreen("Explorar", cubesat.getUsuario());
     }
     
     
     @FXML
     void apresentarTelaInicial(ActionEvent event) {
-        MainFX.changedScreen("Tela Inicial", usuario);
+        MainFX.changedScreen("Tela Inicial", cubesat.getUsuario());
     }
     
     /**
@@ -255,7 +280,6 @@ public class TelaEditarCubesatController implements Initializable {
        MainFX.addOnChangeScreenListener(new MainFX.OnChangeScreen(){
            @Override
            public void onScreenChanged(String newString, Object viewData){
-               usuario = (UsuarioDTO)viewData;
            }
        });
        
