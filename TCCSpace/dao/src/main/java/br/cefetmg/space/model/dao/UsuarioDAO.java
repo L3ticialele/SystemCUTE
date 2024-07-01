@@ -191,4 +191,14 @@ public class UsuarioDAO implements IUsuarioDAO{
         }
     }
 
+    @Override
+    public UsuarioDTO procurarPorId(int id) throws PersistenciaException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public UsuarioDTO validarlogin(String email, String senha) throws PersistenciaException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 }
