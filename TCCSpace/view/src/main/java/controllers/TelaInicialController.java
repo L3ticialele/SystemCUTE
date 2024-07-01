@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package controllers;
 
 import br.cefetmg.space.model.dto.UsuarioDTO;
@@ -17,11 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
-/**
- * FXML Controller class
- *
- * @author letic
- */
+
 public class TelaInicialController implements Initializable {
     
     @FXML
@@ -37,7 +29,7 @@ public class TelaInicialController implements Initializable {
     private Button botaoHome;
 
     @FXML
-    private Label label;
+    private  Label Nome;;
     
     private UsuarioDTO usuario;
     
@@ -49,6 +41,8 @@ public class TelaInicialController implements Initializable {
     
     @FXML
     private ImageView iconeExplorar;
+
+    
     
     @FXML
     void explorarToPourple(MouseEvent event){
@@ -113,6 +107,7 @@ public class TelaInicialController implements Initializable {
         MainFX.changedScreen("Tela Inicial", usuario);
     }
     
+    
     /**
      * Initializes the controller class.
      * @param url
@@ -125,6 +120,7 @@ public class TelaInicialController implements Initializable {
            @Override
            public void onScreenChanged(String newString, Object viewData){
                usuario = (UsuarioDTO)viewData;
+               Nome.setText(usuario.getNome());
            }
        });
     }       

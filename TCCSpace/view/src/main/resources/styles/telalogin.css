@@ -7,3 +7,8 @@
 #BotaoSenha:hover{
     -fx-underline: true;
 }
+#fundo{
+    -fx-background-image: url("../images/fundoL.png");
+    -fx-background-position: center;
+    -fx-background-size: cover;
+}
