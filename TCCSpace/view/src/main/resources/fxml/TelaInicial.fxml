@@ -16,7 +16,7 @@
    <children>
       <VBox prefHeight="720.0" prefWidth="1280.0">
          <children>
-            <AnchorPane prefHeight="720.0" prefWidth="1820.0">
+            <AnchorPane fx:id="painel" prefHeight="720.0" prefWidth="1820.0">
                <children>
                   <ButtonBar prefHeight="94.0" prefWidth="1280.0">
                      <buttons>
@@ -88,7 +88,7 @@
                         <Font size="47.0" />
                      </font>
                   </Label>
-                  <Label fx:id="Nome" layoutX="196.0" layoutY="111.0" prefHeight="69.0" prefWidth="164.0" textFill="#e8e6e6">
+                  <Label fx:id="Nome" layoutX="196.0" layoutY="111.0" prefHeight="69.0" prefWidth="779.0" textFill="#e8e6e6">
                      <font>
                         <Font size="47.0" />
                      </font>
@@ -103,6 +103,7 @@
                         <Font size="40.0" />
                      </font>
                   </Label>
+                  <VBox fx:id="visualizarCubes" layoutX="125.0" layoutY="252.0" prefHeight="399.0" prefWidth="447.0" />
                </children>
             </AnchorPane>
          </children>
