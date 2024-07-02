@@ -12,7 +12,6 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-
 <HBox fx:id="fundo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../styles/telalogin.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TelaLoginController">
    <children>
       <VBox prefHeight="720.0" prefWidth="1280.0">
@@ -34,9 +33,9 @@
                         <Font size="19.0" />
                      </font>
                   </Button>
-                  <Button fx:id="BotaoLogin" layoutX="425.0" layoutY="436.0" mnemonicParsing="false" onAction="#loginButaoErro" prefHeight="63.0" prefWidth="423.0" style="-fx-background-color: #DFDCE1; -fx-background-radius: 50px;" text="LOGIN">
+                  <Button fx:id="BotaoLogin" layoutX="425.0" layoutY="436.0" mnemonicParsing="false" onAction="#loginButaoErro" prefHeight="63.0" prefWidth="423.0" style="-fx-background-color: #DFDCE1; -fx-background-radius: 50px;" text="LOGIN" textFill="#281c5c">
                      <font>
-                        <Font size="24.0" />
+                        <Font size="30.0" />
                      </font>
                   </Button>
                   <TextField fx:id="CampoEmail" alignment="CENTER_RIGHT" layoutX="481.0" layoutY="227.0" prefHeight="44.0" prefWidth="351.0" promptText="E-MAIL" style="-fx-background-color: #DFDCE1; -fx-border-color: 0; -fx-background-radius: 50px;">

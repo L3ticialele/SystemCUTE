@@ -71,7 +71,7 @@
                         <Image url="@../images/IconeEmail.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="BotaoVoltar" layoutX="871.0" layoutY="197.0" mnemonicParsing="false" onAction="#voltarPaginaLogin" style="-fx-background-color: 0;">
+                  <Button fx:id="BotaoVoltar" layoutX="871.0" layoutY="197.0" mnemonicParsing="false" onAction="#voltarPaginaLogin" style="-fx-background-color: transparent;">
                      <graphic>
                         <ImageView fitHeight="43.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
                            <image>
