@@ -13,5 +13,7 @@ public interface IDadosDAO {
     boolean delete(int idDado) throws PersistenciaException;
 
     List<DadosDTO> listarTodos() throws PersistenciaException;
+    
+    DadosDTO procurarPorId(int id) throws PersistenciaException;
 }
 

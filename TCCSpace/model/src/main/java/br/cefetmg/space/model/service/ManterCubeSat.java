@@ -16,31 +16,11 @@ public class ManterCubeSat implements IManterCubeSat {
     
     @Override
     public void cadastrar(CubeSatDTO cube) throws PersistenciaException {
-       /*
-        if((cube.getNome() == null) || (cube.getNome().isEmpty()))
-            throw new NegocioException("Obrigatório informar o nome do CubeSat.");
-        if((cube.getDataFabricacao() == null) || (cube.getDataFabricacao().isEmpty()))
-            throw new NegocioException("Obrigatório informar o ano de fabricação do CubeSat.");
-        if(cube.getTamanho() == 0)
-            throw new NegocioException("Obrigatório informar o tamanho do CubeSat.");
-        if((cube.getCompeticao() == null) || (cube.getCompeticao().isEmpty()))
-            throw new NegocioException("Obrigatório informar a competição que o CubeSat participou ou irá participar.");
-       */
         cubeSatDAO.inserir(cube);
     }
     
     @Override
     public boolean alterar(CubeSatDTO cube) throws PersistenciaException{
-        /*
-        if((cube.getNome() == null) || (cube.getNome().isEmpty()))
-            throw new NegocioException("Obrigatório informar o nome do CubeSat.");
-        if((cube.getDataFabricacao() == null) || (cube.getDataFabricacao().isEmpty()))
-            throw new NegocioException("Obrigatório informar o ano de fabricação do CubeSat.");
-        if(cube.getTamanho() == 0)
-            throw new NegocioException("Obrigatório informar o tamanho do CubeSat.");
-        if((cube.getCompeticao() == null) || (cube.getCompeticao().isEmpty()))
-            throw new NegocioException("Obrigatório informar a competição que o CubeSat participou ou irá participar.");
-    */
         boolean result = cubeSatDAO.atualizar(cube);
         return result;
     }

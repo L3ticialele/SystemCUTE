@@ -6,11 +6,15 @@ import java.util.List;
 
 
 public interface ICubeSatDAO{
-    void inserir(CubeSatDTO cube) throws PersistenciaException;
+    boolean inserir(CubeSatDTO cube) throws PersistenciaException;
 
     boolean atualizar(CubeSatDTO cube) throws PersistenciaException;
 
     boolean delete(int cube) throws PersistenciaException;
 
     List<CubeSatDTO> listarTodos() throws PersistenciaException;
+    
+    CubeSatDTO procurarPorId(int id) throws PersistenciaException;
+    
+    CubeSatDTO procurarPorNome(String nomeC) throws PersistenciaException;
 }
