@@ -198,7 +198,26 @@ public class UsuarioDAO implements IUsuarioDAO{
 
     @Override
     public UsuarioDTO validarlogin(String email, String senha) throws PersistenciaException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+        EntityManagerFactory entityManagerFactory = 
+        Persistence.createEntityManagerFactory("persistence");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        
+        try{
+             entityManager.getTransaction().begin();
+             Query query = entityManager.createQuery("SELECT u.email, u.senha FROM UsuarioDTO AS u WHERE u.email = :email AND u.senha = :senha");
+             query.setParameter("email", email);
+             query.setParameter("senha", senha);
+             List<UsuarioDTO> usuarioPersistido = query.getResultList();
+            if(!usuarioPersistido.isEmpty()){
+                return usuarioPersistido.get(0);
+            }else{
+                return null;
+            }
+        }catch(Exception ex){
+            entityManager.getTransaction().rollback();
+            throw ex;
+        }finally{
+            entityManager.close();
+        }    }
 
 }

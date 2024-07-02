@@ -46,7 +46,7 @@
                         </Button>
                         <Button fx:id="botaoExplorar" mnemonicParsing="false" onAction="#apresentaTelaExplorar" onMouseEntered="#explorarToPourple" onMouseExited="#explorarToWhite" prefHeight="105.0" style="-fx-background-color: 0;" text="EXPLORAR" textFill="WHITE">
                            <graphic>
-                              <ImageView fx:id="iconeExplorar" fitHeight="36.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="iconeExplorar" fitHeight="39.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../images/iconeExplorar.png" />
                                  </image>
@@ -104,6 +104,7 @@
                      </font>
                   </Label>
                   <VBox fx:id="visualizarCubes" layoutX="125.0" layoutY="252.0" prefHeight="399.0" prefWidth="447.0" />
+                  <VBox fx:id="visualizarEquipe" layoutX="730.0" layoutY="252.0" prefHeight="399.0" prefWidth="447.0" />
                </children>
             </AnchorPane>
          </children>

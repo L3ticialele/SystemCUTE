@@ -1,6 +1,5 @@
 package controllers;
 
-import br.cefetmg.space.model.idao.IUsuarioDAO;
 import br.cefetmg.space.model.dto.UsuarioDTO;
 import br.cefetmg.space.model.dao.UsuarioDAO;
 import br.cefetmg.space.model.idao.exception.PersistenciaException;
@@ -22,9 +21,6 @@ public class TelaCadastroController implements Initializable {
     private Button BotaoCadastrar;
 
     @FXML
-    private Button BotaoVoltar;
-
-    @FXML
     private TextField CampoEmail;
 
     @FXML
@@ -44,7 +40,7 @@ public class TelaCadastroController implements Initializable {
     
 
     public void voltarPaginaLogin(ActionEvent e) {
-        MainFX.changedScreen("Login");
+        MainFX.changedScreen("Login", usuario);
     }
 
     public void BotaoCadastrar(ActionEvent e) {

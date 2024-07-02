@@ -1,10 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMain.java to edit this template
- */
 package br.cefetmg.space.view;
-
-import br.cefetmg.space.model.dto.UsuarioDTO;
 import java.io.IOException;
 import java.util.ArrayList;
 import javafx.application.Application;
@@ -13,10 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-/**
- *
- * @author letic
- */
+
 public class MainFX extends Application {
     
     private static Stage stage;

@@ -1,10 +1,4 @@
 package controllers;
-
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
-
 import br.cefetmg.space.model.dao.CubeSatDAO;
 import br.cefetmg.space.model.dao.UsuarioDAO;
 import br.cefetmg.space.model.dto.CubeSatDTO;
@@ -34,11 +28,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author letic
- */
+
 public class TelaCadastrarCubesatController implements Initializable {
     
    private BufferedImage imagem;
