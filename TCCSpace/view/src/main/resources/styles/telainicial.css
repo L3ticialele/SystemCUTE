@@ -1,13 +1,9 @@
-/*
- * Empty Stylesheet file.
- */
-
 .mainFxmlClass {
 
 }
 
 #fundoTelaInicial{
-    -fx-background-image: url("../images/fundo.png");
+    -fx-background-image: url("../images/fundoInicial.png");
     -fx-background-position: center;
     -fx-background-size: cover;
 }

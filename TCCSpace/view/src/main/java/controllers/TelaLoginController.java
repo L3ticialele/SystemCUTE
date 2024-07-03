@@ -1,8 +1,6 @@
 package controllers;
 
 import br.cefetmg.space.model.dto.UsuarioDTO;
-import br.cefetmg.space.model.idao.IUsuarioDAO;
-import br.cefetmg.space.model.dto.UsuarioDTO;
 import br.cefetmg.space.model.dao.UsuarioDAO;
 import br.cefetmg.space.model.idao.exception.PersistenciaException;
 import br.cefetmg.space.view.MainFX;
@@ -19,9 +17,6 @@ import javafx.scene.control.TextField;
 public class TelaLoginController implements Initializable {
 
     @FXML
-    private Button BotaoCadastro;
-
-    @FXML
     private Button BotaoLogin;
 
     @FXML
@@ -32,7 +27,7 @@ public class TelaLoginController implements Initializable {
 
     @FXML
     private PasswordField CampoSenha;
-    
+
     private UsuarioDTO usuario;
 
     @FXML
@@ -55,12 +50,19 @@ public class TelaLoginController implements Initializable {
     }
 
     public boolean test(String email, String senha) throws PersistenciaException {
+        UsuarioDTO nv = new UsuarioDTO();
+        nv.setEmail(email);
+        nv.setSenha(senha);
+        nv.setTelefone("tel");
+
         UsuarioDAO usuarioDAO = new UsuarioDAO();
-        usuario = usuarioDAO.procurarPorEmail(email);
 
-        UsuarioDAO user = new UsuarioDAO();
-
-        return user.validarlogin(usuario);
+        if (usuarioDAO.validarlogin(nv)) {
+            usuario = usuarioDAO.procurarPorEmail(email);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
