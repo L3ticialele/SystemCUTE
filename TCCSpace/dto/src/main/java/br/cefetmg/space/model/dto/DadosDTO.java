@@ -38,10 +38,12 @@ public class DadosDTO implements Serializable {
     private float correnteBateria;
     @Column(name = "correntePlacaSolar")
     private float correntePlacaSolar;
+    /*
     @Column(name = "gas1")
     private float gas1;
     @Column(name = "gas2")
     private float gas2;
+    */
     @Column(name = "luz1")
     private float luz1;
     @Column(name = "luz2")
@@ -62,6 +64,7 @@ public class DadosDTO implements Serializable {
     private float tensaoPlacaSolar;
     @Column(name = "umidade")
     private float umidade;
+    /*
     @Column(name = "velocidade")
     private float velocidade;
     @Column(name = "velocidadeAngularX")
@@ -70,6 +73,7 @@ public class DadosDTO implements Serializable {
     private float velocidadeAngularY;
     @Column(name = "velocidadeAngularZ")
     private float velocidadeAngularZ;
+    */
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "cubesat", nullable = false)
     private CubeSatDTO cubesat;
@@ -116,6 +120,7 @@ public class DadosDTO implements Serializable {
         this.anguloZ = anguloZ;
     }
 
+    /*
     public float getVelocidadeAngularX() {
         return velocidadeAngularX;
     }
@@ -139,6 +144,8 @@ public class DadosDTO implements Serializable {
     public void setVelocidadeAngularZ(float velocidadeAngularZ) {
         this.velocidadeAngularZ = velocidadeAngularZ;
     }
+
+    */
 
     public float getAcelerometroX() {
         return acelerometroX;
@@ -164,6 +171,7 @@ public class DadosDTO implements Serializable {
         this.acelerometroZ = acelerometroZ;
     }
 
+    /*
     public float getVelocidade() {
         return velocidade;
     }
@@ -171,6 +179,7 @@ public class DadosDTO implements Serializable {
     public void setVelocidade(float velocidade) {
         this.velocidade = velocidade;
     }
+    */
 
     public float getBateria() {
         return bateria;
@@ -259,6 +268,8 @@ public class DadosDTO implements Serializable {
     public void setPontoOrvalho(float pontoOrvalho) {
         this.pontoOrvalho = pontoOrvalho;
     }
+    
+    /*
 
     public float getGas1() {
         return gas1;
@@ -275,6 +286,8 @@ public class DadosDTO implements Serializable {
     public void setGas2(float gas2) {
         this.gas2 = gas2;
     }
+
+   */
 
     public float getSensorUV() {
         return sensorUV;

@@ -132,7 +132,7 @@ public class TelaInicialController implements Initializable {
             @Override
             public void onScreenChanged(String newString, Object viewData) {
                 usuario = (UsuarioDTO) viewData;
-                Nome.setText(usuario.getNome());
+                Nome.setText(usuario.getNome() + "!");
 
                 cubeSat = usuario.getCubeSat();
                 visualizarCubes.setSpacing(10);
@@ -143,12 +143,15 @@ public class TelaInicialController implements Initializable {
                     botaoCube.setAlignment(Pos.CENTER);
                     botaoCube.setStyle("-fx-background-color: transparent; -fx-border-color: #8c52ff; -fx-border-radius: 2px;"
                             + "-fx-text-fill: white;" + "-fx-font-size: 20px");
-                    //Image imagem = new Image("teste.pjpg");
-                    //ImageView imageView = new ImageView(imagem);
-                    // imageView.setFitWidth(30); 
-                    //imageView.setFitHeight(30);
-                    // botaoCube.setGraphic(imageView);
+                    /*
+                    Image imagem = new Image("teste.jpg");
+                    ImageView imageView = new ImageView(imagem);
+                    imageView.setFitWidth(30); 
+                    imageView.setFitHeight(30);
+                    botaoCube.setGraphic(imageView);
+                    */
                     visualizarCubes.getChildren().add(botaoCube);
+                    
                 }
                 equipe = usuario.getEquipes();
                 for(int y=0; y<usuario.quantEquipes(); y++){

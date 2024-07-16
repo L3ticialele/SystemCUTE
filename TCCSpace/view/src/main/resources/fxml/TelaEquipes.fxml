@@ -4,14 +4,19 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollBar?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<HBox id="fundoTelaEquipes" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../styles/telaequipes.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TelaEquipesController">
+<HBox id="fundoTelaEditarCubesat" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../styles/telaeditarcubesat.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TelaEditarCubesatController">
    <children>
       <VBox prefHeight="720.0" prefWidth="1280.0">
          <children>
@@ -53,11 +58,11 @@
                         <Font size="25.0" />
                      </font>
                   </Button>
-                  <Button fx:id="botaoCubesat" mnemonicParsing="false" onAction="#apresentaTelaCubesat" onMouseEntered="#cubesatToPourple" onMouseExited="#cubesatToWhite" style="-fx-background-color: 0;" text="CUBESATS" textFill="WHITE">
+                  <Button fx:id="botaoCubesat" mnemonicParsing="false" onAction="#apresentaTelaCubesat" style="-fx-background-color: 0;" text="CUBESATS" textFill="WHITE">
                      <graphic>
-                        <ImageView fx:id="iconeCubesat" fitHeight="43.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="43.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../images/iconeCubeSat.png" />
+                              <Image url="@../../../../../../../../../Área%20de%20Trabalho/TCC-main/TCC-main/TCCSpace/view/src/main/resources/images/iconeCubeSat.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -65,9 +70,9 @@
                         <Font size="25.0" />
                      </font>
                   </Button>
-                  <Button fx:id="botaoEquipe" mnemonicParsing="false" onAction="#apresentaTelaEquipe" prefHeight="33.0" prefWidth="105.0" style="-fx-background-color: 0;" text="EQUIPES" textFill="#8c52ff">
+                  <Button fx:id="botaoEquipe" mnemonicParsing="false" onAction="#apresentaTelaEquipe" onMouseEntered="#equipesToPourple" onMouseExited="#equipesToWhite" prefHeight="33.0" prefWidth="105.0" style="-fx-background-color: 0;" text="EQUIPES" textFill="#8c52ff">
                      <graphic>
-                        <ImageView fitHeight="49.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="iconeEquipes" fitHeight="49.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/iconeEquipesLilas.png" />
                            </image>
@@ -79,12 +84,148 @@
                   </Button>
                </buttons>
             </ButtonBar>
-            <Line endX="1100.4595947265625" endY="0.20090562105178833" startX="-145.5" stroke="WHITE">
+            <Line endX="1423.893310546875" endY="-12.041077613830566" startX="181.93380737304688" startY="-4.9701948165893555" stroke="WHITE">
                <VBox.margin>
                   <Insets left="20.0" />
                </VBox.margin>
             </Line>
+            <AnchorPane opacity="0.79" prefHeight="501.0" prefWidth="983.0" style="-fx-background-color: #000000; -fx-background-radius: 10PX;">
+               <children>
+                  <Label alignment="CENTER" layoutX="43.0" layoutY="28.0" prefHeight="45.0" prefWidth="248.0" text="SUAS EQUIPES" textFill="WHITE">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
+                  <Line endX="256.6666259765625" endY="376.0" layoutX="53.0" layoutY="65.0" startX="256.6666259765625" startY="-33.33335876464844" stroke="WHITE" />
+                  <Button fx:id="botaoSair" layoutX="808.0" layoutY="9.0" mnemonicParsing="false" onAction="#apresentaTelaCubesat" onMouseEntered="#sairToPourple" onMouseExited="#sairToWhite" prefHeight="75.0" prefWidth="75.0" style="-fx-background-color: 0;">
+                     <graphic>
+                        <ImageView fx:id="iconeSair" fitHeight="50.0" fitWidth="50.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/iconeSair.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Label layoutX="329.0" layoutY="240.0" prefHeight="51.0" prefWidth="137.0" text="DESCRIÇÃO" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <TextArea fx:id="textDescricao" layoutX="327.0" layoutY="284.0" prefHeight="154.0" prefWidth="178.0" style="-fx-background-color: #2C254F;">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </TextArea>
+                  <Button fx:id="botaoAdicionarMembros" layoutX="778.0" layoutY="70.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="23.0" style="-fx-background-radius: 50%;">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="17.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/iconeAdicionar.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Label layoutX="673.0" layoutY="70.0" text="MEMBROS" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="522.0" layoutY="252.0" text="CUBESATS" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="botaoAdicionarCubesats" layoutX="618.0" layoutY="252.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="30.0" style="-fx-background-radius: 50%;">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="17.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/iconeAdicionar.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="botaoEditarEquipe" layoutX="566.0" layoutY="38.0" mnemonicParsing="false" prefHeight="1.0" prefWidth="40.0" style="-fx-background-color: #73668B;" text="EDITAR" textFill="WHITE">
+                     <font>
+                        <Font size="8.0" />
+                     </font>
+                  </Button>
+                  <Label fx:id="labelNomeEquipe" layoutX="327.0" layoutY="29.0" text="&lt;NOME DA EQUIPE&gt;" textFill="WHITE">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="327.0" layoutY="69.0" prefHeight="30.0" prefWidth="71.0" text="AVISOS" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="botaoSairEquipe" layoutX="672.0" layoutY="391.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="171.0" style="-fx-background-color: #73668B;" text="SAIR DA EQUIPE" textFill="WHITE">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Button>
+                  <TextField id="textNomeCubesat" fx:id="textBuscarEquipe" layoutX="25.0" layoutY="80.0" minHeight="-Infinity" prefHeight="28.0" prefWidth="266.0" style="-fx-background-color: #2C254F; -fx-border-radius: 50px;" stylesheets="@../styles/telacadastrarcubesat.css">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor>
+                  </TextField>
+                  <Button fx:id="botaoBuscarEquipe" layoutX="258.0" layoutY="81.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="23.0" style="-fx-background-color: 0;">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/iconeExplorar.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="botaoCadastrarEquipe" layoutX="23.0" layoutY="74.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="40.0" style="-fx-background-radius: 50%;">
+                     <graphic>
+                        <ImageView fitHeight="17.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/iconeAdicionar.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <TextArea fx:id="textAvisos" layoutX="327.0" layoutY="99.0" prefHeight="134.0" prefWidth="318.0" style="-fx-background-color: #2C254F;">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </TextArea>
+                  <AnchorPane fx:id="paneListaEquipes" layoutX="25.0" layoutY="125.0" prefHeight="316.0" prefWidth="266.0">
+                     <children>
+                        <ScrollBar fx:id="scroll1" layoutX="252.0" layoutY="9.0" orientation="VERTICAL" prefHeight="298.0" prefWidth="14.0" style="-fx-background-color: 0;" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="paneListaMembros" layoutX="672.0" layoutY="100.0" prefHeight="290.0" prefWidth="172.0" style="-fx-background-color: #2C254F;">
+                     <children>
+                        <ScrollBar fx:id="scroll3" layoutX="157.0" orientation="VERTICAL" prefHeight="291.0" prefWidth="14.0" style="-fx-background-color: 0;" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="paneListaCubesatsEquipe" layoutX="521.0" layoutY="284.0" prefHeight="138.0" prefWidth="138.0" style="-fx-background-color: #2C254F;">
+                     <children>
+                        <ScrollBar fx:id="scroll2" layoutX="124.0" layoutY="3.0" orientation="VERTICAL" prefHeight="150.0" prefWidth="14.0" style="-fx-background-color: 0;" />
+                     </children>
+                  </AnchorPane>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="50.0" left="200.0" right="200.0" top="50.0" />
+               </VBox.margin>
+            </AnchorPane>
          </children>
       </VBox>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" />
    </children>
 </HBox>
