@@ -144,10 +144,6 @@ public class TelaEditarCubesatController implements Initializable {
                     erro.show();
                 }
                 
-                choiceBoxAcesso.setValue(cubesat.getAcesso());
-                textDescricao.setText(cubesat.getDescricao());
-                textNomeCubesat.setText(cubesat.getNome());
-                
                 MainFX.changedScreen("Cubesat", cubesat.getUsuario());
         }
     }
@@ -271,6 +267,10 @@ public class TelaEditarCubesatController implements Initializable {
        MainFX.addOnChangeScreenListener(new MainFX.OnChangeScreen(){
            @Override
            public void onScreenChanged(String newString, Object viewData){
+               cubesat = (CubeSatDTO) viewData;
+               choiceBoxAcesso.setValue(cubesat.getAcesso());
+               textDescricao.setText(cubesat.getDescricao());
+               textNomeCubesat.setText(cubesat.getNome());
            }
        });
        

@@ -2,6 +2,7 @@ package controllers;
 
 import br.cefetmg.space.model.dto.UsuarioDTO;
 import br.cefetmg.space.model.dao.UsuarioDAO;
+import br.cefetmg.space.model.idao.IUsuarioDAO;
 import br.cefetmg.space.model.idao.exception.PersistenciaException;
 import br.cefetmg.space.view.MainFX;
 import java.net.URL;
@@ -50,6 +51,7 @@ public class TelaLoginController implements Initializable {
     }
 
     public boolean test(String email, String senha) throws PersistenciaException {
+      
         UsuarioDTO nv = new UsuarioDTO();
         nv.setEmail(email);
         nv.setSenha(senha);

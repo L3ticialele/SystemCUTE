@@ -33,7 +33,7 @@
                         <Font size="19.0" />
                      </font>
                   </Button>
-                  <Button fx:id="BotaoLogin" layoutX="425.0" layoutY="436.0" mnemonicParsing="false" onAction="#loginButaoErro" prefHeight="63.0" prefWidth="423.0" style="-fx-background-color: #DFDCE1; -fx-background-radius: 50px;" text="LOGIN" textFill="#281c5c">
+                  <Button id="BotaoLogin" fx:id="BotaoLogin" layoutX="425.0" layoutY="436.0" mnemonicParsing="false" onAction="#loginButaoErro" prefHeight="63.0" prefWidth="423.0" style="-fx-background-color: #DFDCE1; -fx-background-radius: 50px;" stylesheets="@../styles/telalogin.css" text="LOGIN" textFill="#281c5c">
                      <font>
                         <Font size="30.0" />
                      </font>
