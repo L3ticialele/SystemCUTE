@@ -35,12 +35,9 @@ public class TelaCadastroController implements Initializable {
     @FXML
     private Label msg;
     
-    @FXML
-    private UsuarioDTO usuario;
-    
 
     public void voltarPaginaLogin(ActionEvent e) {
-        MainFX.changedScreen("Login", usuario);
+        MainFX.changedScreen("Login", null);
     }
 
     public void BotaoCadastrar(ActionEvent e) {
@@ -51,13 +48,12 @@ public class TelaCadastroController implements Initializable {
             String nome = CampoNome.getText();
             String senha = CampoSenha.getText();
             String telefone = CampoTelefone.getText();
-            inserir(email, nome, senha, telefone);
-            MainFX.changedScreen("Tela Inicial", usuario);
+            MainFX.changedScreen("Tela Inicial", inserir(email, nome, senha, telefone));
         }
     }
 
-    public void inserir(String email, String nome, String senha, String telefone) {
-        usuario = new UsuarioDTO();
+    public UsuarioDTO inserir(String email, String nome, String senha, String telefone) {
+        UsuarioDTO usuario = new UsuarioDTO();
         usuario.setEmail(email);
         usuario.setNome(nome);
         usuario.setSenha(senha);
@@ -68,6 +64,8 @@ public class TelaCadastroController implements Initializable {
             user.inserir(usuario);
         } catch (PersistenciaException ex) {
             Logger.getLogger(TelaCadastroController.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            return usuario;
         }
     }
 

@@ -30,6 +30,10 @@ import javafx.scene.paint.Color;
 
 
 public class TelaCubesatController implements Initializable {
+    
+    @FXML
+    private Button botaoDados;
+    
     @FXML
     private Button botaoCubesat;
     
@@ -72,7 +76,12 @@ public class TelaCubesatController implements Initializable {
     
     
     @FXML
-    void apresentaTelaEditarCubesat(ActionEvent event){
+    void apresentarTelaDados(ActionEvent event){
+        MainFX.changedScreen("Gui3d", usuario);
+    }
+    
+    @FXML
+    void apresentarTelaEditarCubesat(ActionEvent event){
         MainFX.changedScreen("Editar Cubesat", cubesat);
     }
     
@@ -140,6 +149,7 @@ public class TelaCubesatController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
+        
         MainFX.addOnChangeScreenListener(new MainFX.OnChangeScreen(){
            @Override
            public void onScreenChanged(String newString, Object viewData){
@@ -155,6 +165,7 @@ public class TelaCubesatController implements Initializable {
                     List<CubeSatDTO> cubes = usuario.getCubeSat();
                     if(!cubes.isEmpty()){
                         for(int i = 0, j=0; i<cubes.size(); i++, j+=49){
+                            cubesat = cubes.get(i);
                             System.out.println(cubes.get(i).getNome());
                             Button botao = new Button();
                             botao.setId(cubes.get(i).getNome());
@@ -169,6 +180,9 @@ public class TelaCubesatController implements Initializable {
                             botao.setStyle("-fx-background-color: 0; -fx-border-color: #8c52ff; -fx-border-radius: 2px;");
                             botao.setText(cubes.get(i).getNome());
                             botao.setTextFill(Color.WHITE);
+                            botao.setOnAction(event -> {
+                                 apresentarTelaEditarCubesat(event);
+                            });
                             vBoxListarCubesats.getChildren().add(botao);
                     }
                 }

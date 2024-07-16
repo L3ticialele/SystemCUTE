@@ -21,6 +21,8 @@ public class MainFX extends Application {
     private static Scene telaLogin;
     private static Scene telaEditarCubesat;
     
+    private static Scene telaGui3d;
+    
     @Override
     public void start(Stage primaryStage) throws IOException {
         try{
@@ -30,6 +32,9 @@ public class MainFX extends Application {
             
             Parent loaderTelaEditarCubesat = FXMLLoader.load(getClass().getResource("/fxml/TelaEditarCubesat.fxml"));
             telaEditarCubesat = new Scene(loaderTelaEditarCubesat, 1280, 720);
+            
+            Parent loaderTelaGui3d = FXMLLoader.load(getClass().getResource("/fxml/Data3DViewer.fxml"));
+            telaGui3d = new Scene(loaderTelaGui3d, 1280, 720);
             
             Parent  loaderTelaCubesat = FXMLLoader.load(getClass().getResource("/fxml/TelaCubesat.fxml"));
             telaCubesat = new Scene(loaderTelaCubesat, 1280, 720);
@@ -61,6 +66,9 @@ public class MainFX extends Application {
     
     public static void changedScreen(String tela, Object userData){
         switch(tela){
+            case "Gui3d":
+                stage.setScene(telaGui3d);
+                notifyAllListeners("Gui3d", userData);
             case "Cubesat":
                 stage.setScene(telaCubesat);
                 notifyAllListeners("Cubesat", userData);
