@@ -2,7 +2,6 @@ package controllers;
 
 import br.cefetmg.space.model.dto.UsuarioDTO;
 import br.cefetmg.space.model.dao.UsuarioDAO;
-import br.cefetmg.space.model.idao.IUsuarioDAO;
 import br.cefetmg.space.model.idao.exception.PersistenciaException;
 import br.cefetmg.space.view.MainFX;
 import java.net.URL;
