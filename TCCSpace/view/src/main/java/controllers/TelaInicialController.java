@@ -136,7 +136,7 @@ public class TelaInicialController implements Initializable {
 
                 cubeSat = usuario.getCubeSat();
                 visualizarCubes.setSpacing(10);
-
+                visualizarCubes.getChildren().clear();
                 for (int x = 0; x < usuario.quantCubeSat(); x++) {
                     Button botaoCube = new Button(cubeSat.get(x).getNome());
                     botaoCube.setId(cubeSat.get(x).getNome());
@@ -150,6 +150,7 @@ public class TelaInicialController implements Initializable {
                     imageView.setFitHeight(30);
                     botaoCube.setGraphic(imageView);
                     */
+                    
                     visualizarCubes.getChildren().add(botaoCube);
                     
                 }
