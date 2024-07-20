@@ -7,6 +7,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -15,14 +17,18 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "cubesat")
+@SuppressWarnings("ValidAttributes")
 public class CubeSatDTO implements Serializable {
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
-    @Column(name = "dataFabricacao")
-    private String dataFabricacao;
-    @Column(name = "tamanho")
-    private double tamanho;
+    @Column (name = "acesso")
+    private String acesso;
+    @Column(name = "data")
+    private String data;
+    @Column(name = "descricao")
+    private String descricao;
     @Column(name = "nome")
     private String nome;
     @OneToMany(fetch = FetchType.EAGER, cascade =
@@ -39,11 +45,20 @@ public class CubeSatDTO implements Serializable {
 
     public CubeSatDTO(){
         dado = new ArrayList<>();
-        dataFabricacao = null;
-        tamanho = -1;
+        data = null;
+        descricao = null;
         nome = null;
         equipe = null;
-        status = "inativo";
+        status = "Inativo";
+        acesso = "Público";
+    }
+    
+    public String getAcesso(){
+        return acesso;
+    }
+    
+    public void setAcesso(String acesso){
+        this.acesso = acesso;
     }
     
     public String getStatus() {
@@ -95,20 +110,20 @@ public class CubeSatDTO implements Serializable {
         return dado;
     }
 
-    public String getDataFabricacao() {
-        return dataFabricacao;
+    public String getDataCadastro() {
+        return data;
     }
 
-    public void setDataFabricacao(String dataFabricacao) {
-        this.dataFabricacao = dataFabricacao;
+    public void setDataCadastro(String dataCadastro) {
+        this.data = dataCadastro;
     }
     
-    public double getTamanho(){
-        return tamanho;
+    public String getDescricao(){
+        return descricao;
     }
     
-    public void setTamanho(double tamanho){
-        this.tamanho = tamanho;
+    public void setDescricao(String descricao){
+        this.descricao = descricao;
     }
     
     public String getNome() {

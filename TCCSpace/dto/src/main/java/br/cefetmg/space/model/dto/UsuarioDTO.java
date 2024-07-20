@@ -28,8 +28,6 @@ public class UsuarioDTO implements Serializable{
     private int id;
     @Column(name = "senha")
     private String senha;
-    @Column(name = "username")
-    private String username;
     @Column(name = "email")
     private String email;
     @Column(name = "administrador")
@@ -44,12 +42,11 @@ public class UsuarioDTO implements Serializable{
             inverseJoinColumns={@JoinColumn(name="idequipe")})
     private List<EquipeDTO> equipes;
     @OneToMany(fetch = FetchType.EAGER, cascade = 
-            CascadeType.ALL, mappedBy = "usuario")
+            CascadeType.PERSIST, mappedBy = "usuario")
     private List<CubeSatDTO> cubeSat;
     
     public UsuarioDTO(){
         senha = null;
-        username = null;
         email = null;
         telefone = null;
         administrador = false;
@@ -128,14 +125,6 @@ public class UsuarioDTO implements Serializable{
             for(int i=0; i<cubeSat.size(); i++)
                 setCubeSat(cubeSat.get(i));
     }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
    
     public int getId() {
         return id;
@@ -159,13 +148,5 @@ public class UsuarioDTO implements Serializable{
 
     public void setSenha(String senha) {
         this.senha = senha;
-    }
-
-    public String getUserName() {
-        return username;
-    }
-
-    public void setUserName(String usuario) {
-        username = usuario;
     }
 }

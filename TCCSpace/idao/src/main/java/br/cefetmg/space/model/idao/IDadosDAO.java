@@ -15,5 +15,9 @@ public interface IDadosDAO {
     List<DadosDTO> listarTodos() throws PersistenciaException;
     
     DadosDTO procurarPorId(int id) throws PersistenciaException;
+    
+    DadosDTO buscarDadoMaisRecente();
+    
+    void gerarDadosParaCubeSat(int idCubeSat);
 }
 

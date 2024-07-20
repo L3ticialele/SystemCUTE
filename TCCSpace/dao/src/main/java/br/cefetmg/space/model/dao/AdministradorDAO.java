@@ -13,13 +13,18 @@ import javax.persistence.criteria.CriteriaQuery;
 
 public class AdministradorDAO implements IAdministradorDAO {
     @Override
+    //insere um objeto do tipo administradorDTO no banco de dados
     public void inserir(AdministradorDTO adm) throws PersistenciaException{
+        //pega o arquivo persistencia.xml 
         EntityManagerFactory entityManagerFactory = 
         Persistence.createEntityManagerFactory("persistence");
+        //cria um gerenciador para a persistencia
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         
         try{
+            //abre a conexão
             entityManager.getTransaction().begin();
+            //adiciona o administrador no banco de dados
             entityManager.persist(adm);
             entityManager.getTransaction().commit();
         }catch(Exception ex){
@@ -101,7 +106,6 @@ public class AdministradorDAO implements IAdministradorDAO {
             
             if(admPersistido != null){
                 admPersistido.setEmail(adm.getEmail());
-                admPersistido.setUserName(adm.getUserName());
                 admPersistido.setNome(adm.getNome());
                 admPersistido.setSenha(adm.getSenha());
                 admPersistido.setTelefone(adm.getTelefone());
