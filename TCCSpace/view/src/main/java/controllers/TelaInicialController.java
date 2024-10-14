@@ -127,10 +127,13 @@ public class TelaInicialController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+
+        System.out.println("oi");
         MainFX.addOnChangeScreenListener(new MainFX.OnChangeScreen() {
             @Override
             public void onScreenChanged(String newString, Object viewData) {
+                 System.out.println("oi");
+                if(newString.equals("Tela Inicial")){
                 usuario = (UsuarioDTO) viewData;
                 Nome.setText(usuario.getNome() + "!");
 
@@ -161,6 +164,7 @@ public class TelaInicialController implements Initializable {
                     botaoEquipe.setStyle("-fx-background-color: transparent; -fx-border-color: #8c52ff; -fx-border-radius: 2px;"
                             + "-fx-text-fill: white;" + "-fx-font-size: 20px");
                     visualizarEquipe.getChildren().add(botaoEquipe);
+                }
                 }
             }
         });

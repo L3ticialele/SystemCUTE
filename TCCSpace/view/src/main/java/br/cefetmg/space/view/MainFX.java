@@ -69,6 +69,7 @@ public class MainFX extends Application {
             case "Gui3d":
                 stage.setScene(telaGui3d);
                 notifyAllListeners("Gui3d", userData);
+                 break;
             case "Cubesat":
                 stage.setScene(telaCubesat);
                 notifyAllListeners("Cubesat", userData);
