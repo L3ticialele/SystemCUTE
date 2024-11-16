@@ -4,6 +4,7 @@ import br.cefetmg.space.model.dto.UsuarioDTO;
 import br.cefetmg.space.model.dao.UsuarioDAO;
 import br.cefetmg.space.model.idao.exception.PersistenciaException;
 import br.cefetmg.space.view.MainFX;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -33,7 +34,7 @@ public class TelaLoginController implements Initializable {
     @FXML
     private Label msgErro;
 
-    public void loginButaoErro(ActionEvent e) throws PersistenciaException {
+    public void loginButaoErro(ActionEvent e) throws PersistenciaException, IOException {
         String email = CampoEmail.getText();
         String senha = CampoSenha.getText();
         if (CampoEmail.getText().isBlank() == true || CampoSenha.getText().isBlank() == true) {
@@ -45,7 +46,7 @@ public class TelaLoginController implements Initializable {
         }
     }
 
-    public void cadastroButao(ActionEvent e) {
+    public void cadastroButao(ActionEvent e) throws IOException {
         MainFX.changedScreen("Cadastro", null);
     }
 
@@ -68,7 +69,8 @@ public class TelaLoginController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        MainFX.addOnChangeScreenListener((String newString, Object viewData) -> {
+        });
     }
 
 }

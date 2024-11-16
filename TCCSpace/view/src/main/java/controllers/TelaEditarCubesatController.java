@@ -9,6 +9,7 @@ import br.cefetmg.space.view.MainFX;
 import java.awt.Desktop;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.ResourceBundle;
@@ -40,14 +41,16 @@ public class TelaEditarCubesatController implements Initializable {
     private TextArea textDescricao;
 
     @FXML
-    private Button botaoEquipe;
+    private Button botaoSuporte;
 
     @FXML
-    private Button botaoExplorar;
+    private Button botaoPerfil;
 
     @FXML
     private Button botaoHome;
-
+    
+    private UsuarioDTO usuario;
+    
     @FXML
     private ChoiceBox<String> choiceBoxAcesso;
 
@@ -57,13 +60,13 @@ public class TelaEditarCubesatController implements Initializable {
     @FXML
     private TextField textNomeCubesat;
 
-    private String[] acesso = {"Público", "Privado"};
+    private final String[] acesso = {"Público", "Privado"};
 
     @FXML
-    private ImageView iconeEquipes;
+    private ImageView iconeSuporte;
 
     @FXML
-    private ImageView iconeExplorar;
+    private ImageView iconePerfil;
 
     @FXML
     private ImageView iconeSair;
@@ -90,7 +93,8 @@ public class TelaEditarCubesatController implements Initializable {
     private Button botaoExcluirCubesat;
 
     private Stage dialogStage;
-    private boolean okClicked = false;
+    
+    private final boolean okClicked = false;
 
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
@@ -99,6 +103,7 @@ public class TelaEditarCubesatController implements Initializable {
     public void textsFields() {
         textNomeCubesat.setText(cubesat.getNome());
         textDescricao.setText(cubesat.getDescricao());
+        choiceBoxAcesso.getItems().addAll(acesso);
         choiceBoxAcesso.setValue(cubesat.getAcesso());
         labelDataCadastro.setText(cubesat.getDataCadastro());
         labelIdCubesat.setText("ID: " + cubesat.getId());
@@ -116,7 +121,7 @@ public class TelaEditarCubesatController implements Initializable {
     }
 
     @FXML
-    void salvarAlteracoesCubesat(ActionEvent event) throws PersistenciaException {
+    void salvarAlteracoesCubesat(ActionEvent event) throws PersistenciaException, IOException {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         Alert confirmacao = new Alert(Alert.AlertType.CONFIRMATION);
         Alert erro = new Alert(Alert.AlertType.ERROR);
@@ -181,31 +186,31 @@ public class TelaEditarCubesatController implements Initializable {
     }
 
     @FXML
-    void explorarToPourple(MouseEvent event) {
-        botaoExplorar.setStyle("-fx-text-fill: #8C52FF;"
+    void perfilToPourple(MouseEvent event) {
+        botaoPerfil.setStyle("-fx-text-fill: #8C52FF;"
                 + "-fx-background-color: 0;");
-        iconeExplorar.setImage(new Image("file:src/main/resources/images/iconeExplorarLilas.png"));
+        iconePerfil.setImage(new Image("file:src/main/resources/images/userLilas.png"));
     }
 
     @FXML
-    void explorarToWhite(MouseEvent event) {
-        botaoExplorar.setStyle("-fx-text-fill: white;"
+    void perfilToWhite(MouseEvent event) {
+        botaoPerfil.setStyle("-fx-text-fill: white;"
                 + "-fx-background-color: 0;");
-        iconeExplorar.setImage(new Image("file:src/main/resources/images/iconeExplorar.png"));
+        iconePerfil.setImage(new Image("file:src/main/resources/images/user.png"));
     }
 
     @FXML
-    void equipesToPourple(MouseEvent event) {
-        botaoEquipe.setStyle("-fx-text-fill: #8C52FF;"
+    void suporteToPourple(MouseEvent event) {
+        botaoSuporte.setStyle("-fx-text-fill: #8C52FF;"
                 + "-fx-background-color: 0;");
-        iconeEquipes.setImage(new Image("file:src/main/resources/images/iconeEquipesLilas.png"));
+        iconeSuporte.setImage(new Image("file:src/main/resources/images/suporteLilas.png"));
     }
 
     @FXML
-    void equipesToWhite(MouseEvent event) {
-        botaoEquipe.setStyle("-fx-text-fill: white;"
+    void suporteToWhite(MouseEvent event) {
+        botaoSuporte.setStyle("-fx-text-fill: white;"
                 + "-fx-background-color: 0;");
-        iconeEquipes.setImage(new Image("file:src/main/resources/images/iconeEquipes.png"));
+        iconeSuporte.setImage(new Image("file:src/main/resources/images/suport.png"));
     }
 
     @FXML
@@ -233,22 +238,17 @@ public class TelaEditarCubesatController implements Initializable {
     }
 
     @FXML
-    void apresentaTelaCubesat(ActionEvent event) {
-        MainFX.changedScreen("Cubesat", cubesat.getUsuario());
+    void apresentaTelaSuporte(ActionEvent event) throws IOException {
+        MainFX.changedScreen("Suporte", cubesat.getUsuario());
     }
 
     @FXML
-    void apresentaTelaEquipe(ActionEvent event) {
-        MainFX.changedScreen("Equipes", cubesat.getUsuario());
+    void apresentaTelaPerfil(ActionEvent event) throws IOException {
+        MainFX.changedScreen("Perfil", cubesat.getUsuario());
     }
 
     @FXML
-    void apresentaTelaExplorar(ActionEvent event) {
-        MainFX.changedScreen("Explorar", cubesat.getUsuario());
-    }
-
-    @FXML
-    void apresentarTelaInicial(ActionEvent event) {
+    void apresentarTelaInicial(ActionEvent event) throws IOException {
         MainFX.changedScreen("Tela Inicial", cubesat.getUsuario());
     }
 
@@ -261,21 +261,14 @@ public class TelaEditarCubesatController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        MainFX.addOnChangeScreenListener(new MainFX.OnChangeScreen() {
-            @Override
-            public void onScreenChanged(String newString, Object viewData) {
-                System.out.println("viewData.clss: " + viewData.getClass().getName());
-
-                if (viewData instanceof CubeSatDTO) {
-                    cubesat = (CubeSatDTO) viewData;
-
-                    choiceBoxAcesso.setValue(cubesat.getAcesso());
-                    textDescricao.setText(cubesat.getDescricao());
-                    textNomeCubesat.setText(cubesat.getNome());
-                } else {
-                    System.out.println("cubesat null!");
-                }
-
+        MainFX.addOnChangeScreenListener((String newString, Object viewData) -> {
+            if(viewData instanceof CubeSatDTO cubeSatDTO) {
+                cubesat = cubeSatDTO;
+                textsFields();
+                usuario = cubesat.getUsuario();
+            }
+            else if(viewData instanceof UsuarioDTO usuarioDTO){
+                usuario = usuarioDTO;
             }
         });
 
