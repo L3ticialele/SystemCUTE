@@ -1,7 +1,9 @@
-/*
- * Empty Stylesheet file.
- */
-
 .mainFxmlClass {
 
+}
+
+#fundoTelaExplorar{
+    -fx-background-image: url("../images/fundo.png");
+    -fx-background-position: center;
+    -fx-background-size: cover;
 }

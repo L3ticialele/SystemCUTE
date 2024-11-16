@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<HBox fx:id="fundoCadastro" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../styles/telacadastro.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TelaCadastroController">
+   <children>
+      <VBox prefHeight="720.0" prefWidth="1280.0">
+         <children>
+            <AnchorPane prefHeight="720.0" prefWidth="1280.0">
+               <children>
+                  <TextField fx:id="CampoNome" alignment="CENTER_RIGHT" layoutX="443.0" layoutY="222.0" prefHeight="50.0" prefWidth="395.0" promptText="NOME" style="-fx-background-radius: 50px; -fx-background-color: #DFDCE1;" AnchorPane.leftAnchor="443.0" AnchorPane.rightAnchor="445.0">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </TextField>
+                  <Button fx:id="BotaoCadastrar" layoutX="443.0" layoutY="574.0" mnemonicParsing="false" onAction="#BotaoCadastrar" prefHeight="50.0" prefWidth="395.0" style="-fx-background-radius: 50px; -fx-background-color: #DFDCE1;" text="CADASTRAR">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Button>
+                  <TextField fx:id="CampoEmail" layoutX="422.0" layoutY="303.0" prefHeight="50.0" prefWidth="425.0" promptText="E-MAIL" style="-fx-background-color: #DFDCE1; -fx-background-radius: 50px;">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="CampoTelefone" alignment="CENTER_RIGHT" layoutX="413.0" layoutY="395.0" prefHeight="50.0" prefWidth="425.0" promptText="TELEFONE" style="-fx-background-color: #DFDCE1; -fx-background-radius: 50px;">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="CampoSenha" layoutX="426.0" layoutY="479.0" prefHeight="50.0" prefWidth="387.0" promptText="SENHA" style="-fx-background-color: #DFDCE1; -fx-background-radius: 50px;">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </TextField>
+                  <Label fx:id="msg" layoutX="567.0" layoutY="190.0" textFill="#f8eaea">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Circle fill="#73668b" layoutX="449.0" layoutY="247.0" radius="41.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <ImageView fitHeight="65.0" fitWidth="59.0" layoutX="420.0" layoutY="219.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/IconePerfil.png" />
+                     </image>
+                  </ImageView>
+                  <Circle fill="#73668b" layoutX="813.0" layoutY="504.0" radius="41.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <ImageView fitHeight="65.0" fitWidth="50.0" layoutX="788.0" layoutY="476.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/IconeSenha.png" />
+                     </image>
+                  </ImageView>
+                  <Circle fill="#73668b" layoutX="449.0" layoutY="420.0" radius="41.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <ImageView fitHeight="57.0" fitWidth="59.0" layoutX="420.0" layoutY="392.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/IconeTelefone.png" />
+                     </image>
+                  </ImageView>
+                  <Circle fill="#73668b" layoutX="821.0" layoutY="328.0" radius="41.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <ImageView fitHeight="50.0" fitWidth="65.0" layoutX="789.0" layoutY="305.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/IconeEmail.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="BotaoVoltar" layoutX="871.0" layoutY="197.0" mnemonicParsing="false" onAction="#voltarPaginaLogin" style="-fx-background-color: transparent;">
+                     <graphic>
+                        <ImageView fitHeight="43.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/iconeSair.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </children>
+</HBox>

@@ -1,0 +1,22 @@
+.mainFxmlClass {
+
+}
+
+#fundoCadastro{
+    -fx-background-image: url("../images/fundoCadastro.png");
+    -fx-background-position: center;
+    -fx-background-size: cover;
+}
+
+#BotaoVoltar{
+    -fx-background-position: center;
+    -fx-background-size: cover;
+}
+
+@font-face {
+  -fx-font-family: 'Space Age';
+  src: url('../fonts/space age.ttf') format('truetype');
+}
+#BotaoCadastrar{
+    -fx-font-family: 'Space Age';
+}

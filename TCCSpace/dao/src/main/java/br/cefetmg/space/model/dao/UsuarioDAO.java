@@ -134,6 +134,31 @@ public class UsuarioDAO implements IUsuarioDAO{
         }
     }
     
+     @Override
+    public boolean validarlogin(UsuarioDTO usuario) throws PersistenciaException{
+        EntityManagerFactory entityManagerFactory = 
+        Persistence.createEntityManagerFactory("persistence");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        
+        try{
+             entityManager.getTransaction().begin();
+             Query query = entityManager.createQuery("SELECT u.email, u.senha FROM UsuarioDTO AS u WHERE u.email = :email AND u.senha = :senha");
+             query.setParameter("email", usuario.getEmail());
+             query.setParameter("senha", usuario.getSenha());
+             List<UsuarioDTO> usuarioPersistido = query.getResultList();
+            if(!usuarioPersistido.isEmpty()){
+                return true;
+            }else{
+                return false;
+            }
+        }catch(Exception ex){
+            entityManager.getTransaction().rollback();
+            throw ex;
+        }finally{
+            entityManager.close();
+        }
+    }
+    
     @Override
     public boolean atualizar(int idUsuario, UsuarioDTO usuario) throws PersistenciaException{
         EntityManagerFactory entityManagerFactory = 
@@ -146,7 +171,6 @@ public class UsuarioDAO implements IUsuarioDAO{
             
             if(usuarioPersistido != null){
                 usuarioPersistido.setEmail(usuario.getEmail());
-                usuarioPersistido.setUserName(usuario.getUserName());
                 usuarioPersistido.setNome(usuario.getNome());
                 usuarioPersistido.setSenha(usuario.getSenha());
                 usuarioPersistido.setAdministrador(usuario.isAdministrador());
@@ -166,4 +190,34 @@ public class UsuarioDAO implements IUsuarioDAO{
             entityManager.close();
         }
     }
+
+    @Override
+    public UsuarioDTO procurarPorId(int id) throws PersistenciaException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public UsuarioDTO validarlogin(String email, String senha) throws PersistenciaException {
+        EntityManagerFactory entityManagerFactory = 
+        Persistence.createEntityManagerFactory("persistence");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        
+        try{
+             entityManager.getTransaction().begin();
+             Query query = entityManager.createQuery("SELECT u.email, u.senha FROM UsuarioDTO AS u WHERE u.email = :email AND u.senha = :senha");
+             query.setParameter("email", email);
+             query.setParameter("senha", senha);
+             List<UsuarioDTO> usuarioPersistido = query.getResultList();
+            if(!usuarioPersistido.isEmpty()){
+                return usuarioPersistido.get(0);
+            }else{
+                return null;
+            }
+        }catch(Exception ex){
+            entityManager.getTransaction().rollback();
+            throw ex;
+        }finally{
+            entityManager.close();
+        }    }
+
 }

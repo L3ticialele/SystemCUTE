@@ -1,7 +1,10 @@
-/*
- * Empty Stylesheet file.
- */
-
 .mainFxmlClass {
 
+}
+
+
+#fundoTelaCubesat{
+    -fx-background-image: url("../images/fundo.png");
+    -fx-background-position: center;
+    -fx-background-size: cover;
 }

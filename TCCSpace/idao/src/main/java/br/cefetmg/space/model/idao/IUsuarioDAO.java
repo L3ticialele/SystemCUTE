@@ -17,4 +17,10 @@ public interface IUsuarioDAO {
     UsuarioDTO procurarPorUserName(String user) throws PersistenciaException;
     
     UsuarioDTO procurarPorEmail(String email) throws PersistenciaException;
+    
+    UsuarioDTO procurarPorId(int id) throws PersistenciaException;
+    
+    UsuarioDTO validarlogin(String email, String senha) throws PersistenciaException;
+    
+    boolean validarlogin(UsuarioDTO usuario) throws PersistenciaException;
 }

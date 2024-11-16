@@ -1,0 +1,24 @@
+.mainFxmlClass {
+   
+}
+#BotaoCadastro:hover{
+    -fx-underline: true;
+}
+#BotaoSenha:hover{
+    -fx-underline: true;
+}
+#fundo{
+    -fx-background-image: url("../images/fundoL.png");
+    -fx-background-position: center;
+    -fx-background-size: cover;
+}
+
+@font-face {
+  -fx-font-family: 'Space Age';
+  src: url('../fonts/space age.ttf') format('truetype');
+}
+
+
+#BotaoLogin{
+    -fx-font-family: 'Space Age';
+}

@@ -1,10 +1,5 @@
 package controllers;
-
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
-
+import br.cefetmg.space.model.dto.UsuarioDTO;
 import br.cefetmg.space.view.MainFX;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -13,12 +8,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 
-/**
- * FXML Controller class
- *
- * @author letic
- */
 public class TelaExplorarController implements Initializable {
 
    @FXML
@@ -26,6 +19,8 @@ public class TelaExplorarController implements Initializable {
 
     @FXML
     private Button botaoEquipe;
+    
+    private UsuarioDTO usuario;
 
     @FXML
     private Button botaoExplorar;
@@ -35,26 +30,60 @@ public class TelaExplorarController implements Initializable {
 
     @FXML
     private Label label;
+    
+    @FXML
+    private ImageView iconeEquipes;
+    
+    @FXML
+    private ImageView iconeCubesat;
+    
+    @FXML
+    void cubesatToPourple(MouseEvent event){
+        botaoCubesat.setStyle("-fx-text-fill: #8C52FF;"
+                + "-fx-background-color: 0;");
+        iconeCubesat.setImage(new Image("file:src/main/resources/images/iconeCubesatLilas.png"));
+    }
+    
+    @FXML
+    void cubesatToWhite(MouseEvent event){
+        botaoCubesat.setStyle("-fx-text-fill: white;"
+                + "-fx-background-color: 0;");
+        iconeCubesat.setImage(new Image("file:src/main/resources/images/iconeCubesat.png"));
+    }
+    
+    @FXML
+    void equipesToPourple(MouseEvent event){
+        botaoEquipe.setStyle("-fx-text-fill: #8C52FF;"
+                + "-fx-background-color: 0;");
+        iconeEquipes.setImage(new Image("file:src/main/resources/images/iconeEquipesLilas.png"));
+    }
+    
+    @FXML
+    void equipesToWhite(MouseEvent event){
+        botaoEquipe.setStyle("-fx-text-fill: white;"
+                + "-fx-background-color: 0;");
+        iconeEquipes.setImage(new Image("file:src/main/resources/images/iconeEquipes.png"));
+    }
 
     @FXML
     void apresentaTelaCubesat(ActionEvent event) {
-        MainFX.changedScreen("Cubesat");
+        MainFX.changedScreen("Cubesat", usuario);
     }
 
     @FXML
     void apresentaTelaEquipe(ActionEvent event) {
-        MainFX.changedScreen("Equipes");
+        MainFX.changedScreen("Equipes", usuario);
     }
 
     @FXML
     void apresentaTelaExplorar(ActionEvent event) {
-        MainFX.changedScreen("Explorar");
+        MainFX.changedScreen("Explorar", usuario);
     }
     
     
     @FXML
     void apresentarTelaInicial(ActionEvent event) {
-        MainFX.changedScreen("Tela Inicial");
+        MainFX.changedScreen("Tela Inicial", usuario);
     }
     
     /**
@@ -65,6 +94,12 @@ public class TelaExplorarController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        MainFX.addOnChangeScreenListener(new MainFX.OnChangeScreen(){
+           @Override
+           public void onScreenChanged(String newString, Object viewData){
+               usuario = (UsuarioDTO)viewData;
+           }
+       });
     }
     
 }
