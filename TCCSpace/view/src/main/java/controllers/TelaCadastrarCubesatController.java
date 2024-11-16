@@ -1,15 +1,14 @@
 package controllers;
 import br.cefetmg.space.model.dao.CubeSatDAO;
-import br.cefetmg.space.model.dao.UsuarioDAO;
 import br.cefetmg.space.model.dto.CubeSatDTO;
 import br.cefetmg.space.model.dto.UsuarioDTO;
 import br.cefetmg.space.model.idao.ICubeSatDAO;
-import br.cefetmg.space.model.idao.IUsuarioDAO;
 import br.cefetmg.space.model.idao.exception.PersistenciaException;
 import br.cefetmg.space.view.MainFX;
 import java.awt.Desktop;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.ResourceBundle;
@@ -18,7 +17,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -45,16 +43,13 @@ public class TelaCadastrarCubesatController implements Initializable {
    private TextArea textDescricao;
 
     @FXML
-    private Button botaoEquipe;
+    private Button botaoSuporte;
 
     @FXML
-    private Button botaoExplorar;
+    private Button botaoPerfil;
     
     @FXML
     private Button botaoHome;
-    
-    @FXML 
-    private ChoiceBox<String> choiceBoxAcesso;
     
     @FXML
     private TextField textNomeCubesat;
@@ -62,13 +57,11 @@ public class TelaCadastrarCubesatController implements Initializable {
     @FXML
     private Label labelNomeCubesat;
     
-    private String[] acesso = {"Público", "Privado"};
+    @FXML
+    private ImageView iconeSuporte;
     
     @FXML
-    private ImageView iconeEquipes;
-    
-    @FXML
-    private ImageView iconeExplorar;
+    private ImageView iconePerfil;
     
     @FXML
     private ImageView iconeSair;
@@ -94,7 +87,6 @@ public class TelaCadastrarCubesatController implements Initializable {
     void setToNull(){
         textNomeCubesat.setText(null);
         textDescricao.setText(null);
-        choiceBoxAcesso.setValue("Público");
     }
     
     @FXML
@@ -114,31 +106,31 @@ public class TelaCadastrarCubesatController implements Initializable {
     }
     
     @FXML
-    void explorarToPourple(MouseEvent event){
-        botaoExplorar.setStyle("-fx-text-fill: #8C52FF;"
+    void perfilToPourple(MouseEvent event){
+        botaoPerfil.setStyle("-fx-text-fill: #8C52FF;"
                 + "-fx-background-color: 0;");
-        iconeExplorar.setImage(new Image("file:src/main/resources/images/iconeExplorarLilas.png"));
+        iconePerfil.setImage(new Image("file:src/main/resources/images/userLilas.png"));
     }
     
     @FXML
-    void explorarToWhite(MouseEvent event){
-        botaoExplorar.setStyle("-fx-text-fill: white;"
+    void perfilToWhite(MouseEvent event){
+        botaoPerfil.setStyle("-fx-text-fill: white;"
                 + "-fx-background-color: 0;");
-        iconeExplorar.setImage(new Image("file:src/main/resources/images/iconeExplorar.png"));
+        iconePerfil.setImage(new Image("file:src/main/resources/images/user.png"));
     }
     
     @FXML
-    void equipesToPourple(MouseEvent event){
-        botaoEquipe.setStyle("-fx-text-fill: #8C52FF;"
+    void suporteToPourple(MouseEvent event){
+        botaoSuporte.setStyle("-fx-text-fill: #8C52FF;"
                 + "-fx-background-color: 0;");
-        iconeEquipes.setImage(new Image("file:src/main/resources/images/iconeEquipesLilas.png"));
+        iconeSuporte.setImage(new Image("file:src/main/resources/images/suporteLilas.png"));
     }
     
     @FXML
-    void equipesToWhite(MouseEvent event){
-        botaoEquipe.setStyle("-fx-text-fill: white;"
+    void suporteToWhite(MouseEvent event){
+        botaoSuporte.setStyle("-fx-text-fill: white;"
                 + "-fx-background-color: 0;");
-        iconeEquipes.setImage(new Image("file:src/main/resources/images/iconeEquipes.png"));
+        iconeSuporte.setImage(new Image("file:src/main/resources/images/suport.png"));
     }
     
     @FXML 
@@ -189,7 +181,6 @@ public class TelaCadastrarCubesatController implements Initializable {
                 LocalDateTime dataCadastro = LocalDateTime.now(); 
                 cube.setDataCadastro(dataCadastro.toString());
                 cube.setNome(textNomeCubesat.getText());
-                cube.setAcesso(choiceBoxAcesso.getValue());
                 cube.setPessoa(user);
                 cube.setDescricao(textDescricao.getText());
 
@@ -203,38 +194,31 @@ public class TelaCadastrarCubesatController implements Initializable {
                 
                 textNomeCubesat.setText(null);
                 textDescricao.setText(null);
-                choiceBoxAcesso.setValue("Público");
                 
-                MainFX.changedScreen("Cubesat", user);
+                MainFX.changedScreen("Tela Inicial", user);
             }
             
-        }catch(Exception e){
+        }catch(PersistenciaException | IOException e){
             e.printStackTrace();
         }
         
     }
-    
+
     @FXML
-    void apresentaTelaCubesat(ActionEvent event) {
+    void apresentaTelaSuporte(ActionEvent event) throws IOException {
         setToNull();
-        MainFX.changedScreen("Cubesat", user);
+        MainFX.changedScreen("Suporte", user);
     }
 
     @FXML
-    void apresentaTelaEquipe(ActionEvent event) {
+    void apresentaTelaPerfil(ActionEvent event) throws IOException {
         setToNull();
-        MainFX.changedScreen("Equipes", user);
-    }
-
-    @FXML
-    void apresentaTelaExplorar(ActionEvent event) {
-        setToNull();
-        MainFX.changedScreen("Explorar", user);
+        MainFX.changedScreen("Perfil", user);
     }
     
     
     @FXML
-    void apresentarTelaInicial(ActionEvent event) {
+    void apresentarTelaInicial(ActionEvent event) throws IOException {
         setToNull();
         MainFX.changedScreen("Tela Inicial", user);
     }
@@ -255,15 +239,9 @@ public class TelaCadastrarCubesatController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb){
        
-       MainFX.addOnChangeScreenListener(new MainFX.OnChangeScreen(){
-           @Override
-           public void onScreenChanged(String newString, Object viewData){
-               user = (UsuarioDTO)viewData;
-           }
+       MainFX.addOnChangeScreenListener((String newString, Object viewData) -> {
+           user = (UsuarioDTO)viewData;
        });
-        
-       choiceBoxAcesso.getItems().addAll(acesso);
-       choiceBoxAcesso.setValue("Público");
     }
     
 }

@@ -4,6 +4,7 @@ import br.cefetmg.space.model.dto.UsuarioDTO;
 import br.cefetmg.space.model.dao.UsuarioDAO;
 import br.cefetmg.space.model.idao.exception.PersistenciaException;
 import br.cefetmg.space.view.MainFX;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -36,11 +37,11 @@ public class TelaCadastroController implements Initializable {
     private Label msg;
     
 
-    public void voltarPaginaLogin(ActionEvent e) {
+    public void voltarPaginaLogin(ActionEvent e) throws IOException {
         MainFX.changedScreen("Login", null);
     }
 
-    public void BotaoCadastrar(ActionEvent e) {
+    public void BotaoCadastrar(ActionEvent e) throws IOException {
         if (CampoEmail.getText().isBlank() == true || CampoSenha.getText().isBlank() == true || CampoNome.getText().isBlank() == true || CampoTelefone.getText().isBlank() == true) {
             msg.setText("Preencha os campos vazios");
         } else {
