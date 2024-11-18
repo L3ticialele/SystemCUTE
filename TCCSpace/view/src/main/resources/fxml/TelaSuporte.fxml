@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<HBox id="fundoTelaExplorar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../styles/telaexplorar.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TelaExplorarController">
+<HBox id="fundoTelaEquipes" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../styles/telaequipes.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TelaSuporteController">
    <children>
       <VBox prefHeight="720.0" prefWidth="1280.0">
          <children>
@@ -41,11 +41,11 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="botaoExplorar" mnemonicParsing="false" onAction="#apresentaTelaExplorar" prefHeight="105.0" style="-fx-background-color: 0;" text="EXPLORAR" textFill="#8c52ff">
+                  <Button fx:id="botaoPerfil" mnemonicParsing="false" onAction="#apresentaTelaPerfil" onDragEntered="#perfilToPourple" onDragExited="#perfilToWhite" prefHeight="105.0" style="-fx-background-color: 0;" text="PERFIL" textFill="WHITE">
                      <graphic>
-                        <ImageView fitHeight="36.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="iconePerfil" fitHeight="36.0" fitWidth="35.0" onDragEntered="#perfilToPourple" onDragExited="#perfilToWhite" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../images/iconeExplorarLilas.png" />
+                              <Image url="@../images/user.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -53,7 +53,7 @@
                         <Font size="25.0" />
                      </font>
                   </Button>
-                  <Button fx:id="botaoCubesat" mnemonicParsing="false" onAction="#apresentaTelaCubesat" onMouseEntered="#cubesatToPourple" onMouseExited="#cubesatToWhite" style="-fx-background-color: 0;" text="CUBESATS" textFill="WHITE">
+                  <Button fx:id="botaoCubesat" mnemonicParsing="false" onAction="#apresentarTelaInicial" onMouseEntered="#cubesatToPourple" onMouseExited="#cubesatToWhite" style="-fx-background-color: 0;" text="CUBESATS" textFill="WHITE">
                      <graphic>
                         <ImageView fx:id="iconeCubesat" fitHeight="43.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -65,11 +65,11 @@
                         <Font size="25.0" />
                      </font>
                   </Button>
-                  <Button fx:id="botaoEquipe" mnemonicParsing="false" onAction="#apresentaTelaEquipe" onMouseEntered="#equipesToPourple" onMouseExited="#equipesToWhite" prefHeight="33.0" prefWidth="105.0" style="-fx-background-color: 0;" text="EQUIPES" textFill="WHITE">
+                  <Button fx:id="botaoSuporte" mnemonicParsing="false" onAction="#apresentaTelaSuporte" prefHeight="33.0" prefWidth="105.0" style="-fx-background-color: 0;" text="SUPORTE" textFill="#8c52ff">
                      <graphic>
-                        <ImageView fx:id="iconeEquipes" fitHeight="49.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="iconeSuporte" fitHeight="49.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../images/iconeEquipes.png" />
+                              <Image url="@../images/suporteLilas.png" />
                            </image>
                         </ImageView>
                      </graphic>
