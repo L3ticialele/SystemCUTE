@@ -1,5 +1,4 @@
 package controllers;
-
 import br.cefetmg.space.model.dto.UsuarioDTO;
 import br.cefetmg.space.view.MainFX;
 import java.io.IOException;
@@ -8,69 +7,49 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.chart.LineChart;
 import javafx.scene.control.Button;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.shape.MeshView;
 
-public class BaseController implements Initializable{
+public class TelaPerfilController implements Initializable {
 
-    @FXML
-    private AnchorPane anchorPane3d;
-
-    @FXML
+   @FXML
     private Button botaoCubesat;
 
     @FXML
     private Button botaoSuporte;
+    
+    private UsuarioDTO usuario;
 
     @FXML
     private Button botaoPerfil;
-
+    
     @FXML
     private Button botaoHome;
 
     @FXML
+    private Label label;
+    
+    @FXML
     private ImageView iconeSuporte;
-
-    @FXML
-    private ImageView iconePerfil;
-
-    @FXML
-    private LineChart<?, ?> lineChart;
-
-    @FXML
-    private MenuBar menuBarTrocarGrafico;
-
-    @FXML
-    private MenuItem menuItemAltitude;
-
-    @FXML
-    private MenuItem menuItemTemperatura;
-
-    @FXML
-    private MeshView meshVIew3D;
-    
-    private UsuarioDTO usuario;
     
     @FXML
-    void perfilToPourple(MouseEvent event){
-        botaoPerfil.setStyle("-fx-text-fill: #8C52FF;"
+    private ImageView iconeCubesat;
+    
+    @FXML
+    void cubesatToPourple(MouseEvent event){
+        botaoCubesat.setStyle("-fx-text-fill: #8C52FF;"
                 + "-fx-background-color: 0;");
-        iconePerfil.setImage(new Image("file:src/main/resources/images/userLilas.png"));
+        iconeCubesat.setImage(new Image("file:src/main/resources/images/iconeCubesatLilas.png"));
     }
     
-    
     @FXML
-    void perfilToWhite(MouseEvent event){
-        botaoPerfil.setStyle("-fx-text-fill: white;"
+    void cubesatToWhite(MouseEvent event){
+        botaoCubesat.setStyle("-fx-text-fill: white;"
                 + "-fx-background-color: 0;");
-        iconePerfil.setImage(new Image("file:src/main/resources/images/user.png"));
+        iconeCubesat.setImage(new Image("file:src/main/resources/images/iconeCubesat.png"));
     }
     
     @FXML
@@ -85,17 +64,6 @@ public class BaseController implements Initializable{
         botaoSuporte.setStyle("-fx-text-fill: white;"
                 + "-fx-background-color: 0;");
         iconeSuporte.setImage(new Image("file:src/main/resources/images/suport.png"));
-    }
-    
-    @FXML
-    void telaCadastrarCubesat(ActionEvent event) throws IOException{
-        MainFX.changedScreen("Cadastrar Cubesat", usuario);
-    }
-    
-
-    @FXML
-    void apresentaTelaCubesat(ActionEvent event) throws IOException {
-        MainFX.changedScreen("Cubesat", usuario);
     }
 
     @FXML
@@ -113,11 +81,21 @@ public class BaseController implements Initializable{
     void apresentarTelaInicial(ActionEvent event) throws IOException {
         MainFX.changedScreen("Tela Inicial", usuario);
     }
-
+    
+    /**
+     * Initializes the controller class.
+     * @param url
+     * @param rb
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        // TODO
+        MainFX.addOnChangeScreenListener(new MainFX.OnChangeScreen(){
+           @Override
+           public void onScreenChanged(String newString, Object viewData){
+               usuario = (UsuarioDTO)viewData;
+           }
+       });
     }
     
-
 }
