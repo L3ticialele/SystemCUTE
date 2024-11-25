@@ -1,10 +1,10 @@
 
 package br.cefetmg.space.model.service;
 
-import br.cefetmg.space.model.dao.UsuarioDAO;
-import br.cefetmg.space.model.dto.UsuarioDTO;
-import br.cefetmg.space.model.idao.IUsuarioDAO;
-import br.cefetmg.space.model.idao.exception.PersistenciaException;
+import br.cefetmg.space.dao.UsuarioDAO;
+import br.cefetmg.space.entidades.Usuario;
+import br.cefetmg.space.idao.IUsuarioDAO;
+import br.cefetmg.space.idao.exception.PersistenciaException;
 import java.util.List;
 
 public class ManterUsuario implements IManterUsuario{
@@ -15,12 +15,12 @@ public class ManterUsuario implements IManterUsuario{
      }
     
     @Override
-    public void cadastrar(UsuarioDTO usuario) throws PersistenciaException {
+    public void cadastrar(Usuario usuario) throws PersistenciaException {
         usuarioDAO.inserir(usuario);
     }
     
     @Override
-    public boolean alterar(int idUsuario, UsuarioDTO usuario) throws PersistenciaException{
+    public boolean alterar(int idUsuario, Usuario usuario) throws PersistenciaException{
         boolean result = usuarioDAO.atualizar(idUsuario, usuario);
         return result;
     }
@@ -31,8 +31,8 @@ public class ManterUsuario implements IManterUsuario{
     }
 
     @Override
-    public List<UsuarioDTO> pesquisarTodos() throws PersistenciaException {
-       List<UsuarioDTO> result = usuarioDAO.listarTodos();
+    public List<Usuario> pesquisarTodos() throws PersistenciaException {
+       List<Usuario> result = usuarioDAO.listarTodos();
        return result;
     }
 }

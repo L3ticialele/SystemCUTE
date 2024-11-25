@@ -5,7 +5,7 @@
         <groupId>com.tccspace</groupId>
         <artifactId>TCCSpace</artifactId>
         <version>1.0-SNAPSHOT</version>
-        <relativePath>../pom.xml</relativePath>
+        <relativePath>../TCCSpace</relativePath>
     </parent>
     <artifactId>dto</artifactId>
     <packaging>jar</packaging>
@@ -63,5 +63,5 @@
         <maven.compiler.target>17</maven.compiler.target>
         <exec.mainClass>br.cefetmg.space.dto.Dto</exec.mainClass>
     </properties>
-    <groupId>com.tccspace</groupId>
+    <name>entidades</name>
 </project>

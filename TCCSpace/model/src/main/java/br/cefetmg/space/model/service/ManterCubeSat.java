@@ -1,10 +1,10 @@
 
 package br.cefetmg.space.model.service;
 
-import br.cefetmg.space.model.dao.CubeSatDAO;
-import br.cefetmg.space.model.dto.CubeSatDTO;
-import br.cefetmg.space.model.idao.ICubeSatDAO;
-import br.cefetmg.space.model.idao.exception.PersistenciaException;
+import br.cefetmg.space.dao.CubeSatDAO;
+import br.cefetmg.space.entidades.CubeSat;
+import br.cefetmg.space.idao.ICubeSatDAO;
+import br.cefetmg.space.idao.exception.PersistenciaException;
 import java.util.List;
 
 public class ManterCubeSat implements IManterCubeSat {
@@ -15,12 +15,12 @@ public class ManterCubeSat implements IManterCubeSat {
      }
     
     @Override
-    public void cadastrar(CubeSatDTO cube) throws PersistenciaException {
+    public void cadastrar(CubeSat cube) throws PersistenciaException {
         cubeSatDAO.inserir(cube);
     }
     
     @Override
-    public boolean alterar(CubeSatDTO cube) throws PersistenciaException{
+    public boolean alterar(CubeSat cube) throws PersistenciaException{
         boolean result = cubeSatDAO.atualizar(cube);
         return result;
     }
@@ -32,8 +32,8 @@ public class ManterCubeSat implements IManterCubeSat {
     }
 
     @Override
-    public List<CubeSatDTO> pesquisarTodos() throws PersistenciaException {
-       List<CubeSatDTO> result = cubeSatDAO.listarTodos();
+    public List<CubeSat> pesquisarTodos() throws PersistenciaException {
+       List<CubeSat> result = cubeSatDAO.listarTodos();
        return result;
     }
 }
