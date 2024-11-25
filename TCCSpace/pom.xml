@@ -44,9 +44,9 @@
     
     
     
-    <module>model</module>
+    <module>controller</module>
         
-    <module>ok</module>
+    <module>view</module>
       
   </modules>
             

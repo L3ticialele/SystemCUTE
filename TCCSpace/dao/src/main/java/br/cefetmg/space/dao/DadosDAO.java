@@ -81,7 +81,7 @@ public class DadosDAO implements IDadosDAO{
         try {
             // Consulta para obter o dado mais recente da tabela 'dados' ordenado pelo ID decrescente
             entityManager.getTransaction().begin();
-            Query query = entityManager.createQuery("SELECT d FROM DadosDTO d ORDER BY d.id DESC", Dados.class);
+            Query query = entityManager.createQuery("SELECT d FROM Dados d ORDER BY d.id DESC", Dados.class);
              List<Dados> dadosPersistidos = query.getResultList();
             if(!dadosPersistidos.isEmpty()){
                 return dadosPersistidos.get(0);
@@ -255,7 +255,7 @@ public class DadosDAO implements IDadosDAO{
         
         try{
              entityManager.getTransaction().begin();
-             Query query = entityManager.createQuery("FROM DadosDTO AS d WHERE d.id =:id ");
+             Query query = entityManager.createQuery("FROM Dados AS d WHERE d.id =:id ");
              query.setParameter("id", id);
              List<Dados> dadosPersistidos = query.getResultList();
             if(!dadosPersistidos.isEmpty()){

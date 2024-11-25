@@ -123,7 +123,7 @@ public class CubeSatDAO implements ICubeSatDAO {
 
         try {
             entityManager.getTransaction().begin();
-            Query query = entityManager.createQuery("FROM CubeSatDTO AS u WHERE u.id =:id ");
+            Query query = entityManager.createQuery("FROM CubeSat AS u WHERE u.id =:id ");
             query.setParameter("id", id);
             List<CubeSat> cubesatPersistido = query.getResultList();
             if (!cubesatPersistido.isEmpty()) {
@@ -147,7 +147,7 @@ public class CubeSatDAO implements ICubeSatDAO {
 
         try {
             entityManager.getTransaction().begin();
-            Query query = entityManager.createQuery("FROM CubeSatDTO AS c WHERE c.nome =:nomeC");
+            Query query = entityManager.createQuery("FROM CubeSat AS c WHERE c.nome =:nomeC");
             query.setParameter("nomeC", nomeC);
             List<CubeSat> cubesatPersistido = query.getResultList();
             if (!cubesatPersistido.isEmpty()) {

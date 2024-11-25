@@ -94,7 +94,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 
         try {
             entityManager.getTransaction().begin();
-            Query query = entityManager.createQuery("FROM UsuarioDTO AS u WHERE u.username =:user ");
+            Query query = entityManager.createQuery("FROM Usuario AS u WHERE u.username =:user ");
             query.setParameter("user", user);
             List<Usuario> usuarioPersistido = query.getResultList();
             if (!usuarioPersistido.isEmpty()) {
@@ -118,7 +118,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 
         try {
             entityManager.getTransaction().begin();
-            Query query = entityManager.createQuery("FROM UsuarioDTO AS u WHERE u.email =:email ");
+            Query query = entityManager.createQuery("FROM Usuario AS u WHERE u.email =:email ");
             query.setParameter("email", email);
             List<Usuario> usuarioPersistido = query.getResultList();
             if (!usuarioPersistido.isEmpty()) {
@@ -142,7 +142,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 
         try {
             entityManager.getTransaction().begin();
-            Query query = entityManager.createQuery("SELECT u.email, u.senha FROM UsuarioDTO AS u WHERE u.email = :email AND u.senha = :senha");
+            Query query = entityManager.createQuery("SELECT u.email, u.senha FROM Usuario AS u WHERE u.email = :email AND u.senha = :senha");
             query.setParameter("email", usuario.getEmail());
             query.setParameter("senha", usuario.getSenha());
             List<Usuario> usuarioPersistido = query.getResultList();
@@ -203,7 +203,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 
         try {
             entityManager.getTransaction().begin();
-            Query query = entityManager.createQuery("SELECT u.email, u.senha FROM UsuarioDTO AS u WHERE u.email = :email AND u.senha = :senha");
+            Query query = entityManager.createQuery("SELECT u.email, u.senha FROM Usuario AS u WHERE u.email = :email AND u.senha = :senha");
             query.setParameter("email", email);
             query.setParameter("senha", senha);
             List<Usuario> usuarioPersistido = query.getResultList();

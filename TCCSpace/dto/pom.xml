@@ -7,7 +7,7 @@
         <version>1.0-SNAPSHOT</version>
         <relativePath>../TCCSpace</relativePath>
     </parent>
-    <artifactId>dto</artifactId>
+    <artifactId>entidades</artifactId>
     <packaging>jar</packaging>
     <dependencies>
         <dependency>
@@ -61,7 +61,7 @@
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <exec.mainClass>br.cefetmg.space.dto.Dto</exec.mainClass>
+        <exec.mainClass>br.cefetmg.space.entidades.Entidades</exec.mainClass>
     </properties>
     <name>entidades</name>
 </project>
