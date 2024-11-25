@@ -1,0 +1,491 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Copyright (c) 2015, 2019, Gluon and/or its affiliates.
+  All rights reserved. Use is subject to license terms.
+
+  This file is available and licensed under the following license:
+
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions
+  are met:
+
+  - Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+  - Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in
+    the documentation and/or other materials provided with the distribution.
+  - Neither the name of Oracle Corporation nor the names of its
+    contributors may be used to endorse or promote products derived
+    from this software without specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<HBox id="fundoTela" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../styles/gui.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Data3DViewerController">
+   <children>
+      <VBox prefHeight="400.0" prefWidth="640.0">
+         <children>
+            <ButtonBar prefHeight="168.0" prefWidth="924.0">
+               <buttons>
+                  <Button defaultButton="true" maxHeight="137.0" maxWidth="282.0" minHeight="20.0" minWidth="24.0" mnemonicParsing="false" prefHeight="137.0" prefWidth="290.0" style="-fx-background-color: 0;">
+                     <graphic>
+                        <ImageView fitHeight="49.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/menu.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="botaoHome" mnemonicParsing="false" onAction="#apresentarTelaInicial" prefHeight="99.0" prefWidth="125.0" style="-fx-background-color: 0;" text="Cubesat Telemetry&#10;Environment" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="73.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/iconeHome.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="botaoSuporte" mnemonicParsing="false" onAction="#apresentaTelaSuporte" onMouseEntered="#suporteToPourple" onMouseExited="#suporteToWhite" prefHeight="105.0" style="-fx-background-color: 0;" text="SUPORTE" textFill="WHITE">
+                     <graphic>
+                        <ImageView fx:id="iconeSuporte" fitHeight="36.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/suport.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="botaoCubesat" mnemonicParsing="false" onAction="#apresentarTelaInicial" style="-fx-background-color: 0;" text="CUBESATS" textFill="#8c52ff">
+                     <graphic>
+                        <ImageView fitHeight="43.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/iconeCubesatLilas.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="botaoPerfil" mnemonicParsing="false" onAction="#apresentaTelaPerfil" onMouseEntered="#perfilToPourple" onMouseExited="#perfilToWhite" prefHeight="33.0" prefWidth="105.0" style="-fx-background-color: 0;" text="PERFIL" textFill="WHITE">
+                     <graphic>
+                        <ImageView fx:id="iconePerfil" fitHeight="49.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/user.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Button>
+               </buttons>
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin>
+            </ButtonBar>
+            <Line endX="1107.4393310546875" endY="1.1920928955078125E-6" startX="-145.5" stroke="WHITE" strokeWidth="1.5" styleClass="menu-bar">
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+            </Line>
+            <AnchorPane maxHeight="-1.0" maxWidth="-1.0" minHeight="720.0" minWidth="1280.0" prefWidth="1207.0" styleClass="body" stylesheets="@../assets/css/gui.css" VBox.vgrow="ALWAYS">
+               <children>
+                  <Pane layoutX="47.0" layoutY="-7.0" prefHeight="601.0" prefWidth="1221.0" styleClass="card" stylesheets="@../assets/css/gui.css">
+                     <children>
+                        <Line endX="257.33331298828125" layoutX="570.0" layoutY="304.0" rotate="90.0" startX="-300.0" stroke="WHITE" strokeWidth="2.0" />
+                        <AnchorPane layoutX="569.0" layoutY="73.0" prefHeight="451.0" prefWidth="261.0" styleClass="pane">
+                           <children>
+                              <GridPane layoutX="15.0" layoutY="38.0" prefHeight="248.0" prefWidth="232.0">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="141.77783203125" minWidth="10.0" prefWidth="137.33331298828125" />
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="92.888916015625" minWidth="10.0" prefWidth="88.00002034505206" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="TEM. EXTERNA:">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Text>
+                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="TEMP. INTERNA:" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Text>
+                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="ALTITUDE:" GridPane.rowIndex="2">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Text>
+                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="UMIDADE:" GridPane.rowIndex="3">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Text>
+                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="LUZ(1):" GridPane.rowIndex="4">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Text>
+                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="LUZ(2):" GridPane.rowIndex="5">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Text>
+                                    <Label fx:id="labelAltitude" text="000.00" textAlignment="CENTER" textFill="#e1e1e1" GridPane.columnIndex="1">
+                                       <font>
+                                          <Font name="Monospaced Regular" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="labelBateria" text="000.00" textAlignment="CENTER" textFill="#e1e1e1" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font name="Monospaced Regular" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="labelTemperaturaExterna" text="000.00" textAlignment="CENTER" textFill="#e1e1e1" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                       <font>
+                                          <Font name="Monospaced Regular" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="labelUmidade" text="000.00" textAlignment="CENTER" textFill="#e1e1e1" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                       <font>
+                                          <Font name="Monospaced Regular" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="labelLuz1" text="000.00" textAlignment="CENTER" textFill="#e1e1e1" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                       <font>
+                                          <Font name="Monospaced Regular" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="labelLuz2" text="000.00" textAlignment="CENTER" textFill="#e1e1e1" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                       <font>
+                                          <Font name="Monospaced Regular" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="labelTemperaturaInterna" text="000.00" textAlignment="CENTER" textFill="#e1e1e1" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                                       <font>
+                                          <Font name="Monospaced Regular" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="BATERIA(%):" GridPane.rowIndex="6">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </GridPane>
+                              <Text fill="WHITE" layoutX="96.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DADOS" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                                 <styleClass>
+                                    <String fx:value="Ablation" />
+                                    <String fx:value="short-letter-space" />
+                                 </styleClass>
+                              </Text>
+                              <Text fill="WHITE" layoutX="80.0" layoutY="314.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ROTAÇÃO" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                                 <styleClass>
+                                    <String fx:value="Ablation" />
+                                    <String fx:value="short-letter-space" />
+                                 </styleClass>
+                              </Text>
+                              <GridPane layoutX="19.0" layoutY="330.0" prefHeight="93.0" prefWidth="232.0">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="139.11114501953125" minWidth="10.0" prefWidth="139.11114501953125" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="92.888916015625" minWidth="10.0" prefWidth="86.22218831380206" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="EIXO X:">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Text>
+                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="EIXO Y:" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Text>
+                                    <Label fx:id="labelLuz11" text="000.00" textAlignment="CENTER" textFill="#e1e1e1" GridPane.columnIndex="1">
+                                       <font>
+                                          <Font name="Monospaced Regular" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="labelLuz21" text="000.00" textAlignment="CENTER" textFill="#e1e1e1" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font name="Monospaced Regular" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="labelTemperaturaInterna1" text="000.00" textAlignment="CENTER" textFill="#e1e1e1" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                       <font>
+                                          <Font name="Monospaced Regular" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="EIXO Z:" GridPane.rowIndex="2">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane layoutX="851.0" layoutY="74.0" prefHeight="221.0" prefWidth="348.0" styleClass="pane">
+                           <children>
+                              <GridPane layoutX="16.0" layoutY="25.0" prefHeight="180.0" prefWidth="325.0">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="231.33329264322916" minWidth="10.0" prefWidth="231.33329264322916" />
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="93.77783203125" minWidth="8.4444580078125" prefWidth="83.33337402343747" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="CORRENTE(BATERIA):">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Text>
+                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="CORRENTE(PLACA SOLAR):" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Text>
+                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="TENSÃO (BATERIA):" GridPane.rowIndex="2">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Text>
+                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="TENSÃO(PLACA SOLAR):" GridPane.rowIndex="3">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Text>
+                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="POTÊNCIA(BATERIA):" GridPane.rowIndex="4">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Text>
+                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="POTÊNCIA(PLACA SOLAR):" GridPane.rowIndex="5">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Text>
+                                    <Label fx:id="labelCorrenteBateria" prefHeight="24.0" prefWidth="94.0" text="000.00" textAlignment="CENTER" textFill="#e1e1e1" GridPane.columnIndex="1">
+                                       <font>
+                                          <Font name="Monospaced Regular" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="labelCorrentePlacaSolar" text="000.00" textAlignment="CENTER" textFill="#e1e1e1" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font name="Monospaced Regular" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="labelTensaoBateria" text="000.00" textAlignment="CENTER" textFill="#e1e1e1" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                       <font>
+                                          <Font name="Monospaced Regular" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="labelPontoOrvalho" text="000.00" textAlignment="CENTER" textFill="#e1e1e1" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                       <font>
+                                          <Font name="Monospaced Regular" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="labelTensaoPlacaSolar" text="000.00" textAlignment="CENTER" textFill="#e1e1e1" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                       <font>
+                                          <Font name="Monospaced Regular" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="labelPotenciaBateria" text="000.00" textAlignment="CENTER" textFill="#e1e1e1" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                       <font>
+                                          <Font name="Monospaced Regular" size="18.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </GridPane>
+                              <Text fill="WHITE" layoutX="139.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Ablation" text="ENERGIA" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane layoutX="854.0" layoutY="303.0" prefHeight="223.0" prefWidth="347.0" styleClass="pane">
+                           <children>
+                              <Text fill="WHITE" layoutX="137.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Ablation" text="EXTRAS" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                              </Text>
+                              <GridPane layoutX="22.0" layoutY="21.0" prefHeight="186.0" prefWidth="302.0">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="214.44441731770834" minWidth="10.0" prefWidth="202.88899739583334" />
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="93.77783203125" minWidth="10.0" prefWidth="80.44433593750003" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="GÁS(1):">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Text>
+                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="GÁS(2):" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Text>
+                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="SENSOR(UV):" GridPane.rowIndex="2">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Text>
+                                    <Label fx:id="labelGas1" text="000.00" textAlignment="CENTER" textFill="#e1e1e1" GridPane.columnIndex="1">
+                                       <font>
+                                          <Font name="Monospaced Regular" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="labelGas2" text="000.00" textAlignment="CENTER" textFill="#e1e1e1" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font name="Monospaced Regular" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="labelSensorUV" text="000.00" textAlignment="CENTER" textFill="#e1e1e1" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                       <font>
+                                          <Font name="Monospaced Regular" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="PRESSÃO:" GridPane.rowIndex="3">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Text>
+                                    <Label fx:id="labelPressao" text="000.00" textAlignment="CENTER" textFill="#e1e1e1" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                       <font>
+                                          <Font name="Monospaced Regular" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="PONTO ORVALHO:" GridPane.rowIndex="4">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Text>
+                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="HORÁRIO:" GridPane.rowIndex="5">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Text>
+                                    <Label text="000.00" textAlignment="CENTER" textFill="#e1e1e1" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                       <font>
+                                          <Font name="Monospaced Regular" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="00:00" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                       <font>
+                                          <Font name="Monospaced Regular" size="18.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </AnchorPane>
+                        <Button layoutX="863.0" layoutY="548.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="145.0" style="-fx-background-color: #574040;" text="VISUALIZAR GRÁFICOS" textFill="WHITE" />
+                        <Button layoutX="624.0" layoutY="548.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="168.0" style="-fx-background-color: #574040;" text="GRAVAR NOVOS DADOS" textFill="WHITE" />
+                        <Button layoutX="1046.0" layoutY="549.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="136.0" style="-fx-background-color: #574040;" text="BAIXAR PLANILHA" textFill="WHITE" />
+                        <Button layoutX="22.0" layoutY="37.0" mnemonicParsing="false" style="-fx-background-color: #574040;" text="VOLTAR" textFill="#fff9f9" />
+                        <Button layoutX="463.0" layoutY="36.0" mnemonicParsing="false" style="-fx-background-color: #574040;" text="EDITAR" textFill="WHITE" />
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="99.0" layoutY="22.0" prefHeight="59.0" prefWidth="363.0" text="NOME" textFill="WHITE">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </Label>
+                        <TableView layoutX="32.0" layoutY="98.0" prefHeight="475.0" prefWidth="484.0">
+                          <columns>
+                            <TableColumn prefWidth="88.66666412353516" text="ID" />
+                            <TableColumn prefWidth="136.0000457763672" text="IMAGEM" />
+                              <TableColumn prefWidth="258.88890075683594" text="NOME" />
+                          </columns>
+                        </TableView>
+                        <Label layoutX="807.0" layoutY="27.0" text="GRAVAÇÃO 1" textFill="WHITE">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </children>
+</HBox>
