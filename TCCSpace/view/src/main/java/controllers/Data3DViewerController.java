@@ -6,6 +6,7 @@ import br.cefetmg.space.view.MainFX;
 import gui3d.LineChartManager;
 import gui3d.Model3D;
 import gui3d.Updater;
+import java.io.IOException;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -218,6 +219,11 @@ public class Data3DViewerController {
     void apresentarTelaInicial(ActionEvent event) throws IOException {
         MainFX.changedScreen("Tela Inicial", usuario);
     }
+  
+    @FXML
+    void apresentaGraficos (ActionEvent event) throws IOException {
+    
+        MainFX.changedScreen("Graficos", cubesat);
     
     @FXML
     void gravarDados(ActionEvent event){
