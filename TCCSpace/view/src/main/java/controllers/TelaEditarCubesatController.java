@@ -262,8 +262,10 @@ public class TelaEditarCubesatController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
         MainFX.addOnChangeScreenListener((String newString, Object viewData) -> {
+            CubeSat cubeSat = (CubeSat) viewData;
+            Usuario user = (Usuario) viewData;
             if(viewData instanceof CubeSat) {
-                cubesat = (CubeSat) viewData;
+                cubesat = cubeSat;
                 textsFields();
                 usuario = cubesat.getUsuario();
             }
