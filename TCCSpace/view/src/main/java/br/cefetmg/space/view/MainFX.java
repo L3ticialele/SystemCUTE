@@ -20,7 +20,6 @@ public class MainFX extends Application {
     private static Scene telaLogin;
     private static Scene telaEditarCubesat;
     private static Scene graficos;
-    
     private static Scene telaGui3d;
     
     @Override

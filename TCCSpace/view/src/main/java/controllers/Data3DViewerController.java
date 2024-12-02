@@ -7,6 +7,12 @@ import gui3d.LineChartManager;
 import gui3d.Model3D;
 import gui3d.Updater;
 import java.io.IOException;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -19,6 +25,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.MeshView;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 public class Data3DViewerController {
 
@@ -147,6 +155,9 @@ public class Data3DViewerController {
 
     @FXML
     private Button botaoHome;
+    
+    @FXML
+    private Button botaoGravarDados;
 
     @FXML
     private ImageView iconeSuporte;
@@ -208,10 +219,23 @@ public class Data3DViewerController {
     void apresentarTelaInicial(ActionEvent event) throws IOException {
         MainFX.changedScreen("Tela Inicial", usuario);
     }
+  
     @FXML
     void apresentaGraficos (ActionEvent event) throws IOException {
     
         MainFX.changedScreen("Graficos", cubesat);
+    
+    @FXML
+    void gravarDados(ActionEvent event){
+        System.out.println("oi");
+        FileChooser fileChooser = new FileChooser();
+        Stage secondaryStage = new Stage();
+        File selectedFile = fileChooser.showOpenDialog(secondaryStage); 
+        if (selectedFile != null) {
+            try { Path path = Paths.get(selectedFile.getAbsolutePath()); 
+            List<String> fileContent = Files.readAllLines(path); 
+            fileContent.forEach(System.out::println); 
+            } catch (IOException ex) { ex.printStackTrace(); } }
     }
 
     private void configureMenuActions() {
