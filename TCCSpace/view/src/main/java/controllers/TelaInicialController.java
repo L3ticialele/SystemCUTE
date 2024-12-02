@@ -19,6 +19,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 public class TelaInicialController implements Initializable {
 
@@ -50,6 +51,8 @@ public class TelaInicialController implements Initializable {
     private HBox visualizarCubes;
 
     private Usuario usuario;
+
+    private List<CubeSat> cubeSat;
     
     private CubeSat cube;
 
@@ -66,7 +69,7 @@ public class TelaInicialController implements Initializable {
                 + "-fx-background-color: 0;");
         iconePerfil.setImage(new Image("file:src/main/resources/images/user.png"));
     }
-    
+
     @FXML
     void suporteToPourple(MouseEvent event) {
         botaoSuporte.setStyle("-fx-text-fill: #8C52FF;"
@@ -102,6 +105,7 @@ public class TelaInicialController implements Initializable {
     }
     
     void apresentarTelaDados(ActionEvent event) throws IOException{
+
         MainFX.changedScreen("Gui3d", cube);
     }
 
