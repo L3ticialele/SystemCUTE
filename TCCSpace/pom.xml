@@ -3,60 +3,58 @@
           
   
   
-  <modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
           
   
   
-  <groupId>com.mycompany</groupId>
+    <groupId>com.tccspace</groupId>
           
   
   
-  <artifactId>TCCSpace</artifactId>
+    <artifactId>TCCSpace</artifactId>
           
   
   
-  <version>1.0-SNAPSHOT</version>
+    <version>1.0-SNAPSHOT</version>
           
   
   
-  <packaging>pom</packaging>
+    <packaging>pom</packaging>
           
   
   
-  <modules>
+    <modules>
+                    
                     
     
     
-    <module>idao</module>
+        <module>dao</module>
                     
     
     
-    <module>dao</module>
+        <module>entidades</module>
                     
     
     
-    <module>dto</module>
+        <module>controller</module>
                     
     
     
-    <module>model</module>
-                    
+        <module>view</module>
     
-    
-    <module>view</module>
-  </modules>
+    </modules>
           
   
   
-  <properties>
+    <properties>
                     
     
     
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
                 
   
   
-  </properties>
+    </properties>
       
 
 

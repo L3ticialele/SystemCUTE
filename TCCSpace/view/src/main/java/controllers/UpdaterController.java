@@ -1,44 +1,44 @@
 package controllers;
 
+import br.cefetmg.space.dao.DadosDAO;
+import br.cefetmg.space.entidades.Dados;
 import gui3d.LineChartManager;
 import gui3d.Model3D;
-import br.cefetmg.space.model.dto.DadosDTO;
-import br.cefetmg.space.model.dao.DadosDAO;
 import javafx.application.Platform;
 import javafx.scene.control.Label;
 
 public class UpdaterController {
 
-    private DadosDAO dadosDAO;
-    private Label labelAccelerationX;
-    private Label labelAccelerationY;
-    private Label labelAccelerationZ;
-    private Label labelRotationX;
-    private Label labelRotationY;
-    private Label labelRotationZ;
-    private Label labelSpeedX;
-    private Label labelSpeedY;
-    private Label labelSpeedZ;
-    private Label labelAltitude;
-    private Label labelBateria;
-    private Label labelCorrenteBateria;
-    private Label labelTensaoBateria;
-    private Label labelPotenciaBateria;
-    private Label labelCorrentePlacaSolar;
-    private Label labelTensaoPlacaSolar;
-    private Label labelPotenciaPlacaSolar;
-    private Label labelGas1;
-    private Label labelGas2;
-    private Label labelLuz1;
-    private Label labelLuz2;
-    private Label labelPontoOrvalho;
-    private Label labelPressao;
-    private Label labelSensorUV;
-    private Label labelTemperaturaExterna;
-    private Label labelTemperaturaInterna;
-    private Label labelUmidade;
-    private Model3D model3d;
-    private LineChartManager lineChartManager;
+    private final DadosDAO dadosDAO;
+    private final Label labelAccelerationX;
+    private final Label labelAccelerationY;
+    private final Label labelAccelerationZ;
+    private final Label labelRotationX;
+    private final Label labelRotationY;
+    private final Label labelRotationZ;
+    private final Label labelSpeedX;
+    private final Label labelSpeedY;
+    private final Label labelSpeedZ;
+    private final Label labelAltitude;
+    private final Label labelBateria;
+    private final Label labelCorrenteBateria;
+    private final Label labelTensaoBateria;
+    private final Label labelPotenciaBateria;
+    private final Label labelCorrentePlacaSolar;
+    private final Label labelTensaoPlacaSolar;
+    private final Label labelPotenciaPlacaSolar;
+    private final Label labelGas1;
+    private final Label labelGas2;
+    private final Label labelLuz1;
+    private final Label labelLuz2;
+    private final Label labelPontoOrvalho;
+    private final Label labelPressao;
+    private final Label labelSensorUV;
+    private final Label labelTemperaturaExterna;
+    private final Label labelTemperaturaInterna;
+    private final Label labelUmidade;
+    private final Model3D model3d;
+    private final LineChartManager lineChartManager;
     private double prevX;
     private double prevY;
     private double prevZ;
@@ -88,7 +88,7 @@ public class UpdaterController {
         Thread updaterThread = new Thread(() -> {
             try {
                 while (true) {
-                    DadosDTO dadoMaisRecente = dadosDAO.buscarDadoMaisRecente();
+                    Dados dadoMaisRecente = dadosDAO.buscarDadoMaisRecente();
                     if (dadoMaisRecente != null) {
                         Platform.runLater(() -> {
                             // Atualiza as labels com os novos dados

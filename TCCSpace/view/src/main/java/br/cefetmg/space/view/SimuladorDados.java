@@ -1,13 +1,12 @@
 package br.cefetmg.space.view;
 
-import br.cefetmg.space.model.dao.CubeSatDAO;
-import br.cefetmg.space.model.dao.DadosDAO;
-import br.cefetmg.space.model.dto.DadosDTO;
-import br.cefetmg.space.model.idao.ICubeSatDAO;
-import br.cefetmg.space.model.idao.IDadosDAO;
+import br.cefetmg.space.dao.CubeSatDAO;
+import br.cefetmg.space.dao.DadosDAO;
+import br.cefetmg.space.entidades.Dados;
+import br.cefetmg.space.idao.ICubeSatDAO;
+import br.cefetmg.space.idao.IDadosDAO;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Random;
 
 public class SimuladorDados {
 
@@ -15,7 +14,7 @@ public class SimuladorDados {
 
         try {
             // Gera dados simulados
-            DadosDTO dados = new DadosDTO();
+            Dados dados = new Dados();
             ICubeSatDAO cubesatDAO = new CubeSatDAO();
             dados.setCubeSat(cubesatDAO.procurarPorId(1));
             dados.setAcelerometroX((float) (Math.random() * 10));  // Convertendo para float

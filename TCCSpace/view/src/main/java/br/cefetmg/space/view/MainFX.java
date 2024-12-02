@@ -12,14 +12,14 @@ public class MainFX extends Application {
     
     private static Stage stage;
     
-    private static Scene telaCubesat;
-    private static Scene telaExplorar;
-    private static Scene telaEquipes;
+    private static Scene telaPerfil;
+    private static Scene telaSuporte;
     private static Scene telaInicial;
     private static Scene telaCadastrarCubesat;
     private static Scene telaCadastro;
     private static Scene telaLogin;
     private static Scene telaEditarCubesat;
+    private static Scene graficos;
     
     private static Scene telaGui3d;
     
@@ -27,36 +27,8 @@ public class MainFX extends Application {
     public void start(Stage primaryStage) throws IOException {
         try{
             stage = primaryStage;
-                    
             primaryStage.setTitle("CUTE");
-            
-            Parent loaderTelaEditarCubesat = FXMLLoader.load(getClass().getResource("/fxml/TelaEditarCubesat.fxml"));
-            telaEditarCubesat = new Scene(loaderTelaEditarCubesat, 1280, 720);
-            
-            Parent loaderTelaGui3d = FXMLLoader.load(getClass().getResource("/fxml/Data3DViewer.fxml"));
-            telaGui3d = new Scene(loaderTelaGui3d, 1280, 720);
-            
-            Parent  loaderTelaCubesat = FXMLLoader.load(getClass().getResource("/fxml/TelaCubesat.fxml"));
-            telaCubesat = new Scene(loaderTelaCubesat, 1280, 720);
-            
-            Parent loaderTelaExplorar = FXMLLoader.load(getClass().getResource("/fxml/TelaExplorar.fxml"));
-            telaExplorar = new Scene(loaderTelaExplorar, 1280, 720);
-            
-            Parent loaderTelaEquipes = FXMLLoader.load(getClass().getResource("/fxml/TelaEquipes.fxml"));
-            telaEquipes = new Scene(loaderTelaEquipes, 1280, 720);
-             
-            Parent loaderTelaInicial = FXMLLoader.load(getClass().getResource("/fxml/TelaInicial.fxml"));
-            telaInicial = new Scene(loaderTelaInicial, 1280, 720);
-            
-            Parent loaderTelaCadastrarCubesat = FXMLLoader.load(getClass().getResource("/fxml/TelaCadastrarCubesat.fxml"));
-            telaCadastrarCubesat = new Scene(loaderTelaCadastrarCubesat, 1280, 720);
-            
-            Parent loaderTelaCadastro = FXMLLoader.load(getClass().getResource("/fxml/TelaCadastro.fxml"));
-            telaCadastro = new Scene(loaderTelaCadastro, 1280, 720);
-            
-            Parent loaderTelaLogin = FXMLLoader.load(getClass().getResource("/fxml/TelaLogin.fxml"));
-            telaLogin = new Scene(loaderTelaLogin, 1280, 720);
-            
+            telaLogin = new Scene(loaderFXML("/fxml/TelaLogin"),  1280, 720);
             primaryStage.setScene(telaLogin);
             primaryStage.show();
         }catch(Exception e){
@@ -64,61 +36,66 @@ public class MainFX extends Application {
         }
     }
     
-    public static void changedScreen(String tela, Object userData){
+    public static void changedScreen(String tela, Object userData) throws IOException{
         switch(tela){
             case "Gui3d":
+                telaGui3d = new Scene(loaderFXML("/fxml/Data3DViewer"),  1280, 720);
                 stage.setScene(telaGui3d);
-                notifyAllListeners("Gui3d", userData);
-            case "Cubesat":
-                stage.setScene(telaCubesat);
-                notifyAllListeners("Cubesat", userData);
                 break;
-            case "Explorar":
-                stage.setScene(telaExplorar);
-                notifyAllListeners("Explorar", userData);
+            case "Perfil":
+                telaPerfil = new Scene(loaderFXML("/fxml/TelaPerfil"),  1280, 720);
+                stage.setScene(telaPerfil);
                 break;
-            case "Equipes":
-                stage.setScene(telaEquipes);
-                notifyAllListeners("Equipes", userData);
+            case "Suporte":
+                telaSuporte = new Scene(loaderFXML("/fxml/TelaSuporte"),  1280, 720);
+                stage.setScene(telaSuporte);
                 break;
             case "Tela Inicial":
+                telaInicial = new Scene(loaderFXML("/fxml/TelaInicial"),  1280, 720);
                 stage.setScene(telaInicial);
-                notifyAllListeners("Tela Inicial", userData);
                 break;
             case "Cadastrar Cubesat":
+                telaCadastrarCubesat = new Scene(loaderFXML("/fxml/TelaCadastrarCubesat"),  1280, 720);
                 stage.setScene(telaCadastrarCubesat);
-                notifyAllListeners("Cadastrar Cubesat", userData);
                 break;
             case "Cadastro": 
+                telaCadastro = new Scene(loaderFXML("/fxml/TelaCadastro"),  1280, 720);
                 stage.setScene(telaCadastro);
-                notifyAllListeners("Cadastro", userData);
                 break;
             case "Login":
+                telaLogin = new Scene(loaderFXML("/fxml/TelaLogin"),  1280, 720);
                 stage.setScene(telaLogin);
-                notifyAllListeners("Login", userData);
                 break;
             case "Editar Cubesat":
+                telaEditarCubesat = new Scene(loaderFXML("/fxml/TelaEditarCubesat"),  1280, 720);
                 stage.setScene(telaEditarCubesat);
-                notifyAllListeners("Editar Cubesat", userData);
+                break;
+            case "Graficos":
+                graficos = new Scene(loaderFXML("/fxml/Graficos"),  1280, 720);
+                stage.setScene(graficos);
+                break;
         }
+        notifyAllListeners(tela, userData);
         
     }
-    public static void changedScreen(String tela){
-        notifyAllListeners(tela, null);
+    
+    public static Parent loaderFXML(String caminho) throws IOException{
+        return FXMLLoader.load(MainFX.class.getResource(caminho + ".fxml"));
     }
     
-    private static ArrayList<OnChangeScreen> listeners = new ArrayList<>();
-    
-    public static interface OnChangeScreen{
+    private static final ArrayList<OnChangeScreen> listeners = new ArrayList<>();
+
+    public static interface OnChangeScreen {
+
         void onScreenChanged(String newScreen, Object userData);
     }
-    
-    public static void addOnChangeScreenListener(OnChangeScreen newListener){
+
+    public static void addOnChangeScreenListener(OnChangeScreen newListener) {
         listeners.add(newListener);
     }
-    
-    private static void notifyAllListeners(String newScreen, Object userData){
-        for(OnChangeScreen l : listeners){
+
+    private static void notifyAllListeners(String newScreen, Object userData) {
+        for (OnChangeScreen l : listeners) {
             l.onScreenChanged(newScreen, userData);
         }
     }
