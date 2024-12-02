@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
@@ -11,7 +12,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
-
 
 <HBox fx:id="fundo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../styles/telalogin.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TelaLoginController">
    <children>
@@ -34,15 +34,18 @@
                         <Font size="19.0" />
                      </font>
                   </Button>
-                  <Button fx:id="BotaoLogin" layoutX="425.0" layoutY="436.0" mnemonicParsing="false" onAction="#loginButaoErro" prefHeight="63.0" prefWidth="423.0" style="-fx-background-color: #DFDCE1; -fx-background-radius: 50px;" text="LOGIN">
+                  <Button id="BotaoLogin" fx:id="BotaoLogin" layoutX="425.0" layoutY="436.0" mnemonicParsing="false" onAction="#loginButaoErro" prefHeight="63.0" prefWidth="423.0" style="-fx-background-color: #DFDCE1; -fx-background-radius: 50px;" stylesheets="@../styles/telalogin.css" text="LOGIN" textFill="#281c5c">
                      <font>
-                        <Font size="24.0" />
+                        <Font size="30.0" />
                      </font>
                   </Button>
-                  <TextField fx:id="CampoEmail" alignment="CENTER_RIGHT" layoutX="481.0" layoutY="227.0" prefHeight="44.0" prefWidth="351.0" promptText="E-MAIL" style="-fx-background-color: #DFDCE1; -fx-border-color: 0; -fx-background-radius: 50px;">
+                  <TextField fx:id="CampoEmail" layoutX="481.0" layoutY="227.0" prefHeight="44.0" prefWidth="351.0" promptText="E-MAIL" style="-fx-background-color: #DFDCE1; -fx-border-color: 0; -fx-background-radius: 50px;">
                      <font>
                         <Font size="20.0" />
                      </font>
+                     <padding>
+                        <Insets left="40.0" />
+                     </padding>
                   </TextField>
                   <PasswordField fx:id="CampoSenha" layoutX="445.0" layoutY="316.0" prefHeight="44.0" prefWidth="360.0" promptText="SENHA" style="-fx-background-color: #DFDCE1; -fx-border-color: 0; -fx-background-radius: 50px;">
                      <font>

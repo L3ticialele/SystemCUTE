@@ -1,11 +1,11 @@
 package controllers;
 
-import br.cefetmg.space.model.dto.UsuarioDTO;
-import br.cefetmg.space.model.idao.IUsuarioDAO;
-import br.cefetmg.space.model.dto.UsuarioDTO;
-import br.cefetmg.space.model.dao.UsuarioDAO;
-import br.cefetmg.space.model.idao.exception.PersistenciaException;
+import br.cefetmg.space.dao.UsuarioDAO;
+import br.cefetmg.space.entidades.Usuario;
+import br.cefetmg.space.idao.IUsuarioDAO;
+import br.cefetmg.space.idao.exception.PersistenciaException;
 import br.cefetmg.space.view.MainFX;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -19,9 +19,6 @@ import javafx.scene.control.TextField;
 public class TelaLoginController implements Initializable {
 
     @FXML
-    private Button BotaoCadastro;
-
-    @FXML
     private Button BotaoLogin;
 
     @FXML
@@ -32,13 +29,13 @@ public class TelaLoginController implements Initializable {
 
     @FXML
     private PasswordField CampoSenha;
-    
-    private UsuarioDTO usuario;
+
+    private Usuario usuario;
 
     @FXML
     private Label msgErro;
 
-    public void loginButaoErro(ActionEvent e) throws PersistenciaException {
+    public void loginButaoErro(ActionEvent e) throws PersistenciaException, IOException {
         String email = CampoEmail.getText();
         String senha = CampoSenha.getText();
         if (CampoEmail.getText().isBlank() == true || CampoSenha.getText().isBlank() == true) {
@@ -50,22 +47,31 @@ public class TelaLoginController implements Initializable {
         }
     }
 
-    public void cadastroButao(ActionEvent e) {
+    public void cadastroButao(ActionEvent e) throws IOException {
         MainFX.changedScreen("Cadastro", null);
     }
 
     public boolean test(String email, String senha) throws PersistenciaException {
-        UsuarioDAO usuarioDAO = new UsuarioDAO();
-        usuario = usuarioDAO.procurarPorEmail(email);
+      
+        Usuario nv = new Usuario();
+        nv.setEmail(email);
+        nv.setSenha(senha);
+        nv.setTelefone("tel");
 
-        UsuarioDAO user = new UsuarioDAO();
+        IUsuarioDAO usuarioDAO = new UsuarioDAO();
 
-        return user.validarlogin(usuario);
+        if (usuarioDAO.validarlogin(nv)) {
+            usuario = usuarioDAO.procurarPorEmail(email);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        MainFX.addOnChangeScreenListener((String newString, Object viewData) -> {
+        });
     }
 
 }

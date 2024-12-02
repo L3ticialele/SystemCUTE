@@ -1,10 +1,11 @@
 package controllers;
 
-import br.cefetmg.space.model.idao.IUsuarioDAO;
-import br.cefetmg.space.model.dto.UsuarioDTO;
-import br.cefetmg.space.model.dao.UsuarioDAO;
-import br.cefetmg.space.model.idao.exception.PersistenciaException;
+import br.cefetmg.space.dao.UsuarioDAO;
+import br.cefetmg.space.entidades.Usuario;
+import br.cefetmg.space.idao.IUsuarioDAO;
+import br.cefetmg.space.idao.exception.PersistenciaException;
 import br.cefetmg.space.view.MainFX;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -22,9 +23,6 @@ public class TelaCadastroController implements Initializable {
     private Button BotaoCadastrar;
 
     @FXML
-    private Button BotaoVoltar;
-
-    @FXML
     private TextField CampoEmail;
 
     @FXML
@@ -39,15 +37,12 @@ public class TelaCadastroController implements Initializable {
     @FXML
     private Label msg;
     
-    @FXML
-    private UsuarioDTO usuario;
-    
 
-    public void voltarPaginaLogin(ActionEvent e) {
-        MainFX.changedScreen("Login");
+    public void voltarPaginaLogin(ActionEvent e) throws IOException {
+        MainFX.changedScreen("Login", null);
     }
 
-    public void BotaoCadastrar(ActionEvent e) {
+    public void BotaoCadastrar(ActionEvent e) throws IOException {
         if (CampoEmail.getText().isBlank() == true || CampoSenha.getText().isBlank() == true || CampoNome.getText().isBlank() == true || CampoTelefone.getText().isBlank() == true) {
             msg.setText("Preencha os campos vazios");
         } else {
@@ -55,23 +50,24 @@ public class TelaCadastroController implements Initializable {
             String nome = CampoNome.getText();
             String senha = CampoSenha.getText();
             String telefone = CampoTelefone.getText();
-            inserir(email, nome, senha, telefone);
-            MainFX.changedScreen("Tela Inicial", usuario);
+            MainFX.changedScreen("Tela Inicial", inserir(email, nome, senha, telefone));
         }
     }
 
-    public void inserir(String email, String nome, String senha, String telefone) {
-        usuario = new UsuarioDTO();
+    public Usuario inserir(String email, String nome, String senha, String telefone) {
+        Usuario usuario = new Usuario();
         usuario.setEmail(email);
         usuario.setNome(nome);
         usuario.setSenha(senha);
         usuario.setTelefone(telefone);
 
-        UsuarioDAO user = new UsuarioDAO();
+        IUsuarioDAO user = new UsuarioDAO();
         try {
             user.inserir(usuario);
         } catch (PersistenciaException ex) {
             Logger.getLogger(TelaCadastroController.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            return usuario;
         }
     }
 
