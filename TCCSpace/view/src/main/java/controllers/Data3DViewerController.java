@@ -6,7 +6,6 @@ import br.cefetmg.space.view.MainFX;
 import gui3d.LineChartManager;
 import gui3d.Model3D;
 import gui3d.Updater;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -262,7 +261,8 @@ public class Data3DViewerController {
         } else {
             System.out.println("Operação de salvamento cancelada.");
         }
-  
+    }
+    
     @FXML
     void apresentaGraficos (ActionEvent event) throws IOException {
     
