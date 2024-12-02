@@ -66,21 +66,7 @@ public class TelaInicialController implements Initializable {
                 + "-fx-background-color: 0;");
         iconePerfil.setImage(new Image("file:src/main/resources/images/user.png"));
     }
-
-    @FXML
-    void cubesatToPourple(MouseEvent event) {
-        botaoCubesat.setStyle("-fx-text-fill: #8C52FF;"
-                + "-fx-background-color: 0;");
-        iconeCubesat.setImage(new Image("file:src/main/resources/images/iconeCubesatLilas.png"));
-    }
-
-    @FXML
-    void cubesatToWhite(MouseEvent event) {
-        botaoCubesat.setStyle("-fx-text-fill: white;"
-                + "-fx-background-color: 0;");
-        iconeCubesat.setImage(new Image("file:src/main/resources/images/iconeCubesat.png"));
-    }
-
+    
     @FXML
     void suporteToPourple(MouseEvent event) {
         botaoSuporte.setStyle("-fx-text-fill: #8C52FF;"
