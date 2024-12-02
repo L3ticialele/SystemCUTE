@@ -1,8 +1,9 @@
 package controllers;
 
-import br.cefetmg.space.model.dto.UsuarioDTO;
-import br.cefetmg.space.model.dao.UsuarioDAO;
-import br.cefetmg.space.model.idao.exception.PersistenciaException;
+import br.cefetmg.space.dao.UsuarioDAO;
+import br.cefetmg.space.entidades.Usuario;
+import br.cefetmg.space.idao.IUsuarioDAO;
+import br.cefetmg.space.idao.exception.PersistenciaException;
 import br.cefetmg.space.view.MainFX;
 import java.io.IOException;
 import java.net.URL;
@@ -53,14 +54,14 @@ public class TelaCadastroController implements Initializable {
         }
     }
 
-    public UsuarioDTO inserir(String email, String nome, String senha, String telefone) {
-        UsuarioDTO usuario = new UsuarioDTO();
+    public Usuario inserir(String email, String nome, String senha, String telefone) {
+        Usuario usuario = new Usuario();
         usuario.setEmail(email);
         usuario.setNome(nome);
         usuario.setSenha(senha);
         usuario.setTelefone(telefone);
 
-        UsuarioDAO user = new UsuarioDAO();
+        IUsuarioDAO user = new UsuarioDAO();
         try {
             user.inserir(usuario);
         } catch (PersistenciaException ex) {

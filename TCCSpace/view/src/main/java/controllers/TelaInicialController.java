@@ -1,8 +1,7 @@
 package controllers;
 
-import br.cefetmg.space.model.dto.CubeSatDTO;
-import br.cefetmg.space.model.dto.EquipeDTO;
-import br.cefetmg.space.model.dto.UsuarioDTO;
+import br.cefetmg.space.entidades.CubeSat;
+import br.cefetmg.space.entidades.Usuario;
 import br.cefetmg.space.view.MainFX;
 import java.io.IOException;
 import java.net.URL;
@@ -20,7 +19,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 
 public class TelaInicialController implements Initializable {
 
@@ -51,9 +49,9 @@ public class TelaInicialController implements Initializable {
     @FXML
     private HBox visualizarCubes;
 
-    private UsuarioDTO usuario;
-
-    private List<CubeSatDTO> cubeSat;
+    private Usuario usuario;
+    
+    private CubeSat cube;
 
     @FXML
     void perfilToPourple(MouseEvent event) {
@@ -68,21 +66,7 @@ public class TelaInicialController implements Initializable {
                 + "-fx-background-color: 0;");
         iconePerfil.setImage(new Image("file:src/main/resources/images/user.png"));
     }
-
-    @FXML
-    void cubesatToPourple(MouseEvent event) {
-        botaoCubesat.setStyle("-fx-text-fill: #8C52FF;"
-                + "-fx-background-color: 0;");
-        iconeCubesat.setImage(new Image("file:src/main/resources/images/iconeCubesatLilas.png"));
-    }
-
-    @FXML
-    void cubesatToWhite(MouseEvent event) {
-        botaoCubesat.setStyle("-fx-text-fill: white;"
-                + "-fx-background-color: 0;");
-        iconeCubesat.setImage(new Image("file:src/main/resources/images/iconeCubesat.png"));
-    }
-
+    
     @FXML
     void suporteToPourple(MouseEvent event) {
         botaoSuporte.setStyle("-fx-text-fill: #8C52FF;"
@@ -118,7 +102,7 @@ public class TelaInicialController implements Initializable {
     }
     
     void apresentarTelaDados(ActionEvent event) throws IOException{
-        MainFX.changedScreen("Gui3d", cubeSat);
+        MainFX.changedScreen("Gui3d", cube);
     }
 
     /**
@@ -130,8 +114,10 @@ public class TelaInicialController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         MainFX.addOnChangeScreenListener((String newString, Object viewData) -> {
-            if(viewData instanceof UsuarioDTO) {
-                usuario = (UsuarioDTO) viewData;
+            if(viewData instanceof Usuario) {
+                System.out.println("a");
+                List<CubeSat> cubeSat;
+                usuario = (Usuario) viewData;
                 nome.setText(usuario.getNome() + "!");
                 cubeSat = usuario.getCubeSat();
                 visualizarCubes.setSpacing(10);

@@ -19,7 +19,7 @@ public class MainFX extends Application {
     private static Scene telaCadastro;
     private static Scene telaLogin;
     private static Scene telaEditarCubesat;
-    
+    private static Scene graficos;
     private static Scene telaGui3d;
     
     @Override
@@ -42,7 +42,7 @@ public class MainFX extends Application {
                 stage.setScene(telaGui3d);
                 break;
             case "Perfil":
-                telaPerfil = new Scene(loaderFXML("/fxml/TelaPerfil"),  1280, 720);
+                telaPerfil = new Scene(loaderFXML("/fxml/TelaEditarPerfil"),  1280, 720);
                 stage.setScene(telaPerfil);
                 break;
             case "Suporte":
@@ -68,6 +68,10 @@ public class MainFX extends Application {
             case "Editar Cubesat":
                 telaEditarCubesat = new Scene(loaderFXML("/fxml/TelaEditarCubesat"),  1280, 720);
                 stage.setScene(telaEditarCubesat);
+                break;
+            case "Graficos":
+                graficos = new Scene(loaderFXML("/fxml/Graficos"),  1280, 720);
+                stage.setScene(graficos);
                 break;
         }
         notifyAllListeners(tela, userData);

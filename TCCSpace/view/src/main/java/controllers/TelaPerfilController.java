@@ -1,5 +1,6 @@
 package controllers;
-import br.cefetmg.space.model.dto.UsuarioDTO;
+
+import br.cefetmg.space.entidades.Usuario;
 import br.cefetmg.space.view.MainFX;
 import java.io.IOException;
 import java.net.URL;
@@ -21,7 +22,7 @@ public class TelaPerfilController implements Initializable {
     @FXML
     private Button botaoSuporte;
     
-    private UsuarioDTO usuario;
+    private Usuario usuario;
 
     @FXML
     private Button botaoPerfil;
@@ -93,7 +94,7 @@ public class TelaPerfilController implements Initializable {
         MainFX.addOnChangeScreenListener(new MainFX.OnChangeScreen(){
            @Override
            public void onScreenChanged(String newString, Object viewData){
-               usuario = (UsuarioDTO)viewData;
+               usuario = (Usuario)viewData;
            }
        });
     }

@@ -1,6 +1,6 @@
 package controllers;
 
-import br.cefetmg.space.model.dto.UsuarioDTO;
+import br.cefetmg.space.entidades.Usuario;
 import br.cefetmg.space.view.MainFX;
 import java.io.IOException;
 import java.net.URL;
@@ -56,7 +56,7 @@ public class BaseController implements Initializable{
     @FXML
     private MeshView meshVIew3D;
     
-    private UsuarioDTO usuario;
+    private Usuario usuario;
     
     @FXML
     void perfilToPourple(MouseEvent event){

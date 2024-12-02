@@ -1,10 +1,10 @@
 package controllers;
 
-import br.cefetmg.space.model.dao.CubeSatDAO;
-import br.cefetmg.space.model.dto.CubeSatDTO;
-import br.cefetmg.space.model.dto.UsuarioDTO;
-import br.cefetmg.space.model.idao.ICubeSatDAO;
-import br.cefetmg.space.model.idao.exception.PersistenciaException;
+import br.cefetmg.space.dao.CubeSatDAO;
+import br.cefetmg.space.entidades.CubeSat;
+import br.cefetmg.space.entidades.Usuario;
+import br.cefetmg.space.idao.ICubeSatDAO;
+import br.cefetmg.space.idao.exception.PersistenciaException;
 import br.cefetmg.space.view.MainFX;
 import java.awt.Desktop;
 import java.awt.image.BufferedImage;
@@ -32,7 +32,7 @@ public class TelaEditarCubesatController implements Initializable {
 
     private BufferedImage imagem;
 
-    private CubeSatDTO cubesat;
+    private CubeSat cubesat;
 
     @FXML
     private Button botaoCubesat;
@@ -49,7 +49,7 @@ public class TelaEditarCubesatController implements Initializable {
     @FXML
     private Button botaoHome;
     
-    private UsuarioDTO usuario;
+    private Usuario usuario;
     
     @FXML
     private ChoiceBox<String> choiceBoxAcesso;
@@ -125,7 +125,7 @@ public class TelaEditarCubesatController implements Initializable {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         Alert confirmacao = new Alert(Alert.AlertType.CONFIRMATION);
         Alert erro = new Alert(Alert.AlertType.ERROR);
-        CubeSatDTO cube = new CubeSatDTO();
+        CubeSat cube = new CubeSat();
         ICubeSatDAO cubeDAO = new CubeSatDAO();
 
         if (textNomeCubesat.getText() == null || textNomeCubesat.getText().isEmpty()) {
@@ -262,13 +262,15 @@ public class TelaEditarCubesatController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
         MainFX.addOnChangeScreenListener((String newString, Object viewData) -> {
-            if(viewData instanceof CubeSatDTO cubeSatDTO) {
-                cubesat = cubeSatDTO;
+            CubeSat cubeSat = (CubeSat) viewData;
+            Usuario user = (Usuario) viewData;
+            if(viewData instanceof CubeSat) {
+                cubesat = cubeSat;
                 textsFields();
                 usuario = cubesat.getUsuario();
             }
-            else if(viewData instanceof UsuarioDTO usuarioDTO){
-                usuario = usuarioDTO;
+            else if(viewData instanceof Usuario){
+                usuario = user;
             }
         });
 

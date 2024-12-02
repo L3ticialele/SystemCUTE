@@ -36,7 +36,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="botaoCubesat" mnemonicParsing="false" onAction="#apresentarTelaInicial" onMouseEntered="#cubesatToPourple" onMouseExited="#cubesatToWhite" style="-fx-background-color: 0;" text="CUBESATS" textFill="#8c52ff">
+                  <Button fx:id="botaoCubesat" mnemonicParsing="false" onAction="#apresentarTelaInicial" style="-fx-background-color: 0;" text="CUBESATS" textFill="#8c52ff">
                      <graphic>
                         <ImageView fx:id="iconeCubesat" fitHeight="43.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -48,7 +48,7 @@
                         <Font size="25.0" />
                      </font>
                   </Button>
-                  <Button fx:id="botaoPerfil" mnemonicParsing="false" onAction="#apresentaTelaPerfil" prefHeight="105.0" style="-fx-background-color: 0;" text="PERFIL" textFill="WHITE">
+                  <Button fx:id="botaoPerfil" mnemonicParsing="false" onAction="#apresentaTelaPerfil" onMouseEntered="#perfilToPourple" onMouseExited="#perfilToWhite" prefHeight="105.0" style="-fx-background-color: 0;" text="PERFIL" textFill="WHITE">
                      <graphic>
                         <ImageView fx:id="iconePerfil" fitHeight="36.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -60,7 +60,7 @@
                         <Font size="25.0" />
                      </font>
                   </Button>
-                  <Button fx:id="botaoSuporte" mnemonicParsing="false" onAction="#apresentaTelaSuporte" prefHeight="33.0" prefWidth="105.0" style="-fx-background-color: 0;" text="SUPORTE" textFill="WHITE">
+                  <Button fx:id="botaoSuporte" mnemonicParsing="false" onAction="#apresentaTelaSuporte" onMouseEntered="#suporteToPourple" onMouseExited="#suporteToWhite" prefHeight="33.0" prefWidth="105.0" style="-fx-background-color: 0;" text="SUPORTE" textFill="WHITE">
                      <graphic>
                         <ImageView fx:id="iconeSuporte" fitHeight="49.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
                            <image>
