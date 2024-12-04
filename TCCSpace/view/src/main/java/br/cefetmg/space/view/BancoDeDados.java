@@ -1,16 +1,17 @@
 package br.cefetmg.space.view;
 
-import br.cefetmg.space.model.dao.DadosDAO;
-import br.cefetmg.space.model.dto.DadosDTO;
+import br.cefetmg.space.dao.DadosDAO;
+import br.cefetmg.space.entidades.Dados;
+import br.cefetmg.space.idao.IDadosDAO;
 
 public class BancoDeDados {
 
     public static void main(String[] args) {
-        DadosDAO dadosDAO = new DadosDAO();
+        IDadosDAO dadosDAO = new DadosDAO();
 
         try {
             while (true) {
-                DadosDTO dadoMaisRecente = dadosDAO.buscarDadoMaisRecente();
+                Dados dadoMaisRecente = dadosDAO.buscarDadoMaisRecente();
                 if (dadoMaisRecente != null) {
                     System.out.println("Dado mais recente:");
                     System.out.println("ID: " + dadoMaisRecente.getId());

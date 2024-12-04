@@ -1,5 +1,6 @@
 package controllers;
-import br.cefetmg.space.model.dto.UsuarioDTO;
+
+import br.cefetmg.space.entidades.Usuario;
 import br.cefetmg.space.view.MainFX;
 import java.io.IOException;
 import java.net.URL;
@@ -19,7 +20,7 @@ public class TelaSuporteController implements Initializable {
    @FXML
     private Button botaoCubesat;
    
-   private UsuarioDTO usuario;
+   private Usuario usuario;
 
     @FXML
     private Button botaoSuporte;
@@ -92,7 +93,7 @@ public class TelaSuporteController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         MainFX.addOnChangeScreenListener((String newString, Object viewData) -> {
-            usuario = (UsuarioDTO)viewData;
+            usuario = (Usuario)viewData;
         });
     }
     

@@ -1,8 +1,9 @@
 package controllers;
 
-import br.cefetmg.space.model.dto.UsuarioDTO;
-import br.cefetmg.space.model.dao.UsuarioDAO;
-import br.cefetmg.space.model.idao.exception.PersistenciaException;
+import br.cefetmg.space.dao.UsuarioDAO;
+import br.cefetmg.space.entidades.Usuario;
+import br.cefetmg.space.idao.IUsuarioDAO;
+import br.cefetmg.space.idao.exception.PersistenciaException;
 import br.cefetmg.space.view.MainFX;
 import java.io.IOException;
 import java.net.URL;
@@ -29,7 +30,7 @@ public class TelaLoginController implements Initializable {
     @FXML
     private PasswordField CampoSenha;
 
-    private UsuarioDTO usuario;
+    private Usuario usuario;
 
     @FXML
     private Label msgErro;
@@ -52,12 +53,12 @@ public class TelaLoginController implements Initializable {
 
     public boolean test(String email, String senha) throws PersistenciaException {
       
-        UsuarioDTO nv = new UsuarioDTO();
+        Usuario nv = new Usuario();
         nv.setEmail(email);
         nv.setSenha(senha);
         nv.setTelefone("tel");
 
-        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        IUsuarioDAO usuarioDAO = new UsuarioDAO();
 
         if (usuarioDAO.validarlogin(nv)) {
             usuario = usuarioDAO.procurarPorEmail(email);

@@ -1,9 +1,10 @@
 package controllers;
-import br.cefetmg.space.model.dao.CubeSatDAO;
-import br.cefetmg.space.model.dto.CubeSatDTO;
-import br.cefetmg.space.model.dto.UsuarioDTO;
-import br.cefetmg.space.model.idao.ICubeSatDAO;
-import br.cefetmg.space.model.idao.exception.PersistenciaException;
+
+import br.cefetmg.space.dao.CubeSatDAO;
+import br.cefetmg.space.entidades.CubeSat;
+import br.cefetmg.space.entidades.Usuario;
+import br.cefetmg.space.idao.ICubeSatDAO;
+import br.cefetmg.space.idao.exception.PersistenciaException;
 import br.cefetmg.space.view.MainFX;
 import java.awt.Desktop;
 import java.awt.image.BufferedImage;
@@ -34,7 +35,7 @@ public class TelaCadastrarCubesatController implements Initializable {
    @FXML 
    private Button botaoCadastrarCubesat;
    
-   private UsuarioDTO user;
+   private Usuario user;
     
    @FXML
    private Button botaoCubesat;
@@ -164,7 +165,7 @@ public class TelaCadastrarCubesatController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             Alert confirmacao = new Alert(Alert.AlertType.CONFIRMATION);
             Alert erro = new Alert(Alert.AlertType.ERROR);
-            CubeSatDTO cube = new CubeSatDTO();
+            CubeSat cube = new CubeSat();
             ICubeSatDAO cubeDAO = new CubeSatDAO();
             
             if(textNomeCubesat.getText() == null || textNomeCubesat.getText().isEmpty()){
@@ -240,7 +241,7 @@ public class TelaCadastrarCubesatController implements Initializable {
     public void initialize(URL url, ResourceBundle rb){
        
        MainFX.addOnChangeScreenListener((String newString, Object viewData) -> {
-           user = (UsuarioDTO)viewData;
+           user = (Usuario)viewData;
        });
     }
     

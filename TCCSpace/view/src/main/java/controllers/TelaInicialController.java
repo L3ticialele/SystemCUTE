@@ -1,8 +1,7 @@
 package controllers;
 
-import br.cefetmg.space.model.dto.CubeSatDTO;
-import br.cefetmg.space.model.dto.EquipeDTO;
-import br.cefetmg.space.model.dto.UsuarioDTO;
+import br.cefetmg.space.entidades.CubeSat;
+import br.cefetmg.space.entidades.Usuario;
 import br.cefetmg.space.view.MainFX;
 import java.io.IOException;
 import java.net.URL;
@@ -51,9 +50,11 @@ public class TelaInicialController implements Initializable {
     @FXML
     private HBox visualizarCubes;
 
-    private UsuarioDTO usuario;
+    private Usuario usuario;
 
-    private List<CubeSatDTO> cubeSat;
+    private List<CubeSat> cubeSat;
+    
+    private CubeSat cube;
 
     @FXML
     void perfilToPourple(MouseEvent event) {
@@ -67,20 +68,6 @@ public class TelaInicialController implements Initializable {
         botaoPerfil.setStyle("-fx-text-fill: white;"
                 + "-fx-background-color: 0;");
         iconePerfil.setImage(new Image("file:src/main/resources/images/user.png"));
-    }
-
-    @FXML
-    void cubesatToPourple(MouseEvent event) {
-        botaoCubesat.setStyle("-fx-text-fill: #8C52FF;"
-                + "-fx-background-color: 0;");
-        iconeCubesat.setImage(new Image("file:src/main/resources/images/iconeCubesatLilas.png"));
-    }
-
-    @FXML
-    void cubesatToWhite(MouseEvent event) {
-        botaoCubesat.setStyle("-fx-text-fill: white;"
-                + "-fx-background-color: 0;");
-        iconeCubesat.setImage(new Image("file:src/main/resources/images/iconeCubesat.png"));
     }
 
     @FXML
@@ -118,7 +105,8 @@ public class TelaInicialController implements Initializable {
     }
     
     void apresentarTelaDados(ActionEvent event) throws IOException{
-        MainFX.changedScreen("Gui3d", cubeSat);
+
+        MainFX.changedScreen("Gui3d", cube);
     }
 
     /**
@@ -130,8 +118,10 @@ public class TelaInicialController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         MainFX.addOnChangeScreenListener((String newString, Object viewData) -> {
-            if(viewData instanceof UsuarioDTO) {
-                usuario = (UsuarioDTO) viewData;
+            if(viewData instanceof Usuario) {
+                System.out.println("a");
+                List<CubeSat> cubeSat;
+                usuario = (Usuario) viewData;
                 nome.setText(usuario.getNome() + "!");
                 cubeSat = usuario.getCubeSat();
                 visualizarCubes.setSpacing(10);

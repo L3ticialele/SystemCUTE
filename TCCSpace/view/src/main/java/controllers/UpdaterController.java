@@ -1,9 +1,9 @@
 package controllers;
 
+import br.cefetmg.space.dao.DadosDAO;
+import br.cefetmg.space.entidades.Dados;
 import gui3d.LineChartManager;
 import gui3d.Model3D;
-import br.cefetmg.space.model.dto.DadosDTO;
-import br.cefetmg.space.model.dao.DadosDAO;
 import javafx.application.Platform;
 import javafx.scene.control.Label;
 
@@ -88,7 +88,7 @@ public class UpdaterController {
         Thread updaterThread = new Thread(() -> {
             try {
                 while (true) {
-                    DadosDTO dadoMaisRecente = dadosDAO.buscarDadoMaisRecente();
+                    Dados dadoMaisRecente = dadosDAO.buscarDadoMaisRecente();
                     if (dadoMaisRecente != null) {
                         Platform.runLater(() -> {
                             // Atualiza as labels com os novos dados
