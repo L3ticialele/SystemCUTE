@@ -158,7 +158,7 @@ public class Data3DViewerController {
 
     @FXML
     private Button botaoHome;
-    
+
     @FXML
     private Button botaoVoltar;
 
@@ -166,7 +166,6 @@ public class Data3DViewerController {
     private Button botaoBaixarPlanilha;
 
     private Button botaoGravarDados;
-
 
     @FXML
     private ImageView iconeSuporte;
@@ -233,10 +232,10 @@ public class Data3DViewerController {
     void voltar(ActionEvent event) throws IOException {
         MainFX.changedScreen("Tela Inicial", usuario);
     }
-    
+
     @FXML
     void baixarPlanilha(ActionEvent event) throws IOException {
-        
+
         Workbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet("PlanilhaVazia");
 
@@ -262,25 +261,28 @@ public class Data3DViewerController {
             System.out.println("Operação de salvamento cancelada.");
         }
     }
-    
+
     @FXML
-    void apresentaGraficos (ActionEvent event) throws IOException {
-    
+    void apresentaGraficos(ActionEvent event) throws IOException {
+
         MainFX.changedScreen("Graficos", cubesat);
     }
-    
+
     @FXML
-    void gravarDados(ActionEvent event){
+    void gravarDados(ActionEvent event) {
         System.out.println("oi");
         FileChooser fileChooser = new FileChooser();
         Stage secondaryStage = new Stage();
-        File selectedFile = fileChooser.showOpenDialog(secondaryStage); 
+        File selectedFile = fileChooser.showOpenDialog(secondaryStage);
         if (selectedFile != null) {
-            try { Path path = Paths.get(selectedFile.getAbsolutePath()); 
-            List<String> fileContent = Files.readAllLines(path); 
-            fileContent.forEach(System.out::println); 
-            } catch (IOException ex) { ex.printStackTrace(); } }
-
+            try {
+                Path path = Paths.get(selectedFile.getAbsolutePath());
+                List<String> fileContent = Files.readAllLines(path);
+                fileContent.forEach(System.out::println);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 
     private void configureMenuActions() {
@@ -335,10 +337,9 @@ public class Data3DViewerController {
 
                     if (newString.equals("Gui3d")) {
                         parte3d();
+                    } else if (viewData.getClass().equals(Usuario.class)) {
+                        usuario = (Usuario) viewData;
                     }
-
-                } else if (viewData.getClass().equals(Usuario.class)) {
-                    usuario = (Usuario) viewData;
                 }
             }
         });
