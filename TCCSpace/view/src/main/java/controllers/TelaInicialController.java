@@ -19,6 +19,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 public class TelaInicialController implements Initializable {
 
@@ -50,6 +51,8 @@ public class TelaInicialController implements Initializable {
     private HBox visualizarCubes;
 
     private Usuario usuario;
+  
+    private List<CubeSat> cubeSat;
     
     private CubeSat cube;
 
@@ -65,20 +68,6 @@ public class TelaInicialController implements Initializable {
         botaoPerfil.setStyle("-fx-text-fill: white;"
                 + "-fx-background-color: 0;");
         iconePerfil.setImage(new Image("file:src/main/resources/images/user.png"));
-    }
-
-    @FXML
-    void cubesatToPourple(MouseEvent event) {
-        botaoCubesat.setStyle("-fx-text-fill: #8C52FF;"
-                + "-fx-background-color: 0;");
-        iconeCubesat.setImage(new Image("file:src/main/resources/images/iconeCubesatLilas.png"));
-    }
-
-    @FXML
-    void cubesatToWhite(MouseEvent event) {
-        botaoCubesat.setStyle("-fx-text-fill: white;"
-                + "-fx-background-color: 0;");
-        iconeCubesat.setImage(new Image("file:src/main/resources/images/iconeCubesat.png"));
     }
 
     @FXML

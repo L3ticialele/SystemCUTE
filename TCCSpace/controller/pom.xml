@@ -5,26 +5,20 @@
         <groupId>com.tccspace</groupId>
         <artifactId>TCCSpace</artifactId>
         <version>1.0-SNAPSHOT</version>
-        <relativePath>../TCCSpace</relativePath>
+        <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>controller</artifactId>
     <packaging>jar</packaging>
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>dto</artifactId>
+            <artifactId>entidades</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>dao</artifactId>
             <version>${project.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.tccspace</groupId>
-                    <artifactId>idao</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
     </dependencies>
     <properties>
