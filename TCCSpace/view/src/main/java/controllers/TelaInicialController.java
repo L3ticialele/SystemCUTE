@@ -51,7 +51,7 @@ public class TelaInicialController implements Initializable {
     private HBox visualizarCubes;
 
     private Usuario usuario;
-
+  
     private List<CubeSat> cubeSat;
     
     private CubeSat cube;
@@ -105,7 +105,6 @@ public class TelaInicialController implements Initializable {
     }
     
     void apresentarTelaDados(ActionEvent event) throws IOException{
-
         MainFX.changedScreen("Gui3d", cube);
     }
 

@@ -6,6 +6,7 @@ import br.cefetmg.space.view.MainFX;
 import gui3d.LineChartManager;
 import gui3d.Model3D;
 import gui3d.Updater;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -167,7 +168,6 @@ public class Data3DViewerController {
 
     private Button botaoGravarDados;
 
-
     @FXML
     private ImageView iconeSuporte;
 
@@ -280,7 +280,6 @@ public class Data3DViewerController {
             List<String> fileContent = Files.readAllLines(path); 
             fileContent.forEach(System.out::println); 
             } catch (IOException ex) { ex.printStackTrace(); } }
-
     }
 
     private void configureMenuActions() {
@@ -336,8 +335,7 @@ public class Data3DViewerController {
                     if (newString.equals("Gui3d")) {
                         parte3d();
                     }
-
-                } else if (viewData.getClass().equals(Usuario.class)) {
+                else if (viewData.getClass().equals(Usuario.class)) {
                     usuario = (Usuario) viewData;
                 }
             }
