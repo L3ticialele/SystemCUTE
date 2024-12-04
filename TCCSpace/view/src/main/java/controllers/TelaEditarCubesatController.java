@@ -270,7 +270,7 @@ public class TelaEditarCubesatController implements Initializable {
                 usuario = cubesat.getUsuario();
             }
             else if(viewData instanceof Usuario){
-                usuario = user;
+                usuario = (Usuario) viewData;
             }
         });
 

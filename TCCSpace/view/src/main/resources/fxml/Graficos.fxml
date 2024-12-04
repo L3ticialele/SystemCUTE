@@ -127,7 +127,7 @@
                   <Pane layoutX="47.0" layoutY="-7.0" prefHeight="601.0" prefWidth="1221.0" styleClass="card" stylesheets="@../assets/css/gui.css">
                      <children>
                         <Line endX="257.33331298828125" layoutX="570.0" layoutY="304.0" rotate="90.0" startX="-300.0" stroke="WHITE" strokeWidth="2.0" />
-                        <Button layoutX="22.0" layoutY="37.0" mnemonicParsing="false" style="-fx-background-color: #574040;" text="VOLTAR" textFill="#fff9f9" />
+                        <Button fx:id="botaoVoltar" layoutX="22.0" layoutY="37.0" mnemonicParsing="false" style="-fx-background-color: #574040;" text="VOLTAR" textFill="#fff9f9" />
                         <Label alignment="CENTER" contentDisplay="CENTER" layoutX="99.0" layoutY="22.0" prefHeight="59.0" prefWidth="363.0" text="GRÁFICOS" textFill="WHITE">
                            <font>
                               <Font size="30.0" />

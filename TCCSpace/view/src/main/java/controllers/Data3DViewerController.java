@@ -6,7 +6,6 @@ import br.cefetmg.space.view.MainFX;
 import gui3d.LineChartManager;
 import gui3d.Model3D;
 import gui3d.Updater;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -26,6 +25,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.MeshView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import java.io.File;
+import java.io.FileOutputStream;
 
 public class Data3DViewerController {
 
@@ -154,8 +158,13 @@ public class Data3DViewerController {
 
     @FXML
     private Button botaoHome;
-    
+
     @FXML
+    private Button botaoVoltar;
+
+    @FXML
+    private Button botaoBaixarPlanilha;
+
     private Button botaoGravarDados;
 
     @FXML
@@ -218,24 +227,62 @@ public class Data3DViewerController {
     void apresentarTelaInicial(ActionEvent event) throws IOException {
         MainFX.changedScreen("Tela Inicial", usuario);
     }
-  
+
     @FXML
-    void apresentaGraficos (ActionEvent event) throws IOException {
-    
+    void voltar(ActionEvent event) throws IOException {
+        MainFX.changedScreen("Tela Inicial", usuario);
+    }
+
+    @FXML
+    void baixarPlanilha(ActionEvent event) throws IOException {
+
+        Workbook workbook = new XSSFWorkbook();
+        Sheet sheet = workbook.createSheet("PlanilhaVazia");
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Salvar Planilha");
+        fileChooser.setInitialFileName("PlanilhaCubesat.xlsx");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Arquivos Excel", "*.xlsx"));
+
+        Stage stage = (Stage) botaoBaixarPlanilha.getScene().getWindow();
+        File file = fileChooser.showSaveDialog(stage);
+
+        if (file != null) {
+            try (FileOutputStream fileOut = new FileOutputStream(file)) {
+                workbook.write(fileOut);
+                System.out.println("Planilha vazia salva em: " + file.getAbsolutePath());
+            } catch (IOException e) {
+                e.printStackTrace();
+                System.out.println("Erro ao salvar a planilha.");
+            } finally {
+                workbook.close();
+            }
+        } else {
+            System.out.println("Operação de salvamento cancelada.");
+        }
+    }
+
+    @FXML
+    void apresentaGraficos(ActionEvent event) throws IOException {
+
         MainFX.changedScreen("Graficos", cubesat);
     }
-    
+
     @FXML
-    void gravarDados(ActionEvent event){
+    void gravarDados(ActionEvent event) {
         System.out.println("oi");
         FileChooser fileChooser = new FileChooser();
         Stage secondaryStage = new Stage();
-        File selectedFile = fileChooser.showOpenDialog(secondaryStage); 
+        File selectedFile = fileChooser.showOpenDialog(secondaryStage);
         if (selectedFile != null) {
-            try { Path path = Paths.get(selectedFile.getAbsolutePath()); 
-            List<String> fileContent = Files.readAllLines(path); 
-            fileContent.forEach(System.out::println); 
-            } catch (IOException ex) { ex.printStackTrace(); } }
+            try {
+                Path path = Paths.get(selectedFile.getAbsolutePath());
+                List<String> fileContent = Files.readAllLines(path);
+                fileContent.forEach(System.out::println);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 
     private void configureMenuActions() {
@@ -287,10 +334,12 @@ public class Data3DViewerController {
                 if (viewData.getClass().equals(CubeSat.class)) {
                     cubesat = (CubeSat) viewData;
                     usuario = cubesat.getUsuario();
-                    if(newString.equals("Gui3d"))
+
+                    if (newString.equals("Gui3d")) {
                         parte3d();
-                } else if (viewData.getClass().equals(Usuario.class)) {
-                    usuario = (Usuario) viewData;
+                    } else if (viewData.getClass().equals(Usuario.class)) {
+                        usuario = (Usuario) viewData;
+                    }
                 }
             }
         });
