@@ -1,5 +1,7 @@
 package controllers;
 
+import br.cefetmg.space.view.MainFX;
+import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -13,6 +15,9 @@ public class GraficosController {
 
     @FXML
     private Button botaoHome;
+    
+    @FXML
+    private Button botaoVoltar;
 
     @FXML
     private Button botaoPerfil;
@@ -50,6 +55,11 @@ public class GraficosController {
 
     }
 
+    @FXML
+    void voltarData3DViewer(ActionEvent event) throws IOException{
+        MainFX.changedScreen("Gui3d", null);
+    }
+    
     @FXML
     void displayGrafico01(ActionEvent event) {
 
