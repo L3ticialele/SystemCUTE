@@ -14,7 +14,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.chart.LineChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuBar;
@@ -28,6 +27,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import java.io.File;
 import java.io.FileReader;
+import javafx.scene.control.Label;
 
 public class Data3DViewerController {
 
@@ -177,6 +177,9 @@ public class Data3DViewerController {
 
     @FXML
     private MeshView meshVIew3D;
+    
+    @FXML
+    private Button botaoEditarCubesat;
 
     private Usuario usuario;
 
@@ -351,6 +354,11 @@ public class Data3DViewerController {
     void apresentaTelaPerfil(ActionEvent event) throws IOException {
         MainFX.changedScreen("Perfil", usuario);
     }
+    
+    @FXML
+    void apresentarTelaEditarCubesat(ActionEvent event) throws IOException {
+        MainFX.changedScreen("Editar Cubesat", cubesat);
+    }
 
     @FXML
     void apresentarTelaInicial(ActionEvent event) throws IOException {
@@ -423,17 +431,15 @@ public class Data3DViewerController {
         MainFX.addOnChangeScreenListener(new MainFX.OnChangeScreen() {
             @Override
             public void onScreenChanged(String newString, Object viewData) {
-                if (viewData.getClass().equals(CubeSat.class)) {
+                if (viewData instanceof CubeSat) {
                     cubesat = (CubeSat) viewData;
                     usuario = cubesat.getUsuario();
+                    System.out.println(cubesat.getNome());
                     labelNomeCubesat.setText(cubesat.getNome());
+                   // if (newString.equals("Gui3d")) {
+                     //   parte3d();
+                    //}
 
-                    if (newString.equals("Gui3d")) {
-                        parte3d();
-                    }
-
-                } else if (viewData.getClass().equals(Usuario.class)) {
-                    usuario = (Usuario) viewData;
                 }
             }
         });

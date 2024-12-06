@@ -40,7 +40,7 @@ public class TelaLoginController implements Initializable {
         String email = CampoEmail.getText();
         String senha = CampoSenha.getText();
         if (CampoEmail.getText().isBlank() == true || CampoSenha.getText().isBlank() == true) {
-            msgErro.setText("Preencha os campos vazios");
+            msgErro.setText("Preencha todos os campos!");
         } else if (usuarioController.login(email, senha) != null) {
             usuario = usuarioController.login(email, senha);
             MainFX.changedScreen("Tela Inicial", usuario);
@@ -50,7 +50,7 @@ public class TelaLoginController implements Initializable {
     }
 
     public void cadastroButao(ActionEvent e) throws IOException {
-        MainFX.changedScreen("Cadastro", null);
+        MainFX.changedScreen("Cadastrar Usuario", null);
     }
 
 

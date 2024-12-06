@@ -1,24 +1,22 @@
 package controllers;
 
 import br.cefetmg.space.controller.UsuarioController;
-import br.cefetmg.space.dao.UsuarioDAO;
-import br.cefetmg.space.entidades.Usuario;
-import br.cefetmg.space.idao.IUsuarioDAO;
 import br.cefetmg.space.idao.exception.PersistenciaException;
 import br.cefetmg.space.view.MainFX;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 
-public class TelaCadastroController implements Initializable {
+public class TelaCadastrarUsuarioController implements Initializable {
 
     @FXML
     private Button BotaoCadastrar;
@@ -38,10 +36,23 @@ public class TelaCadastroController implements Initializable {
     @FXML
     private Label msg;
     
+    @FXML
+    private ImageView iconeSair;
+    
     private final UsuarioController usuarioController = new UsuarioController();
 
     public void voltarPaginaLogin(ActionEvent e) throws IOException {
         MainFX.changedScreen("Login", null);
+    }
+    
+    @FXML
+    void sairToPourple(MouseEvent event) {
+        iconeSair.setImage(new Image("file:src/main/resources/images/iconeSairLilas.png"));
+    }
+
+    @FXML
+    void sairToWhite(MouseEvent event) {
+        iconeSair.setImage(new Image("file:src/main/resources/images/iconeSair.png"));
     }
 
     public void BotaoCadastrar(ActionEvent e) throws IOException, PersistenciaException {

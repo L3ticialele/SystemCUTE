@@ -21,7 +21,7 @@
          <children>
             <ButtonBar layoutX="63.0" layoutY="8.0" prefHeight="94.0" prefWidth="1141.0">
                <buttons>
-                  <Button fx:id="botaoHome" mnemonicParsing="false" onAction="#apresentarTelaInicial" prefHeight="94.0" prefWidth="261.0" style="-fx-background-color: 0;" text="Cubesat Telemetry&#10;Environment" textFill="WHITE">
+                  <Button fx:id="botaoHome" mnemonicParsing="false" prefHeight="94.0" prefWidth="261.0" style="-fx-background-color: 0;" text="Cubesat Telemetry&#10;Environment" textFill="WHITE">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -33,10 +33,10 @@
                         </ImageView>
                      </graphic>
                      <cursor>
-                        <Cursor fx:constant="HAND" />
+                        <Cursor fx:constant="DEFAULT" />
                      </cursor>
                   </Button>
-                  <Button fx:id="botaoCubesat" mnemonicParsing="false" onAction="#apresentarTelaDados" style="-fx-background-color: 0;" text="CUBESATS" textFill="#8c52ff">
+                  <Button fx:id="botaoCubesat" mnemonicParsing="false" onAction="#apresentarTelaInicial" style="-fx-background-color: 0;" text="CUBESATS" textFill="#8c52ff">
                      <graphic>
                         <ImageView fx:id="iconeCubesat" fitHeight="43.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -47,6 +47,9 @@
                      <font>
                         <Font size="25.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                   <Button fx:id="botaoPerfil" mnemonicParsing="false" onAction="#apresentaTelaPerfil" onMouseEntered="#perfilToPourple" onMouseExited="#perfilToWhite" prefHeight="105.0" style="-fx-background-color: 0;" text="PERFIL" textFill="WHITE">
                      <graphic>
@@ -59,6 +62,9 @@
                      <font>
                         <Font size="25.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                   <Button fx:id="botaoSuporte" mnemonicParsing="false" onAction="#apresentaTelaSuporte" onMouseEntered="#suporteToPourple" onMouseExited="#suporteToWhite" prefHeight="33.0" prefWidth="105.0" style="-fx-background-color: 0;" text="SUPORTE" textFill="WHITE">
                      <graphic>
@@ -71,6 +77,9 @@
                      <font>
                         <Font size="25.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                </buttons>
                <padding>
@@ -110,6 +119,9 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                   <HBox fx:id="visualizarCubes" layoutX="56.0" layoutY="144.0" prefHeight="319.0" prefWidth="979.0" />
                </children>

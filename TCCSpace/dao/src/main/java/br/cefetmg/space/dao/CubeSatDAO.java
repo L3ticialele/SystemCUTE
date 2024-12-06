@@ -49,7 +49,6 @@ public class CubeSatDAO implements ICubeSatDAO {
                         + " Nome: " + cube.getNome()
                         + " Cadastro: " + cube.getDataCadastro()
                         + " Descrição: " + cube.getDescricao()
-                        + " Status: " + cube.getStatus()
                 );
             }
         }
@@ -100,7 +99,6 @@ public class CubeSatDAO implements ICubeSatDAO {
                 cubePersistido.setDescricao(cube.getDescricao());
                 cubePersistido.setTodosDados(cube.getDados());
                 cubePersistido.setPessoa(cube.getUsuario());
-                cubePersistido.setStatus(cube.getStatus());
                 entityManager.getTransaction().commit();
                 return true;
             } else {

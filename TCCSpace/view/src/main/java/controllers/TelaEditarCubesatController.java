@@ -11,14 +11,13 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -48,19 +47,14 @@ public class TelaEditarCubesatController implements Initializable {
 
     @FXML
     private Button botaoHome;
-    
+
     private Usuario usuario;
-    
-    @FXML
-    private ChoiceBox<String> choiceBoxAcesso;
 
     @FXML
     private Label labelDataCadastro;
 
     @FXML
     private TextField textNomeCubesat;
-
-    private final String[] acesso = {"Público", "Privado"};
 
     @FXML
     private ImageView iconeSuporte;
@@ -93,20 +87,45 @@ public class TelaEditarCubesatController implements Initializable {
     private Button botaoExcluirCubesat;
 
     private Stage dialogStage;
-    
+
     private final boolean okClicked = false;
 
-    public void setDialogStage(Stage dialogStage) {
-        this.dialogStage = dialogStage;
+    public void campoFields() {
+        if (cubesat != null) {
+            textNomeCubesat.setText(cubesat.getNome() != null ? cubesat.getNome() : "");
+            labelDataCadastro.setText(cubesat.getDataCadastro() != null ? cubesat.getDataCadastro() : "");
+            labelIdCubesat.setText("ID: " + Integer.toString(cubesat.getId()));
+            textDescricao.setText(cubesat.getDescricao());
+            botaoSalvarCubesat.setVisible(false);
+        } else {
+            System.err.println("CubeSat atual está nulo!");
+        }
     }
 
-    public void textsFields() {
-        textNomeCubesat.setText(cubesat.getNome());
-        textDescricao.setText(cubesat.getDescricao());
-        choiceBoxAcesso.getItems().addAll(acesso);
-        choiceBoxAcesso.setValue(cubesat.getAcesso());
-        labelDataCadastro.setText(cubesat.getDataCadastro());
-        labelIdCubesat.setText("ID: " + cubesat.getId());
+    private void inicializarListeners() {
+        textNomeCubesat.textProperty().addListener((observable, oldValue, newValue) -> {
+            verificarAlteracoes();
+        });
+
+        textDescricao.textProperty().addListener((observable, oldValue, newValue) -> {
+            verificarAlteracoes();
+        });
+
+        labelDataCadastro.textProperty().addListener((observable, oldValue, newValue) -> {
+            verificarAlteracoes();
+        });
+
+        labelIdCubesat.textProperty().addListener((observable, oldValue, newValue) -> {
+            verificarAlteracoes();
+        });
+    }
+
+    private void verificarAlteracoes() {
+        boolean alterado
+                = !textNomeCubesat.getText().equals(cubesat.getNome())
+                || !textDescricao.getText().equals(cubesat.getDescricao());
+
+        botaoSalvarCubesat.setVisible(alterado);
     }
 
     public boolean isOkClicked() {
@@ -115,9 +134,34 @@ public class TelaEditarCubesatController implements Initializable {
 
     @FXML
     void excluirCubesat(ActionEvent event) throws PersistenciaException {
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setHeaderText("Tem certeza que deseja excluir o cubesat ?"); //+ cubesat.getNome() + "?");
-        alert.show();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText("Tem certeza que deseja excluir o CubeSat?");
+        alert.setContentText("Essa ação não poderá ser desfeita.");
+
+        alert.showAndWait().ifPresent(buttonType -> {
+            if (buttonType == ButtonType.OK) {
+                ICubeSatDAO cubesatDAO = new CubeSatDAO();
+                try {
+                    cubesatDAO.delete(cubesat.getId());
+                    Alert confirmacao = new Alert(Alert.AlertType.CONFIRMATION);
+                    confirmacao.setHeaderText("CubeSat excluído com sucesso!");
+                    confirmacao.show();
+                    usuario.getCubeSat().remove(cubesat);
+                    cubesat = null;
+                    apresentarTelaInicial(event);
+
+                } catch (Exception e) {
+                    Alert erro = new Alert(Alert.AlertType.ERROR);
+                    erro.setHeaderText("Erro ao excluir o CubeSat: " + e.getMessage());
+                    erro.show();
+                }
+            }
+        });
+    }
+
+    @FXML
+    void apresentarTelaLogin(ActionEvent event) throws IOException {
+        MainFX.changedScreen("Login", null);
     }
 
     @FXML
@@ -125,29 +169,28 @@ public class TelaEditarCubesatController implements Initializable {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         Alert confirmacao = new Alert(Alert.AlertType.CONFIRMATION);
         Alert erro = new Alert(Alert.AlertType.ERROR);
-        CubeSat cube = new CubeSat();
-        ICubeSatDAO cubeDAO = new CubeSatDAO();
+        CubeSat cubesatAlterado = new CubeSat();
+        ICubeSatDAO cubesatDAO = new CubeSatDAO();
 
         if (textNomeCubesat.getText() == null || textNomeCubesat.getText().isEmpty()) {
             alert.setHeaderText("Por favor, informe o nome do CubeSat.");
             alert.show();
         } else {
-            LocalDateTime dataCadastro = LocalDateTime.now();
-            cube.setDataCadastro(dataCadastro.toString());
-            cube.setNome(textNomeCubesat.getText());
-            cube.setAcesso(choiceBoxAcesso.getValue());
-            cube.setPessoa(cubesat.getUsuario());
-            cube.setDescricao(textDescricao.getText());
+            cubesatAlterado.setId(cubesat.getId());
+            cubesatAlterado.setNome(textNomeCubesat.getText());
+            cubesatAlterado.setDescricao(textDescricao.getText());
+            cubesatAlterado.setDataCadastro(labelDataCadastro.getText());
+            cubesatAlterado.setPessoa(cubesat.getUsuario());
+            cubesatAlterado.setTodosDados(cubesat.getDados());
 
-            if (cubeDAO.atualizar(cube)) {
-                confirmacao.setHeaderText("Cubesat atualizado!");
+            if (cubesatDAO.atualizar(cubesatAlterado)) {
+                confirmacao.setHeaderText("CubeSat atualizado com sucesso!");
                 confirmacao.show();
+                apresentarTelaInicial(event);
             } else {
-                erro.setHeaderText("Houve um erro ao atualizar o cubesat.");
+                erro.setHeaderText("Houve um erro ao atualizar o CubeSat.");
                 erro.show();
             }
-
-            MainFX.changedScreen("Cubesat", cubesat.getUsuario());
         }
     }
 
@@ -239,17 +282,17 @@ public class TelaEditarCubesatController implements Initializable {
 
     @FXML
     void apresentaTelaSuporte(ActionEvent event) throws IOException {
-        MainFX.changedScreen("Suporte", cubesat.getUsuario());
+        MainFX.changedScreen("Suporte", usuario);
     }
 
     @FXML
     void apresentaTelaPerfil(ActionEvent event) throws IOException {
-        MainFX.changedScreen("Perfil", cubesat.getUsuario());
+        MainFX.changedScreen("Perfil", usuario);
     }
 
     @FXML
     void apresentarTelaInicial(ActionEvent event) throws IOException {
-        MainFX.changedScreen("Tela Inicial", cubesat.getUsuario());
+        MainFX.changedScreen("Tela Inicial", usuario);
     }
 
     /**
@@ -262,15 +305,18 @@ public class TelaEditarCubesatController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
         MainFX.addOnChangeScreenListener((String newString, Object viewData) -> {
-            CubeSat cubeSat = (CubeSat) viewData;
-            Usuario user = (Usuario) viewData;
-            if(viewData instanceof CubeSat) {
-                cubesat = cubeSat;
-                textsFields();
+            if (viewData instanceof CubeSat) {
+                cubesat = (CubeSat) viewData;
                 usuario = cubesat.getUsuario();
-            }
-            else if(viewData instanceof Usuario){
-                usuario = (Usuario) viewData;
+                System.out.println("Dados recebidos: " + cubesat.getNome());
+                if (cubesat != null) {
+                    campoFields();
+                    inicializarListeners();
+                } else {
+                    System.err.println("Erro: CubeSatDTO está nulo.");
+                }
+            } else {
+                System.err.println("Erro: Objeto viewData não é do tipo CubeSatDTO.");
             }
         });
 

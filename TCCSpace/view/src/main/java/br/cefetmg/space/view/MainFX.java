@@ -16,7 +16,7 @@ public class MainFX extends Application {
     private static Scene telaSuporte;
     private static Scene telaInicial;
     private static Scene telaCadastrarCubesat;
-    private static Scene telaCadastro;
+    private static Scene telaCadastrarUsuario;
     private static Scene telaLogin;
     private static Scene telaEditarCubesat;
     private static Scene graficos;
@@ -57,9 +57,9 @@ public class MainFX extends Application {
                 telaCadastrarCubesat = new Scene(loaderFXML("/fxml/TelaCadastrarCubesat"),  1280, 720);
                 stage.setScene(telaCadastrarCubesat);
                 break;
-            case "Cadastro": 
-                telaCadastro = new Scene(loaderFXML("/fxml/TelaCadastro"),  1280, 720);
-                stage.setScene(telaCadastro);
+            case "Cadastrar Usuario": 
+                telaCadastrarUsuario = new Scene(loaderFXML("/fxml/TelaCadastrarUsuario"),  1280, 720);
+                stage.setScene(telaCadastrarUsuario);
                 break;
             case "Login":
                 telaLogin = new Scene(loaderFXML("/fxml/TelaLogin"),  1280, 720);
