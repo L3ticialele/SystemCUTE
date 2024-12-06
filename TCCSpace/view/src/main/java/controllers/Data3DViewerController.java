@@ -1,11 +1,15 @@
 package controllers;
 
+import br.cefetmg.space.dao.DadosDAO;
 import br.cefetmg.space.entidades.CubeSat;
+import br.cefetmg.space.entidades.Dados;
 import br.cefetmg.space.entidades.Usuario;
+import br.cefetmg.space.idao.exception.PersistenciaException;
 import br.cefetmg.space.view.MainFX;
 import gui3d.LineChartManager;
 import gui3d.Model3D;
 import gui3d.Updater;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -30,6 +34,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 
 public class Data3DViewerController {
 
@@ -158,7 +163,7 @@ public class Data3DViewerController {
 
     @FXML
     private Button botaoHome;
-
+    
     @FXML
     private Button botaoVoltar;
 
@@ -166,6 +171,7 @@ public class Data3DViewerController {
     private Button botaoBaixarPlanilha;
 
     private Button botaoGravarDados;
+
 
     @FXML
     private ImageView iconeSuporte;
@@ -179,6 +185,114 @@ public class Data3DViewerController {
     private Usuario usuario;
 
     private CubeSat cubesat;
+    
+
+    
+    
+    private Stage caixaDialogo;
+    
+     @FXML
+    void gravarDados(ActionEvent event) throws PersistenciaException {
+        FileChooser fileChooser = new FileChooser();
+        File file = fileChooser.showOpenDialog(caixaDialogo);
+        String data = null, tempInterna = null, tempExterna = null;
+        String X = null, Y = null, Z=null, anguloX=null, anguloY=null, anguloZ=null;
+        String altitude=null, bateria=null, correnteBateria=null, correntePlacaSolar=null;
+        String luz1=null,  luz2=null,pontoOrvalho=null, pressao=null,  sensorUV=null;
+        String tensaoBateria=null, tensaoPlacaSolar=null, umidade=null;
+        int id=1;
+        float floatX=0, floatY=0,floatZ=0,floatAnguloX=0, floatAnguloY=0, floatAnguloZ=0;
+        float floatAltide=0, floatBateria=0, floatCorrenteBateria=0, floatCorrentePlacaSolar=0;
+        float floatLuz1=0, floatLuz2=0, floatPontoOrvalho=0,floatPressao=0, floatSensorUV=0;
+        float floatTensaoBateria=0, floatTensaoPlacaSolar=0, floatTempExterna=0, floatTempInterna=0,floatUmidade=0;
+        DadosDAO dadoDao = new DadosDAO();
+        int lineNumber = 1;
+        if(file != null){
+            try(BufferedReader reader = new BufferedReader(new FileReader(file))){
+                StringBuilder content = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null){
+                    System.out.println(line);
+                    content.append(line).append("\n");
+                    int lineNumer;
+                    switch(lineNumber){
+                        case 1: data = line;
+                                break;
+                        case 2: X = line;
+                                floatX = Float.parseFloat(X);
+                                break;
+                        case 3: Y = line;
+                                floatY = Float.parseFloat(Y);
+                                break;
+                        case 4: Z = line;
+                                floatZ = Float.parseFloat(Z);
+                                break;
+                        case 5: anguloX = line;
+                                floatAnguloX = Float.parseFloat(anguloX);
+                                break;
+                        case 6: anguloY = line;
+                                floatAnguloY = Float.parseFloat(anguloY);
+                                break;
+                        case 7: anguloZ = line;
+                                floatAnguloZ = Float.parseFloat(anguloZ);
+                                break;   
+                        case 8: altitude = line;
+                                floatAltide = Float.parseFloat(altitude);
+                                break;
+                        case 9: bateria = line;
+                                floatBateria = Float.parseFloat(bateria);
+                                break; 
+                        case 10: correnteBateria = line;
+                                floatCorrenteBateria = Float.parseFloat(correnteBateria);
+                                break; 
+                        case 11: correntePlacaSolar = line;
+                                floatCorrentePlacaSolar = Float.parseFloat(correntePlacaSolar);
+                                break; 
+                        case 12: luz1 = line;
+                                floatLuz1 = Float.parseFloat(luz1);
+                                break;
+                        case 13: luz2 = line;
+                               floatLuz2 = Float.parseFloat(luz2);
+                                break;
+                        case 14: pontoOrvalho = line;
+                                floatPontoOrvalho = Float.parseFloat(pontoOrvalho);
+                                break;
+                        case 15: pressao = line;
+                                floatPressao = Float.parseFloat(pressao);
+                                break;
+                        case 16: sensorUV = line;
+                                floatSensorUV = Float.parseFloat(sensorUV);
+                                break;
+                        case 17: tensaoBateria = line;
+                                floatTensaoBateria = Float.parseFloat(tensaoBateria);
+                                break;
+                        case 18: tensaoPlacaSolar = line;
+                                floatTensaoPlacaSolar = Float.parseFloat(tensaoPlacaSolar);
+                                break;
+                        case 19: tempExterna = line;
+                                floatTempExterna = Float.parseFloat(tempExterna);
+                                break;
+                        case 20: tempInterna = line;
+                                floatTempInterna = Float.parseFloat(tempInterna);
+                                break;
+                        case 21: umidade = line;
+                                floatUmidade = Float.parseFloat(umidade);
+                              
+                                
+                                Dados dado = new Dados(id,floatX, floatY,floatZ, floatAnguloX,floatAnguloY,floatAnguloZ, floatAltide, floatBateria,floatCorrenteBateria, floatCorrentePlacaSolar,floatLuz1,  floatLuz2,floatPontoOrvalho, floatPressao,  floatSensorUV, floatTempExterna,floatTempInterna,  floatTensaoBateria, floatTensaoPlacaSolar, floatUmidade,  cubesat, data);   
+                                dadoDao.inserir(dado);
+                                lineNumber = 1;
+                                continue;
+                    }
+                    lineNumber++;
+                    
+                }
+                
+            }catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     @FXML
     void perfilToPourple(MouseEvent event) {
@@ -232,10 +346,10 @@ public class Data3DViewerController {
     void voltar(ActionEvent event) throws IOException {
         MainFX.changedScreen("Tela Inicial", usuario);
     }
-
+    
     @FXML
     void baixarPlanilha(ActionEvent event) throws IOException {
-
+        
         Workbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet("PlanilhaVazia");
 
@@ -261,29 +375,13 @@ public class Data3DViewerController {
             System.out.println("Operação de salvamento cancelada.");
         }
     }
-
+    
     @FXML
-    void apresentaGraficos(ActionEvent event) throws IOException {
-
+    void apresentaGraficos (ActionEvent event) throws IOException {
+    
         MainFX.changedScreen("Graficos", cubesat);
     }
-
-    @FXML
-    void gravarDados(ActionEvent event) {
-        System.out.println("oi");
-        FileChooser fileChooser = new FileChooser();
-        Stage secondaryStage = new Stage();
-        File selectedFile = fileChooser.showOpenDialog(secondaryStage);
-        if (selectedFile != null) {
-            try {
-                Path path = Paths.get(selectedFile.getAbsolutePath());
-                List<String> fileContent = Files.readAllLines(path);
-                fileContent.forEach(System.out::println);
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        }
-    }
+    
 
     private void configureMenuActions() {
         menuItemTemperatura.setOnAction(event -> chartManager.setActiveSeries("Temperatura Interna"));
@@ -337,9 +435,10 @@ public class Data3DViewerController {
 
                     if (newString.equals("Gui3d")) {
                         parte3d();
-                    } else if (viewData.getClass().equals(Usuario.class)) {
-                        usuario = (Usuario) viewData;
                     }
+
+                } else if (viewData.getClass().equals(Usuario.class)) {
+                    usuario = (Usuario) viewData;
                 }
             }
         });
