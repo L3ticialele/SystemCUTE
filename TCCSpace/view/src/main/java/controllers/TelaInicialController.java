@@ -123,7 +123,6 @@ public class TelaInicialController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         MainFX.addOnChangeScreenListener((String newString, Object viewData) -> {
             if(viewData instanceof Usuario) {
-                System.out.println("a");
                 List<CubeSat> cubeSat;
                 usuario = (Usuario) viewData;
                 nome.setText(usuario.getNome() + "!");
@@ -156,7 +155,6 @@ public class TelaInicialController implements Initializable {
                         }
                             });
                     visualizarCubes.getChildren().add(botaoCube);
-                    
                 }
             }
         });

@@ -1,4 +1,4 @@
-package controllers;
+package br.cefetmg.space.controller;
 
 
 
