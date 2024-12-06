@@ -462,7 +462,7 @@
                         <Button fx:id="botaoVoltar" layoutX="22.0" layoutY="37.0" mnemonicParsing="false" onAction="#voltar" style="-fx-background-color: #574040;" text="VOLTAR" textFill="#fff9f9" />
 
                         <Button layoutX="463.0" layoutY="36.0" mnemonicParsing="false" style="-fx-background-color: #574040;" text="EDITAR" textFill="WHITE" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="99.0" layoutY="22.0" prefHeight="59.0" prefWidth="363.0" text="NOME" textFill="WHITE">
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="99.0" layoutY="22.0" prefHeight="59.0" prefWidth="363.0" text="NOME" textFill="WHITE" fx:id="labelNomeCubesat">
                            <font>
                               <Font size="30.0" />
                            </font>

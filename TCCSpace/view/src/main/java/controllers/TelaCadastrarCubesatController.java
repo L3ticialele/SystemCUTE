@@ -186,6 +186,7 @@ public class TelaCadastrarCubesatController implements Initializable {
                 cube.setDescricao(textDescricao.getText());
 
                 if(cubeDAO.inserir(cube)){
+                    user.setCubeSat(cube);
                     confirmacao.setHeaderText("Cubesat cadastrado com sucesso!");
                     confirmacao.show();
                 }else{

@@ -13,7 +13,7 @@ import javax.persistence.criteria.CriteriaQuery;
 public class UsuarioDAO implements IUsuarioDAO {
 
     @Override
-    public void inserir(Usuario usuario) throws PersistenciaException {
+    public Usuario inserir(Usuario usuario) throws PersistenciaException {
         EntityManagerFactory entityManagerFactory
                 = Persistence.createEntityManagerFactory("persistence");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -28,6 +28,7 @@ public class UsuarioDAO implements IUsuarioDAO {
             throw ex;
         } finally {
             entityManager.close();
+            return usuario;
         }
     }
 
@@ -49,11 +50,6 @@ public class UsuarioDAO implements IUsuarioDAO {
                         + " CubeSats feitos/em andamento: " + usuario.quantCubeSat()
                         + " Telefone: " + usuario.getTelefone()
                 );
-                if (usuario.isAdministrador()) {
-                    System.out.println(" Administrador: sim");
-                } else {
-                    System.out.println(" Administrador: não");
-                }
             }
         } else {
             System.out.println(" Não há usuários cadastrados no sistema.");
@@ -173,7 +169,6 @@ public class UsuarioDAO implements IUsuarioDAO {
                 usuarioPersistido.setEmail(usuario.getEmail());
                 usuarioPersistido.setNome(usuario.getNome());
                 usuarioPersistido.setSenha(usuario.getSenha());
-                usuarioPersistido.setAdministrador(usuario.isAdministrador());
                 usuarioPersistido.setTelefone(usuario.getTelefone());
                 usuarioPersistido.setCubeSat(usuario.getCubeSat());
                 entityManager.getTransaction().commit();

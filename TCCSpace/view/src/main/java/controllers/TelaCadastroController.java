@@ -1,5 +1,6 @@
 package controllers;
 
+import br.cefetmg.space.controller.UsuarioController;
 import br.cefetmg.space.dao.UsuarioDAO;
 import br.cefetmg.space.entidades.Usuario;
 import br.cefetmg.space.idao.IUsuarioDAO;
@@ -37,12 +38,13 @@ public class TelaCadastroController implements Initializable {
     @FXML
     private Label msg;
     
+    private final UsuarioController usuarioController = new UsuarioController();
 
     public void voltarPaginaLogin(ActionEvent e) throws IOException {
         MainFX.changedScreen("Login", null);
     }
 
-    public void BotaoCadastrar(ActionEvent e) throws IOException {
+    public void BotaoCadastrar(ActionEvent e) throws IOException, PersistenciaException {
         if (CampoEmail.getText().isBlank() == true || CampoSenha.getText().isBlank() == true || CampoNome.getText().isBlank() == true || CampoTelefone.getText().isBlank() == true) {
             msg.setText("Preencha os campos vazios");
         } else {
@@ -50,24 +52,7 @@ public class TelaCadastroController implements Initializable {
             String nome = CampoNome.getText();
             String senha = CampoSenha.getText();
             String telefone = CampoTelefone.getText();
-            MainFX.changedScreen("Tela Inicial", inserir(email, nome, senha, telefone));
-        }
-    }
-
-    public Usuario inserir(String email, String nome, String senha, String telefone) {
-        Usuario usuario = new Usuario();
-        usuario.setEmail(email);
-        usuario.setNome(nome);
-        usuario.setSenha(senha);
-        usuario.setTelefone(telefone);
-
-        IUsuarioDAO user = new UsuarioDAO();
-        try {
-            user.inserir(usuario);
-        } catch (PersistenciaException ex) {
-            Logger.getLogger(TelaCadastroController.class.getName()).log(Level.SEVERE, null, ex);
-        }finally{
-            return usuario;
+            MainFX.changedScreen("Tela Inicial", usuarioController.cadastrar(email, nome, senha, telefone));
         }
     }
 
