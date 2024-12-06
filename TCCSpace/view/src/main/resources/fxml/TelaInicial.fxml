@@ -36,7 +36,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="botaoCubesat" mnemonicParsing="false" onAction="#apresentarTelaInicial" style="-fx-background-color: 0;" text="CUBESATS" textFill="#8c52ff">
+                  <Button fx:id="botaoCubesat" mnemonicParsing="false" onAction="#apresentarTelaDados" style="-fx-background-color: 0;" text="CUBESATS" textFill="#8c52ff">
                      <graphic>
                         <ImageView fx:id="iconeCubesat" fitHeight="43.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
                            <image>

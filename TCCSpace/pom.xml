@@ -33,12 +33,15 @@
         <module>entidades</module>
                     
     
+    
         <module>controller</module>
+                    
     
     
         <module>view</module>
-      
+    
     </modules>
+          
   
   
     <properties>

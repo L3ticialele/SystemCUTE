@@ -1,7 +1,10 @@
 package controllers;
 
+import br.cefetmg.space.dao.CubeSatDAO;
 import br.cefetmg.space.entidades.CubeSat;
 import br.cefetmg.space.entidades.Usuario;
+import br.cefetmg.space.idao.ICubeSatDAO;
+import br.cefetmg.space.idao.exception.PersistenciaException;
 import br.cefetmg.space.view.MainFX;
 import java.io.IOException;
 import java.net.URL;
@@ -103,7 +106,7 @@ public class TelaInicialController implements Initializable {
     void apresentarTelaCadastrarCubesat(ActionEvent event) throws IOException {
         MainFX.changedScreen("Cadastrar Cubesat", usuario);
     }
-    
+    @FXML
     void apresentarTelaDados(ActionEvent event) throws IOException{
         MainFX.changedScreen("Gui3d", cube);
     }
@@ -114,6 +117,8 @@ public class TelaInicialController implements Initializable {
      * @param url
      * @param rb
      */
+ 
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         MainFX.addOnChangeScreenListener((String newString, Object viewData) -> {
@@ -140,8 +145,13 @@ public class TelaInicialController implements Initializable {
                     */
                    botaoCube.setOnAction(event -> {
                         try {
+                            ICubeSatDAO cubesatDAO = new CubeSatDAO();
+                            String nomeCubesat = botaoCube.getText();
+                            cube = cubesatDAO.procurarPorNome(nomeCubesat);
                             apresentarTelaDados(event);
                         } catch (IOException ex) {
+                            Logger.getLogger(TelaInicialController.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (PersistenciaException ex) {
                             Logger.getLogger(TelaInicialController.class.getName()).log(Level.SEVERE, null, ex);
                         }
                             });
