@@ -1,6 +1,7 @@
 package controllers;
 
 import br.cefetmg.space.controller.UsuarioController;
+import br.cefetmg.space.controller.ValidaCamposController;
 import br.cefetmg.space.idao.exception.PersistenciaException;
 import br.cefetmg.space.view.MainFX;
 import java.io.IOException;
@@ -40,6 +41,8 @@ public class TelaCadastrarUsuarioController implements Initializable {
     private ImageView iconeSair;
     
     private final UsuarioController usuarioController = new UsuarioController();
+    
+    private final ValidaCamposController validador = new ValidaCamposController();
 
     public void voltarPaginaLogin(ActionEvent e) throws IOException {
         MainFX.changedScreen("Login", null);
@@ -54,6 +57,22 @@ public class TelaCadastrarUsuarioController implements Initializable {
     void sairToWhite(MouseEvent event) {
         iconeSair.setImage(new Image("file:src/main/resources/images/iconeSair.png"));
     }
+    
+    public boolean validaCampos(String email, String senha, String telefone){
+        if(!validador.validaEmail(email)){
+            msg.setText("Email invalido");
+            return false;
+        }
+        else if(!validador.validarTelefone(telefone)){
+            msg.setText("Telefone Inválido");
+            return false;
+        }
+        else if(!validador.senhaForte(senha)){
+            msg.setText("Senha fraca");
+            return false;
+        }
+        return true;
+    }
 
     public void BotaoCadastrar(ActionEvent e) throws IOException, PersistenciaException {
         if (CampoEmail.getText().isBlank() == true || CampoSenha.getText().isBlank() == true || CampoNome.getText().isBlank() == true || CampoTelefone.getText().isBlank() == true) {
@@ -63,6 +82,7 @@ public class TelaCadastrarUsuarioController implements Initializable {
             String nome = CampoNome.getText();
             String senha = CampoSenha.getText();
             String telefone = CampoTelefone.getText();
+            if(validaCampos(email, senha, telefone))
             MainFX.changedScreen("Tela Inicial", usuarioController.cadastrar(email, nome, senha, telefone));
         }
     }
