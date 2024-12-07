@@ -182,7 +182,7 @@ public class Data3DViewerController {
     void gravarDados(ActionEvent event) throws PersistenciaException {
         FileChooser fileChooser = new FileChooser();
         File file = fileChooser.showOpenDialog(caixaDialogo);
-        String data = null;
+        String data = null, horas = null;
         int id = 1;
         float floatX = 0, floatY = 0, floatZ = 0, floatAnguloX = 0, floatAnguloY = 0, floatAnguloZ = 0;
         float floatAltide = 0, floatBateria = 0, floatCorrenteBateria = 0, floatCorrentePlacaSolar = 0;
@@ -199,6 +199,7 @@ public class Data3DViewerController {
                     content.append(line).append("\n");
                     String[] parts = line.split(" ");
                     data = parts[0].split(":")[1];
+                    horas = parts[0].split(":")[1];
                     floatX = Float.parseFloat(parts[1].split(":")[1].trim());
                     floatY = Float.parseFloat(parts[2].split(":")[1].trim());
                     floatZ = Float.parseFloat(parts[3].split(":")[1].trim());
@@ -220,7 +221,7 @@ public class Data3DViewerController {
                     floatTempInterna = Float.parseFloat(parts[19].split(":")[1].trim());
                     floatUmidade = Float.parseFloat(parts[20].split(":")[1].trim());
 
-                    Dados dado = new Dados(id, floatX, floatY, floatZ, floatAnguloX, floatAnguloY, floatAnguloZ, floatAltide, floatBateria, floatCorrenteBateria, floatCorrentePlacaSolar, floatLuz1, floatLuz2, floatPontoOrvalho, floatPressao, floatSensorUV, floatTempExterna, floatTempInterna, floatTensaoBateria, floatTensaoPlacaSolar, floatUmidade, cubesat, data);
+                    Dados dado = new Dados(floatX, floatY, floatZ, floatAnguloX, floatAnguloY, floatAnguloZ, floatAltide, floatBateria, floatCorrenteBateria, floatCorrentePlacaSolar, floatLuz1, floatLuz2, floatPontoOrvalho, floatPressao, floatSensorUV, floatTempExterna, floatTempInterna, floatTensaoBateria, floatTensaoPlacaSolar, floatUmidade, cubesat, data, horas);
                     dadoDao.inserir(dado);
                     lineNumber++;
 

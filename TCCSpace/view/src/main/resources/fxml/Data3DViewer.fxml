@@ -466,7 +466,7 @@
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor></Button>
-                        <Button layoutX="624.0" layoutY="548.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="168.0" style="-fx-background-color: #574040;" text="GRAVAR NOVOS DADOS" textFill="WHITE">
+                        <Button layoutX="624.0" layoutY="548.0" mnemonicParsing="false" onAction="#gravarDados" prefHeight="34.0" prefWidth="168.0" style="-fx-background-color: #574040;" text="GRAVAR NOVOS DADOS" textFill="WHITE">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor></Button>
