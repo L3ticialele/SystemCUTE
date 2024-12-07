@@ -1,5 +1,4 @@
 package br.cefetmg.space.dao;
-
 import br.cefetmg.space.entidades.Usuario;
 import br.cefetmg.space.idao.IUsuarioDAO;
 import br.cefetmg.space.idao.exception.PersistenciaException;
@@ -10,10 +9,12 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
 
+/*Esta classe inclui as funções que podem ser realizadas com o objeto Usuário*/
 public class UsuarioDAO implements IUsuarioDAO {
-
+    
+    //Inserir um novo usuario no sistema
     @Override
-    public void inserir(Usuario usuario) throws PersistenciaException {
+    public Usuario inserir(Usuario usuario) throws PersistenciaException {
         EntityManagerFactory entityManagerFactory
                 = Persistence.createEntityManagerFactory("persistence");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -28,9 +29,11 @@ public class UsuarioDAO implements IUsuarioDAO {
             throw ex;
         } finally {
             entityManager.close();
+            return usuario;
         }
     }
-
+    
+    //Lista todos os usúarios do sistema
     @Override
     public List<Usuario> listarTodos() throws PersistenciaException {
         EntityManagerFactory entityManagerFactory
@@ -49,11 +52,6 @@ public class UsuarioDAO implements IUsuarioDAO {
                         + " CubeSats feitos/em andamento: " + usuario.quantCubeSat()
                         + " Telefone: " + usuario.getTelefone()
                 );
-                if (usuario.isAdministrador()) {
-                    System.out.println(" Administrador: sim");
-                } else {
-                    System.out.println(" Administrador: não");
-                }
             }
         } else {
             System.out.println(" Não há usuários cadastrados no sistema.");
@@ -61,7 +59,8 @@ public class UsuarioDAO implements IUsuarioDAO {
         entityManager.close();
         return usuarios;
     }
-
+    
+    //Deleta um usuario, conforme o id
     @Override
     public void delete(int idUsuario) throws PersistenciaException {
         EntityManagerFactory entityManagerFactory
@@ -85,7 +84,8 @@ public class UsuarioDAO implements IUsuarioDAO {
             entityManager.close();
         }
     }
-
+    
+    //Procura um usuário, conforme o nome
     @Override
     public Usuario procurarPorUserName(String user) throws PersistenciaException {
         EntityManagerFactory entityManagerFactory
@@ -109,7 +109,8 @@ public class UsuarioDAO implements IUsuarioDAO {
             entityManager.close();
         }
     }
-
+    
+    //Procura um usuario conforme o email
     @Override
     public Usuario procurarPorEmail(String email) throws PersistenciaException {
         EntityManagerFactory entityManagerFactory
@@ -134,6 +135,7 @@ public class UsuarioDAO implements IUsuarioDAO {
         }
     }
 
+   //Validação usada no login
     @Override
     public boolean validarlogin(Usuario usuario) throws PersistenciaException {
         EntityManagerFactory entityManagerFactory
@@ -159,6 +161,7 @@ public class UsuarioDAO implements IUsuarioDAO {
         }
     }
 
+    //Atualiza os dados de um usuário, se alterados
     @Override
     public boolean atualizar(int idUsuario, Usuario usuario) throws PersistenciaException {
         EntityManagerFactory entityManagerFactory
@@ -173,7 +176,6 @@ public class UsuarioDAO implements IUsuarioDAO {
                 usuarioPersistido.setEmail(usuario.getEmail());
                 usuarioPersistido.setNome(usuario.getNome());
                 usuarioPersistido.setSenha(usuario.getSenha());
-                usuarioPersistido.setAdministrador(usuario.isAdministrador());
                 usuarioPersistido.setTelefone(usuario.getTelefone());
                 usuarioPersistido.setCubeSat(usuario.getCubeSat());
                 entityManager.getTransaction().commit();
@@ -189,12 +191,14 @@ public class UsuarioDAO implements IUsuarioDAO {
             entityManager.close();
         }
     }
-
+    
+    //Procura por um usuário pelo ID
     @Override
     public Usuario procurarPorId(int id) throws PersistenciaException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    //Validação usada no login, verifica se a senha e email inseridos pela pessoa se encontram no banco de dados
     @Override
     public Usuario validarlogin(String email, String senha) throws PersistenciaException {
         EntityManagerFactory entityManagerFactory

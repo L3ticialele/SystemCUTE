@@ -15,18 +15,9 @@
    <children>
       <VBox prefHeight="720.0" prefWidth="1280.0">
          <children>
-            <ButtonBar prefHeight="168.0" prefWidth="924.0">
+            <ButtonBar prefHeight="94.0" prefWidth="1194.0">
                <buttons>
-                  <Button defaultButton="true" maxHeight="137.0" maxWidth="282.0" minHeight="20.0" minWidth="24.0" mnemonicParsing="false" prefHeight="89.0" prefWidth="290.0" style="-fx-background-color: 0;">
-                     <graphic>
-                        <ImageView fitHeight="49.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/menu.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Button fx:id="botaoHome" mnemonicParsing="false" onAction="#apresentarTelaInicial" prefHeight="99.0" prefWidth="125.0" style="-fx-background-color: 0;" text="Cubesat Telemetry&#10;Environment" textFill="WHITE">
+                  <Button fx:id="botaoHome" mnemonicParsing="false" prefHeight="94.0" prefWidth="339.0" style="-fx-background-color: 0;" text="Cubesat Telemetry&#10;Environment" textFill="WHITE">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -38,20 +29,8 @@
                         </ImageView>
                      </graphic>
                      <cursor>
-                        <Cursor fx:constant="HAND" />
+                        <Cursor fx:constant="DEFAULT" />
                      </cursor>
-                  </Button>
-                  <Button fx:id="botaoPerfil" mnemonicParsing="false" onAction="#apresentaTelaPerfil" onDragEntered="#perfilToPourple" onDragExited="#perfilToWhite" prefHeight="105.0" style="-fx-background-color: 0;" text="PERFIL" textFill="WHITE">
-                     <graphic>
-                        <ImageView fx:id="iconePerfil" fitHeight="36.0" fitWidth="35.0" onDragEntered="#perfilToPourple" onDragExited="#perfilToWhite" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/user.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <font>
-                        <Font size="25.0" />
-                     </font>
                   </Button>
                   <Button fx:id="botaoCubesat" mnemonicParsing="false" onAction="#apresentarTelaInicial" onMouseEntered="#cubesatToPourple" onMouseExited="#cubesatToWhite" style="-fx-background-color: 0;" text="CUBESATS" textFill="WHITE">
                      <graphic>
@@ -64,6 +43,24 @@
                      <font>
                         <Font size="25.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="botaoPerfil" mnemonicParsing="false" onAction="#apresentaTelaPerfil" onMouseEntered="#perfilToPourple" onMouseExited="#perfilToWhite" prefHeight="105.0" style="-fx-background-color: 0;" text="PERFIL" textFill="WHITE">
+                     <graphic>
+                        <ImageView fx:id="iconePerfil" fitHeight="36.0" fitWidth="35.0" onDragEntered="#perfilToPourple" onDragExited="#perfilToWhite" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/user.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                   <Button fx:id="botaoSuporte" mnemonicParsing="false" onAction="#apresentaTelaSuporte" prefHeight="33.0" prefWidth="105.0" style="-fx-background-color: 0;" text="SUPORTE" textFill="#8c52ff">
                      <graphic>
@@ -76,6 +73,9 @@
                      <font>
                         <Font size="25.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                </buttons>
             </ButtonBar>

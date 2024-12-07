@@ -1,5 +1,4 @@
 package br.cefetmg.space.entidades;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,16 +14,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+/*Está classe define os atributos dos Cubesats, contendo também os gets, os sets e 2 construtores*/
 @Entity
 @Table(name = "cubesat")
 @SuppressWarnings("ValidAttributes")
 public class CubeSat implements Serializable {
-
+    //atributos
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
-    @Column (name = "acesso")
-    private String acesso;
     @Column(name = "data")
     private String data;
     @Column(name = "descricao")
@@ -37,38 +35,18 @@ public class CubeSat implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idUsuario", nullable = true)
     private Usuario usuario;
-    @Column(name = "status")
-    private String status;
-
+    //construtor
     public CubeSat(){
         dado = new ArrayList<>();
         data = null;
         descricao = null;
         nome = null;
-        status = "Inativo";
-        acesso = "Público";
     }
-    
-    public String getAcesso(){
-        return acesso;
-    }
-    
-    public void setAcesso(String acesso){
-        this.acesso = acesso;
-    }
-    
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-    
+  //construtor
     public Usuario getUsuario() {
         return usuario;
     }
-
+    //gets e sets
     public void setPessoa(Usuario usuario) {
         this.usuario = usuario;
     }

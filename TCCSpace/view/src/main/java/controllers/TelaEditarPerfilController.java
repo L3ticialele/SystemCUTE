@@ -16,7 +16,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.scene.control.ButtonType;
@@ -24,6 +23,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 
 public class TelaEditarPerfilController implements Initializable {
@@ -42,6 +42,9 @@ public class TelaEditarPerfilController implements Initializable {
 
     @FXML
     private Button botaoPerfil;
+    
+    @FXML
+    private Label labelPerfil;
 
     @FXML
     private Button botaoSair;
@@ -60,24 +63,9 @@ public class TelaEditarPerfilController implements Initializable {
 
     @FXML
     private ImageView iconeSuporte;
-
+    
     @FXML
-    private ImageView imagemPerfil;
-
-    @FXML
-    private Label labelEmail;
-
-    @FXML
-    private Label labelNome;
-
-    @FXML
-    private Label labelPerfil;
-
-    @FXML
-    private Label labelSenha;
-
-    @FXML
-    private Label labelTelefone;
+    private ImageView iconeCubesat;
     @FXML
     private TextField campoEmail;
 
@@ -108,6 +96,34 @@ public class TelaEditarPerfilController implements Initializable {
     private final Desktop desktop = Desktop.getDesktop();
 
     private File arquivo;
+    
+    @FXML
+    void suporteToPourple(MouseEvent event) {
+        botaoSuporte.setStyle("-fx-text-fill: #8C52FF;"
+                + "-fx-background-color: 0;");
+        iconeSuporte.setImage(new Image("file:src/main/resources/images/suporteLilas.png"));
+    }
+
+    @FXML
+    void suporteToWhite(MouseEvent event) {
+        botaoSuporte.setStyle("-fx-text-fill: white;"
+                + "-fx-background-color: 0;");
+        iconeSuporte.setImage(new Image("file:src/main/resources/images/suport.png"));
+    }
+    
+    @FXML
+    void cubesatToPourple(MouseEvent event){
+        botaoCubesat.setStyle("-fx-text-fill: #8C52FF;"
+                + "-fx-background-color: 0;");
+        iconeCubesat.setImage(new Image("file:src/main/resources/images/iconeCubesatLilas.png"));
+    }
+    
+    @FXML
+    void cubesatToWhite(MouseEvent event){
+        botaoCubesat.setStyle("-fx-text-fill: white;"
+                + "-fx-background-color: 0;");
+        iconeCubesat.setImage(new Image("file:src/main/resources/images/iconeCubesat.png"));
+    }
 
     public void campoFields() {
         if (usuarioAtual != null) {
@@ -115,6 +131,7 @@ public class TelaEditarPerfilController implements Initializable {
             campoEmail.setText(usuarioAtual.getEmail() != null ? usuarioAtual.getEmail() : "");
             campoSenha.setText(usuarioAtual.getSenha() != null ? usuarioAtual.getSenha() : "");
             campoTelefone.setText(usuarioAtual.getTelefone() != null ? usuarioAtual.getTelefone() : "");
+            labelPerfil.setText("ID: " + usuarioAtual.getId());
             botaoSalvarPerfil.setVisible(false);
         } else {
             System.err.println("Usuário atual está nulo!");
@@ -167,6 +184,8 @@ public class TelaEditarPerfilController implements Initializable {
                     Alert confirmacao = new Alert(Alert.AlertType.CONFIRMATION);
                     confirmacao.setHeaderText("Perfil excluído com sucesso!");
                     confirmacao.show();
+                    usuarioAtual = null;
+                    apresentarTelaLogin(event);
                     
                     
                     
@@ -244,15 +263,35 @@ public class TelaEditarPerfilController implements Initializable {
         );
     }
     
+    @FXML
+    void sairToPourple(MouseEvent event) {
+        iconeSair.setImage(new Image("file:src/main/resources/images/iconeSairLilas.png"));
+    }
+
+    @FXML
+    void sairToWhite(MouseEvent event) {
+        iconeSair.setImage(new Image("file:src/main/resources/images/iconeSair.png"));
+    }
     
+    @FXML
+    void apresentaTelaSuporte(ActionEvent event) throws IOException {
+        MainFX.changedScreen("Suporte", usuarioAtual);
+    }
+    
+    @FXML
+    void apresentarTelaLogin(ActionEvent event) throws IOException {
+        MainFX.changedScreen("Login", usuarioAtual);
+    }
 
     @FXML
     void apresentaTelaHome(ActionEvent event) throws IOException {
         MainFX.changedScreen("Tela Inicial", usuarioAtual);
     }
    
-
-   
+    @FXML
+    void apresentaTelaPerfil(ActionEvent event) throws IOException {
+        MainFX.changedScreen("Perfil", usuarioAtual);
+    }
 
 @Override
 public void initialize(URL url, ResourceBundle rb) {
