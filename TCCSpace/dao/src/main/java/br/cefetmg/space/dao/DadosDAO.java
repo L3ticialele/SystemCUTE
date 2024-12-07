@@ -1,6 +1,7 @@
 
 package br.cefetmg.space.dao;
 
+import br.cefetmg.space.entidades.CubeSat;
 import br.cefetmg.space.entidades.Dados;
 import br.cefetmg.space.idao.IDadosDAO;
 import br.cefetmg.space.idao.exception.PersistenciaException;
@@ -96,7 +97,7 @@ public class DadosDAO implements IDadosDAO{
         }
     }
     @Override
-    public void inserir(Dados dados) throws PersistenciaException{
+    public boolean inserir(Dados dados) throws PersistenciaException{
         EntityManagerFactory entityManagerFactory = 
         Persistence.createEntityManagerFactory("persistence");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -105,6 +106,31 @@ public class DadosDAO implements IDadosDAO{
             entityManager.getTransaction().begin();
             entityManager.persist(dados);
             entityManager.getTransaction().commit();
+            return true;
+        }catch(Exception ex){
+            entityManager.getTransaction().rollback();
+            throw ex;
+        }finally{
+            entityManager.close();
+        }
+    }
+    
+    @Override
+    public List<Dados> procurarPorCubeSat(CubeSat cubesat) throws PersistenciaException{
+        EntityManagerFactory entityManagerFactory = 
+        Persistence.createEntityManagerFactory("persistence");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        
+        try{
+             entityManager.getTransaction().begin();
+             Query query = entityManager.createQuery("FROM Dados AS d WHERE d.cubesat =:cubesat ");
+             query.setParameter("cubesat", cubesat);
+             List<Dados> dadosPersistidos = query.getResultList();
+            if(!dadosPersistidos.isEmpty()){
+                return dadosPersistidos;
+            }else{
+                return null;
+            }
         }catch(Exception ex){
             entityManager.getTransaction().rollback();
             throw ex;
@@ -158,6 +184,7 @@ public class DadosDAO implements IDadosDAO{
                         */
                         + " Cubesat: " + dado.getCubeSat().getNome() 
                         + " Data: " + dado.getDataObtencao()
+                        + " Hora: " + dado.getHora()
                 );
             }
         }
