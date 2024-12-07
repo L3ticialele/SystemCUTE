@@ -1,10 +1,9 @@
-
 package br.cefetmg.space.idao;
-
 import br.cefetmg.space.entidades.Usuario;
 import br.cefetmg.space.idao.exception.PersistenciaException;
 import java.util.List;
 
+/*interface com as funções da classe UsuarioDAO*/
 public interface IUsuarioDAO {
     Usuario inserir(Usuario usuario) throws PersistenciaException;
 

@@ -1,6 +1,4 @@
-
 package br.cefetmg.space.entidades;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,10 +14,12 @@ import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+/*Está classe define os atributos dos Usuários, contendo também os gets, os sets e o construtor*/
 @Entity
 @Table(name = "usuarios")
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 public class Usuario implements Serializable{
+    //atributos
     @Id 
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
@@ -34,14 +34,14 @@ public class Usuario implements Serializable{
     @OneToMany(fetch = FetchType.EAGER, cascade = 
             CascadeType.PERSIST, mappedBy = "usuario")
     private List<CubeSat> cubeSat;
-    
+    //construtor
     public Usuario(){
         senha = null;
         email = null;
         telefone = null;
         cubeSat = new ArrayList<>();
     }
-    
+    //gets e sets
     public CubeSat getCubeSat(int posicao){
         return cubeSat.get(posicao);
     }
