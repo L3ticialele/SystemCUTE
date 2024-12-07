@@ -23,8 +23,6 @@ public class CubeSat implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
-    @Column (name = "acesso")
-    private String acesso;
     @Column(name = "data")
     private String data;
     @Column(name = "descricao")
@@ -37,34 +35,14 @@ public class CubeSat implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idUsuario", nullable = true)
     private Usuario usuario;
-    @Column(name = "status")
-    private String status;
 
     public CubeSat(){
         dado = new ArrayList<>();
         data = null;
         descricao = null;
         nome = null;
-        status = "Inativo";
-        acesso = "Público";
     }
-    
-    public String getAcesso(){
-        return acesso;
-    }
-    
-    public void setAcesso(String acesso){
-        this.acesso = acesso;
-    }
-    
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-    
+  
     public Usuario getUsuario() {
         return usuario;
     }

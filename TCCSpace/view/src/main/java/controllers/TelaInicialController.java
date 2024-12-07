@@ -1,7 +1,12 @@
 package controllers;
 
+import br.cefetmg.space.dao.CubeSatDAO;
+import br.cefetmg.space.dao.UsuarioDAO;
 import br.cefetmg.space.entidades.CubeSat;
 import br.cefetmg.space.entidades.Usuario;
+import br.cefetmg.space.idao.ICubeSatDAO;
+import br.cefetmg.space.idao.IUsuarioDAO;
+import br.cefetmg.space.idao.exception.PersistenciaException;
 import br.cefetmg.space.view.MainFX;
 import java.io.IOException;
 import java.net.URL;
@@ -103,24 +108,21 @@ public class TelaInicialController implements Initializable {
     void apresentarTelaCadastrarCubesat(ActionEvent event) throws IOException {
         MainFX.changedScreen("Cadastrar Cubesat", usuario);
     }
-    
+    @FXML
     void apresentarTelaDados(ActionEvent event) throws IOException{
         MainFX.changedScreen("Gui3d", cube);
     }
-
-    /**
-     * Initializes the controller class.
-     *
-     * @param url
-     * @param rb
-     */
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         MainFX.addOnChangeScreenListener((String newString, Object viewData) -> {
             if(viewData instanceof Usuario) {
-                System.out.println("a");
                 List<CubeSat> cubeSat;
-                usuario = (Usuario) viewData;
+                IUsuarioDAO usuarioDAO = new UsuarioDAO();
+                try{
+                usuario = usuarioDAO.procurarPorEmail(((Usuario) viewData).getEmail());
+                }catch(Exception e){
+                }
                 nome.setText(usuario.getNome() + "!");
                 cubeSat = usuario.getCubeSat();
                 visualizarCubes.setSpacing(10);
@@ -140,13 +142,17 @@ public class TelaInicialController implements Initializable {
                     */
                    botaoCube.setOnAction(event -> {
                         try {
+                            ICubeSatDAO cubesatDAO = new CubeSatDAO();
+                            String nomeCubesat = botaoCube.getText();
+                            cube = cubesatDAO.procurarPorNome(nomeCubesat);
                             apresentarTelaDados(event);
                         } catch (IOException ex) {
+                            Logger.getLogger(TelaInicialController.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (PersistenciaException ex) {
                             Logger.getLogger(TelaInicialController.class.getName()).log(Level.SEVERE, null, ex);
                         }
                             });
                     visualizarCubes.getChildren().add(botaoCube);
-                    
                 }
             }
         });

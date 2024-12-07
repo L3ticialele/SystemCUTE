@@ -79,6 +79,42 @@ public class Dados implements Serializable {
     private CubeSat cubesat;
     @Column(name = "dataObtencao")
     private String dataObtencao;
+    @Column(name = "Hora")
+    private String hora;
+
+    public Dados(float acelerometroX, float acelerometroY, float acelerometroZ, float anguloX, float anguloY, float anguloZ, float altitude, float bateria, float correnteBateria, float correntePlacaSolar, float luz1, float luz2, float pontoOrvalho, float pressao, float sensorUV, float temperaturaExterna, float temperaturaInterna, float tensaoBateria, float tensaoPlacaSolar, float umidade, CubeSat cubesat, String dataObtencao, String hora) {
+        this.acelerometroX = acelerometroX;
+        this.acelerometroY = acelerometroY;
+        this.acelerometroZ = acelerometroZ;
+        this.anguloX = anguloX;
+        this.anguloY = anguloY;
+        this.anguloZ = anguloZ;
+        this.altitude = altitude;
+        this.bateria = bateria;
+        this.correnteBateria = correnteBateria;
+        this.correntePlacaSolar = correntePlacaSolar;
+        this.luz1 = luz1;
+        this.luz2 = luz2;
+        this.pontoOrvalho = pontoOrvalho;
+        this.pressao = pressao;
+        this.sensorUV = sensorUV;
+        this.temperaturaExterna = temperaturaExterna;
+        this.temperaturaInterna = temperaturaInterna;
+        this.tensaoBateria = tensaoBateria;
+        this.tensaoPlacaSolar = tensaoPlacaSolar;
+        this.umidade = umidade;
+        this.cubesat = cubesat;
+        this.dataObtencao = dataObtencao;
+        this.hora = hora;
+    }
+    
+    public String getHora() {
+        return hora;
+    }
+
+    public void setHora(String hora) {
+        this.hora = hora;
+    }
     
     public float getLuz1() {
         return luz1;

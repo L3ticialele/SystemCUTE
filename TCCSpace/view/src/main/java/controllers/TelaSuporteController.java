@@ -14,55 +14,54 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
-
 public class TelaSuporteController implements Initializable {
 
-   @FXML
+    @FXML
     private Button botaoCubesat;
-   
-   private Usuario usuario;
+
+    private Usuario usuario;
 
     @FXML
     private Button botaoSuporte;
 
     @FXML
     private Button botaoPerfil;
-    
+
     @FXML
     private Button botaoHome;
 
     @FXML
     private Label label;
-    
+
     @FXML
     private ImageView iconePerfil;
-    
+
     @FXML
     private ImageView iconeCubesat;
-    
+
     @FXML
-    void perfilToPourple(MouseEvent event){
+    void perfilToPourple(MouseEvent event) {
         botaoPerfil.setStyle("-fx-text-fill: #8C52FF;"
                 + "-fx-background-color: 0;");
-        iconePerfil.setImage(new Image("file:src/main/resources/images/user.png"));
+        iconePerfil.setImage(new Image("file:src/main/resources/images/userLilas.png"));
     }
-    
+
     @FXML
-    void perfilToWhite(MouseEvent event){
+    void perfilToWhite(MouseEvent event) {
         botaoPerfil.setStyle("-fx-text-fill: white;"
                 + "-fx-background-color: 0;");
         iconePerfil.setImage(new Image("file:src/main/resources/images/user.png"));
     }
-    
+
     @FXML
-    void cubesatToPourple(MouseEvent event){
+    void cubesatToPourple(MouseEvent event) {
         botaoCubesat.setStyle("-fx-text-fill: #8C52FF;"
                 + "-fx-background-color: 0;");
         iconeCubesat.setImage(new Image("file:src/main/resources/images/iconeCubesatLilas.png"));
     }
-    
+
     @FXML
-    void cubesatToWhite(MouseEvent event){
+    void cubesatToWhite(MouseEvent event) {
         botaoCubesat.setStyle("-fx-text-fill: white;"
                 + "-fx-background-color: 0;");
         iconeCubesat.setImage(new Image("file:src/main/resources/images/iconeCubesat.png"));
@@ -77,15 +76,15 @@ public class TelaSuporteController implements Initializable {
     void apresentaTelaPerfil(ActionEvent event) throws IOException {
         MainFX.changedScreen("Perfil", usuario);
     }
-    
-    
+
     @FXML
     void apresentarTelaInicial(ActionEvent event) throws IOException {
         MainFX.changedScreen("Tela Inicial", usuario);
     }
-    
+
     /**
      * Initializes the controller class.
+     *
      * @param url
      * @param rb
      */
@@ -93,8 +92,10 @@ public class TelaSuporteController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         MainFX.addOnChangeScreenListener((String newString, Object viewData) -> {
-            usuario = (Usuario)viewData;
+            if (viewData instanceof Usuario) {
+                usuario = (Usuario) viewData;
+            }
         });
     }
-    
+
 }

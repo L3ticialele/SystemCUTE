@@ -13,9 +13,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -30,8 +27,6 @@ public class Usuario implements Serializable{
     private String senha;
     @Column(name = "email")
     private String email;
-    @Column(name = "administrador")
-    private boolean administrador;
     @Column(name = "nome")
     private String nome;
     @Column(name = "telefone")
@@ -44,7 +39,6 @@ public class Usuario implements Serializable{
         senha = null;
         email = null;
         telefone = null;
-        administrador = false;
         cubeSat = new ArrayList<>();
     }
     
@@ -54,14 +48,6 @@ public class Usuario implements Serializable{
     
     public int quantCubeSat(){
         return cubeSat.size();
-    }
-
-    public boolean isAdministrador() {
-        return administrador;
-    }
-
-    public void setAdministrador(boolean administrador) {
-        this.administrador = administrador;
     }
 
     public String getNome() {
