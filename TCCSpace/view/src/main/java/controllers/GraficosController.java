@@ -16,14 +16,17 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.Axis;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.Chart;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -47,13 +50,13 @@ public class GraficosController implements Initializable {
     private Button botaoSuporte;
 
     @FXML
-    private Button grafico01;
+    private Button montarGrafico;
 
     @FXML
-    private Button grafico02;
+    private ComboBox<String> opcao1;
 
     @FXML
-    private Button grafico03;
+    private ComboBox<String> opcao2;
 
     @FXML
     private ImageView iconePerfil;
@@ -67,9 +70,14 @@ public class GraficosController implements Initializable {
 
     private DadosDAO dadosDao = new DadosDAO();
     private List<Dados> dadosCubeSat;
-    private ArrayList<String> hora = new ArrayList<String>();
-    private ArrayList<Float> altitude = new ArrayList<Float>();
-    private ArrayList<Float> bateria = new ArrayList<Float>();
+    private ArrayList<Object> hora = new ArrayList<Object>();
+    private ArrayList<Object> altitude = new ArrayList<Object>();
+    private ArrayList<Object> bateria = new ArrayList<Object>();
+    private ArrayList<Object> tensaoBateria = new ArrayList<Object>();
+    private ArrayList<Object> pressao = new ArrayList<Object>();
+    private ArrayList<Object> pontoOrvalho = new ArrayList<Object>();
+    private ArrayList<Object> correnteBateria = new ArrayList<Object>();
+    private ArrayList<Object> sensorUV = new ArrayList<Object>();
     //private Dados dadosCubeSat(cubesat);
 
     @FXML
@@ -92,6 +100,121 @@ public class GraficosController implements Initializable {
         MainFX.changedScreen("Gui3d", cubesat);
     }
 
+    ArrayList<ArrayList<Object>> selectListas() {
+        ArrayList<ArrayList<Object>> listas = new ArrayList<ArrayList<Object>>();
+        switch (opcao1.getValue()) {
+
+            case "hora":
+                listas.add(hora);
+                break;
+            case "altitude":
+                listas.add(altitude);
+                break;
+            case "bateria":
+                listas.add(bateria);
+                break;
+            case "tensão da bateria":
+                listas.add(tensaoBateria);
+                break;
+            case "ponto de orvalho":
+                listas.add(pontoOrvalho);
+                break;
+            case "corrente da bateria":
+                listas.add(correnteBateria);
+                break;
+            case "sensor UV":
+                listas.add(sensorUV);
+                break;
+        }
+        switch (opcao2.getValue()) {
+
+            case "hora":
+                listas.add(hora);
+                break;
+            case "altitude":
+                listas.add(altitude);
+                break;
+            case "bateria":
+                listas.add(bateria);
+                break;
+            case "tensão da bateria":
+                listas.add(tensaoBateria);
+                break;
+            case "ponto de orvalho":
+                listas.add(pontoOrvalho);
+                break;
+            case "corrente da bateria":
+                listas.add(correnteBateria);
+                break;
+            case "sensor UV":
+                listas.add(sensorUV);
+                break;
+        }
+        return listas;
+    }
+
+    @FXML
+    void montarGrafico(ActionEvent event) {
+
+        Axis x;
+        Axis y;
+        Chart grafico;
+        ArrayList<ArrayList<Object>> listasSelec = selectListas();
+        ArrayList<Object> listaOpcao1 = listasSelec.get(0);
+        ArrayList<Object> listaOpcao2 = listasSelec.get(1);
+        XYChart.Series<Object, Object> dados = new XYChart.Series<>();
+
+        switch (opcao1.getValue()) {
+
+            case "hora":
+                x = new CategoryAxis();
+                y = new NumberAxis();
+                grafico = new BarChart(x, y);
+
+                for (int i = 0; i < listaOpcao1.size(); i++) {
+                    String h = listaOpcao1.get(i).toString();
+                    Float a = Float.parseFloat(listaOpcao2.get(i).toString());
+                    dados.getData().add(new XYChart.Data<>(h, a));
+                }
+
+                break;
+            default:
+                x = new NumberAxis();
+                if (opcao2.getValue() != "hora") {
+                    y = new NumberAxis();
+                    for (int i = 0; i < listaOpcao1.size(); i++) {
+                        Float b = Float.parseFloat(listaOpcao1.get(i).toString());
+                        Float a = Float.parseFloat(listaOpcao2.get(i).toString());
+                        dados.getData().add(new XYChart.Data<>(b, a));
+                    }
+                    grafico = new LineChart(x, y);
+                } else {
+
+                    y = new CategoryAxis();
+                    for (int i = 0; i < listaOpcao1.size(); i++) {
+                        Float h = Float.parseFloat(listaOpcao1.get(i).toString());
+                        String a = listaOpcao2.get(i).toString();
+                        dados.getData().add(new XYChart.Data<>(h, a));
+                    }
+                    grafico = new BarChart(x, y);
+                }
+
+                break;
+        }
+        //opcao2.getItems().remove(opcao1.getValue());
+
+        dados.setName(opcao1.getValue() + " x " + opcao2.getValue());
+        x.setLabel(opcao1.getAccessibleText());
+        y.setLabel(opcao2.getAccessibleText());
+        if (grafico instanceof BarChart) {
+            ((BarChart) grafico).getData().add(dados);
+        } else if (grafico instanceof LineChart) {
+            ((LineChart) grafico).getData().add(dados);
+        }
+        painelGraficos.setCenter(grafico);
+
+    }
+
     @FXML
     void displayGrafico01(ActionEvent event) {
         CategoryAxis xHora = new CategoryAxis();
@@ -106,8 +229,8 @@ public class GraficosController implements Initializable {
         //fornecer dados (lembrar de tirar comentário)
 
         for (int i = 0; i < hora.size(); i++) {
-            String h = hora.get(i);
-            Float a = altitude.get(i);
+            String h = hora.get(i).toString();
+            Float a = Float.parseFloat(altitude.get(i).toString());
             dadosHora_Altitude.getData().add(new XYChart.Data<>(h, a));
         }
         /*for (String h, Float a : hora, altitude){
@@ -120,56 +243,6 @@ public class GraficosController implements Initializable {
         painelGraficos.setCenter(graficoHora_Altitude);
     }
 
-    @FXML
-    void displayGrafico02(ActionEvent event) {
-
-        CategoryAxis xHora = new CategoryAxis();
-        xHora.setLabel("hora");
-
-        NumberAxis yBateria = new NumberAxis();
-        yBateria.setLabel("% bateria");
-
-        LineChart graficoHora_Bateria = new LineChart(xHora, yBateria);
-        XYChart.Series dadosHora_Bateria = new XYChart.Series();
-        dadosHora_Bateria.setName("hora x bateria");
-        //fornecer dados (lembrar de tirar comentário)
-        for (int i = 0; i < hora.size(); i++) {
-            String h = hora.get(i);
-            Float b = bateria.get(i);
-            dadosHora_Bateria.getData().add(new XYChart.Data<>(h, b));
-        }
-
-        graficoHora_Bateria.getData().add(dadosHora_Bateria);
-        painelGraficos.setCenter(graficoHora_Bateria);
-
-    }
-
-    @FXML
-    void displayGrafico03(ActionEvent event) {
-
-        NumberAxis altitude = new NumberAxis();
-        altitude.setLabel("altitude");
-
-        NumberAxis pressao = new NumberAxis();
-        pressao.setLabel("pressao");
-
-        LineChart graficoAltitudePressao = new LineChart(altitude, pressao);
-        XYChart.Series dados = new XYChart.Series();
-
-        XYChart.Series dadosAltitudePressao = new XYChart.Series();
-
-        dados.setName("altitude x pressao");
-        //fornecer dados (lembrar de tirar comentário)
-        dados.getData().add(new XYChart.Data(0, 100));
-        dados.getData().add(new XYChart.Data(300, 70));
-        dados.getData().add(new XYChart.Data(900, 40));
-        dados.getData().add(new XYChart.Data(200, 20));
-        dados.getData().add(new XYChart.Data(0, 10));
-
-        graficoAltitudePressao.getData().add(dados);
-        painelGraficos.setCenter(grafico02);
-
-    }
 
     @FXML
     void perfilToPourple(MouseEvent event) {
@@ -208,20 +281,25 @@ public class GraficosController implements Initializable {
 
         for (Dados d : dadosCubeSat) {
 
-            //alerta.setContentText(d.getHora());
-            //alerta.showAndWait();
-            //alerta.setContentText("1:" + d.getHora());
-            //alerta.showAndWait();
             hora.add(d.getHora());
-            //alerta.setContentText(d.getHora());
-            //alerta.showAndWait();
             altitude.add(d.getAltitude());
             bateria.add(d.getBateria());
+            pressao.add(d.getPressao());
+            tensaoBateria.add(d.getTensaoBateria());
+            pontoOrvalho.add(d.getPontoOrvalho());
+            correnteBateria.add(d.getCorrenteBateria());
+            sensorUV.add(d.getSensorUV());
 
-            //alerta.setContentText(d.getHora());
-            //alerta.showAndWait();
         }
 
+    }
+
+    private void carregaOpcoes() {
+
+        opcao1.getItems().addAll("hora", "altitude", "bateria", "pressão", "tensão da bateria", "ponto de orvalho", "corrente da bateria", "sensor UV");
+        opcao2.getItems().addAll("hora", "altitude", "bateria", "pressão", "tensão da bateria", "ponto de orvalho", "corrente da bateria", "sensor UV");
+        opcao1.setPromptText("atributo 1");
+        opcao2.setPromptText("atributo 2");
     }
 
     @Override
@@ -237,6 +315,8 @@ public class GraficosController implements Initializable {
                 } catch (PersistenciaException ex) {
                     Logger.getLogger(GraficosController.class.getName()).log(Level.SEVERE, null, ex);
                 }
+
+                carregaOpcoes();
 
             }
         });
