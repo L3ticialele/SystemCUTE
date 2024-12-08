@@ -110,6 +110,9 @@ public class GraficosController implements Initializable {
             case "altitude":
                 listas.add(altitude);
                 break;
+            case "pressão":
+                listas.add(pressao);
+                break;
             case "bateria":
                 listas.add(bateria);
                 break;
@@ -134,6 +137,9 @@ public class GraficosController implements Initializable {
             case "altitude":
                 listas.add(altitude);
                 break;
+            case "pressão":
+                listas.add(pressao);
+                break;            
             case "bateria":
                 listas.add(bateria);
                 break;
@@ -213,34 +219,6 @@ public class GraficosController implements Initializable {
         }
         painelGraficos.setCenter(grafico);
 
-    }
-
-    @FXML
-    void displayGrafico01(ActionEvent event) {
-        CategoryAxis xHora = new CategoryAxis();
-        xHora.setLabel("hora");
-
-        NumberAxis yAltitude = new NumberAxis();
-        yAltitude.setLabel("altitude");
-
-        BarChart graficoHora_Altitude = new BarChart(xHora, yAltitude);
-        XYChart.Series dadosHora_Altitude = new XYChart.Series();
-        dadosHora_Altitude.setName("hora x altitude");
-        //fornecer dados (lembrar de tirar comentário)
-
-        for (int i = 0; i < hora.size(); i++) {
-            String h = hora.get(i).toString();
-            Float a = Float.parseFloat(altitude.get(i).toString());
-            dadosHora_Altitude.getData().add(new XYChart.Data<>(h, a));
-        }
-        /*for (String h, Float a : hora, altitude){
-    
-        dadosHora_Altitude.getData().add(new XYChart.Data(h, a));
-        }
-         */
-
-        graficoHora_Altitude.getData().add(dadosHora_Altitude);
-        painelGraficos.setCenter(graficoHora_Altitude);
     }
 
 
