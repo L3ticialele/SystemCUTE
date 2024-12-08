@@ -182,11 +182,7 @@ public class Data3DViewerController {
     void gravarDados(ActionEvent event) throws PersistenciaException {
         FileChooser fileChooser = new FileChooser();
         File file = fileChooser.showOpenDialog(caixaDialogo);
-        String data = null, hora = null, tempInterna = null, tempExterna = null;
-        String X = null, Y = null, Z = null, anguloX = null, anguloY = null, anguloZ = null;
-        String altitude = null, bateria = null, correnteBateria = null, correntePlacaSolar = null;
-        String luz1 = null, luz2 = null, pontoOrvalho = null, pressao = null, sensorUV = null;
-        String tensaoBateria = null, tensaoPlacaSolar = null, umidade = null;
+        String data = null, horas = null;
         int id = 1;
         float floatX = 0, floatY = 0, floatZ = 0, floatAnguloX = 0, floatAnguloY = 0, floatAnguloZ = 0;
         float floatAltide = 0, floatBateria = 0, floatCorrenteBateria = 0, floatCorrentePlacaSolar = 0;
@@ -201,103 +197,40 @@ public class Data3DViewerController {
                 while ((line = reader.readLine()) != null) {
                     System.out.println(line);
                     content.append(line).append("\n");
-                    int lineNumer;
-                    switch (lineNumber) {
-                        case 1:
-                            data = line;
-                            break;
-                        case 2:
-                            X = line;
-                            floatX = Float.parseFloat(X);
-                            break;
-                        case 3:
-                            Y = line;
-                            floatY = Float.parseFloat(Y);
-                            break;
-                        case 4:
-                            Z = line;
-                            floatZ = Float.parseFloat(Z);
-                            break;
-                        case 5:
-                            anguloX = line;
-                            floatAnguloX = Float.parseFloat(anguloX);
-                            break;
-                        case 6:
-                            anguloY = line;
-                            floatAnguloY = Float.parseFloat(anguloY);
-                            break;
-                        case 7:
-                            anguloZ = line;
-                            floatAnguloZ = Float.parseFloat(anguloZ);
-                            break;
-                        case 8:
-                            altitude = line;
-                            floatAltide = Float.parseFloat(altitude);
-                            break;
-                        case 9:
-                            bateria = line;
-                            floatBateria = Float.parseFloat(bateria);
-                            break;
-                        case 10:
-                            correnteBateria = line;
-                            floatCorrenteBateria = Float.parseFloat(correnteBateria);
-                            break;
-                        case 11:
-                            correntePlacaSolar = line;
-                            floatCorrentePlacaSolar = Float.parseFloat(correntePlacaSolar);
-                            break;
-                        case 12:
-                            luz1 = line;
-                            floatLuz1 = Float.parseFloat(luz1);
-                            break;
-                        case 13:
-                            luz2 = line;
-                            floatLuz2 = Float.parseFloat(luz2);
-                            break;
-                        case 14:
-                            pontoOrvalho = line;
-                            floatPontoOrvalho = Float.parseFloat(pontoOrvalho);
-                            break;
-                        case 15:
-                            pressao = line;
-                            floatPressao = Float.parseFloat(pressao);
-                            break;
-                        case 16:
-                            sensorUV = line;
-                            floatSensorUV = Float.parseFloat(sensorUV);
-                            break;
-                        case 17:
-                            tensaoBateria = line;
-                            floatTensaoBateria = Float.parseFloat(tensaoBateria);
-                            break;
-                        case 18:
-                            tensaoPlacaSolar = line;
-                            floatTensaoPlacaSolar = Float.parseFloat(tensaoPlacaSolar);
-                            break;
-                        case 19:
-                            tempExterna = line;
-                            floatTempExterna = Float.parseFloat(tempExterna);
-                            break;
-                        case 20:
-                            tempInterna = line;
-                            floatTempInterna = Float.parseFloat(tempInterna);
-                            break;
-                        case 21:
-                            umidade = line;
-                            floatUmidade = Float.parseFloat(umidade);
-                        case 22:
-                            hora = line;
+                    String[] parts = line.split(" ");
+                    data = parts[0].split(":")[1];
+                    horas = parts[0].split(":")[1];
+                    floatX = Float.parseFloat(parts[1].split(":")[1].trim());
+                    floatY = Float.parseFloat(parts[2].split(":")[1].trim());
+                    floatZ = Float.parseFloat(parts[3].split(":")[1].trim());
+                    floatAnguloX = Float.parseFloat(parts[4].split(":")[1].trim());
+                    floatAnguloY = Float.parseFloat(parts[5].split(":")[1].trim());
+                    floatAnguloZ = Float.parseFloat(parts[6].split(":")[1].trim());
+                    floatAltide = Float.parseFloat(parts[7].split(":")[1].trim());
+                    floatBateria = Integer.parseInt(parts[8].split(":")[1].trim());
+                    floatCorrenteBateria = Float.parseFloat(parts[9].split(":")[1].trim());
+                    floatCorrentePlacaSolar = Float.parseFloat(parts[10].split(":")[1]);
+                    floatLuz1 = Integer.parseInt(parts[11].split(":")[1].trim());
+                    floatLuz2 = Integer.parseInt(parts[12].split(":")[1].trim());
+                    floatPontoOrvalho = Float.parseFloat(parts[13].split(":")[1].trim());
+                    floatPressao = Float.parseFloat(parts[14].split(":")[1].trim());
+                    floatSensorUV = Float.parseFloat(parts[15].split(":")[1].trim());
+                    floatTensaoBateria = Float.parseFloat(parts[16].split(":")[1].trim());
+                    floatTensaoPlacaSolar = Float.parseFloat(parts[17].split(":")[1].trim());
+                    floatTempExterna = Float.parseFloat(parts[18].split(":")[1].trim());
+                    floatTempInterna = Float.parseFloat(parts[19].split(":")[1].trim());
+                    floatUmidade = Float.parseFloat(parts[20].split(":")[1].trim());
 
-                            Dados dado = new Dados(floatX, floatY, floatZ, floatAnguloX, floatAnguloY, floatAnguloZ, floatAltide, floatBateria, floatCorrenteBateria, floatCorrentePlacaSolar, floatLuz1, floatLuz2, floatPontoOrvalho, floatPressao, floatSensorUV, floatTempExterna, floatTempInterna, floatTensaoBateria, floatTensaoPlacaSolar, floatUmidade, cubesat, data, hora);
-                            dadoDao.inserir(dado);
-                            lineNumber = 1;
-                            continue;
-                    }
+                    Dados dado = new Dados(floatX, floatY, floatZ, floatAnguloX, floatAnguloY, floatAnguloZ, floatAltide, floatBateria, floatCorrenteBateria, floatCorrentePlacaSolar, floatLuz1, floatLuz2, floatPontoOrvalho, floatPressao, floatSensorUV, floatTempExterna, floatTempInterna, floatTensaoBateria, floatTensaoPlacaSolar, floatUmidade, cubesat, data, horas);
+                    dadoDao.inserir(dado);
                     lineNumber++;
 
                 }
 
-            } catch (IOException e) {
+            }catch (NumberFormatException e) { 
+                System.err.println("Erro ao converter número na linha " + lineNumber + ": " + e.getMessage());
+            } 
+            catch (IOException e) {
                 e.printStackTrace();
             }
         }
@@ -370,7 +303,6 @@ public class Data3DViewerController {
 
     @FXML
     void apresentaGraficos(ActionEvent event) throws IOException {
-
         MainFX.changedScreen("Graficos", cubesat);
     }
 

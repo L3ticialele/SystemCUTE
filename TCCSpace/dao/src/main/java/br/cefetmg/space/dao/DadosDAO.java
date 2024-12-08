@@ -1,79 +1,19 @@
-
 package br.cefetmg.space.dao;
-
 import br.cefetmg.space.entidades.CubeSat;
 import br.cefetmg.space.entidades.Dados;
 import br.cefetmg.space.idao.IDadosDAO;
 import br.cefetmg.space.idao.exception.PersistenciaException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
 
+/*Esta classe inclui as funções que podem ser realizadas com o objeto Dados*/
 public class DadosDAO implements IDadosDAO{
-    @Override
-    public void gerarDadosParaCubeSat(int idCubeSat) {
-        EntityManagerFactory entityManagerFactory = 
-        Persistence.createEntityManagerFactory("persistence");
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-
-        EntityTransaction transaction = entityManager.getTransaction();
-        transaction.begin();
-        try {
-            // Gera dados simulados
-            Dados dados = new Dados();
-            dados.setId(idCubeSat);
-            dados.setAcelerometroX((float) (Math.random() * 10));  // Convertendo para float
-            dados.setAcelerometroY((float) (Math.random() * 10));  // Convertendo para float
-            dados.setAcelerometroZ((float) (Math.random() * 10));  // Convertendo para float
-            dados.setAnguloX((float) (Math.random() * 360));  // Convertendo para float
-            dados.setAnguloY((float) (Math.random() * 360));  // Convertendo para float
-            dados.setAnguloZ((float) (Math.random() * 360));  // Convertendo para float
-            dados.setAltitude((float) (Math.random() * 10000));  // Convertendo para float
-            dados.setBateria((float) (Math.random() * 100));  // Convertendo para float
-            dados.setCorrenteBateria((float) (Math.random() * 5));  // Convertendo para float
-            dados.setCorrentePlacaSolar((float) (Math.random() * 10));  // Convertendo para float
-            /*
-            dados.setGas1((float) (Math.random() * 100));  // Convertendo para float
-            dados.setGas2((float) (Math.random() * 100));  // Convertendo para float
-            */
-            dados.setLuz1((float) (Math.random() * 1000));  // Convertendo para float
-            dados.setLuz2((float) (Math.random() * 1000));  // Convertendo para float
-            dados.setPontoOrvalho((float) (Math.random() * 50));  // Convertendo para float
-            dados.setPressao((float) (Math.random() * 1000));  // Convertendo para float
-            dados.setSensorUV((float) (Math.random() * 10));  // Convertendo para float
-            dados.setTemperaturaExterna((float) (Math.random() * 50));  // Convertendo para float
-            dados.setTemperaturaInterna((float) (Math.random() * 50));  // Convertendo para float
-            dados.setTensaoBateria((float) (Math.random() * 14));  // Convertendo para float
-            dados.setTensaoPlacaSolar((float) (Math.random() * 30));  // Convertendo para float
-            dados.setUmidade((float) (Math.random() * 100));  // Convertendo para float
-            /*
-            dados.setVelocidade((float) (Math.random() * 1000));  // Convertendo para float
-            dados.setVelocidadeAngularX((float) (Math.random() * 10));  // Convertendo para float
-            dados.setVelocidadeAngularY((float) (Math.random() * 10));  // Convertendo para float
-            dados.setVelocidadeAngularZ((float) (Math.random() * 10));  // Convertendo para float
-            */
-
-            LocalDateTime now = LocalDateTime.now();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-            dados.setDataObtencao(now.format(formatter));
-
-            // Persiste os dados no banco de dados
-            entityManager.persist(dados);
-            entityManager.flush();
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction.isActive()) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        }
-    }
+    
+    //Busca pelo gravamento do dado mais recente de um cubesat 
     @Override
     public Dados buscarDadoMaisRecente() {
         EntityManagerFactory entityManagerFactory = 
@@ -96,6 +36,8 @@ public class DadosDAO implements IDadosDAO{
             entityManager.close();
         }
     }
+    
+    //Insere um novo objeto dado no BD, estes dados estão ligados a algum cubesat
     @Override
     public boolean inserir(Dados dados) throws PersistenciaException{
         EntityManagerFactory entityManagerFactory = 
@@ -115,6 +57,7 @@ public class DadosDAO implements IDadosDAO{
         }
     }
     
+    //Lista todos os dados de um cubesat
     @Override
     public List<Dados> procurarPorCubeSat(CubeSat cubesat) throws PersistenciaException{
         EntityManagerFactory entityManagerFactory = 
@@ -139,6 +82,7 @@ public class DadosDAO implements IDadosDAO{
         }
     }
     
+    //Lista todos os dados existentes no Banco de Dados
     @Override
     public List<Dados> listarTodos() throws PersistenciaException{
         EntityManagerFactory entityManagerFactory = 
@@ -191,7 +135,8 @@ public class DadosDAO implements IDadosDAO{
         entityManager.close();
         return dados;
     }
-       
+     
+    //Deleta um dado, de um cubesat, conforme o ID 
     @Override
     public boolean delete(int idDado) throws PersistenciaException{
         EntityManagerFactory entityManagerFactory = 
@@ -218,6 +163,7 @@ public class DadosDAO implements IDadosDAO{
         }
     }
     
+    //Atualiza o alguma configuração do dado, se alterado
     @Override
     public boolean atualizar(Dados dados) throws PersistenciaException{
         EntityManagerFactory entityManagerFactory = 
@@ -274,6 +220,7 @@ public class DadosDAO implements IDadosDAO{
         }
     }
     
+    //Procura um dado por seu id
     @Override
     public Dados procurarPorId(int id) throws PersistenciaException{
         EntityManagerFactory entityManagerFactory = 

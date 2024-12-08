@@ -113,7 +113,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                      <graphic>
-                        <ImageView fx:id="imagemPerfil" fitHeight="88.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="perfilUsuario" fitHeight="88.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
                            <effect>
                               <ColorAdjust brightness="-0.06" contrast="1.0" hue="-0.05" saturation="-0.03" />
                            </effect>

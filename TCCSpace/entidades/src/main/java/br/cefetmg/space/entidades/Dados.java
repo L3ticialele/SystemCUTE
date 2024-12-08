@@ -1,5 +1,4 @@
 package br.cefetmg.space.entidades;
-
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,10 +10,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+/*Está classe define os atributos dos Dados dos cubesats, contendo também os gets, os sets e o construtor*/
 @Entity
 @Table(name = "dados")
 public class Dados implements Serializable {
-
+    //atributos
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -38,12 +38,6 @@ public class Dados implements Serializable {
     private float correnteBateria;
     @Column(name = "correntePlacaSolar")
     private float correntePlacaSolar;
-    /*
-    @Column(name = "gas1")
-    private float gas1;
-    @Column(name = "gas2")
-    private float gas2;
-    */
     @Column(name = "luz1")
     private float luz1;
     @Column(name = "luz2")
@@ -64,16 +58,6 @@ public class Dados implements Serializable {
     private float tensaoPlacaSolar;
     @Column(name = "umidade")
     private float umidade;
-    /*
-    @Column(name = "velocidade")
-    private float velocidade;
-    @Column(name = "velocidadeAngularX")
-    private float velocidadeAngularX;
-    @Column(name = "velocidadeAngularY")
-    private float velocidadeAngularY;
-    @Column(name = "velocidadeAngularZ")
-    private float velocidadeAngularZ;
-    */
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "cubesat", nullable = false)
     private CubeSat cubesat;
@@ -82,6 +66,7 @@ public class Dados implements Serializable {
     @Column(name = "Hora")
     private String hora;
 
+    //construtor
     public Dados(float acelerometroX, float acelerometroY, float acelerometroZ, float anguloX, float anguloY, float anguloZ, float altitude, float bateria, float correnteBateria, float correntePlacaSolar, float luz1, float luz2, float pontoOrvalho, float pressao, float sensorUV, float temperaturaExterna, float temperaturaInterna, float tensaoBateria, float tensaoPlacaSolar, float umidade, CubeSat cubesat, String dataObtencao, String hora) {
         this.acelerometroX = acelerometroX;
         this.acelerometroY = acelerometroY;
@@ -108,6 +93,7 @@ public class Dados implements Serializable {
         this.hora = hora;
     }
     
+    //gets e sets
     public String getHora() {
         return hora;
     }
@@ -155,34 +141,7 @@ public class Dados implements Serializable {
     public void setAnguloZ(float anguloZ) {
         this.anguloZ = anguloZ;
     }
-
-    /*
-    public float getVelocidadeAngularX() {
-        return velocidadeAngularX;
-    }
-
-    public void setVelocidadeAngularX(float velocidadeAngularX) {
-        this.velocidadeAngularX = velocidadeAngularX;
-    }
-
-    public float getVelocidadeAngularY() {
-        return velocidadeAngularY;
-    }
-
-    public void setVelocidadeAngularY(float velocidadeAngularY) {
-        this.velocidadeAngularY = velocidadeAngularY;
-    }
-
-    public float getVelocidadeAngularZ() {
-        return velocidadeAngularZ;
-    }
-
-    public void setVelocidadeAngularZ(float velocidadeAngularZ) {
-        this.velocidadeAngularZ = velocidadeAngularZ;
-    }
-
-    */
-
+    
     public float getAcelerometroX() {
         return acelerometroX;
     }
@@ -206,16 +165,6 @@ public class Dados implements Serializable {
     public void setAcelerometroZ(float acelerometroZ) {
         this.acelerometroZ = acelerometroZ;
     }
-
-    /*
-    public float getVelocidade() {
-        return velocidade;
-    }
-
-    public void setVelocidade(float velocidade) {
-        this.velocidade = velocidade;
-    }
-    */
 
     public float getBateria() {
         return bateria;
@@ -304,26 +253,6 @@ public class Dados implements Serializable {
     public void setPontoOrvalho(float pontoOrvalho) {
         this.pontoOrvalho = pontoOrvalho;
     }
-    
-    /*
-
-    public float getGas1() {
-        return gas1;
-    }
-
-    public void setGas1(float gas1) {
-        this.gas1 = gas1;
-    }
-
-    public float getGas2() {
-        return gas2;
-    }
-
-    public void setGas2(float gas2) {
-        this.gas2 = gas2;
-    }
-
-   */
 
     public float getSensorUV() {
         return sensorUV;

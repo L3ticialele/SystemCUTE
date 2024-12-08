@@ -1,5 +1,4 @@
 package br.cefetmg.space.dao;
-
 import br.cefetmg.space.entidades.CubeSat;
 import br.cefetmg.space.idao.ICubeSatDAO;
 import br.cefetmg.space.idao.exception.PersistenciaException;
@@ -10,14 +9,15 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
 
+/*Esta classe inclui as funções que podem ser realizadas com o objeto CubeSat*/
 public class CubeSatDAO implements ICubeSatDAO {
-
+    
+    //Inserir um novo cubesat a lista de cubesats de um usuário
     @Override
     public boolean inserir(CubeSat cube) throws PersistenciaException {
         EntityManagerFactory entityManagerFactory
                 = Persistence.createEntityManagerFactory("persistence");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-
         try {
             entityManager.getTransaction().begin();
             entityManager.persist(cube);
@@ -31,7 +31,8 @@ public class CubeSatDAO implements ICubeSatDAO {
             entityManager.close();
         }
     }
-
+    
+    //Lista todos os cubesats de um usúario
     @Override
     public List<CubeSat> listarTodos() throws PersistenciaException {
         EntityManagerFactory entityManagerFactory
@@ -56,6 +57,7 @@ public class CubeSatDAO implements ICubeSatDAO {
         return cubes;
     }
 
+    //Deleta um cubesat, de um usuário, conforme o id
     @Override
     public boolean delete(int idCube) throws PersistenciaException {
         EntityManagerFactory entityManagerFactory
@@ -81,7 +83,8 @@ public class CubeSatDAO implements ICubeSatDAO {
             entityManager.close();
         }
     }
-
+    
+    //Atualiza o alguma configuração do cubesat, se alterado
     @Override
     public boolean atualizar(CubeSat cube) throws PersistenciaException {
         EntityManagerFactory entityManagerFactory
@@ -99,6 +102,7 @@ public class CubeSatDAO implements ICubeSatDAO {
                 cubePersistido.setDescricao(cube.getDescricao());
                 cubePersistido.setTodosDados(cube.getDados());
                 cubePersistido.setPessoa(cube.getUsuario());
+                cubePersistido.setImagem(cube.getImagem());
                 entityManager.getTransaction().commit();
                 return true;
             } else {
@@ -112,7 +116,8 @@ public class CubeSatDAO implements ICubeSatDAO {
             entityManager.close();
         }
     }
-
+    
+    //Procura um cubeSat, de um usuário, pelo ID
     @Override
     public CubeSat procurarPorId(int id) throws PersistenciaException {
         EntityManagerFactory entityManagerFactory
@@ -136,7 +141,8 @@ public class CubeSatDAO implements ICubeSatDAO {
             entityManager.close();
         }
     }
-
+    
+    //Procura um cubeSat, de um usuário, pelo nome
     @Override
     public CubeSat procurarPorNome(String nomeC) throws PersistenciaException {
         EntityManagerFactory entityManagerFactory
