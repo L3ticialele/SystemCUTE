@@ -362,15 +362,28 @@ public class Data3DViewerController {
     }
 
     @FXML
-    void baixarPlanilha(ActionEvent event) throws IOException {
+    void baixarPlanilha(ActionEvent event) throws IOException, PersistenciaException {
+        Dados dadosSelecionados = tabelaGravacoes.getSelectionModel().getSelectedItem();
+
+        if (dadosSelecionados == null) {
+            System.out.println("Nenhuma gravação selecionada.");
+            return;
+        }
+
         Stage stage = (Stage) botaoBaixarPlanilha.getScene().getWindow();
         File file = data3D.abrirExploradorArquivos().showSaveDialog(stage);
-        data3D.baixarPlanilha(file);
+
+        if (file != null) {
+            ArrayList<Dados> dados = new ArrayList<>();
+            dados.add(dadosSelecionados);
+            data3D.preencherDados(dados);
+
+            data3D.baixarPlanilha(file);
+        }
     }
 
     @FXML
     void apresentaGraficos(ActionEvent event) throws IOException {
-
         MainFX.changedScreen("Graficos", cubesat);
     }
 
@@ -379,8 +392,8 @@ public class Data3DViewerController {
         listaGravacoes = dadosController.atualizaDados(ultimaGravacao, cubesat);
         tabelaGravacoes.setItems(FXCollections.observableArrayList(listaGravacoes));
     }
-    
-    void mostrarDados(Dados dados){
+
+    void mostrarDados(Dados dados) {
         if (dados != null) {
             labelGravacao.setText("GRAVAÇÃO " + dados.getId() + " - " + dados.getDataObtencao());
             labelAltitude.setText(Float.toString(dados.getAltitude()));
