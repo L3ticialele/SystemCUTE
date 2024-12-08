@@ -1,10 +1,9 @@
 package br.cefetmg.space.idao;
-
 import br.cefetmg.space.entidades.CubeSat;
 import br.cefetmg.space.idao.exception.PersistenciaException;
 import java.util.List;
 
-
+/*interface com as funções da classe CubeSatDAO*/
 public interface ICubeSatDAO{
     boolean inserir(CubeSat cube) throws PersistenciaException;
 

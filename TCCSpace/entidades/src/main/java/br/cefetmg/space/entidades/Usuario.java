@@ -1,6 +1,4 @@
-
 package br.cefetmg.space.entidades;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,10 +16,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+/*Está classe define os atributos dos Usuários, contendo também os gets, os sets e o construtor*/
 @Entity
 @Table(name = "usuarios")
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 public class Usuario implements Serializable{
+    //atributos
     @Id 
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
@@ -55,9 +55,7 @@ public class Usuario implements Serializable{
     public void setImagem(Imagem imagem) {
         this.imagem = imagem;
     }
-    
-    
-    
+
     public CubeSat getCubeSat(int posicao){
         return cubeSat.get(posicao);
     }
