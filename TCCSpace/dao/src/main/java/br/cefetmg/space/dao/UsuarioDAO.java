@@ -171,6 +171,7 @@ public class UsuarioDAO implements IUsuarioDAO {
                 usuarioPersistido.setSenha(usuario.getSenha());
                 usuarioPersistido.setTelefone(usuario.getTelefone());
                 usuarioPersistido.setCubeSat(usuario.getCubeSat());
+                usuarioPersistido.setImagem(usuario.getImagem());
                 entityManager.getTransaction().commit();
                 return true;
             } else {

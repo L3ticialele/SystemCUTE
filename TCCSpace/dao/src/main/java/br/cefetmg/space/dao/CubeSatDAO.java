@@ -99,6 +99,7 @@ public class CubeSatDAO implements ICubeSatDAO {
                 cubePersistido.setDescricao(cube.getDescricao());
                 cubePersistido.setTodosDados(cube.getDados());
                 cubePersistido.setPessoa(cube.getUsuario());
+                cubePersistido.setImagem(cube.getImagem());
                 entityManager.getTransaction().commit();
                 return true;
             } else {

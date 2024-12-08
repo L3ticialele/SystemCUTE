@@ -13,7 +13,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -32,15 +34,29 @@ public class Usuario implements Serializable{
     @Column(name = "telefone")
     private String telefone;
     @OneToMany(fetch = FetchType.EAGER, cascade = 
-            CascadeType.PERSIST, mappedBy = "usuario")
+            CascadeType.ALL, mappedBy = "usuario")
     private List<CubeSat> cubeSat;
+     @OneToOne(cascade = CascadeType.ALL) // Cascade para persistir a imagem automaticamente
+    @JoinColumn(name = "imagem_id") // Nome da chave estrangeira
+    private Imagem imagem; // A associação com a imagem
     
     public Usuario(){
         senha = null;
         email = null;
         telefone = null;
         cubeSat = new ArrayList<>();
+        imagem = null;
     }
+
+    public Imagem getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(Imagem imagem) {
+        this.imagem = imagem;
+    }
+    
+    
     
     public CubeSat getCubeSat(int posicao){
         return cubeSat.get(posicao);

@@ -9,6 +9,7 @@
     <class>br.cefetmg.space.entidades.CubeSat</class>
     <class>br.cefetmg.space.entidades.Dados</class>
     <class>br.cefetmg.space.entidades.Usuario</class>
+    <class>br.cefetmg.space.entidades.Imagem</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/tccaerospace"/>
       <property name="javax.persistence.jdbc.user" value="postgres"/>

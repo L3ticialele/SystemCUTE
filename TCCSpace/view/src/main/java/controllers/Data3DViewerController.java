@@ -370,7 +370,6 @@ public class Data3DViewerController {
 
     @FXML
     void apresentaGraficos(ActionEvent event) throws IOException {
-
         MainFX.changedScreen("Graficos", cubesat);
     }
 
