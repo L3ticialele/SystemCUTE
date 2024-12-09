@@ -25,7 +25,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Button fx:id="BotaoSenha" layoutX="438.0" layoutY="360.0" mnemonicParsing="false" style="-fx-background-color: 0;" text="Esqueceu sua senha?" textFill="#5984f1">
+                  <Button fx:id="BotaoSenha" layoutX="438.0" layoutY="360.0" mnemonicParsing="false" onAction="#esqueceuSenha" style="-fx-background-color: 0;" text="Esqueceu sua senha?" textFill="#5984f1">
                      <font>
                         <Font size="19.0" />
                      </font>
