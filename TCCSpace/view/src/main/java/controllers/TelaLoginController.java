@@ -48,6 +48,13 @@ public class TelaLoginController implements Initializable {
             msgErro.setText("E-mail ou senha incorreto!");
         }
     }
+    
+    public void esqueceuSenha(ActionEvent e)throws IOException{
+        
+            MainFX.changedScreen("Tela Esqueceu", usuario);
+
+        
+    }
 
     public void cadastroButao(ActionEvent e) throws IOException {
         MainFX.changedScreen("Cadastrar Usuario", null);

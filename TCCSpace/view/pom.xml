@@ -2,10 +2,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-    <artifactId>TCCSpace</artifactId>
-    <groupId>com.tccspace</groupId>
-    <version>1.0-SNAPSHOT</version>
-  </parent>
+        <artifactId>TCCSpace</artifactId>
+        <groupId>com.tccspace</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
     <groupId>com.tccspace</groupId>
     <artifactId>view</artifactId>
     <version>1.0-SNAPSHOT</version>
@@ -53,6 +53,12 @@
             <version>5.2.3</version>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
+            <version>1.6.2</version>
+        </dependency>
+
     </dependencies>
     <build>
         <plugins>
@@ -101,11 +107,11 @@
                         <id>ide-profile</id>
                         <configuration>
                             <options>
-				<option>${profiler.jvmargs.arg1}</option>
-				<option>${profiler.jvmargs.arg2}</option>
-				<option>${profiler.jvmargs.arg3}</option>
-				<option>${profiler.jvmargs.arg4}</option>
-				<option>${profiler.jvmargs.arg5}</option>
+                                <option>${profiler.jvmargs.arg1}</option>
+                                <option>${profiler.jvmargs.arg2}</option>
+                                <option>${profiler.jvmargs.arg3}</option>
+                                <option>${profiler.jvmargs.arg4}</option>
+                                <option>${profiler.jvmargs.arg5}</option>
                             </options>
                         </configuration>
                     </execution>
