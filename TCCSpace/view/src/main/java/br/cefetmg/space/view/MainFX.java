@@ -1,4 +1,5 @@
 package br.cefetmg.space.view;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import javafx.application.Application;
@@ -7,11 +8,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-
 public class MainFX extends Application {
-    
+
     private static Stage stage;
-    
+
     private static Scene telaPerfil;
     private static Scene telaSuporte;
     private static Scene telaInicial;
@@ -21,67 +21,72 @@ public class MainFX extends Application {
     private static Scene telaEditarCubesat;
     private static Scene graficos;
     private static Scene telaGui3d;
-    
+    private static Scene esqueceuSenha;
+
     @Override
     public void start(Stage primaryStage) throws IOException {
-        try{
+        try {
             stage = primaryStage;
             primaryStage.setTitle("CUTE");
-            telaLogin = new Scene(loaderFXML("/fxml/TelaLogin"),  1280, 720);
+            telaLogin = new Scene(loaderFXML("/fxml/TelaLogin"), 1280, 720);
             primaryStage.setScene(telaLogin);
             primaryStage.show();
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
-    public static void changedScreen(String tela, Object userData) throws IOException{
-        switch(tela){
+
+    public static void changedScreen(String tela, Object userData) throws IOException {
+        switch (tela) {
             case "Gui3d":
-                telaGui3d = new Scene(loaderFXML("/fxml/Data3DViewer"),  1280, 720);
+                telaGui3d = new Scene(loaderFXML("/fxml/Data3DViewer"), 1280, 720);
                 stage.setScene(telaGui3d);
                 break;
             case "Perfil":
-                telaPerfil = new Scene(loaderFXML("/fxml/TelaEditarPerfil"),  1280, 720);
+                telaPerfil = new Scene(loaderFXML("/fxml/TelaEditarPerfil"), 1280, 720);
                 stage.setScene(telaPerfil);
                 break;
             case "Suporte":
-                telaSuporte = new Scene(loaderFXML("/fxml/TelaSuporte"),  1280, 720);
+                telaSuporte = new Scene(loaderFXML("/fxml/TelaSuporte"), 1280, 720);
                 stage.setScene(telaSuporte);
                 break;
             case "Tela Inicial":
-                telaInicial = new Scene(loaderFXML("/fxml/TelaInicial"),  1280, 720);
+                telaInicial = new Scene(loaderFXML("/fxml/TelaInicial"), 1280, 720);
                 stage.setScene(telaInicial);
                 break;
             case "Cadastrar Cubesat":
-                telaCadastrarCubesat = new Scene(loaderFXML("/fxml/TelaCadastrarCubesat"),  1280, 720);
+                telaCadastrarCubesat = new Scene(loaderFXML("/fxml/TelaCadastrarCubesat"), 1280, 720);
                 stage.setScene(telaCadastrarCubesat);
                 break;
-            case "Cadastrar Usuario": 
-                telaCadastrarUsuario = new Scene(loaderFXML("/fxml/TelaCadastrarUsuario"),  1280, 720);
+            case "Cadastrar Usuario":
+                telaCadastrarUsuario = new Scene(loaderFXML("/fxml/TelaCadastrarUsuario"), 1280, 720);
                 stage.setScene(telaCadastrarUsuario);
                 break;
             case "Login":
-                telaLogin = new Scene(loaderFXML("/fxml/TelaLogin"),  1280, 720);
+                telaLogin = new Scene(loaderFXML("/fxml/TelaLogin"), 1280, 720);
                 stage.setScene(telaLogin);
                 break;
             case "Editar Cubesat":
-                telaEditarCubesat = new Scene(loaderFXML("/fxml/TelaEditarCubesat"),  1280, 720);
+                telaEditarCubesat = new Scene(loaderFXML("/fxml/TelaEditarCubesat"), 1280, 720);
                 stage.setScene(telaEditarCubesat);
                 break;
             case "Graficos":
-                graficos = new Scene(loaderFXML("/fxml/Graficos"),  1280, 720);
+                graficos = new Scene(loaderFXML("/fxml/Graficos"), 1280, 720);
                 stage.setScene(graficos);
+                break;
+            case "Tela Esqueceu":
+                esqueceuSenha = new Scene(loaderFXML("/fxml/EsqueceuSenha"), 1280, 720);
+                stage.setScene(esqueceuSenha);
                 break;
         }
         notifyAllListeners(tela, userData);
-        
+
     }
-    
-    public static Parent loaderFXML(String caminho) throws IOException{
+
+    public static Parent loaderFXML(String caminho) throws IOException {
         return FXMLLoader.load(MainFX.class.getResource(caminho + ".fxml"));
     }
-    
+
     private static final ArrayList<OnChangeScreen> listeners = new ArrayList<>();
 
     public static interface OnChangeScreen {
@@ -105,5 +110,5 @@ public class MainFX extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }
