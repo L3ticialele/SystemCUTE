@@ -14,6 +14,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class TelaLoginController implements Initializable {
 
@@ -29,12 +31,39 @@ public class TelaLoginController implements Initializable {
     @FXML
     private PasswordField CampoSenha;
 
-    private Usuario usuario;
+    @FXML
+    private Button BotaoVerSenha;
     
-    private UsuarioController usuarioController = new UsuarioController();
+    @FXML
+   private ImageView imagemBotao;
 
     @FXML
+    private TextField TextFieldVisualizarSenha;
+
+    private Usuario usuario;
+
+    private UsuarioController usuarioController = new UsuarioController();
+    
+    
+    @FXML
     private Label msgErro;
+
+    boolean visualizador = false;
+
+    @FXML
+    void botaoVisualizarSenha(ActionEvent event) {
+        if (visualizador) {
+            TextFieldVisualizarSenha.setVisible(false);
+            CampoSenha.setVisible(true);
+            imagemBotao.setImage(new Image("file:src/main/resources/images/iconeOlho.jpg"));
+            visualizador = false;
+        } else {
+            TextFieldVisualizarSenha.setVisible(true);
+            CampoSenha.setVisible(false);
+           imagemBotao.setImage(new Image("file:src/main/resources/images/iconeNOlho.jpg"));
+            visualizador = true;
+        }
+    }
 
     public void loginButaoErro(ActionEvent e) throws PersistenciaException, IOException {
         String email = CampoEmail.getText();
@@ -48,21 +77,19 @@ public class TelaLoginController implements Initializable {
             msgErro.setText("E-mail ou senha incorreto!");
         }
     }
-    
-    public void esqueceuSenha(ActionEvent e)throws IOException{
-        
-            MainFX.changedScreen("Tela Esqueceu", usuario);
 
-        
+    public void esqueceuSenha(ActionEvent e) throws IOException {
+
+        MainFX.changedScreen("Tela Esqueceu", usuario);
     }
 
     public void cadastroButao(ActionEvent e) throws IOException {
         MainFX.changedScreen("Cadastrar Usuario", null);
     }
 
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        TextFieldVisualizarSenha.textProperty().bindBidirectional(CampoSenha.textProperty());
         MainFX.addOnChangeScreenListener((String newString, Object viewData) -> {
         });
     }

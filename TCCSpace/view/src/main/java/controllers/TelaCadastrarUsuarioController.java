@@ -36,18 +36,26 @@ public class TelaCadastrarUsuarioController implements Initializable {
 
     @FXML
     private Label msg;
-    
+
     @FXML
     private ImageView iconeSair;
-    
+
+    @FXML
+    private TextField TextFieldVisualizarSenha;
+
+    @FXML
+    private ImageView imagemBotaoOlho;
+
+    boolean visualizador = false;
+
     private final UsuarioController usuarioController = new UsuarioController();
-    
+
     private final ValidaCamposController validador = new ValidaCamposController();
 
     public void voltarPaginaLogin(ActionEvent e) throws IOException {
         MainFX.changedScreen("Login", null);
     }
-    
+
     @FXML
     void sairToPourple(MouseEvent event) {
         iconeSair.setImage(new Image("file:src/main/resources/images/iconeSairLilas.png"));
@@ -57,21 +65,34 @@ public class TelaCadastrarUsuarioController implements Initializable {
     void sairToWhite(MouseEvent event) {
         iconeSair.setImage(new Image("file:src/main/resources/images/iconeSair.png"));
     }
-    
-    public boolean validaCampos(String email, String senha, String telefone){
-        if(!validador.validaEmail(email)){
+
+    public boolean validaCampos(String email, String senha, String telefone) {
+        if (!validador.validaEmail(email)) {
             msg.setText("Email invalido");
             return false;
-        }
-        else if(!validador.validarTelefone(telefone)){
+        } else if (!validador.validarTelefone(telefone)) {
             msg.setText("Telefone Inválido");
             return false;
-        }
-        else if(!validador.senhaForte(senha)){
+        } else if (!validador.senhaForte(senha)) {
             msg.setText("Senha fraca");
             return false;
         }
         return true;
+    }
+
+    @FXML
+    void botaoVisualizarSenha(ActionEvent event) {
+        if (visualizador) {
+            TextFieldVisualizarSenha.setVisible(false);
+            CampoSenha.setVisible(true);
+            imagemBotaoOlho.setImage(new Image("file:src/main/resources/images/iconeOlho.jpg"));
+            visualizador = false;
+        } else {
+            TextFieldVisualizarSenha.setVisible(true);
+            CampoSenha.setVisible(false);
+            imagemBotaoOlho.setImage(new Image("file:src/main/resources/images/iconeNOlho.jpg"));
+            visualizador = true;
+        }
     }
 
     public void BotaoCadastrar(ActionEvent e) throws IOException, PersistenciaException {
@@ -82,14 +103,15 @@ public class TelaCadastrarUsuarioController implements Initializable {
             String nome = CampoNome.getText();
             String senha = CampoSenha.getText();
             String telefone = CampoTelefone.getText();
-            if(validaCampos(email, senha, telefone))
-            MainFX.changedScreen("Tela Inicial", usuarioController.cadastrar(email, nome, senha, telefone));
+            if (validaCampos(email, senha, telefone)) {
+                MainFX.changedScreen("Tela Inicial", usuarioController.cadastrar(email, nome, senha, telefone));
+            }
         }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        TextFieldVisualizarSenha.textProperty().bindBidirectional(CampoSenha.textProperty());
     }
 
 }

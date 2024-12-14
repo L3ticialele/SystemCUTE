@@ -54,7 +54,11 @@
                         <Insets left="40.0" />
                      </padding>
                   </TextField>
-                  <PasswordField fx:id="CampoSenha" layoutX="445.0" layoutY="316.0" prefHeight="44.0" prefWidth="360.0" promptText="SENHA" style="-fx-background-color: #DFDCE1; -fx-border-color: 0; -fx-background-radius: 50px;">
+                  <TextField fx:id="TextFieldVisualizarSenha" layoutX="447.0" layoutY="316.0" prefHeight="44.0" prefWidth="366.0" promptText="SENHA" style="-fx-background-color: #DFDCE1; -fx-border-color: 0; -fx-background-radius: 50px;" visible="false">
+                     <font>
+                        <Font size="20.0" />
+                     </font></TextField>
+                  <PasswordField fx:id="CampoSenha" layoutX="447.0" layoutY="316.0" prefHeight="44.0" prefWidth="360.0" promptText="SENHA" style="-fx-background-color: #DFDCE1; -fx-border-color: 0; -fx-background-radius: 50px;">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -76,6 +80,14 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
+                  <Button fx:id="BotaoVerSenha" layoutX="718.0" layoutY="316.0" mnemonicParsing="false" onAction="#botaoVisualizarSenha" prefHeight="40.0" prefWidth="57.0" style="-fx-background-color: transparent;">
+                     <graphic>
+                        <ImageView fx:id="imagemBotao" fitHeight="36.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/iconeOlho.jpg" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
                </children>
                <cursor>
                   <Cursor fx:constant="HAND" />
