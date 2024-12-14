@@ -43,7 +43,7 @@
                   </Button>
                   <Button id="BotaoLogin" fx:id="BotaoLogin" layoutX="425.0" layoutY="436.0" mnemonicParsing="false" onAction="#loginButaoErro" prefHeight="63.0" prefWidth="423.0" style="-fx-background-color: #DFDCE1; -fx-background-radius: 50px;" stylesheets="@../styles/telalogin.css" text="LOGIN" textFill="#281c5c">
                      <font>
-                        <Font name="Arial Bold" size="30.0" />
+                        <Font name="Microsoft Tai Le" size="30.0" />
                      </font>
                   </Button>
                   <TextField fx:id="CampoEmail" layoutX="481.0" layoutY="227.0" prefHeight="44.0" prefWidth="351.0" promptText="E-MAIL" style="-fx-background-color: #DFDCE1; -fx-border-color: 0; -fx-background-radius: 50px;">

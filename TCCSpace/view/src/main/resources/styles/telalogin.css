@@ -17,8 +17,3 @@
   -fx-font-family: 'Space Age';
   src: url('../fonts/space age.ttf') format('truetype');
 }
-
-
-#BotaoLogin{
-    -fx-font-family: 'Space Age';
-}

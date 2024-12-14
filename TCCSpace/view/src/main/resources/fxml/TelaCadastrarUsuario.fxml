@@ -28,9 +28,9 @@
                         <Insets left="50.0" />
                      </padding>
                   </TextField>
-                  <Button fx:id="BotaoCadastrar" layoutX="443.0" layoutY="574.0" mnemonicParsing="false" onAction="#BotaoCadastrar" prefHeight="50.0" prefWidth="395.0" style="-fx-background-radius: 50px; -fx-background-color: #DFDCE1;" text="CADASTRAR">
+                  <Button fx:id="BotaoCadastrar" layoutX="425.0" layoutY="568.0" mnemonicParsing="false" onAction="#BotaoCadastrar" prefHeight="50.0" prefWidth="395.0" style="-fx-background-radius: 50px; -fx-background-color: #DFDCE1;" text="CADASTRAR" textFill="#281c5c">
                      <font>
-                        <Font size="30.0" />
+                        <Font name="Microsoft Tai Le" size="30.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
