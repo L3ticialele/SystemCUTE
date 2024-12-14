@@ -365,17 +365,22 @@ public class Data3DViewerController {
     void baixarPlanilha(ActionEvent event) throws IOException, PersistenciaException {
         Dados dadosSelecionados = tabelaGravacoes.getSelectionModel().getSelectedItem();
 
-        if (dadosSelecionados == null) {
-            System.out.println("Nenhuma gravação selecionada.");
-            return;
-        }
-
         Stage stage = (Stage) botaoBaixarPlanilha.getScene().getWindow();
         File file = data3D.abrirExploradorArquivos().showSaveDialog(stage);
 
         if (file != null) {
-            ArrayList<Dados> dados = new ArrayList<>();
-            dados.add(dadosSelecionados);
+            ArrayList<Dados> dados;
+            
+            if (dadosSelecionados == null) {
+                dados = new ArrayList<>(tabelaGravacoes.getItems());
+                System.out.println("Baixando todas as gravações.");
+            }
+            else {
+                dados = new ArrayList<>();
+                dados.add(dadosSelecionados);
+                System.out.println("Baixando gravação selecionada.");
+            }
+            
             data3D.preencherDados(dados);
 
             data3D.baixarPlanilha(file);
