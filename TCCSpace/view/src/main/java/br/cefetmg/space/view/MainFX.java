@@ -22,6 +22,7 @@ public class MainFX extends Application {
     private static Scene graficos;
     private static Scene telaGui3d;
     private static Scene esqueceuSenha;
+    private static Scene verificarSenha;
 
     @Override
     public void start(Stage primaryStage) throws IOException {
@@ -46,6 +47,11 @@ public class MainFX extends Application {
                 telaPerfil = new Scene(loaderFXML("/fxml/TelaEditarPerfil"), 1280, 720);
                 stage.setScene(telaPerfil);
                 break;
+            case "VerificarSenha":
+                verificarSenha = new Scene(loaderFXML("/fxml/VerificarSenha"), 1280, 720);
+                stage.setScene(verificarSenha);
+                break;
+
             case "Suporte":
                 telaSuporte = new Scene(loaderFXML("/fxml/TelaSuporte"), 1280, 720);
                 stage.setScene(telaSuporte);

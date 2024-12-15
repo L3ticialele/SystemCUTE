@@ -39,7 +39,7 @@ public class EsqueceuSenhaController implements Initializable {
 
 
     @FXML
-    void mandarEmail(ActionEvent event) {
+    public void mandarEmail(ActionEvent event) {
         String email = CampoRecuperarEmail.getText().trim();
 
         if (email.isEmpty()) {
