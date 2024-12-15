@@ -3,7 +3,6 @@ package controllers;
 import br.cefetmg.space.dao.DadosDAO;
 import br.cefetmg.space.entidades.CubeSat;
 import br.cefetmg.space.entidades.Dados;
-import br.cefetmg.space.entidades.Usuario;
 import br.cefetmg.space.idao.exception.PersistenciaException;
 import br.cefetmg.space.view.MainFX;
 import java.io.IOException;
@@ -16,6 +15,7 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Group;
 import javafx.scene.chart.Axis;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
@@ -31,6 +31,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import br.cefetmg.space.view.Renderizador3D;
 
 public class GraficosController implements Initializable {
 
@@ -63,8 +64,13 @@ public class GraficosController implements Initializable {
 
     @FXML
     private BorderPane painelGraficos;
+    @FXML 
+    private BorderPane painel3D;
     @FXML
     private ImageView iconeSuporte;
+    
+    @FXML 
+    private Group parte3D;
 
     private CubeSat cubesat;
 
@@ -280,11 +286,10 @@ public class GraficosController implements Initializable {
         opcao2.setPromptText("atributo 2");
     }
 
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
         MainFX.addOnChangeScreenListener((String newString, Object viewData) -> {
-
             if (viewData instanceof CubeSat) {
                 cubesat = (CubeSat) viewData;
 
@@ -295,7 +300,9 @@ public class GraficosController implements Initializable {
                 }
 
                 carregaOpcoes();
-
+                Renderizador3D.renderizar3D(parte3D);
+                painel3D.setCenter(parte3D);
+                
             }
         });
     }

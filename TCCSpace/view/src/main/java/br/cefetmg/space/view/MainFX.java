@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 public class MainFX extends Application {
 
     private static Stage stage;
-
+    private static Scene renderizador3D;
     private static Scene telaPerfil;
     private static Scene telaSuporte;
     private static Scene telaInicial;

@@ -34,6 +34,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.ComboBox?>
@@ -142,11 +143,15 @@
                         <BorderPane fx:id="painelGraficos" layoutX="567.0" layoutY="16.0" prefHeight="482.0" prefWidth="632.0" />
                         <ComboBox fx:id="opcao1" layoutX="59.0" layoutY="87.0" prefHeight="25.0" prefWidth="207.0" promptText="parâmetro 1" style="-fx-background-color: #DFDCE1;" />
                         <ComboBox fx:id="opcao2" layoutX="59.0" layoutY="142.0" prefHeight="25.0" prefWidth="207.0" promptText="parâmetro 2" style="-fx-background-color: #DFDCE1;" />
-                        <ImageView fitHeight="51.0" fitWidth="112.0" layoutX="13.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="51.0" fitWidth="112.0" layoutX="13.0" layoutY="21.0" onMouseClicked="#voltarData3Dviewer" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/iconeSair.png" />
                            </image>
                         </ImageView>
+                        <BorderPane fx:id="painel3D" layoutX="38.0" layoutY="209.0" prefHeight="273.0" prefWidth="457.0">
+                           <center>
+                              <Group fx:id="parte3D" BorderPane.alignment="CENTER" />
+                           </center></BorderPane>
                      </children>
                   </Pane>
                </children>
