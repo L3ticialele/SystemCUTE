@@ -1,7 +1,9 @@
 package controllers;
 
 import br.cefetmg.space.controller.UsuarioController;
+import br.cefetmg.space.dao.UsuarioDAO;
 import br.cefetmg.space.entidades.Usuario;
+import br.cefetmg.space.idao.IUsuarioDAO;
 import br.cefetmg.space.idao.exception.PersistenciaException;
 import br.cefetmg.space.view.MainFX;
 import javafx.event.ActionEvent;
@@ -17,6 +19,8 @@ import org.mindrot.jbcrypt.BCrypt;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 
 public class VerificarSenhaController implements Initializable {
 
@@ -38,7 +42,30 @@ public class VerificarSenhaController implements Initializable {
     private Usuario usuario;
 
     private UsuarioController usuarioController = new UsuarioController();
-
+    
+    @FXML
+    private TextField TextFieldVisualizarSenha;
+    
+    @FXML
+   private ImageView imagemBotao;
+    
+    private boolean visualizador = false;
+    
+     @FXML
+    void botaoVisualizarSenha(ActionEvent event) {
+        if (visualizador) {
+            TextFieldVisualizarSenha.setVisible(false);
+            CampoSenha.setVisible(true);
+            imagemBotao.setImage(new Image("file:src/main/resources/images/iconeOlho.jpg"));
+            visualizador = false;
+        } else {
+            TextFieldVisualizarSenha.setVisible(true);
+            CampoSenha.setVisible(false);
+           imagemBotao.setImage(new Image("file:src/main/resources/images/iconeNOlho.jpg"));
+            visualizador = true;
+        }
+    }
+    
     @FXML
     public void verificarSenha(ActionEvent e) throws PersistenciaException, IOException {
         try {
@@ -49,7 +76,7 @@ public class VerificarSenhaController implements Initializable {
                 return;
             }
 
-            if (usuario != null && BCrypt.checkpw(senha, usuario.getSenha())) {
+            if (usuarioController.login(usuario.getEmail(), senha) != null) {
                 MainFX.changedScreen("Perfil", usuario);
                 labelInsira.setText("Acesso concedido.");
             } else {
@@ -73,9 +100,15 @@ public class VerificarSenhaController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+        TextFieldVisualizarSenha.textProperty().bindBidirectional(CampoSenha.textProperty());
+        MainFX.addOnChangeScreenListener((String newString, Object viewData) -> {
+         if (viewData instanceof Usuario){
+             IUsuarioDAO usuarioDAO = new UsuarioDAO();
+             try {
+                    usuario = usuarioDAO.procurarPorEmail(((Usuario) viewData).getEmail());
+                } catch (Exception e) {
+                }
+         }
+         });
     }
 }
