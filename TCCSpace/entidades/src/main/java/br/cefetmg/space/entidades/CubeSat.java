@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /*Está classe define os atributos dos Cubesats, contendo também os gets, os sets e 2 construtores*/
@@ -30,19 +31,46 @@ public class CubeSat implements Serializable {
     @Column(name = "nome")
     private String nome;
     @OneToMany(fetch = FetchType.EAGER, cascade =
-            CascadeType.PERSIST, mappedBy = "cubesat")
+            CascadeType.ALL, mappedBy = "cubesat")
     private List<Dados> dado;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idUsuario", nullable = true)
     private Usuario usuario;
-    //construtor
+    @OneToOne(cascade = CascadeType.ALL) // Cascade para persistir a imagem automaticamente
+    @JoinColumn(name = "imagem_id") // Nome da chave estrangeira
+    private Imagem imagem; // A associação com a imagem
+
     public CubeSat(){
         dado = new ArrayList<>();
         data = null;
         descricao = null;
         nome = null;
     }
-  //construtor
+  
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
+
+    public List<Dados> getDado() {
+        return dado;
+    }
+
+    public void setDado(List<Dados> dado) {
+        this.dado = dado;
+    }
+
+    public Imagem getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(Imagem imagem) {
+        this.imagem = imagem;
+    }
+
     public Usuario getUsuario() {
         return usuario;
     }

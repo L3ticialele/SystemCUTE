@@ -2,12 +2,9 @@
 
 }
 
-#fundoTelaEditarCubesat{
+
+#fundoTelaSuporte{
     -fx-background-image: url("../images/fundo.png");
     -fx-background-position: center;
     -fx-background-size: cover;
-}
-
-#perfilCubesat{
-    -fx-background-radius: 50px;
 }

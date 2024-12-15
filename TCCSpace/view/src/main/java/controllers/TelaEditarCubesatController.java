@@ -1,17 +1,24 @@
 package controllers;
 
+import br.cefetmg.space.controller.ManipularImagem;
 import br.cefetmg.space.dao.CubeSatDAO;
 import br.cefetmg.space.entidades.CubeSat;
+import br.cefetmg.space.entidades.Imagem;
 import br.cefetmg.space.entidades.Usuario;
 import br.cefetmg.space.idao.ICubeSatDAO;
 import br.cefetmg.space.idao.exception.PersistenciaException;
 import br.cefetmg.space.view.MainFX;
 import java.awt.Desktop;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -23,13 +30,15 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.PixelReader;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javax.imageio.ImageIO;
+import org.apache.poi.ss.util.ImageUtils;
 
 public class TelaEditarCubesatController implements Initializable {
-
-    private BufferedImage imagem;
 
     private CubeSat cubesat;
 
@@ -90,16 +99,41 @@ public class TelaEditarCubesatController implements Initializable {
 
     private final boolean okClicked = false;
 
-    public void campoFields() {
+    private final ManipularImagem manipuladorImagem = new ManipularImagem();
+
+    private Imagem imagem;
+
+    public void campoFields() throws PersistenciaException {
         if (cubesat != null) {
             textNomeCubesat.setText(cubesat.getNome() != null ? cubesat.getNome() : "");
             labelDataCadastro.setText(cubesat.getDataCadastro() != null ? cubesat.getDataCadastro() : "");
             labelIdCubesat.setText("ID: " + Integer.toString(cubesat.getId()));
             textDescricao.setText(cubesat.getDescricao());
+            if (imagem() != null) {
+                perfilCubesat.setImage(imagem());
+            }
             botaoSalvarCubesat.setVisible(false);
         } else {
             System.err.println("CubeSat atual está nulo!");
         }
+    }
+
+    public Image imagem() throws PersistenciaException {
+        // Recupera o objeto Imagem do banco pelo ID
+        if (cubesat.getImagem() != null) {
+            Imagem imagemCube = manipuladorImagem.recuperarImagem(cubesat.getImagem().getId());
+            if (imagemCube != null) {
+                // Converte o array de bytes para um InputStream
+                ByteArrayInputStream inputStream = new ByteArrayInputStream(imagemCube.getDados());
+
+                // Cria o objeto Image (JavaFX)
+                return new Image(inputStream);
+            } else {
+                System.out.println("Imagem não encontrada.");
+                return null;
+            }
+        }
+        return null;
     }
 
     private void inicializarListeners() {
@@ -118,18 +152,31 @@ public class TelaEditarCubesatController implements Initializable {
         labelIdCubesat.textProperty().addListener((observable, oldValue, newValue) -> {
             verificarAlteracoes();
         });
+
+        perfilCubesat.accessibleTextProperty().addListener((observable, oldValue, newValue) -> {
+            verificarAlteracoes();
+        });
+
     }
 
     private void verificarAlteracoes() {
         boolean alterado
                 = !textNomeCubesat.getText().equals(cubesat.getNome())
-                || !textDescricao.getText().equals(cubesat.getDescricao());
-
+                || !textDescricao.getText().equals(cubesat.getDescricao())
+                || !verificarAlteracoesImagem();
         botaoSalvarCubesat.setVisible(alterado);
     }
 
     public boolean isOkClicked() {
         return this.okClicked;
+    }
+
+    public boolean verificarAlteracoesImagem() {
+        if (cubesat.getImagem() != null) {
+            return Arrays.equals(imagem.getDados(), cubesat.getImagem().getDados());
+        } else{
+            return perfilCubesat.getImage() == null;
+        }
     }
 
     @FXML
@@ -146,7 +193,6 @@ public class TelaEditarCubesatController implements Initializable {
                     Alert confirmacao = new Alert(Alert.AlertType.CONFIRMATION);
                     confirmacao.setHeaderText("CubeSat excluído com sucesso!");
                     confirmacao.show();
-                    usuario.getCubeSat().remove(cubesat);
                     cubesat = null;
                     apresentarTelaInicial(event);
 
@@ -162,6 +208,31 @@ public class TelaEditarCubesatController implements Initializable {
     @FXML
     void apresentarTelaLogin(ActionEvent event) throws IOException {
         MainFX.changedScreen("Login", null);
+    }
+
+    public static byte[] imageToBytes(Image image) throws IOException {
+        // Converte a Image (JavaFX) para BufferedImage
+        BufferedImage bufferedImage = javafxToBufferedImage(image);
+
+        // Usa ImageIO para converter o BufferedImage para array de bytes
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ImageIO.write(bufferedImage, "png", baos);
+        return baos.toByteArray();
+    }
+
+    // Converte Image (JavaFX) para BufferedImage
+    private static BufferedImage javafxToBufferedImage(Image image) {
+        PixelReader pixelReader = image.getPixelReader();
+        int width = (int) image.getWidth();
+        int height = (int) image.getHeight();
+
+        BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                bufferedImage.setRGB(x, y, pixelReader.getColor(x, y).hashCode());
+            }
+        }
+        return bufferedImage;
     }
 
     @FXML
@@ -182,7 +253,15 @@ public class TelaEditarCubesatController implements Initializable {
             cubesatAlterado.setDataCadastro(labelDataCadastro.getText());
             cubesatAlterado.setPessoa(cubesat.getUsuario());
             cubesatAlterado.setTodosDados(cubesat.getDados());
-
+            if (perfilCubesat.getImage() != null) {
+                if (verificarAlteracoesImagem()) {
+                    manipuladorImagem.atualizarImagem(imagem);
+                }
+                else{
+                    cubesatAlterado.setImagem(imagem);
+                    System.out.println(cubesatAlterado.getImagem().getNome() + " ok");
+                }
+            }
             if (cubesatDAO.atualizar(cubesatAlterado)) {
                 confirmacao.setHeaderText("CubeSat atualizado com sucesso!");
                 confirmacao.show();
@@ -256,17 +335,22 @@ public class TelaEditarCubesatController implements Initializable {
         iconeSuporte.setImage(new Image("file:src/main/resources/images/suport.png"));
     }
 
+    public static Image transformarImagemParaJavaFX(Imagem imagem) {
+        // Converte o array de bytes em um InputStream
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(imagem.getDados());
+
+        // Cria o objeto Image do JavaFX
+        return new Image(inputStream);
+    }
+
     @FXML
     void adicionarImagem(ActionEvent event) throws PersistenciaException {
-        try {
-            configurarFileChooser(fileChooser);
-            arquivo = fileChooser.showOpenDialog(new Stage());
-            if (arquivo != null) {
-                perfilCubesat.setImage(new Image("file:" + arquivo.getPath()));
-                perfilCubesat.setStyle("-fx-border-radius: 50%;");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        imagem = manipuladorImagem.selecionarImagem();
+        if (imagem != null) {
+            perfilCubesat.setImage(transformarImagemParaJavaFX(imagem));
+            verificarAlteracoes();
+            if(cubesat.getImagem() != null)
+                imagem.setId(cubesat.getImagem().getId());
         }
     }
 
@@ -295,12 +379,6 @@ public class TelaEditarCubesatController implements Initializable {
         MainFX.changedScreen("Tela Inicial", usuario);
     }
 
-    /**
-     * Initializes the controller class.
-     *
-     * @param url
-     * @param rb
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
@@ -308,9 +386,12 @@ public class TelaEditarCubesatController implements Initializable {
             if (viewData instanceof CubeSat) {
                 cubesat = (CubeSat) viewData;
                 usuario = cubesat.getUsuario();
-                System.out.println("Dados recebidos: " + cubesat.getNome());
                 if (cubesat != null) {
-                    campoFields();
+                    try {
+                        campoFields();
+                    } catch (PersistenciaException ex) {
+                        Logger.getLogger(TelaEditarCubesatController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     inicializarListeners();
                 } else {
                     System.err.println("Erro: CubeSatDTO está nulo.");

@@ -1,12 +1,14 @@
 package controllers;
 
+import br.cefetmg.space.controller.ManipularImagem;
 import br.cefetmg.space.dao.UsuarioDAO;
+import br.cefetmg.space.entidades.Imagem;
 import br.cefetmg.space.entidades.Usuario;
 import br.cefetmg.space.idao.IUsuarioDAO;
 import br.cefetmg.space.idao.exception.PersistenciaException;
 import br.cefetmg.space.view.MainFX;
-import static controllers.TelaEditarPerfilController.configurarFileChooser;
 import java.awt.Desktop;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import javafx.event.ActionEvent;
@@ -17,7 +19,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -42,7 +47,7 @@ public class TelaEditarPerfilController implements Initializable {
 
     @FXML
     private Button botaoPerfil;
-    
+
     @FXML
     private Label labelPerfil;
 
@@ -63,7 +68,7 @@ public class TelaEditarPerfilController implements Initializable {
 
     @FXML
     private ImageView iconeSuporte;
-    
+
     @FXML
     private ImageView iconeCubesat;
     @FXML
@@ -88,6 +93,8 @@ public class TelaEditarPerfilController implements Initializable {
 
     private Usuario usuarioAtual;
 
+    private final ManipularImagem manipuladorImagem = new ManipularImagem();
+
     @FXML
     private ImageView perfilUsuario;
 
@@ -96,7 +103,9 @@ public class TelaEditarPerfilController implements Initializable {
     private final Desktop desktop = Desktop.getDesktop();
 
     private File arquivo;
-    
+
+    private Imagem imagem;
+
     @FXML
     void suporteToPourple(MouseEvent event) {
         botaoSuporte.setStyle("-fx-text-fill: #8C52FF;"
@@ -110,22 +119,22 @@ public class TelaEditarPerfilController implements Initializable {
                 + "-fx-background-color: 0;");
         iconeSuporte.setImage(new Image("file:src/main/resources/images/suport.png"));
     }
-    
+
     @FXML
-    void cubesatToPourple(MouseEvent event){
+    void cubesatToPourple(MouseEvent event) {
         botaoCubesat.setStyle("-fx-text-fill: #8C52FF;"
                 + "-fx-background-color: 0;");
         iconeCubesat.setImage(new Image("file:src/main/resources/images/iconeCubesatLilas.png"));
     }
-    
+
     @FXML
-    void cubesatToWhite(MouseEvent event){
+    void cubesatToWhite(MouseEvent event) {
         botaoCubesat.setStyle("-fx-text-fill: white;"
                 + "-fx-background-color: 0;");
         iconeCubesat.setImage(new Image("file:src/main/resources/images/iconeCubesat.png"));
     }
 
-    public void campoFields() {
+    public void campoFields() throws PersistenciaException {
         if (usuarioAtual != null) {
             campoNome.setText(usuarioAtual.getNome() != null ? usuarioAtual.getNome() : "");
             campoEmail.setText(usuarioAtual.getEmail() != null ? usuarioAtual.getEmail() : "");
@@ -135,6 +144,22 @@ public class TelaEditarPerfilController implements Initializable {
             botaoSalvarPerfil.setVisible(false);
         } else {
             System.err.println("Usuário atual está nulo!");
+        }
+    }
+
+    public Image imagem() throws PersistenciaException {
+        // Recupera o objeto Imagem do banco pelo ID
+        Imagem imagemUsuario = manipuladorImagem.recuperarImagem(usuarioAtual.getImagem().getId());
+
+        if (imagemUsuario != null) {
+            // Converte o array de bytes para um InputStream
+            ByteArrayInputStream inputStream = new ByteArrayInputStream(imagemUsuario.getDados());
+
+            // Cria o objeto Image (JavaFX)
+            return new Image(inputStream);
+        } else {
+            System.out.println("Imagem não encontrada.");
+            return null;
         }
     }
 
@@ -161,13 +186,36 @@ public class TelaEditarPerfilController implements Initializable {
                 = !campoNome.getText().equals(usuarioAtual.getNome())
                 || !campoEmail.getText().equals(usuarioAtual.getEmail())
                 || !campoSenha.getText().equals(usuarioAtual.getSenha())
-                || !campoTelefone.getText().equals(usuarioAtual.getTelefone());
+                || !campoTelefone.getText().equals(usuarioAtual.getTelefone())
+                || !Arrays.equals(imagem.getDados(), usuarioAtual.getImagem().getDados());
 
         botaoSalvarPerfil.setVisible(alterado);
     }
 
     public boolean isOkClicked() {
         return this.okClicked;
+    }
+
+    @FXML
+    void adicionarImagem(ActionEvent event) throws PersistenciaException {
+        imagem = manipuladorImagem.selecionarImagem();
+        if (imagem != null) {
+            perfilUsuario.setImage(transformarImagemParaJavaFX(imagem));
+            if (usuarioAtual.getImagem() != null) {
+                imagem.setId(usuarioAtual.getImagem().getId());
+                verificarAlteracoes();
+            } else {
+                botaoSalvarPerfil.setVisible(true);
+            }
+        }
+    }
+
+    public static Image transformarImagemParaJavaFX(Imagem imagem) {
+        // Converte o array de bytes em um InputStream
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(imagem.getDados());
+
+        // Cria o objeto Image do JavaFX
+        return new Image(inputStream);
     }
 
     @FXML
@@ -186,9 +234,6 @@ public class TelaEditarPerfilController implements Initializable {
                     confirmacao.show();
                     usuarioAtual = null;
                     apresentarTelaLogin(event);
-                    
-                    
-                    
                 } catch (Exception e) {
                     Alert erro = new Alert(Alert.AlertType.ERROR);
                     erro.setHeaderText("Erro ao excluir o perfil: " + e.getMessage());
@@ -197,8 +242,6 @@ public class TelaEditarPerfilController implements Initializable {
             }
         });
     }
-
-
 
     @FXML
     void salvarAlteracoesPerfil(ActionEvent event) throws PersistenciaException, IOException {
@@ -226,9 +269,15 @@ public class TelaEditarPerfilController implements Initializable {
             usuarioAlterado.setEmail(campoEmail.getText());
             usuarioAlterado.setSenha(campoSenha.getText());
             usuarioAlterado.setTelefone(campoTelefone.getText());
-
             int IdUsuario = usuarioAtual.getId();
+            if (perfilUsuario.getImage() != null) {
+                System.out.println(imagem.getNome());
+                usuarioAlterado.setImagem(imagem);
+            }
             if (usuarioDAO.atualizar(IdUsuario, usuarioAlterado)) {
+                if (usuarioAtual.getImagem() != null) {
+                    manipuladorImagem.atualizarImagem(imagem);
+                }
                 confirmacao.setHeaderText("Perfil atualizado com sucesso!");
                 confirmacao.show();
                 MainFX.changedScreen("Perfil", usuarioAlterado);
@@ -240,30 +289,6 @@ public class TelaEditarPerfilController implements Initializable {
     }
 
     @FXML
-    void adicionarImagem(ActionEvent event) throws PersistenciaException {
-        try {
-            configurarFileChooser(fileChooser);
-            arquivo = fileChooser.showOpenDialog(new Stage());
-            if (arquivo != null) {
-                perfilUsuario.setImage(new Image("file:" + arquivo.getPath()));
-                perfilUsuario.setStyle("-fx-border-radius: 50%;");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void configurarFileChooser(final FileChooser fileChooser) {
-        FileChooser f = new FileChooser();
-        f.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("Todas as imagens", "*.*"),
-                new FileChooser.ExtensionFilter("JPG", "*.jpg"),
-                new FileChooser.ExtensionFilter("PNG", "*.png"),
-                new FileChooser.ExtensionFilter("JPEG", "*.jpeg")
-        );
-    }
-    
-    @FXML
     void sairToPourple(MouseEvent event) {
         iconeSair.setImage(new Image("file:src/main/resources/images/iconeSairLilas.png"));
     }
@@ -272,12 +297,12 @@ public class TelaEditarPerfilController implements Initializable {
     void sairToWhite(MouseEvent event) {
         iconeSair.setImage(new Image("file:src/main/resources/images/iconeSair.png"));
     }
-    
+
     @FXML
     void apresentaTelaSuporte(ActionEvent event) throws IOException {
         MainFX.changedScreen("Suporte", usuarioAtual);
     }
-    
+
     @FXML
     void apresentarTelaLogin(ActionEvent event) throws IOException {
         MainFX.changedScreen("Login", usuarioAtual);
@@ -287,32 +312,41 @@ public class TelaEditarPerfilController implements Initializable {
     void apresentaTelaHome(ActionEvent event) throws IOException {
         MainFX.changedScreen("Tela Inicial", usuarioAtual);
     }
-   
+
     @FXML
     void apresentaTelaPerfil(ActionEvent event) throws IOException {
         MainFX.changedScreen("Perfil", usuarioAtual);
     }
 
-@Override
-public void initialize(URL url, ResourceBundle rb) {
-    MainFX.addOnChangeScreenListener((String newString, Object viewData) -> {
-        if (viewData instanceof Usuario) {
-            usuarioAtual = (Usuario) viewData;
-            System.out.println("Dados recebidos: " + usuarioAtual.getNome());
-            if (usuarioAtual != null) {
-                campoFields();
-                inicializarListeners();
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        MainFX.addOnChangeScreenListener((String newString, Object viewData) -> {
+            if (viewData instanceof Usuario) {
+                usuarioAtual = (Usuario) viewData;
+                System.out.println("Dados recebidos: " + usuarioAtual.getNome());
+                try {
+                    if (usuarioAtual.getImagem() != null) {
+                        perfilUsuario.setImage(imagem());
+                    }
+                } catch (PersistenciaException ex) {
+                    Logger.getLogger(TelaEditarPerfilController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                if (usuarioAtual != null) {
+                    try {
+                        campoFields();
+                    } catch (PersistenciaException ex) {
+                        Logger.getLogger(TelaEditarPerfilController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    inicializarListeners();
+                } else {
+                    System.err.println("Erro: UsuarioDTO está nulo.");
+                }
             } else {
-                System.err.println("Erro: UsuarioDTO está nulo.");
+                System.err.println("Erro: Objeto viewData não é do tipo UsuarioDTO.");
             }
-        } else {
-            System.err.println("Erro: Objeto viewData não é do tipo UsuarioDTO.");
-        }
-    });
+        });
 
-    botaoSalvarPerfil.setVisible(false); 
-}
+        botaoSalvarPerfil.setVisible(false);
+    }
 
-     
-    
 }

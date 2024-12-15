@@ -12,53 +12,49 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EsqueceuSenhaController">
+<HBox fx:id="fundo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../styles/telalogin.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <HBox fx:id="fundo" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../styles/telalogin.css">
+      <VBox prefHeight="743.0" prefWidth="1280.0">
          <children>
-            <VBox prefHeight="720.0" prefWidth="1280.0">
+            <AnchorPane id="AnchorPane" prefHeight="741.0" prefWidth="1280.0" styleClass="mainFxmlClass" stylesheets="@../styles/telalogin.css">
                <children>
-                  <AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1820.0" styleClass="mainFxmlClass" stylesheets="@../styles/telalogin.css">
-                     <children>
-                        <Button id="BotaoLogin" fx:id="BotaoEnviar" layoutX="428.0" layoutY="412.0" mnemonicParsing="false" onAction="#mandarEmail" prefHeight="63.0" prefWidth="423.0" style="-fx-background-color: #DFDCE1; -fx-background-radius: 50px;" stylesheets="@../styles/telalogin.css" text="ENVIAR" textFill="#281c5c">
-                           <font>
-                              <Font name="Arial Bold" size="30.0" />
-                           </font>
-                        </Button>
-                        <Label fx:id="labelInsira" layoutX="410.0" layoutY="213.0" prefHeight="47.0" prefWidth="423.0" text="INSIRA SEU EMAIL:" textFill="#fcfcfc">
-                           <font>
-                              <Font size="22.0" />
-                           </font>
-                        </Label>
-                        <TextField fx:id="CampoRecuperarEmail" layoutX="427.0" layoutY="287.0" prefHeight="50.0" prefWidth="425.0" promptText="E-MAIL" style="-fx-background-color: #DFDCE1; -fx-background-radius: 50px;">
-                           <font>
-                              <Font size="17.0" />
-                           </font>
-                        </TextField>
-                        <Circle fill="#73668b" layoutX="864.0" layoutY="312.0" radius="41.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                        <ImageView fitHeight="50.0" fitWidth="65.0" layoutX="832.0" layoutY="289.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/IconeEmail.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fx:id="iconeSair" fitHeight="55.0" fitWidth="48.0" layoutX="873.0" layoutY="198.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/iconeSair.png" />
-                           </image>
-                        </ImageView>
-                        <Button fx:id="botaoSair" layoutX="859.0" layoutY="184.0" mnemonicParsing="false" onAction="#apresentarTelaInicial" prefHeight="75.0" prefWidth="75.0" style="-fx-background-color: 0;">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Button>
-                     </children>
+                  <Button id="BotaoLogin" fx:id="BotaoEnviar" layoutX="428.0" layoutY="412.0" mnemonicParsing="false" onAction="#mandarEmail" prefHeight="63.0" prefWidth="423.0" style="-fx-background-color: #DFDCE1; -fx-background-radius: 50px;" stylesheets="@../styles/telalogin.css" text="ENVIAR" textFill="#281c5c">
+                     <font>
+                        <Font name="Arial Bold" size="30.0" />
+                     </font>
+                  </Button>
+                  <Label fx:id="labelInsira" layoutX="410.0" layoutY="213.0" prefHeight="47.0" prefWidth="423.0" text="INSIRA SEU EMAIL:" textFill="#fcfcfc">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="CampoRecuperarEmail" layoutX="427.0" layoutY="287.0" prefHeight="50.0" prefWidth="425.0" promptText="E-MAIL" style="-fx-background-color: #DFDCE1; -fx-background-radius: 50px;">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </TextField>
+                  <Circle fill="#73668b" layoutX="864.0" layoutY="312.0" radius="41.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <ImageView fitHeight="50.0" fitWidth="65.0" layoutX="832.0" layoutY="289.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/IconeEmail.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="iconeSair" fitHeight="55.0" fitWidth="48.0" layoutX="873.0" layoutY="198.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/iconeSair.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="botaoSair" layoutX="859.0" layoutY="184.0" mnemonicParsing="false" onAction="#apresentarTelaInicial" prefHeight="75.0" prefWidth="75.0" style="-fx-background-color: 0;">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
-                  </AnchorPane>
+                  </Button>
                </children>
-            </VBox>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </AnchorPane>
          </children>
-      </HBox>
+      </VBox>
    </children>
-</AnchorPane>
+</HBox>

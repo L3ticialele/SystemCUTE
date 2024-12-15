@@ -1,13 +1,15 @@
 package controllers;
 
+import br.cefetmg.space.controller.ManipularImagem;
 import br.cefetmg.space.dao.CubeSatDAO;
 import br.cefetmg.space.entidades.CubeSat;
+import br.cefetmg.space.entidades.Imagem;
 import br.cefetmg.space.entidades.Usuario;
 import br.cefetmg.space.idao.ICubeSatDAO;
 import br.cefetmg.space.idao.exception.PersistenciaException;
 import br.cefetmg.space.view.MainFX;
 import java.awt.Desktop;
-import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -25,11 +27,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 
 public class TelaCadastrarCubesatController implements Initializable {
-
-    private BufferedImage imagem;
 
     @FXML
     private Button botaoCadastrarCubesat;
@@ -77,6 +76,10 @@ public class TelaCadastrarCubesatController implements Initializable {
     private final Desktop desktop = Desktop.getDesktop();
 
     private File arquivo;
+
+    private final ManipularImagem manipuladorImagem = new ManipularImagem();
+
+    private Imagem imagem;
 
     @FXML
     void cadastrarToPourple(MouseEvent event) {
@@ -133,18 +136,19 @@ public class TelaCadastrarCubesatController implements Initializable {
         iconeSuporte.setImage(new Image("file:src/main/resources/images/suport.png"));
     }
 
+    public static Image transformarImagemParaJavaFX(Imagem imagem) {
+        // Converte o array de bytes em um InputStream
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(imagem.getDados());
+
+        // Cria o objeto Image do JavaFX
+        return new Image(inputStream);
+    }
+
     @FXML
     void adicionarImagem(ActionEvent event) throws PersistenciaException {
-        try {
-            configurarFileChooser(fileChooser);
-            arquivo = fileChooser.showOpenDialog(new Stage());
-            if (arquivo != null) {
-                perfilCubesat.setImage(new Image("file:" + arquivo.getPath()));
-                perfilCubesat.setStyle("-fx-border-radius: 50%;");
-
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        imagem = manipuladorImagem.selecionarImagem();
+        if (imagem != null) {
+            perfilCubesat.setImage(transformarImagemParaJavaFX(imagem));
         }
     }
 
@@ -179,7 +183,9 @@ public class TelaCadastrarCubesatController implements Initializable {
                 cube.setNome(textNomeCubesat.getText());
                 cube.setPessoa(user);
                 cube.setDescricao(textDescricao.getText());
-
+                if (imagem != null) {
+                        cube.setImagem(imagem);
+                }
                 if (cubeDAO.inserir(cube)) {
                     confirmacao.setHeaderText("Cubesat cadastrado com sucesso!");
                     confirmacao.show();

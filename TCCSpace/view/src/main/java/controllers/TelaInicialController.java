@@ -56,11 +56,12 @@ public class TelaInicialController implements Initializable {
     private HBox visualizarCubes;
 
     private Usuario usuario;
-  
-    private List<CubeSat> cubeSat;
-    
-    private CubeSat cube;
 
+    private List<CubeSat> cubeSat;
+
+    private CubeSat cube;
+    
+  
     @FXML
     void perfilToPourple(MouseEvent event) {
         botaoPerfil.setStyle("-fx-text-fill: #8C52FF;"
@@ -103,25 +104,26 @@ public class TelaInicialController implements Initializable {
     void apresentarTelaInicial(ActionEvent event) throws IOException {
         MainFX.changedScreen("Tela Inicial", usuario);
     }
-    
+
     @FXML
     void apresentarTelaCadastrarCubesat(ActionEvent event) throws IOException {
         MainFX.changedScreen("Cadastrar Cubesat", usuario);
     }
+
     @FXML
-    void apresentarTelaDados(ActionEvent event) throws IOException{
+    void apresentarTelaDados(ActionEvent event) throws IOException {
         MainFX.changedScreen("Gui3d", cube);
     }
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         MainFX.addOnChangeScreenListener((String newString, Object viewData) -> {
-            if(viewData instanceof Usuario) {
+            if (viewData instanceof Usuario) {
                 List<CubeSat> cubeSat;
                 IUsuarioDAO usuarioDAO = new UsuarioDAO();
-                try{
-                usuario = usuarioDAO.procurarPorEmail(((Usuario) viewData).getEmail());
-                }catch(Exception e){
+                try {
+                    usuario = usuarioDAO.procurarPorEmail(((Usuario) viewData).getEmail());
+                } catch (Exception e) {
                 }
                 nome.setText(usuario.getNome() + "!");
                 cubeSat = usuario.getCubeSat();
@@ -139,8 +141,8 @@ public class TelaInicialController implements Initializable {
                     imageView.setFitWidth(30); 
                     imageView.setFitHeight(30);
                     botaoCube.setGraphic(imageView);
-                    */
-                   botaoCube.setOnAction(event -> {
+                     */
+                    botaoCube.setOnAction(event -> {
                         try {
                             ICubeSatDAO cubesatDAO = new CubeSatDAO();
                             String nomeCubesat = botaoCube.getText();
@@ -151,7 +153,7 @@ public class TelaInicialController implements Initializable {
                         } catch (PersistenciaException ex) {
                             Logger.getLogger(TelaInicialController.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                            });
+                    });
                     visualizarCubes.getChildren().add(botaoCube);
                 }
             }
