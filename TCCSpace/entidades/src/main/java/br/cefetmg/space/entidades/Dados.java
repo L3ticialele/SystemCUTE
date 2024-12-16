@@ -65,9 +65,10 @@ public class Dados implements Serializable {
     private String dataObtencao;
     @Column(name = "Hora")
     private String hora;
+    private int posicao;
 
     //construtor
-    public Dados(float acelerometroX, float acelerometroY, float acelerometroZ, float anguloX, float anguloY, float anguloZ, float altitude, float bateria, float correnteBateria, float correntePlacaSolar, float luz1, float luz2, float pontoOrvalho, float pressao, float sensorUV, float temperaturaExterna, float temperaturaInterna, float tensaoBateria, float tensaoPlacaSolar, float umidade, CubeSat cubesat, String dataObtencao, String hora) {
+    public Dados(float acelerometroX, float acelerometroY, float acelerometroZ, float anguloX, float anguloY, float anguloZ, float altitude, float bateria, float correnteBateria, float correntePlacaSolar, float luz1, float luz2, float pontoOrvalho, float pressao, float sensorUV, float temperaturaExterna, float temperaturaInterna, float tensaoBateria, float tensaoPlacaSolar, float umidade, CubeSat cubesat, String dataObtencao, String hora, int posicao) {
         this.acelerometroX = acelerometroX;
         this.acelerometroY = acelerometroY;
         this.acelerometroZ = acelerometroZ;
@@ -91,9 +92,18 @@ public class Dados implements Serializable {
         this.cubesat = cubesat;
         this.dataObtencao = dataObtencao;
         this.hora = hora;
+        this.posicao = posicao;
     }
     
     //gets e sets
+    public int getPosicao(){
+        return posicao;
+    }
+    
+    public void setPosicao(int posicao){
+        this.posicao = posicao;
+    }
+    
     public String getHora() {
         return hora;
     }

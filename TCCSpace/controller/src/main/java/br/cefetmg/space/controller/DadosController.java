@@ -13,8 +13,8 @@ public class DadosController {
     IDadosDAO dadosDAO = new DadosDAO();
     Dados dados;
 
-    public boolean cadastrarDados(float acelerometroX, float acelerometroY, float acelerometroZ, float anguloX, float anguloY, float anguloZ, float altitude, float bateria, float correnteBateria, float correntePlacaSolar, float luz1, float luz2, float pontoOrvalho, float pressao, float sensorUV, float temperaturaExterna, float temperaturaInterna, float tensaoBateria, float tensaoPlacaSolar, float umidade, CubeSat cubesat, String dataObtencao, String hora) throws PersistenciaException {
-        dados = new Dados(acelerometroX, acelerometroY, acelerometroZ, anguloX, anguloY, anguloZ, altitude, bateria, correnteBateria, correntePlacaSolar, luz1, luz2, pontoOrvalho, pressao, sensorUV, temperaturaExterna, temperaturaInterna, tensaoBateria, tensaoPlacaSolar, umidade, cubesat, dataObtencao, hora);
+    public boolean cadastrarDados(float acelerometroX, float acelerometroY, float acelerometroZ, float anguloX, float anguloY, float anguloZ, float altitude, float bateria, float correnteBateria, float correntePlacaSolar, float luz1, float luz2, float pontoOrvalho, float pressao, float sensorUV, float temperaturaExterna, float temperaturaInterna, float tensaoBateria, float tensaoPlacaSolar, float umidade, CubeSat cubesat, String dataObtencao, String hora, int posicao) throws PersistenciaException {
+        dados = new Dados(acelerometroX, acelerometroY, acelerometroZ, anguloX, anguloY, anguloZ, altitude, bateria, correnteBateria, correntePlacaSolar, luz1, luz2, pontoOrvalho, pressao, sensorUV, temperaturaExterna, temperaturaInterna, tensaoBateria, tensaoPlacaSolar, umidade, cubesat, dataObtencao, hora, posicao);
         cubesat.setDados(dados);
         return dadosDAO.inserir(dados);
     }
