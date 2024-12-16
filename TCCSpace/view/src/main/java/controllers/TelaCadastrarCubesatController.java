@@ -215,8 +215,7 @@ public class TelaCadastrarCubesatController implements Initializable {
 
     @FXML
     void apresentaTelaPerfil(ActionEvent event) throws IOException {
-        setToNull();
-        MainFX.changedScreen("Perfil", user);
+        MainFX.changedScreen("VerificarSenha", user);
     }
 
     @FXML

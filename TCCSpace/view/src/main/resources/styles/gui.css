@@ -1,28 +1,7 @@
-@font-face {
-    font-family: "Ablation";
-    src: url("../font/Ablation_PersonalUse.otf");
-}
 
-@font-face {
-    font-family: "TheSeasons";
-    src: url("../font/theseasons-reg.otf");
-}
-@font-face {
-    font-family: "SpaceAge";
-    src: url("../font/spaceage.ttf");
-}
 .short-letter-space {
     -fx-line-spacing: 1px; /* Define o espaçamento entre as linhas */
     -fx-font-weight: bold; /* Engrossa a fonte */
-}
-.Ablation {
--fx-font-family: "Ablation";
-}
-.TheSeasons {
--fx-font-family: "TheSeasons";
-}
-.SpaceAge {
--fx-font-family: "SpaceAge";
 }
 
 

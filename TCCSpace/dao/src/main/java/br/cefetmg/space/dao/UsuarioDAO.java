@@ -8,6 +8,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
+import org.mindrot.jbcrypt.BCrypt;
 
 /*Esta classe inclui as funções que podem ser realizadas com o objeto Usuário*/
 public class UsuarioDAO implements IUsuarioDAO {
@@ -134,7 +135,6 @@ public class UsuarioDAO implements IUsuarioDAO {
             entityManager.close();
         }
     }
-
    //Validação usada no login
     @Override
     public boolean validarlogin(Usuario usuario) throws PersistenciaException {
@@ -144,15 +144,22 @@ public class UsuarioDAO implements IUsuarioDAO {
 
         try {
             entityManager.getTransaction().begin();
-            Query query = entityManager.createQuery("SELECT u.email, u.senha FROM Usuario AS u WHERE u.email = :email AND u.senha = :senha");
+            Query query = entityManager.createQuery("SELECT u FROM Usuario AS u WHERE u.email = :email");
             query.setParameter("email", usuario.getEmail());
-            query.setParameter("senha", usuario.getSenha());
-            List<Usuario> usuarioPersistido = query.getResultList();
-            if (!usuarioPersistido.isEmpty()) {
-                return true;
-            } else {
+            Usuario user; 
+            
+            try{
+                user = (Usuario) query.getSingleResult();
+            }catch(javax.persistence.NoResultException e){
                 return false;
             }
+            if(BCrypt.checkpw(usuario.getSenha(), user.getSenha()))
+            {
+           return true;
+            }else{
+                return false;
+            }
+         
         } catch (Exception ex) {
             entityManager.getTransaction().rollback();
             throw ex;

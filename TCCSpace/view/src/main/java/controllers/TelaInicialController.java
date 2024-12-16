@@ -60,7 +60,8 @@ public class TelaInicialController implements Initializable {
     private List<CubeSat> cubeSat;
 
     private CubeSat cube;
-
+    
+  
     @FXML
     void perfilToPourple(MouseEvent event) {
         botaoPerfil.setStyle("-fx-text-fill: #8C52FF;"
@@ -96,7 +97,7 @@ public class TelaInicialController implements Initializable {
 
     @FXML
     void apresentaTelaPerfil(ActionEvent event) throws IOException {
-        MainFX.changedScreen("Perfil", usuario);
+        MainFX.changedScreen("VerificarSenha", usuario);
     }
 
     @FXML
