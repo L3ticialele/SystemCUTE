@@ -187,9 +187,17 @@ public class TelaEditarPerfilController implements Initializable {
                 || !campoEmail.getText().equals(usuarioAtual.getEmail())
                 || !campoSenha.getText().equals(usuarioAtual.getSenha())
                 || !campoTelefone.getText().equals(usuarioAtual.getTelefone())
-                || !Arrays.equals(imagem.getDados(), usuarioAtual.getImagem().getDados());
+                || !verificarAlteracoesImagem();
 
         botaoSalvarPerfil.setVisible(alterado);
+    }
+    
+    public boolean verificarAlteracoesImagem() {
+        if (usuarioAtual.getImagem() != null) {
+            return Arrays.equals(imagem.getDados(), usuarioAtual.getImagem().getDados());
+        } else{
+            return perfilUsuario.getImage() == null;
+        }
     }
 
     public boolean isOkClicked() {
@@ -270,8 +278,7 @@ public class TelaEditarPerfilController implements Initializable {
             usuarioAlterado.setSenha(campoSenha.getText());
             usuarioAlterado.setTelefone(campoTelefone.getText());
             int IdUsuario = usuarioAtual.getId();
-            if (perfilUsuario.getImage() != null) {
-                System.out.println(imagem.getNome());
+            if (verificarAlteracoesImagem()) {
                 usuarioAlterado.setImagem(imagem);
             }
             if (usuarioDAO.atualizar(IdUsuario, usuarioAlterado)) {

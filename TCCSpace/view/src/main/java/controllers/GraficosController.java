@@ -293,7 +293,8 @@ public class GraficosController implements Initializable {
                 cubesat = (CubeSat) viewData;
 
                 try {
-                    carregaDados();
+                    if(cubesat.getDados() != null)
+                        carregaDados();
                 } catch (PersistenciaException ex) {
                     Logger.getLogger(GraficosController.class.getName()).log(Level.SEVERE, null, ex);
                 }

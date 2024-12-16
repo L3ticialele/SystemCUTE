@@ -177,7 +177,7 @@ public class Data3DViewerController {
 
     @FXML
     private Label labelUmidade;
-
+    
     @FXML
     void gravarDados(ActionEvent event) throws PersistenciaException {
         FileChooser fileChooser = new FileChooser();
@@ -199,32 +199,35 @@ public class Data3DViewerController {
                     content.append(line).append("\n");
                     String[] parts = line.split(" ");
                     data = parts[0].split(":")[1];
-                    horas = parts[0].split(":")[1];
-                    floatX = Float.parseFloat(parts[1].split(":")[1].trim());
-                    floatY = Float.parseFloat(parts[2].split(":")[1].trim());
-                    floatZ = Float.parseFloat(parts[3].split(":")[1].trim());
-                    floatAnguloX = Float.parseFloat(parts[4].split(":")[1].trim());
-                    floatAnguloY = Float.parseFloat(parts[5].split(":")[1].trim());
-                    floatAnguloZ = Float.parseFloat(parts[6].split(":")[1].trim());
-                    floatAltide = Float.parseFloat(parts[7].split(":")[1].trim());
-                    floatBateria = Integer.parseInt(parts[8].split(":")[1].trim());
-                    floatCorrenteBateria = Float.parseFloat(parts[9].split(":")[1].trim());
-                    floatCorrentePlacaSolar = Float.parseFloat(parts[10].split(":")[1]);
-                    floatLuz1 = Integer.parseInt(parts[11].split(":")[1].trim());
-                    floatLuz2 = Integer.parseInt(parts[12].split(":")[1].trim());
-                    floatPontoOrvalho = Float.parseFloat(parts[13].split(":")[1].trim());
-                    floatPressao = Float.parseFloat(parts[14].split(":")[1].trim());
-                    floatSensorUV = Float.parseFloat(parts[15].split(":")[1].trim());
-                    floatTensaoBateria = Float.parseFloat(parts[16].split(":")[1].trim());
-                    floatTensaoPlacaSolar = Float.parseFloat(parts[17].split(":")[1].trim());
-                    floatTempExterna = Float.parseFloat(parts[18].split(":")[1].trim());
-                    floatTempInterna = Float.parseFloat(parts[19].split(":")[1].trim());
-                    floatUmidade = Float.parseFloat(parts[20].split(":")[1].trim());
-
-                    Dados dado = new Dados(floatX, floatY, floatZ, floatAnguloX, floatAnguloY, floatAnguloZ, floatAltide, floatBateria, floatCorrenteBateria, floatCorrentePlacaSolar, floatLuz1, floatLuz2, floatPontoOrvalho, floatPressao, floatSensorUV, floatTempExterna, floatTempInterna, floatTensaoBateria, floatTensaoPlacaSolar, floatUmidade, cubesat, data, horas);
+                    horas = parts[1].split(":")[1];
+                    horas += ":" + parts[1].split(":")[2].trim();
+                    horas += ":" + parts[1].split(":")[3].trim();
+                    floatX = Float.parseFloat(parts[2].split(":")[1].trim());
+                    floatY = Float.parseFloat(parts[3].split(":")[1].trim());
+                    floatZ = Float.parseFloat(parts[4].split(":")[1].trim());
+                    floatAnguloX = Float.parseFloat(parts[5].split(":")[1].trim());
+                    floatAnguloY = Float.parseFloat(parts[6].split(":")[1].trim());
+                    floatAnguloZ = Float.parseFloat(parts[7].split(":")[1].trim());
+                    floatAltide = Float.parseFloat(parts[8].split(":")[1].trim());
+                    floatBateria = Integer.parseInt(parts[9].split(":")[1].trim());
+                    floatCorrenteBateria = Float.parseFloat(parts[10].split(":")[1].trim());
+                    floatCorrentePlacaSolar = Float.parseFloat(parts[11].split(":")[1]);
+                    floatLuz1 = Integer.parseInt(parts[12].split(":")[1].trim());
+                    floatLuz2 = Integer.parseInt(parts[13].split(":")[1].trim());
+                    floatPontoOrvalho = Float.parseFloat(parts[14].split(":")[1].trim());
+                    floatPressao = Float.parseFloat(parts[15].split(":")[1].trim());
+                    floatSensorUV = Float.parseFloat(parts[16].split(":")[1].trim());
+                    floatTensaoBateria = Float.parseFloat(parts[17].split(":")[1].trim());
+                    floatTensaoPlacaSolar = Float.parseFloat(parts[18].split(":")[1].trim());
+                    floatTempExterna = Float.parseFloat(parts[19].split(":")[1].trim());
+                    floatTempInterna = Float.parseFloat(parts[20].split(":")[1].trim());
+                    floatUmidade = Float.parseFloat(parts[21].split(":")[1].trim());
+                    
+                    List<Dados> dados = cubesat.getDados();
+                    Dados dado = new Dados(floatX, floatY, floatZ, floatAnguloX, floatAnguloY, floatAnguloZ, floatAltide, floatBateria, floatCorrenteBateria, floatCorrentePlacaSolar, floatLuz1, floatLuz2, floatPontoOrvalho, floatPressao, floatSensorUV, floatTempExterna, floatTempInterna, floatTensaoBateria, floatTensaoPlacaSolar, floatUmidade, cubesat, data, horas, (dados.size()+1));
                     dadoDao.inserir(dado);
                     lineNumber++;
-
+                    atualizarDados();
                 }
 
             }catch (NumberFormatException e) { 
@@ -360,7 +363,7 @@ public class Data3DViewerController {
     }
 
     @FXML
-    void selecionarGravacao(MouseEvent event) {
+    void selecionarGravacao(MouseEvent event) throws PersistenciaException {
         int i = tabelaGravacoes.getSelectionModel().getSelectedIndex();
         Dados dados = (Dados) tabelaGravacoes.getItems().get(i);
         mostrarDados(dados);
@@ -389,9 +392,9 @@ public class Data3DViewerController {
                         Logger.getLogger(Data3DViewerController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     ultimaGravacao = 0;
-
+                    
                     colunaGravacao.setCellValueFactory(
-                            new PropertyValueFactory<>("id"));
+                            new PropertyValueFactory<>("posicao"));
                     colunaData.setCellValueFactory(
                             new PropertyValueFactory<>("dataObtencao"));
                     colunaHora.setCellValueFactory(
