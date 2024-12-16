@@ -125,11 +125,6 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Label fx:id="labelNomeCubesat" layoutX="135.0" layoutY="226.0" prefHeight="17.0" prefWidth="150.0" style="-fx-alignment: center;" text="&lt;NOME&gt;" textAlignment="CENTER" textFill="WHITE">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </Label>
                         <Button fx:id="botaoEscolherFoto" layoutX="107.0" layoutY="261.0" mnemonicParsing="false" onAction="#adicionarImagem" prefHeight="30.0" prefWidth="197.0" style="-fx-background-color: #73668B; -fx-background-radius: 20PX;" text="ESCOLHER FOTO" textFill="WHITE">
                            <font>
                               <Font size="15.0" />

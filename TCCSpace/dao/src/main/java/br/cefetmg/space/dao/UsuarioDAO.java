@@ -1,4 +1,5 @@
 package br.cefetmg.space.dao;
+
 import br.cefetmg.space.entidades.Usuario;
 import br.cefetmg.space.idao.IUsuarioDAO;
 import br.cefetmg.space.idao.exception.PersistenciaException;
@@ -12,7 +13,7 @@ import org.mindrot.jbcrypt.BCrypt;
 
 /*Esta classe inclui as funções que podem ser realizadas com o objeto Usuário*/
 public class UsuarioDAO implements IUsuarioDAO {
-    
+
     //Inserir um novo usuario no sistema
     @Override
     public Usuario inserir(Usuario usuario) throws PersistenciaException {
@@ -33,7 +34,7 @@ public class UsuarioDAO implements IUsuarioDAO {
             return usuario;
         }
     }
-    
+
     //Lista todos os usúarios do sistema
     @Override
     public List<Usuario> listarTodos() throws PersistenciaException {
@@ -60,7 +61,7 @@ public class UsuarioDAO implements IUsuarioDAO {
         entityManager.close();
         return usuarios;
     }
-    
+
     //Deleta um usuario, conforme o id
     @Override
     public void delete(int idUsuario) throws PersistenciaException {
@@ -85,7 +86,7 @@ public class UsuarioDAO implements IUsuarioDAO {
             entityManager.close();
         }
     }
-    
+
     //Procura um usuário, conforme o nome
     @Override
     public Usuario procurarPorUserName(String user) throws PersistenciaException {
@@ -110,7 +111,7 @@ public class UsuarioDAO implements IUsuarioDAO {
             entityManager.close();
         }
     }
-    
+
     //Procura um usuario conforme o email
     @Override
     public Usuario procurarPorEmail(String email) throws PersistenciaException {
@@ -128,38 +129,6 @@ public class UsuarioDAO implements IUsuarioDAO {
             } else {
                 return null;
             }
-        } catch (Exception ex) {
-            entityManager.getTransaction().rollback();
-            throw ex;
-        } finally {
-            entityManager.close();
-        }
-    }
-   //Validação usada no login
-    @Override
-    public boolean validarlogin(Usuario usuario) throws PersistenciaException {
-        EntityManagerFactory entityManagerFactory
-                = Persistence.createEntityManagerFactory("persistence");
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-
-        try {
-            entityManager.getTransaction().begin();
-            Query query = entityManager.createQuery("SELECT u FROM Usuario AS u WHERE u.email = :email");
-            query.setParameter("email", usuario.getEmail());
-            Usuario user; 
-            
-            try{
-                user = (Usuario) query.getSingleResult();
-            }catch(javax.persistence.NoResultException e){
-                return false;
-            }
-            if(BCrypt.checkpw(usuario.getSenha(), user.getSenha()))
-            {
-           return true;
-            }else{
-                return false;
-            }
-         
         } catch (Exception ex) {
             entityManager.getTransaction().rollback();
             throw ex;
@@ -199,7 +168,7 @@ public class UsuarioDAO implements IUsuarioDAO {
             entityManager.close();
         }
     }
-    
+
     //Procura por um usuário pelo ID
     @Override
     public Usuario procurarPorId(int id) throws PersistenciaException {
@@ -229,6 +198,42 @@ public class UsuarioDAO implements IUsuarioDAO {
             throw ex;
         } finally {
             entityManager.close();
+        }
+    }
+
+    @Override
+    public boolean validarlogin(Usuario usuario) throws PersistenciaException {
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("persistence");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+        try {
+            entityManager.getTransaction().begin();
+            Query query = entityManager.createQuery("SELECT u FROM Usuario AS u WHERE u.email = :email");
+            query.setParameter("email", usuario.getEmail());
+
+            Usuario user;
+            try {
+                user = (Usuario) query.getSingleResult();
+            } catch (javax.persistence.NoResultException e) {
+                // Nenhum usuário encontrado com o e-mail fornecido
+                return false;
+            }
+
+            boolean validPassword = BCrypt.checkpw(usuario.getSenha(), user.getSenha());
+
+            if (!validPassword) {
+                // Senha inválida
+                return false;
+            }
+
+            entityManager.getTransaction().commit();
+            return true;
+        } catch (Exception ex) {
+            entityManager.getTransaction().rollback();
+            throw new PersistenciaException("Erro ao validar login", ex);
+        } finally {
+            entityManager.close();
+            entityManagerFactory.close();
         }
     }
 

@@ -259,7 +259,6 @@ public class TelaEditarCubesatController implements Initializable {
                 }
                 else{
                     cubesatAlterado.setImagem(imagem);
-                    System.out.println(cubesatAlterado.getImagem().getNome() + " ok");
                 }
             }
             if (cubesatDAO.atualizar(cubesatAlterado)) {

@@ -177,7 +177,7 @@ public class Data3DViewerController {
 
     @FXML
     private Label labelUmidade;
-    
+
     @FXML
     void gravarDados(ActionEvent event) throws PersistenciaException {
         FileChooser fileChooser = new FileChooser();
@@ -209,11 +209,11 @@ public class Data3DViewerController {
                     floatAnguloY = Float.parseFloat(parts[6].split(":")[1].trim());
                     floatAnguloZ = Float.parseFloat(parts[7].split(":")[1].trim());
                     floatAltide = Float.parseFloat(parts[8].split(":")[1].trim());
-                    floatBateria = Integer.parseInt(parts[9].split(":")[1].trim());
+                    floatBateria = Float.parseFloat(parts[9].split(":")[1].trim());
                     floatCorrenteBateria = Float.parseFloat(parts[10].split(":")[1].trim());
                     floatCorrentePlacaSolar = Float.parseFloat(parts[11].split(":")[1]);
-                    floatLuz1 = Integer.parseInt(parts[12].split(":")[1].trim());
-                    floatLuz2 = Integer.parseInt(parts[13].split(":")[1].trim());
+                    floatLuz1 = Float.parseFloat(parts[12].split(":")[1].trim());
+                    floatLuz2 = Float.parseFloat(parts[13].split(":")[1].trim());
                     floatPontoOrvalho = Float.parseFloat(parts[14].split(":")[1].trim());
                     floatPressao = Float.parseFloat(parts[15].split(":")[1].trim());
                     floatSensorUV = Float.parseFloat(parts[16].split(":")[1].trim());
@@ -222,18 +222,20 @@ public class Data3DViewerController {
                     floatTempExterna = Float.parseFloat(parts[19].split(":")[1].trim());
                     floatTempInterna = Float.parseFloat(parts[20].split(":")[1].trim());
                     floatUmidade = Float.parseFloat(parts[21].split(":")[1].trim());
-                    
+
                     List<Dados> dados = cubesat.getDados();
-                    Dados dado = new Dados(floatX, floatY, floatZ, floatAnguloX, floatAnguloY, floatAnguloZ, floatAltide, floatBateria, floatCorrenteBateria, floatCorrentePlacaSolar, floatLuz1, floatLuz2, floatPontoOrvalho, floatPressao, floatSensorUV, floatTempExterna, floatTempInterna, floatTensaoBateria, floatTensaoPlacaSolar, floatUmidade, cubesat, data, horas, (dados.size()+1));
+                    Dados dado = new Dados(floatX, floatY, floatZ, floatAnguloX, floatAnguloY, floatAnguloZ, floatAltide, floatBateria, floatCorrenteBateria, floatCorrentePlacaSolar, floatLuz1, floatLuz2, floatPontoOrvalho, floatPressao, floatSensorUV, floatTempExterna, floatTempInterna, floatTensaoBateria, floatTensaoPlacaSolar, floatUmidade, cubesat, data, horas, (dados.size() + 1));
                     dadoDao.inserir(dado);
                     lineNumber++;
                     atualizarDados();
+                    List<Dados> dadosCubesat = dadosController.listarDadosPorCubeSat(cubesat);
+                    Dados ultimoDado = dadosCubesat.get(dadosCubesat.size() - 1);
+                    mostrarDados(ultimoDado);
                 }
 
-            }catch (NumberFormatException e) { 
+            } catch (NumberFormatException e) {
                 System.err.println("Erro ao converter número na linha " + lineNumber + ": " + e.getMessage());
-            } 
-            catch (IOException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
@@ -306,17 +308,16 @@ public class Data3DViewerController {
 
         if (file != null) {
             ArrayList<Dados> dados;
-            
+
             if (dadosSelecionados == null) {
                 dados = new ArrayList<>(tabelaGravacoes.getItems());
                 System.out.println("Baixando todas as gravações.");
-            }
-            else {
+            } else {
                 dados = new ArrayList<>();
                 dados.add(dadosSelecionados);
                 System.out.println("Baixando gravação selecionada.");
             }
-            
+
             data3D.preencherDados(dados);
 
             data3D.baixarPlanilha(file);
@@ -392,7 +393,7 @@ public class Data3DViewerController {
                         Logger.getLogger(Data3DViewerController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     ultimaGravacao = 0;
-                    
+
                     colunaGravacao.setCellValueFactory(
                             new PropertyValueFactory<>("posicao"));
                     colunaData.setCellValueFactory(

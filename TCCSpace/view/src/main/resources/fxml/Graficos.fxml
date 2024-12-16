@@ -142,11 +142,15 @@
                         <BorderPane fx:id="painelGraficos" layoutX="567.0" layoutY="16.0" prefHeight="482.0" prefWidth="632.0" />
                         <ComboBox fx:id="opcao1" layoutX="59.0" layoutY="87.0" prefHeight="25.0" prefWidth="207.0" promptText="parâmetro 1" style="-fx-background-color: #DFDCE1;" />
                         <ComboBox fx:id="opcao2" layoutX="59.0" layoutY="142.0" prefHeight="25.0" prefWidth="207.0" promptText="parâmetro 2" style="-fx-background-color: #DFDCE1;" />
-                        <ImageView fitHeight="51.0" fitWidth="112.0" layoutX="13.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/iconeSair.png" />
-                           </image>
-                        </ImageView>
+                        <Button fx:id="botaoSair" layoutX="22.0" layoutY="17.0" mnemonicParsing="false" onAction="#voltarData3Dviewer" onMouseEntered="#sairToPourple" onMouseExited="#sairToWhite" style="-fx-background-color: #000000;">
+                           <graphic>
+                              <ImageView fx:id="iconeSair" fitHeight="51.0" fitWidth="112.0" onMouseEntered="#sairToPourple" onMouseExited="#sairToWhite" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/iconeSair.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
                      </children>
                   </Pane>
                </children>

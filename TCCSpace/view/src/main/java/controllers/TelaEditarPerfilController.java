@@ -1,6 +1,8 @@
 package controllers;
 
 import br.cefetmg.space.controller.ManipularImagem;
+import br.cefetmg.space.controller.UsuarioController;
+import br.cefetmg.space.controller.ValidaCamposController;
 import br.cefetmg.space.dao.UsuarioDAO;
 import br.cefetmg.space.entidades.Imagem;
 import br.cefetmg.space.entidades.Usuario;
@@ -81,9 +83,14 @@ public class TelaEditarPerfilController implements Initializable {
     private PasswordField campoSenha;
 
     @FXML
+    private PasswordField campoSenha1;
+
+    @FXML
     private TextField campoTelefone;
 
     private Stage dialogStage;
+
+    private ValidaCamposController validador = new ValidaCamposController();
 
     private final boolean okClicked = false;
 
@@ -105,6 +112,8 @@ public class TelaEditarPerfilController implements Initializable {
     private File arquivo;
 
     private Imagem imagem;
+
+    private final UsuarioController usuarioController = new UsuarioController();
 
     @FXML
     void suporteToPourple(MouseEvent event) {
@@ -138,7 +147,6 @@ public class TelaEditarPerfilController implements Initializable {
         if (usuarioAtual != null) {
             campoNome.setText(usuarioAtual.getNome() != null ? usuarioAtual.getNome() : "");
             campoEmail.setText(usuarioAtual.getEmail() != null ? usuarioAtual.getEmail() : "");
-            campoSenha.setText(usuarioAtual.getSenha() != null ? usuarioAtual.getSenha() : "");
             campoTelefone.setText(usuarioAtual.getTelefone() != null ? usuarioAtual.getTelefone() : "");
             labelPerfil.setText("ID: " + usuarioAtual.getId());
             botaoSalvarPerfil.setVisible(false);
@@ -191,12 +199,12 @@ public class TelaEditarPerfilController implements Initializable {
 
         botaoSalvarPerfil.setVisible(alterado);
     }
-    
+
     public boolean verificarAlteracoesImagem() {
         if (usuarioAtual.getImagem() != null) {
             return Arrays.equals(imagem.getDados(), usuarioAtual.getImagem().getDados());
-        } else{
-            return perfilUsuario.getImage() == null;
+        } else {
+            return perfilUsuario.getImage() != null;
         }
     }
 
@@ -236,6 +244,7 @@ public class TelaEditarPerfilController implements Initializable {
             if (buttonType == ButtonType.OK) {
                 IUsuarioDAO usuarioDAO = new UsuarioDAO();
                 try {
+                    
                     usuarioDAO.delete(usuarioAtual.getId());
                     Alert confirmacao = new Alert(Alert.AlertType.CONFIRMATION);
                     confirmacao.setHeaderText("Perfil excluído com sucesso!");
@@ -249,6 +258,29 @@ public class TelaEditarPerfilController implements Initializable {
                 }
             }
         });
+    }
+
+    void salvar(Usuario usuarioAlterado) throws PersistenciaException, IOException {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        Alert confirmacao = new Alert(Alert.AlertType.CONFIRMATION);
+        Alert erro = new Alert(Alert.AlertType.ERROR);
+        IUsuarioDAO usuarioDAO = new UsuarioDAO();
+        usuarioAlterado.setTelefone(campoTelefone.getText());
+        int IdUsuario = usuarioAtual.getId();
+        if (imagem != null && verificarAlteracoesImagem()) {
+            usuarioAlterado.setImagem(imagem);
+        }
+        if (usuarioDAO.atualizar(IdUsuario, usuarioAlterado)) {
+            if (usuarioAtual.getImagem() != null) {
+                manipuladorImagem.atualizarImagem(imagem);
+            }
+            confirmacao.setHeaderText("Perfil atualizado com sucesso!");
+            confirmacao.show();
+            MainFX.changedScreen("Perfil", usuarioAlterado);
+        } else {
+            erro.setHeaderText("Houve um erro ao atualizar o perfil.");
+            erro.show();
+        }
     }
 
     @FXML
@@ -275,22 +307,22 @@ public class TelaEditarPerfilController implements Initializable {
             usuarioAlterado.setId(usuarioAtual.getId());
             usuarioAlterado.setNome(campoNome.getText());
             usuarioAlterado.setEmail(campoEmail.getText());
-            usuarioAlterado.setSenha(campoSenha.getText());
-            usuarioAlterado.setTelefone(campoTelefone.getText());
-            int IdUsuario = usuarioAtual.getId();
-            if (verificarAlteracoesImagem()) {
-                usuarioAlterado.setImagem(imagem);
-            }
-            if (usuarioDAO.atualizar(IdUsuario, usuarioAlterado)) {
-                if (usuarioAtual.getImagem() != null) {
-                    manipuladorImagem.atualizarImagem(imagem);
+            if (usuarioController.login(usuarioAtual.getEmail(), campoSenha.getText()) != null) {
+                if (campoSenha1.getText() != null || !campoSenha1.getText().isEmpty()) {
+                    if (validador.senhaForte(campoSenha1.getText())) {
+                        usuarioAlterado.setSenha(usuarioController.senhaHash(campoSenha1.getText()));
+                        salvar(usuarioAlterado);
+                    } else {
+                        alert.setHeaderText("Senha fraca!");
+                        alert.show();
+                    }
+                } else {
+                    usuarioAlterado.setSenha(usuarioController.senhaHash(campoSenha.getText()));
+                    salvar(usuarioAlterado);
                 }
-                confirmacao.setHeaderText("Perfil atualizado com sucesso!");
-                confirmacao.show();
-                MainFX.changedScreen("Perfil", usuarioAlterado);
             } else {
-                erro.setHeaderText("Houve um erro ao atualizar o perfil.");
-                erro.show();
+                alert.setHeaderText("Senha atual incorreta!");
+                alert.show();
             }
         }
     }

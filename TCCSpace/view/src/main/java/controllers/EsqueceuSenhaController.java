@@ -1,5 +1,6 @@
 package controllers;
 
+import br.cefetmg.space.controller.UsuarioController;
 import br.cefetmg.space.dao.UsuarioDAO;
 import br.cefetmg.space.entidades.Usuario;
 import br.cefetmg.space.view.EmailSender;
@@ -36,6 +37,8 @@ public class EsqueceuSenhaController implements Initializable {
     private Label labelInsira;
     
      private Usuario usuario;
+     
+     private UsuarioController usuarioController = new UsuarioController();
 
 
     @FXML
@@ -57,8 +60,7 @@ public class EsqueceuSenhaController implements Initializable {
             }
 
             String novaSenha = GeradorSenha.gerarSenha(8);
-
-            usuario.setSenha(novaSenha);
+            usuario.setSenha(usuarioController.senhaHash(novaSenha));
             if (usuarioDAO.atualizar(usuario.getId(), usuario)) {
                 EmailSender.enviarEmail(email, "Recuperação de Senha", "Sua nova senha é: " + novaSenha);
 

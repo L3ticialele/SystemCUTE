@@ -7,11 +7,12 @@ import br.cefetmg.space.idao.exception.PersistenciaException;
 import org.mindrot.jbcrypt.BCrypt;
 
 public class UsuarioController {
+
     IUsuarioDAO usuarioDAO;
     Usuario usuario;
-    
+
     public Usuario login(String email, String senha) throws PersistenciaException {
-      
+
         Usuario nv = new Usuario();
         Usuario usuario;
         nv.setEmail(email);
@@ -27,15 +28,22 @@ public class UsuarioController {
             return null;
         }
     }
-   
-    public Usuario cadastrar(String email, String nome, String senha, String telefone) throws PersistenciaException{
+    
+    public String senhaHash(String senha){
         String senhaHash = BCrypt.hashpw(senha, BCrypt.gensalt());
+        return senhaHash;
+    }
+
+    public Usuario cadastrar(String email, String nome, String senha, String telefone) throws PersistenciaException {
         usuarioDAO = new UsuarioDAO();
         usuario = new Usuario();
-        usuario.setEmail(email);
-        usuario.setNome(nome);
-        usuario.setSenha(senhaHash);
-        usuario.setTelefone(telefone);
-        return usuarioDAO.inserir(usuario);       
+        if (usuarioDAO.procurarPorEmail(email) == null) {
+            usuario.setEmail(email);
+            usuario.setNome(nome);
+            usuario.setSenha(senhaHash(senha));
+            usuario.setTelefone(telefone);
+            return usuarioDAO.inserir(usuario);
+        }
+        return null;
     }
 }
