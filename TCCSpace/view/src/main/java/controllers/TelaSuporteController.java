@@ -74,7 +74,7 @@ public class TelaSuporteController implements Initializable {
 
     @FXML
     void apresentaTelaPerfil(ActionEvent event) throws IOException {
-        MainFX.changedScreen("Perfil", usuario);
+        MainFX.changedScreen("VerificarSenha", usuario);
     }
 
     @FXML

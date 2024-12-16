@@ -32,6 +32,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 
+
 public class GraficosController implements Initializable {
 
     @FXML
@@ -65,6 +66,9 @@ public class GraficosController implements Initializable {
     private BorderPane painelGraficos;
     @FXML
     private ImageView iconeSuporte;
+    
+    private Usuario usuario;
+
 
     private CubeSat cubesat;
 
@@ -80,19 +84,19 @@ public class GraficosController implements Initializable {
     private ArrayList<Object> sensorUV = new ArrayList<Object>();
     //private Dados dadosCubeSat(cubesat);
 
-    @FXML
-    void apresentaTelaPerfil(ActionEvent event) {
-
+     @FXML
+    void apresentaTelaSuporte(ActionEvent event) throws IOException {
+        MainFX.changedScreen("Suporte", usuario);
     }
 
     @FXML
-    void apresentaTelaSuporte(ActionEvent event) {
-
+    void apresentaTelaInicial(ActionEvent event) throws IOException {
+        MainFX.changedScreen("Tela Inicial", usuario);
     }
 
     @FXML
-    void apresentarTelaInicial(ActionEvent event) {
-
+    void apresentaTelaPerfil(ActionEvent event) throws IOException {
+        MainFX.changedScreen("VerificarSenha", usuario);
     }
 
     @FXML
