@@ -82,6 +82,10 @@ public class Updater {
         this.lineChartManager = lineChartManager;
     }
 
+    public Updater(Model3D model3D) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     public void startUpdating() {
         Thread updaterThread = new Thread(() -> {
             try {

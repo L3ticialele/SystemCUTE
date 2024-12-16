@@ -1,26 +1,24 @@
 package br.cefetmg.space.view;
 
+import gui3d.Model3D;
+import gui3d.Updater;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.animation.AnimationTimer;
 import javafx.scene.Group;
 import javafx.scene.PerspectiveCamera;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
-import javafx.scene.shape.Box;
-import javafx.scene.transform.Rotate;
-import javafx.animation.AnimationTimer;
-import javafx.scene.image.Image;
 import javafx.scene.shape.MeshView;
 import javafx.scene.shape.TriangleMesh;
+import javafx.scene.transform.Rotate;
 
 public class Renderizador3D {
-    
-    
+
     public static MeshView loadOBJ(String filePath) throws IOException {
         TriangleMesh mesh = new TriangleMesh();
         List<Float> vertices = new ArrayList<>();
@@ -76,39 +74,43 @@ public class Renderizador3D {
         if (root == null) {
             throw new IllegalArgumentException("O grupo não pode ser nulo.");
         }
-        
 
-        Box box = new Box(100, 100, 100);
-        
-        PhongMaterial material = new PhongMaterial();
-        material.setDiffuseMap(new Image("file:path/to/your/texture.png")); // Caminho para a imagem da textura
-        box.setMaterial(material);
-        material.setDiffuseColor(Color.RED);
-        box.setMaterial(material);
-        
-        root.getChildren().add(box);
-        
+        Model3D model3D = new Model3D();
+        MeshView meshView = model3D.getMeshView();
+
+        root.getChildren().add(meshView);
+
+        // Configuração da câmera
         PerspectiveCamera camera = new PerspectiveCamera(true);
-                camera = new PerspectiveCamera(true);
         camera.setNearClip(1);
         camera.setFarClip(1000);
-        camera.setTranslateY(0); 
-        camera.setTranslateX(0); 
-        camera.setTranslateZ(-465); 
-        
+        camera.setTranslateY(0);
+        camera.setTranslateX(0);
+        camera.setTranslateZ(-465);
+
         Scene scene = new Scene(root, 800, 600, true);
         scene.setFill(Color.LIGHTGRAY);
         scene.setCamera(camera);
-        
+
+        // Configuração inicial do objeto
+        meshView.setScaleX(2);
+        meshView.setScaleY(2);
+        meshView.setScaleZ(2);
+        meshView.setTranslateX(210);
+        meshView.setTranslateY(150);
+        meshView.setTranslateZ(0);
+
+        // Transformações de rotação
         Rotate rotateX = new Rotate(0, Rotate.X_AXIS);
         Rotate rotateY = new Rotate(0, Rotate.Y_AXIS);
-        box.getTransforms().addAll(rotateX, rotateY);
-        
+        meshView.getTransforms().addAll(rotateX, rotateY);
+
+        // Animação de rotação
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                rotateX.setAngle(rotateX.getAngle() + 1); 
-                rotateY.setAngle(rotateY.getAngle() + 1); 
+                rotateX.setAngle(rotateX.getAngle() + 0.5); // Rotação no eixo X
+                rotateY.setAngle(rotateY.getAngle() + 0.7); // Rotação no eixo Y
             }
         };
         timer.start();
