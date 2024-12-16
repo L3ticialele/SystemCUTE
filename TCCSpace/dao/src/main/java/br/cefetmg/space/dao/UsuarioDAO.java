@@ -146,17 +146,20 @@ public class UsuarioDAO implements IUsuarioDAO {
             entityManager.getTransaction().begin();
             Query query = entityManager.createQuery("SELECT u FROM Usuario AS u WHERE u.email = :email");
             query.setParameter("email", usuario.getEmail());
-            Usuario user = (Usuario) query.getSingleResult();
-            if(BCrypt.checkpw(usuario.getSenha(), user.getSenha()))
-            {
-            List<Usuario> usuarioPersistido = query.getResultList();
-            if (!usuarioPersistido.isEmpty()) {
-                return true;
-            } else {
+            Usuario user; 
+            
+            try{
+                user = (Usuario) query.getSingleResult();
+            }catch(javax.persistence.NoResultException e){
                 return false;
             }
+            if(BCrypt.checkpw(usuario.getSenha(), user.getSenha()))
+            {
+           return true;
+            }else{
+                return false;
             }
-            return false;
+         
         } catch (Exception ex) {
             entityManager.getTransaction().rollback();
             throw ex;
