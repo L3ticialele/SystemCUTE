@@ -193,7 +193,7 @@ public class TelaEditarPerfilController implements Initializable {
         boolean alterado
                 = !campoNome.getText().equals(usuarioAtual.getNome())
                 || !campoEmail.getText().equals(usuarioAtual.getEmail())
-                || !campoSenha.getText().equals(usuarioAtual.getSenha())
+                || !campoSenha1.getText().equals(usuarioAtual.getSenha())
                 || !campoTelefone.getText().equals(usuarioAtual.getTelefone())
                 || !verificarAlteracoesImagem();
 
@@ -244,7 +244,7 @@ public class TelaEditarPerfilController implements Initializable {
             if (buttonType == ButtonType.OK) {
                 IUsuarioDAO usuarioDAO = new UsuarioDAO();
                 try {
-                    
+
                     usuarioDAO.delete(usuarioAtual.getId());
                     Alert confirmacao = new Alert(Alert.AlertType.CONFIRMATION);
                     confirmacao.setHeaderText("Perfil excluído com sucesso!");
@@ -271,8 +271,10 @@ public class TelaEditarPerfilController implements Initializable {
             usuarioAlterado.setImagem(imagem);
         }
         if (usuarioDAO.atualizar(IdUsuario, usuarioAlterado)) {
-            if (usuarioAtual.getImagem() != null) {
+            if (usuarioAtual.getImagem() != null && imagem != null) {
                 manipuladorImagem.atualizarImagem(imagem);
+            } else {
+                usuarioAlterado.setImagem(usuarioAtual.getImagem());
             }
             confirmacao.setHeaderText("Perfil atualizado com sucesso!");
             confirmacao.show();
@@ -308,7 +310,10 @@ public class TelaEditarPerfilController implements Initializable {
             usuarioAlterado.setNome(campoNome.getText());
             usuarioAlterado.setEmail(campoEmail.getText());
             if (usuarioController.login(usuarioAtual.getEmail(), campoSenha.getText()) != null) {
-                if (campoSenha1.getText() != null || !campoSenha1.getText().isEmpty()) {
+                if (campoTelefone.getText() == null || campoTelefone.getText().isEmpty()) {
+                    usuarioAlterado.setSenha(usuarioController.senhaHash(campoSenha.getText()));
+                    salvar(usuarioAlterado);
+                } else {
                     if (validador.senhaForte(campoSenha1.getText())) {
                         usuarioAlterado.setSenha(usuarioController.senhaHash(campoSenha1.getText()));
                         salvar(usuarioAlterado);
@@ -316,9 +321,6 @@ public class TelaEditarPerfilController implements Initializable {
                         alert.setHeaderText("Senha fraca!");
                         alert.show();
                     }
-                } else {
-                    usuarioAlterado.setSenha(usuarioController.senhaHash(campoSenha.getText()));
-                    salvar(usuarioAlterado);
                 }
             } else {
                 alert.setHeaderText("Senha atual incorreta!");

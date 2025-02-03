@@ -2,7 +2,6 @@ package controllers;
 
 import br.cefetmg.space.controller.UsuarioController;
 import br.cefetmg.space.controller.ValidaCamposController;
-import br.cefetmg.space.entidades.Usuario;
 import br.cefetmg.space.idao.exception.PersistenciaException;
 import br.cefetmg.space.view.MainFX;
 import java.io.IOException;
@@ -11,7 +10,6 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -106,15 +104,7 @@ public class TelaCadastrarUsuarioController implements Initializable {
             String senha = CampoSenha.getText();
             String telefone = CampoTelefone.getText();
             if (validaCampos(email, senha, telefone)) {
-                Usuario usuario = usuarioController.cadastrar(email, nome, senha, telefone);
-                if (usuario != null) {
-                    MainFX.changedScreen("Tela Inicial", usuario);
-                } else {
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setTitle("Esse e-mail já foi cadastrado.");
-                    alert.setContentText("Por favor, insira outro endereço ou tente recuperar sua senha na tela de Logiin.");
-                    alert.show();
-                }
+                MainFX.changedScreen("Tela Inicial", usuarioController.cadastrar(email, nome, senha, telefone));
             }
         }
     }
