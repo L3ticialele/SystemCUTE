@@ -1,0 +1,1 @@
+data:dd/MM/yyyy hora:hh:mm:ss aceX:0.0 aceY:0.0 aceZ:0.0 anguloX:0.0 anguloY:0.0 anguloZ:0.0 altitude:0.0 bateria:0.0 correnteBateria:0.0 correntePlacaSolar:0.0 luz1:0.0 luz2:0.0 pontoOrvalho:0.0 pressão:0.0 sensorUV:0.0 tensaoBateria:0.0 tensaoPlacaSolar:0.0 TempExterna:0.0 TempInterna:0.0 umidade:0.0
