@@ -21,6 +21,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 
 public class VerificarSenhaController implements Initializable {
 
@@ -50,6 +51,16 @@ public class VerificarSenhaController implements Initializable {
    private ImageView imagemBotao;
     
     private boolean visualizador = false;
+    
+    @FXML
+    void sairToPourple(MouseEvent event) {
+        iconeSair.setImage(new Image("file:src/main/resources/images/iconeSairLilas.png"));
+    }
+
+    @FXML
+    void sairToWhite(MouseEvent event) {
+        iconeSair.setImage(new Image("file:src/main/resources/images/iconeSair.png"));
+    }
     
      @FXML
     void botaoVisualizarSenha(ActionEvent event) {

@@ -17,6 +17,7 @@ import javafx.scene.layout.HBox;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.scene.control.Alert;
+import org.mindrot.jbcrypt.BCrypt;
 
 public class EsqueceuSenhaController implements Initializable {
 
@@ -58,7 +59,7 @@ public class EsqueceuSenhaController implements Initializable {
 
             String novaSenha = GeradorSenha.gerarSenha(8);
 
-            usuario.setSenha(novaSenha);
+            usuario.setSenha(BCrypt.hashpw(novaSenha, BCrypt.gensalt()));
             if (usuarioDAO.atualizar(usuario.getId(), usuario)) {
                 EmailSender.enviarEmail(email, "Recuperação de Senha", "Sua nova senha é: " + novaSenha);
 

@@ -3,11 +3,13 @@ package controllers;
 import br.cefetmg.space.dao.CubeSatDAO;
 import br.cefetmg.space.dao.UsuarioDAO;
 import br.cefetmg.space.entidades.CubeSat;
+import br.cefetmg.space.entidades.Imagem;
 import br.cefetmg.space.entidades.Usuario;
 import br.cefetmg.space.idao.ICubeSatDAO;
 import br.cefetmg.space.idao.IUsuarioDAO;
 import br.cefetmg.space.idao.exception.PersistenciaException;
 import br.cefetmg.space.view.MainFX;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -60,8 +62,7 @@ public class TelaInicialController implements Initializable {
     private List<CubeSat> cubeSat;
 
     private CubeSat cube;
-    
-  
+
     @FXML
     void perfilToPourple(MouseEvent event) {
         botaoPerfil.setStyle("-fx-text-fill: #8C52FF;"
@@ -115,6 +116,14 @@ public class TelaInicialController implements Initializable {
         MainFX.changedScreen("Gui3d", cube);
     }
 
+    public static Image transformarImagemParaJavaFX(Imagem imagem) {
+        // Converte o array de bytes em um InputStream
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(imagem.getDados());
+
+        // Cria o objeto Image do JavaFX
+        return new Image(inputStream);
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         MainFX.addOnChangeScreenListener((String newString, Object viewData) -> {
@@ -135,13 +144,13 @@ public class TelaInicialController implements Initializable {
                     botaoCube.setAlignment(Pos.CENTER);
                     botaoCube.setStyle("-fx-background-color: transparent; -fx-border-color: #8c52ff; -fx-border-radius: 2px;"
                             + "-fx-text-fill: white;" + "-fx-font-size: 20px");
-                    /*
-                    Image imagem = new Image("teste.jpg");
-                    ImageView imageView = new ImageView(imagem);
-                    imageView.setFitWidth(30); 
-                    imageView.setFitHeight(30);
-                    botaoCube.setGraphic(imageView);
-                     */
+                    Imagem imagem = cubeSat.get(x).getImagem();
+                    if (cubeSat.get(x).getImagem() != null) {
+                        ImageView imageView = new ImageView(transformarImagemParaJavaFX(imagem));
+                        imageView.setFitWidth(30);
+                        imageView.setFitHeight(30);
+                        botaoCube.setGraphic(imageView);
+                    }
                     botaoCube.setOnAction(event -> {
                         try {
                             ICubeSatDAO cubesatDAO = new CubeSatDAO();

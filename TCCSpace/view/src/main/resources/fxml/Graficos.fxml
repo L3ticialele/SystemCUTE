@@ -125,7 +125,7 @@
                   <Pane layoutX="35.0" layoutY="140.0" prefHeight="534.0" prefWidth="1221.0" styleClass="card" stylesheets="@../assets/css/gui.css" AnchorPane.topAnchor="140.0">
                      <children>
                         <Line endX="160.18115234375" endY="4.287230491638184" layoutX="623.0" layoutY="239.0" rotate="90.0" startX="-300.0" startY="5.846137046813965" stroke="WHITE" strokeWidth="2.0" />
-                        <Button fx:id="botaoVoltar" layoutX="22.0" layoutY="21.0" mnemonicParsing="false" onAction="#voltarData3Dviewer" prefHeight="43.0" prefWidth="37.0" style="-fx-background-color: 0; -fx-border-color: 0;" textFill="#fff9f9">
+                        <Button fx:id="botaoSair" layoutX="22.0" layoutY="21.0" mnemonicParsing="false" onAction="#voltarData3Dviewer" onMouseEntered="#sairToPourple" onMouseExited="#sairToWhite" prefHeight="43.0" prefWidth="37.0" style="-fx-background-color: 0; -fx-border-color: 0;" textFill="#fff9f9">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -142,11 +142,16 @@
                         <BorderPane fx:id="painelGraficos" layoutX="567.0" layoutY="16.0" prefHeight="482.0" prefWidth="632.0" />
                         <ComboBox fx:id="opcao1" layoutX="59.0" layoutY="87.0" prefHeight="25.0" prefWidth="207.0" promptText="parâmetro 1" style="-fx-background-color: #DFDCE1;" />
                         <ComboBox fx:id="opcao2" layoutX="59.0" layoutY="142.0" prefHeight="25.0" prefWidth="207.0" promptText="parâmetro 2" style="-fx-background-color: #DFDCE1;" />
-                        <ImageView fitHeight="51.0" fitWidth="112.0" layoutX="13.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="iconeSair" fitHeight="51.0" fitWidth="112.0" layoutX="13.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/iconeSair.png" />
                            </image>
                         </ImageView>
+                        <Button fx:id="botaoSair1" layoutX="32.0" layoutY="31.0" mnemonicParsing="false" onAction="#voltarData3Dviewer" onMouseEntered="#sairToPourple" onMouseExited="#sairToWhite" prefHeight="43.0" prefWidth="37.0" style="-fx-background-color: 0; -fx-border-color: 0;" textFill="#fff9f9">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
                      </children>
                   </Pane>
                </children>

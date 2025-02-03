@@ -42,7 +42,7 @@ public class GraficosController implements Initializable {
     private Button botaoHome;
 
     @FXML
-    private Button botaoVoltar;
+    private Button botaoSair;
 
     @FXML
     private Button botaoPerfil;
@@ -52,6 +52,9 @@ public class GraficosController implements Initializable {
 
     @FXML
     private Button montarGrafico;
+    
+    @FXML
+    private ImageView iconeSair;
 
     @FXML
     private ComboBox<String> opcao1;
@@ -102,6 +105,16 @@ public class GraficosController implements Initializable {
     @FXML
     void voltarData3Dviewer(ActionEvent event) throws IOException {
         MainFX.changedScreen("Gui3d", cubesat);
+    }
+    
+    @FXML
+    void sairToPourple(MouseEvent event) {
+        iconeSair.setImage(new Image("file:src/main/resources/images/iconeSairLilas.png"));
+    }
+
+    @FXML
+    void sairToWhite(MouseEvent event) {
+        iconeSair.setImage(new Image("file:src/main/resources/images/iconeSair.png"));
     }
 
     ArrayList<ArrayList<Object>> selectListas() {

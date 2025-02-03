@@ -14,7 +14,7 @@
 
 <HBox fx:id="fundo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../styles/telalogin.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TelaSuporteController">
    <children>
-      <HBox id="fundoTelaEquipes" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" >
+      <HBox id="fundoTelaEquipes" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0">
          <children>
             <VBox prefHeight="720.0" prefWidth="1280.0">
                <children>
@@ -81,35 +81,44 @@
                      </VBox.margin>
                   </Line>
                   <!-- Seção de Textos com fundo mais escuro -->
-                  <VBox alignment="CENTER" prefHeight="300.0" prefWidth="600.0" spacing="10.0" style="-fx-background-radius: 5; -fx-padding: 10;">
+                  <VBox alignment="CENTER" prefHeight="300.0" prefWidth="600.0" style="-fx-background-radius: 5; -fx-padding: 10;">
                      <children>
                         <Label style="-fx-font-size: 18; -fx-font-weight: bold; -fx-text-fill: #ffffff;" text="Dúvidas e Suporte" />
-                        <Label style="-fx-text-fill: #ffffff;" text="Precisa de ajuda? Nossa equipe está à disposição para solucionar dúvidas, ouvir sugestões ou oferecer suporte técnico. Garantimos rapidez e eficiência." wrapText="true">
+                        <Label prefHeight="77.0" prefWidth="543.0" style="-fx-text-fill: #ffffff;" text="Precisa de ajuda? Nossa equipe está à disposição para solucionar dúvidas, ouvir sugestões ou oferecer suporte técnico. Garantimos rapidez e eficiência." wrapText="true">
                            <font>
                               <Font size="16.0" />
                            </font>
+                           <VBox.margin>
+                              <Insets top="-10.0" />
+                           </VBox.margin>
                         </Label>
                      </children>
+                     <VBox.margin>
+                        <Insets top="60.0" />
+                     </VBox.margin>
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="300.0" prefWidth="600.0" spacing="10.0" style=" -fx-background-radius: 5; -fx-padding: 10;">
                      <children>
                         <Label style="-fx-font-size: 18; -fx-font-weight: bold; -fx-text-fill: #ffffff;" text="Contatos Diretos" />
-                        <Label style="-fx-text-fill: #ffffff;" text="E-mail: suporte@suasempresa.com">
+                        <Label style="-fx-text-fill: #ffffff;" text="E-mail: suporte@cute.com">
                            <font>
                               <Font size="17.0" />
                            </font>
                         </Label>
-                        <Label style="-fx-text-fill: #ffffff;" text="Telefone: (XX) XXXX-XXXX">
+                        <Label style="-fx-text-fill: #ffffff;" text="Telefone: (31) 3354-2468">
                            <font>
                               <Font size="17.0" />
                            </font>
                         </Label>
-                        <Label style="-fx-text-fill: #ffffff;" text="WhatsApp: (XX) XXXXX-XXXX">
+                        <Label style="-fx-text-fill: #ffffff;" text="WhatsApp: (31) 93256-0739">
                            <font>
                               <Font size="17.0" />
                            </font>
                         </Label>
                      </children>
+                     <VBox.margin>
+                        <Insets top="-70.0" />
+                     </VBox.margin>
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="300.0" prefWidth="600.0" spacing="10.0" style=" -fx-background-radius: 5; -fx-padding: 10;">
                      <children>

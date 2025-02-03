@@ -40,20 +40,22 @@
                      </font>
                   </PasswordField>
                   <Circle fill="#73668b" layoutX="859.0" layoutY="310.0" radius="41.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <ImageView fitHeight="50.0" fitWidth="65.0" layoutX="827.0" layoutY="288.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="50.0" fitWidth="65.0" layoutX="837.0" layoutY="284.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/IconeEmail.png" />
+                        <Image url="@../images/IconeSenha.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="iconeSair" fitHeight="55.0" fitWidth="48.0" layoutX="873.0" layoutY="198.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/iconeSair.png" />
-                     </image>
-                  </ImageView>
-                  <Button fx:id="botaoSair" layoutX="859.0" layoutY="184.0" mnemonicParsing="false" onAction="#apresentarTelaInicial" prefHeight="75.0" prefWidth="75.0" style="-fx-background-color: transparent;">
+                  <Button fx:id="botaoSair" layoutX="859.0" layoutY="184.0" mnemonicParsing="false" onAction="#apresentarTelaInicial" onMouseDragEntered="#sairToPourple" onMouseDragExited="#sairToWhite" prefHeight="75.0" prefWidth="75.0" style="-fx-background-color: transparent;">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <graphic>
+                        <ImageView fx:id="iconeSair" fitHeight="55.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/iconeSair.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
                   <Button layoutX="769.0" layoutY="288.0" mnemonicParsing="false" onAction="#botaoVisualizarSenha" style="-fx-background-color: transparent;">
                      <graphic>
