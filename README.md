@@ -1,4 +1,4 @@
-# Cubesat Telemetry Environment
+# Cubesat Telemetry Environment - CUTE
 
 ## Descrição do Projeto
 <p>Trabalho de Conclusão de Curso de Informática.</p>
