@@ -1,4 +1,4 @@
-# TCC - Sistema de Telemetria para Cubesats
+# Cubesat Telemetry Environment
 
 ## Descrição do Projeto
 <p>Trabalho de Conclusão de Curso de Informática.</p>
